@@ -1,0 +1,57 @@
+.hotel-card {
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.hotel-card__image {
+  height: 180px;
+  object-fit: cover;
+}
+
+.hotel-card__favorite-button {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.hotel-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hotel-card__title {
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+.hotel-card__location {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.hotel-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.hotel-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hotel-card__price {
+  font-weight: 700;
+  color: #2563eb;
+}

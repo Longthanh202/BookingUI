@@ -1,0 +1,13 @@
+.hotel-list {
+  margin-top: 32px;
+}
+
+.hotel-list__title {
+  margin-bottom: 1rem;
+}
+
+.hotel-list__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

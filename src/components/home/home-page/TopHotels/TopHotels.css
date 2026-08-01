@@ -1,0 +1,43 @@
+.top-hotels {
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
+
+.top-hotels__title {
+  margin-bottom: 1rem;
+}
+
+.top-hotels__card {
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.top-hotels__image {
+  height: 200px;
+  object-fit: cover;
+}
+
+.top-hotels__badge {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  background: #f59e0b;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.top-hotels__favorite-button {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

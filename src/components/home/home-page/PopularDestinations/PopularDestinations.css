@@ -1,0 +1,21 @@
+.popular-destinations {
+  margin-top: 32px;
+}
+
+.popular-destinations__title {
+  margin-bottom: 1rem;
+}
+
+.popular-destinations__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.popular-destinations__card {
+  height: 100%;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  border-radius: 1.5rem;
+  overflow: hidden;
+}

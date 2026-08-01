@@ -1,0 +1,209 @@
+{
+  "banners": [
+    {
+      "id": 1,
+      "title": "Ưu đãi nghỉ dưỡng mùa hè",
+      "subtitle": "Lựa chọn khách sạn đẹp, giá tốt ở khắp Việt Nam",
+      "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUSExMVFhUXFxYYFxcXFxYVFxcVGBgYFxYXFhgYHSggGBolHRUYIzEhJSktLi4uGB8zODMtNygtLisBCgoKDg0OGxAQGi8lHyUtLS8tLS0tLS0tLS8tLystLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAMIBAwMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAADAAECBAUGB//EAEgQAAIBAgQEAwUDCAcGBwEAAAECEQADBBIhMQUiQVETYXEGMoGRoUKxwRQjUmJyktHwFTNDgqKywgckc7Ph8SVEU2OTtOI0/8QAGQEAAwEBAQAAAAAAAAAAAAAAAQIDAAQF/8QALhEAAgIBAwMDAwMEAwAAAAAAAAECEQMSITEEQVETImEUofAygcFxsdHxBSOR/9oADAMBAAIRAxEAPwDEU1OoKKnXrpHIKnFMKemFQRRNF8A0FasK5pXY6S7k1tRsKOls1BCTRLlyKR29iypKyTPAquzg9KG141AtNUjAjPJfBO4/ahRSpxVEqIt2KKekKmBRsBECpBaQqQrGEBUlWlT0AomFpzUJoF/FhdAMzdhsP2j09N6V1Hdj23sizmpVli853Y9dFGnzGv1o+RwJDt065vo01B9TBDrFJl8CiKtVcHfzaGJ7jYjy7Hy/kXFqykpK0Cq5JqlEyioB6iz0KZTUkiTUC61SL0FxRom5g2ahvRDUCtERg6VT8Op5aNmoFNKi5KVYBlrU8tPFTWpWy2lMgKnBqairCWwaDnQ0cYC2lWrduamiUVEqbkWUEgcEbVVuXNas3NKr3IqsCGX4BUqmFpwBVrOeiFOKmqinArGEq1IJ2qYAp7YoDJdgeWlFTakEogq+CK09whRJ0H87d6HdxAXRdT9B69z5fdVS5iVDqrN+ccgAaTrroNlGh3+R3qGTOo8FVivkLcvFhOqr22YjuT9kfz5U2Bh1zIVy6gFR2JBgnzB1qh7T2swtLmIDOQ0EiQFJH3Vq8FsKthVUaAsNiOpJ313PWuOU5SfuKxilwYl7C3XuEteuZQxIUEIkK0AHKCTJA+cV0j2xAHoD07Vzd6/FwgATJ6SffM6kiNO011rJK7bqD9JpHSGSb4OX4BiblwslzVlUMLiwCegMbTof+tdDhb2cdJG/8R5fdqK5r2XbNcuf8NP8zVshSjEg7aiexGoPcaD6HcTVYT9OVdhUtUbZqBKgwrJvcXe5ATkEgfpNv1MQK1cLeFxZ0zDRh2Pl5GuqGWMnSFlAiaHVlkFQ8Oq2T0gStJUowt1NbdCzaWCFqpi1R1tUQW6Wx1ErCzTVb1pVtzUjmQKkFqIoiqaVhjuTtrVyylQtJFEzGKk9zoVIRaDSu3dKGWoN1qrGBGWShNdoYNRpxVkjlcmyRpCmpxRFHqa0wFOFomHBqWamK0A3p0UT57j4fpH6UspRjuwpN7IsZgN/59BVXE4lmBA5V6xuR5kfcPrQ8Vfy2nuCGygneQY0Ikec7aaU3C7Nw2i1wgsQx02AjQAdNPSuHNnctlwdWOFbsr8Gxy3i4tjRMup65s2w2A5aBgLC/ljmObxVAOgicpMfwFXvZG1ms5R0W2TGnvFtfM6fQUPg+HU466xYKEv2wZIAgxmJJOgAE9q5rpblab4F7VKZshd85A1A1Kkbnaul9ksEq4cPeYIovXFJJhdg27dNazvae7hgbZVgBaLQ07trBQLzOcp8vpVbBXy6JBcKxc5XMajTNlGgkAH5Uj1ZI7bDKoS8hLEgEIpPvSQWA5mbWCVGzR12roLfF7RzKbbibIRRCk5lUAt70RJHnXJ2OC273iveuPy+MVljlzW3ACrOm3StfLD/AN1/9NLojJv4DqlFL5M72X4S4v3FP/prB1BkMdCDt7wq3ilnPH6PrrBis72X4peW6CWzlBKlpLQrWxkLCCyHPsew1rYJ5Lj6aEaA+8Iuar+7Hkd6rLUpPUTjTiqMjAYdcqTvykjpJ7Dp8aWBxp8W/oZtsNdIZWgkH570bAWwAhJ3Knt7xEbetZ3EbbW7vEVjVAT6EWlYGkxzrhlJxs6y0AwBGxqeWsrhGPywG1BRWbSIOxeOg7x/33wy9q9KGTUrItIABRQoqWUHahupp+RLomRHahtTZDUCtMkJKbJZv5mlQ4pU1EtbMMUe2dNqArTvUnaalVnTqrcO98DpQ/Gmg5KaKZRSJyySYYtUDURTgU6RJuxU8U9KKYUQFEWoipA1jExT5qhFIVqDYLHNCEmdJMDWYBMRIn0rMu4g3cFcuAFcyuRJ1gGATHeJitLG6o3o33Gg8NwbXOFBoPuMoA75iBHzFef1Uvd8HVhjaANZCYFgohRbf/MwPU9a2+D4Rjg2ciI8Xy2A37fGhX2w64AWixJOYOTMKDcBGoHNMkALOpqk3Ey2HOVmyDxWUMBAdVGVwpmN+uugrl90lt5Le2L38Fz2YvDC2cpQFyiAHdc8jc6FhI6aamO1YjcTJxGTKP6xs5I3bMQ2RAYUT1JJjtVjAoApYOWdmUuxMmIRl1O2rNp0rHtt/vhUAmL1yT0EszfHeqwxxTbJzm6SNXHi2qqz9bV8DQGGIUL2+ZNalnGLf8O6gCqc4gGRKgIdYHVfrWPxnBC6qCYCref9xV0raTBJh/Dt2yGRZIOm7KrnbTckfCs6v5/0FXp+DkeI275v3QgOXxLhMTsGlprt3X85/df/AE1y1/jCWrl9IJdrl0CDyw5Agjed669l5vg34UHyZVWxyHsw7F3DLBFtjPQ89nb5fWuhuWBL6QNGI6ah8zDsTlE94FY3suQXJ3BR9vNrNdLeQGZ2Kj6i5/Gjk5Fx8GNhtcsHqI10gHT6UXFJ4/8ASOIOXM+FuuyjYOllV0nblgwSe+xoeDIARdsuUesaaD4UjbhuReY2gWAOXPpoCdttJPeDUNNrwdDe5VyZWtNH/lGI+BP8K2OA8QDqqtIJUFZiYInLodYGxoPhpe8HwwYXCX0YEEQRmuLp+zEjpWGzFMtyTC4WyxA8nIkeY6VTFlcJfnyTlG1t+cHeAUxYVRwWILiG94aN/EetWYr1VUlaOSUqJlxUGalFKKKRNybIRSqcUqYQ5dTRA1RAqQpClhVemLVAVICjRmxCpCmFOKIBxUqYVIUQCqdq3PUDzM+vQHsajRcHiWkLbWWc5V8yY0A6mp5cigrY8IOTJCzlGZzlESJ0zdo8qDh7T3WKIsnKWgRmygSTB2G2vnRWwbPY8YuVY3gmoDHKM2ZwNYAIj4UfFcVtWbj3bOW0rrkAIjQIF9Dr9+9ebm62TT0nbj6VdwGF8I4O5eZipYsmUkcqBQ2doBPwE9KzrmNy4RUtZltIDkVl6m4qksCTM7gNOsaDaoYnEjw8RbCBAtlngENK5WE8uk6ee29V7aNcwoWILQqyP/eUAx60uPTNavk2S4vT8Ebl8nClmaeUEk7kC6CSf+nan4XDYWf1b+4jQKP4UfD4cLhlRjOYWwSema6p+41O2ynDEodAt1THWAZqrfYko92V+A4BrauXaSXUEdssHQdPfqWGuImIht3e+vnPigj6A/KlwG7euC4zjKCylR5wM30C0PBcOT8qa43vZr7D9pXCj6MazfkZLwS9o7rqieGJJ8VT5KQpY/IVocKtXVsp40+JLEzoYYyv+Eige0d0Wozdry/FkAH31q8OxwxNh72ugQQSCQA3hdhpy1Nt1f8AQZLsZnDeAWcRcxL3A0q1+COjLkKFgASBLb7V0IWQW8j9Yrh8ZgMVcv3jaVige4xjQZRGcn4RXoFu1+ad/wBYL8xm/Ckk6b38fsMt0tvJxHspYVbrEaSjemj2SD9a63FKSCBvlEesP9a5P2OzNfKEAcjajUGWtD8K6i9d0JGsAf6/lVZtamShdIy8BmCKWEtEt7q83We3pSuWBauNcGYsbUlRzCUVQuQdzBHnAqzw/Dq1tbnMAwB1InXUA96a+GTEXDcK5FRm7FQiqXzHqOvlrXPGVnTKJR4VdKi06lhmSI0Mq1pZkNoGhmHxM0DEWg9t2Sci4KBIIPJd6g6g84+tWLAnwHnXKRA91pQNm9dNP2jVJMQRbHvZWw13Og0JUEEjXrqfkOwijVkk6LYvG1dcz/a3jJOgCrbMHsDJ+Jmujs3AwkfLqD1BrA4vZDrcuqOVziNNNB+S2yZ+KN8qtcIunxnQzEMw7QrIBPnz/L0ro6XM09DJZ8e2pGvT1KKUV6BxEYpVOKasY5UVIUwFSAoDkhTgUwp5isYeKU6x1iY8u9VL2NGy9fmdGOg6e4dT2q/7GsTeuFtBkQgazzBX1PXfyrnzdSoJ1uy2LA5ySZEU6AsYUZidBHfoPM+Qre9psOPAd0WXUSojUtpC6QTOg3rOucQt2TyfZe3dt+61xTbt5WQDoC7Ma43/AMlcdlR0rotMt3Y+B4cC1p7zRaZroY6gjwsoICx+k3yB0qFziS2bVkwwuWcztcC5ySwUknKDAWN9vSsu7j7l0N4awGsXcQCN5VwskGRq5HfeNKEcPbVne6QzNg0BChQReOVrjMIGwBE9TXFKc8jvk6lGEFQS1imu37Vm3LJdR7kjOhMAu2vSTrI2nes9MCXwQ8W4Fc3yTnOvhqQATPcbd9a1cPcLG1AVBaspbEAhyhyqVlT1kk9CBFUUxSi3auKDdYOuYaMTc55AGwAkaDaDTxwd5biSy+C7xe4jflTpbKr+TsCZkBQHyjfUyW6dqrflBfClrY1kBJ0ki8oHzNLFrcjEGR4YsOD3LkPB9APvqNtj/R4uLqRd0jqVuIY+ddcVpjRzSdysLZwxODCvuwUH+9cWI+DCp4TDKMC2TYAj4tbcn6rSFp24crHlcsQD1Em3l+hBo/DcIU4beEluZT5ybd/SllLb9zJAvZziAxHigCAozDcz+bUN/wAr61lWrN18UTMW1uXiO5GYhvqRXRcAFq2bgIyApeC8pklrYVR3iSfmaq2MKQxcSdbh2hYd80EnqIHasnu6Ga8hvbDBo11lbZVuMPUWUI++tThyWFtYjwiqIUshRmBlgQXjXXWTWPxbiy3Ha4WRnVSxW0A5UInMZEhTCfpCr1nhxH9YCG0kZ80AgMObvBFT0tpRvfb+A6krdFSyzr4wQp+cN6DmYHJcCgbIZ90yD5aiuis4214LpJzFwRoYgCDrXPcMs+Ixa47hfEvrCJY2t5woBuIZPKJ1mq/E7ly1bV1uZszssNbskwDcAPKgIPIOtI9MpaVzY9SUbfFBvZDhd21jFLKCpEBlIYTntmNNRsdxWzajcfoAn91965rgvF7ly9btsFBYFg6Z0KkIzjQsR9k7RW5Zv5C08wVSkpupO2YdKtNyUm2SglSSBYMDKuUgqdo1WCdI6R2omPYNj8VaIPJbuTI0KsAdO/UGn4ZctottRqEGU7EkCBOm221WMawv4jEFZ8NrGIhtiMyoDr0On0rjjJ6uDrmlSpmFhrTAYYiAmVhljUELCx5AKw+VZr81tXTdsNfjcaZhlntvWzhLLBcGu6eHdlj72ZRcy6eYUn1FZzjMi3FglsNiTvymbhIPoe9dMZHO0St3Ia6VAIMqwyzIfDqpjUc0Ma2MFbXxxcWcrpeidDy/ksyPVm+VZlm1ma4ASCCmUbBmNpPe092GJ07fCrfAkAuncGCCI0OkkzEmIXy37VbFXqpk5/oaN+KUVOKcLXpnnkYpVOKVYJyAqQFMBUgKw9Dih4tSUIG8qPmwH40QVG9iTbGYZZlQCwkA5gQfWQN9KnldQdeBoL3KyrZwEEO5CrAJZj0NvHZfMjMFHlmFanC8XbU3MimIt8zaHls20KwPsypb+9WBdvs/MeYwdW2A8O5oo6a9PMVdwLR4smSSB0gHKvTfWvLlG47nfB1LY2cdxI3LbqZEg9T8CDXN8Bui1ibrBQSo3eW0JAA9NfpWlZtloWeh+7X7qx+HT+U3/JRp251/n41LHjjdFck3Vl+5di3kL5cmG/Nqp1y6uRmjMcs79z6UrlwlbuRMts2gZO6mLmVCN9poWGKC2wtWyV/JpViDy6kGSdRmYH4CrGKtXD4zOwEWedRtnIJLBt41j41ZUiLtkcFbUvbzMc4QBRMZjpnOXrAB9JoeGxB8Gy1lJYXAoHu5nAbM3nvv5Va4cieLYWJLYcFG1MKoYtr5hAPOaGq3WwmHIAR/FyoW1GQJ72neWpm9xUqQsdh3Y3yGlfAKi2BJZmDEN8oEfrVc4eAuDt29rovZ8kTyh0Ybaa5TQ+NYfJevvJDJat5UPua5SWI76j5VztzH3n0NxokaLFsdNCEC5h6zVErj9yUpVI6c3/8Ad1slZCuDmAYsWJRVUKvmo+tUMZxTwUChXytzhZCKYmCRM9TuvWjYOy1nB2rwXlW5Z0Gkjx1BHlufnWFj8S13mZQoCgAKIECe2511NIq16Vx/I7bULfJucBvteLlgumWABtJaZJ32Fc9jlzM+aT+cv+8Z926yrvtAEV2X+z7Ah/HzfZWfiMx/CuPxluHuf8XEa9/z7CnjNPI4pcCSi1BSbIWr2QPABzW7iddAwidK9A4F4mIsm7EQTM6+6co2nsK88vqBOp91vw7V6b7APOBu+r/8yp9X7I6lyN0z1PS+DzzGXXW8/MYW9dIGsA52kxRDxB7qrbYLCktopBmT1PTmNC4k/wCeuzH9bd6/rtUcDqfgf8y/xroqOlNknJ3RpezNonFWY3CsO/8AZPXWY6wNWOjDqNCPlrHlWZ/s/j8ss94A/wADVv8AH0nONt64J5W8jidkcajBMzeEWkURADazMHUHXfQ1i4fiL+PilMZbYvsMqwxVHgqdcrAgxsPWt3hltWlgsSzEaKNCxM+R1rC4ZgmfE8RI2W1ij83ApMcoxbb4HyRlJLyanDMbbuCy6MDbtC4JWTBdbkBhupm5sRVG7hiLakCD+SYqF2Ai60DyHT0rmfZqx/vSdyHB/cYwfKtLg3HS4ZbgCsLNwtcGo8OFznLEqevLoY2G1VcFzEnqa5NVLfO2+hX/AOsja9xBOlH4Mp8caGMpE9DoDp9fkanaKsSZAzarBkZVwwTMrbHVT86Nw5SLyjoVPzW2u/Y85+tNhk/USYuVLQ2jbAp4pwKUV65541NUs1NWMcepqU0NamDWHJCg45ZUD9ZfvowpndAJcwAyHts6k66RoD1qeV+xjY17kZRt9zrGkaa+BdYfRf8ADWkLJW1cIWPzqqPjYRumum2tVDxC0MqgalJHUFfAuq20CCGYjXQxUcLxR76udVUMDHLBYIq5iIgHKAOu29eZUmjtTSZs+z+HZ7qqWGpjbeR0rHwGGjE42fsKPn49tfxq5w/iN2wwuW8rMp0UgQZ8yQPrWPieL3C924ERXuW8RcuZSSC1u5IAIPu5hMdxpUIKXqMrNrRRsJZuFDmZVLYGcq65jndbeQ9SFXbv6VLEpZQXSznXCW7K3GPUhRDj9IsN/lXPY/GHwmXxYYrZ5ZVdSLbNkCeZedjvvQTxJUuXis5na0yRbzTk3zI0SDt86uk2tiDmuDpLPGktEZdWsYQZxBKsqrmkExqRdWBrtr2qng+JhxhrEZLbm6Vz/nMrpyLtG8AdYn1NYyW77l/Dwzxct+GS3Ly5UUkTlBPLpr1q5a4NjOWGtW1QMFLZcy5zmaIDaz1mR0iqODadLcT1KCHG3HOMVm5VBAXQAAXFHQCTHU1SwqAn4r9ctXbnDvAtX7jXhdJtwxEnUNmY5sxmsbD35IjUafAgqNuvWqp1GmiPLs9VtXgvCLbQCBdtHX/igVwfGuKC6AACAttVGsiQgBI/drYfibnhiWwNM9sxMAnx1yg9vWetYNq3ms5vDC7jNMkgWbxiNhJQGuGC9OblJHbL/sikmdd/s4xIAxJJgZD8znA28yPnXJYzDu1y6VUkG5iDMbj8oYfeYrp+E380uqi2GL8qEEAByMubKC20ye9QN1bVq3os3VxMMFJkrjpYPm6jKQNOhreo4v1Ev1dv6G0JrQ3wcpf4ddPiTPIt4tPKQLZAII+I0rvPZl2sYdrMkksZIUwRmzEajToPnXK8Qs3rpustu8Qz3zpbZBBZGGwggkT8K7KwyjMc0DMYLcs6CTqF6g9BT6pZHpmtv52E0Rxq48nLJwBrl1mdgivcvQWa2Nnfpnnp2q9gvZEnLDjna4kypAyOTJ10/q/rRvALFRkXluXXLZ7UtN1mWCrExlPUAyKnw7C3QytdKMFuO0h0nKxJjWNZb61B5M7unsVUMNIz/ZK94GOw+xm2j/vWDc+kxXVcUuBg7eprm+GcJvjG4e4bfItpUZldGAKYY2uhmCw006102PRcj+hn11GvaqKO+p8k3LsirwdgpZY2ZgNOgYgCs3gB/wB44pr/AGOJ/wCatanDwTJBAOYkns0nNylfxrmcD/8A2cQg/wBjij8rgH8+tS0arSLOWlKw/wDs8w6tjBmEwl0j/wCNtqzuD8HL3MSFMRhcV/lAj6j5VH2M4j4WIRlmYug7EQbb9Kl7LcUUNiSTq2ExER1JCwP53qc1NSlJFIuLSRnYZrljDvcQCBiFBkSpBtMcpHqJkV1HAOIC5fFuTmVC+omQ9u1qG7CVEHX1qit1PyBrJHO2IVwIM5PDKkz01O1aSYW3Z4mQpAH5NbGp3Jt2dP8ACa6enz3kUZLuQzYai2jpBSrNTjVo3DbUOSMuuRgOaY3AgabmBULntBZDZNcw3BayAPU+JHw3r031OJcyR56xT8GtFKs3+lCdVW2R0PiP/ptEfImlW+ox+f7h9Cfg5pWqYauMtXgvMpZYiAXJA0286c8RuH+0crpI11Pkd+nSprq4+A6DsRdExOvaquODut1QOVLedjIBChl1A671zi8SuIMqGNZJiST3J3NEs4lxLNJL6HpoY5T01gVLL1LnCls2NBVJNnZ2eDYfxsOOhwZZpMc3gXSCO3Q1gcIQBHA/S/0isls6xmLAEALvBEAafCKvWbtrwiPFK82ZjHNMQVUAgxpvNc2BON6mdM8mvhB72GaBN/KdSwCgicxy5TAjljc702JsYTl97lAVocQWMksw1IJkk9PSq6WcNOovsf2La+f27hPbpVi1Zww2tv0GtxR10HKD/Jqzljj4+5PTll2BBsLb0FpTBygGX0IzTzkSN9fPyow45l0VYHTKFQHUydjlGlFa5ZB/qbZ7lmuNPwEAb9O9FtZyYSzakQOWzJ1YqBqT1Bpfqorv9jfTTZUucXuHYabQS0z8COX4TQ7d3EuJVTJI1W0ZA68wHWtrDHFnYOAQvuW7awHaAwlddjptVe/YxhiWvkQCBnyTIQ/Z/apPq4N1Y30cuSeEwl5rTpdlAUgMwnUtOusnTSqqcDsj3r1w/soi/o92btUsEWILgsCdIuE3CMpIPvDTWR8KFjsZiVE+OQsgQLduZ5QPs+Yp5Z6SYIYd6RrMAbQsnxHQZeY+8SjBl2WN1HwFMuHQKEFiVBkB85EgFdmaDoxHxrGAxL3bdjx3DOgcawsEOQGyCVPJHlIpYHE3buHB8ZyxzC3bLMYy5LrMpOglSwI/hUH1CZZYWjorIYDlQLJO2VdzJ79ZPxo35S4GrIg/bC/Hzrlr2D/O4pczFbSMUJ97PCxOadJJn0ofE+HocHahfzh1Zt5lwRI20A+tBZ7pGeLa2dFd4haJhsRZ+YYz23qt/SuFBg4kbxCrPWOgNVPZvhtu3buZouZwyqSuzcplSGMER9Dt1wcBwoG4rHUm+RBZMpGZtIBzTpTxm3dCuCVHW2/aHCoOa7dJMkEW3OnTZaNgvaHDRrduSDrNu51Bj7PkayvbCz495CBlOTXQn3ABrAnaN6J7PIqtiQOYGzl1WNWVico+MA6b0vqJwvv4M8b1V2OoscRsXAIxCH9or5R0FXLmFzDQhtOh/hNcHwlj4GMJILZEysQJDpDrHbbfyoeMWOFWro/rfExAZhvGa7BB+yQR9KVzYdCOswti6zGAZZid53aTsJ61exGFILE2lLsjW2fKoZkb3gWGVjsO9YnEuF/+JNZR4Q2iw0Bgg2ubQfrHrT3xfs3XVcTdCqSAC7ZTBI2+E/Gk9RofRZUxPAsPaGe01yywDAS2ZZYZSR4gkHX9I1UwnDcIn/mLgGvu3LCHMIjptE/Sj8euX7lhxJutmUhQAZAcEwAO1ZdtcQzpnw7qqhwGAB95TAgAayevfyoybaDHZmymEwZX37rNm/8AVYjLmiOQTMaT3qrxXD2ENt7Re0CSWOe4WIBGgzQQJk1TxNvGeITbwxKhmykkLILZtQWBGppY9HNqylwZbnMGQakS7QNCRqIO9CCd3X3NkltSZmXrk8ykuYHNGo6f9aaziCIXYDbSTv1O9aNyx+cPhoUm5ChhrBe5kz6wGgKD0qnev+GwLFbsohJjqyhsreY2qqavc5ZRfJNcaw0pVAYudfDT5sPuFKm/clRiBvmBPxO1Fw86ye8/D/vQipUE67jp01ohcRPbT47n40CuknbkljJkDT40SICrvtQCzKA3f7ulFsPPMen4AVnYKC3RzNIgQ2wico0P0pWgpAUhTzEaD3uUwZG8EA/E1K1ic7AALmAOhzAHqxMz/CrK5xJNpCYY6NABgwQI0o0PEt376qWBOVisag6CQNRHwomGxaFlBaYPRH3JDanL3U71DGPcQlb+BUuNCXKk6alQY8x10nzq5huJ2IA/IERyxJcdAF0C5fPp51HI25Xp/P8A06YNJVZC1xTDqPcukjlkKd8oXURIPIx+Ed6uJ7RWUYDwbwJyxIU6eIz/AD5gPnVvA43APaa42CCOX1RSA431ALyRzb6azQr2PwDSfya4u2QFRKEsDoM8+80n41yN3KnB/n7nQnt+pCwvtfZSG8C+VKoNEXQI7ZjvqIJjzFWL/tbYRUD4e9JVQASEDaWwVVlYn7La761mNewLXLfIQwXMsiBlBZtQDEyGMEdqtY1uHXokGZBJAviSDHQQNOgpl08XJbfcWWVpPcBw/iCXlLLZuSSScoGUtsCMzDT6TQOPyDlOWAyxpEap7xkjQkSa2ODfk1m3kXRZO4YwDrHNrE61i8ex9t3JQrcTl79eh/dr0My9iOPE/ewFi7mxQaQGyQCD9nUaL19Z603CQFTDmBlNxU0aY8VSkk9SMxkeVVsLdIYsAoPQ9h2+ta/DbaSFgZFhwNdGUiD66k1zxg+C0mRNuXxAjmFpnZteYZQQIkgeojeq/FifyYRO6ADpqwFaaKrIjEHNd5LhBIlZiPLYVas8PS4Ww/NkDKRG8qZWTH6VWjiJyybGZ7P8yyxIKu3l7qgiPia5nAXGGLEH+2JHaczH8frXd4uz4R5SxOWZIXrKxyqO3WsjhvCLLq99VZWRiw5iSWjOZB+zrH/amgtOzJzlbLuOueGyZSBnVx7iNCiDlAZTG/0FC4E8G8T18PoB0fSAK2cHwoXlVme4pUEgplmHIkcynt0rNxNqzYuNaVrmaQH8QqZAUFWEAQILCD2qWj3NjueyRVwmKm1jWI922w2AkrbcjppJAqpxG+BwwKvNNy+JiBBa9r6VsYfAWOZFdmF8xc5hJBOQhTAiVY6fGpcTwtnD20ssjGyzXBGfn5paZ7SY+Ip2hFLuXbj/APiZ/wCC+mvVrf8ACtXE8MVpczP/AEB1+Zrm8Lxu299sSLXMEYSbsSuhAyxvoK3faDj4s5rcZWZAw5ZI5F1BOhBnfoVMjUVHJG1sUjPuAs8JcrmDDYHUMdY1+1WfjnxFtsoKGBvFwbf3qBwjiGLuZbS3DkGrOVnIsiWbaQCIEmO+xmxieI2C0eMHMxm0E/EaDeprWnyMpRYDEYjEpmDtZUhS0AuWIBIOUZtfdP0rN9n8SA1y+xBYMmRjmMM7ZNgZ6x5TNS41xXJ4eVFZt5KI+inVOdTAIPwqODuqAtzKvP4JdBEBvEYSumkBc0R8t6uoutxJPcF7U4p1xAyAKSuYxI5s1zX5EVg42+zsGYgysSB2EAGuk9r7qeIjgAwqgHvHi5gY295d65nC4NmJMCBMgmI+kTQjwLPlkhcYaBjHoKeplSNMpP7v8aVNbJFEXjtJGhGnQQYGvrVh8SzIUO2cOR+tsSe5iqwwwjQrP602z/i5f8VRuqUHOrqveJEeTAwfnR3XJTUjTtWRcLqtsMxQqoLZYck6giJYBdutXMJbwSWHS9bu+KcxR7dxGAJQZAyskxmJmD37ViBpAIJObrpuNiRJijW5hpU7kbGdQT91Zzsyo3VweFOVkuX10+1bS4u0Egh0PfpQRaOpzqI6MYJ16DX+TVPxyQOYAk7HN0320nr8RRIB77xpDCfUVWLXFi6kFvYx2jM5aNszE/LNttRMPcM7aQ20H7J7UFcOvcfOptgwBIP8nT8afYxl3iWMiRJb6ER9NaJhmdWUBjBZZjQmT1O5rTxOLvNId0fcc1qyzaiJDlM4PmDWcVcdT9D94pfST3FaQTh7SvMZIJk/X8asFV7D5VSRmG0fKPuNHQE9B++B9Gim00Mtw3h25kqJ9KIFTKwCqNDqBGwJEn1796WGwhf7YX1yt9EJrUwvC7cc9xiCIICAAiIic0jeoTnFcl4YpvsZRw0Vew1lRlMnWOoifSK2rOFw+wH3/iKp4jBEMxWIiQAwnTX8PrSxzQlyhpYpruVzhFHUxMxI3me1QYhbixrnJG8RpPxrOu8UI962w9QR99AvcSDFTtlJOvpVEQZuYi7lMEA7fIGrWGvqbZCgKJuAjQbMy9uwrmrnEwdxPxNEtcathCpBklzMj7TMdvjWW7szOjwrXMlxbbfnOQA5oyjNvt6/Wuf4jhGFyM5eRc1IWTkKhoMaavvvvVnBe0NpM0ltY7dO/wBaq4njFslMkwq3F1yj32Vh91BIDpl8HwjaCwBuDOWRPXzip8Yu57XPJIBKmSYMgaev4CuS4hjDccmDGsSZgEzHzNEs8QZUKAEg7gxA10K66HemdvsBUjuL2GGXwrawSW1bQQIE/f061axnD1vEB9CHRQQSYDeGpHp1riT7QXs2YR+HnsKtN7UXCsEAHMrSJ3UgiJ0+yKm8cmth9cTs8Rw8Lde1bgBbKDXXVmucxHU6H51nX/ZzMSS4ExHKSRB3mdSazeE+1CrcuvdLtmW2F5VJ5c0gy361Xbntjb6W3PrkH3E0jhPwHVEd/ZcH+1brsoH4mgjgC5zbzuQqo08u5a4O36v1NAve2R6Wfm//AOap2vaS+7s1u0pJVFI1MBS5BnT9M/KmUJm1RRW9pgLd1UB0ChoETJLDoPKrj4dApYFjylpLHXSQTFVrnjXb9o3bdtSxIBlRMKTBOYwBM+tXOMWLluy9x8Ra2gIrI7tmITQA7DNqegFHTJbAtPcDZtKyq2uqqdzuQD3pVi28a0D85GkRGwGg6UqbTIFrwXkRSP40y4MqcyMynupK/dVW3eNHTFGuiiVie232ktv5lArfvplY/EmoZ02C3LcwJUhwPQNlMafpGjHEzQnYGleOL5RiwgRgF8S2w7MTackkTqwgmB+kabEIluJw7wZiMx7al55uvXvVR7U0rVnL7pI9CRU3hXZmryTTEhVIS20H7JIjudzoZ6/yV47EmVC7xtI7bVHFZnCgseWRIAUkabkbxH1quLABnUkbSTuKMcdbsziuxdyXZUERmJC5pQEgSwBbTQa0Lxh07DuPvqV6+zmXZm3PMSdTvvtUMtWCiXiHvTzQ9RTh6Wgk8x6Mw9GI+6kL9wbO3xhv8wqGelmoOKCpMIcZc6w3rmX/AJZWi/0oIg2/XJcKT651eqs0opdCHWSXkupxDDj+zvKfJku/SbdVnx6E6o/zXb0yn7zQvDHaoNaFFRRnN/iRZt4u2NgR6KNvUMPuqVzFpGhY+RkfiapC1T5DTUhbvsEa+nUN/h/hQ/Ft/on4hD+FMUqJXypqQlMc3F7fRf4UmuL2+i1GKY0dgUP43l9w/Ci2Lqkw+ZR3HOZ6cun30A02YUDUdDw/AYW4uZ8YluCRluW7mY+Y8Nm0/hV6xh+GL799G/ZTFH7wBXHEjzp7dtSYLR5k1Nxfl/b/AAUVeDtPF4OPeN4+SWyB82uA1j8SxGBLMbNhnWLMC6zrBV3Nz3LhkMDbXfQZogwazLuACyMpJ6agg9qqDOBs3y6Urj8hbN63xbDK1phg7AyZ5U58lzOoUC5LFjl1I5tztQuK+0he21kWcPbttlJW1aRYKsGBzRnmQOvXzrMsXDE+tJn8vpUXGSEaZntc102pVZa4e1PT0xiytTFKlXSSJipimpVgoelSpVhhVGlSrGGqQpqVYwzVClSpQiFSApUqJh6VPSoGGNOKVKgEiaQpUqxhxTGlSooxA0xpqVMZkSKG4pUqwpGKeKalQCWeHnny/Zjbp8q12QTsKalShY+KUZdqyLtNSoGQGlSpVgn/2Q=="
+    },
+    {
+      "id": 2,
+      "title": "Kỳ nghỉ gia đình hoàn hảo",
+      "subtitle": "Phòng tiện nghi, gần danh thắng nổi tiếng",
+      "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": 3,
+      "title": "Phượt trải nghiệm miền Trung",
+      "subtitle": "Giá chỉ từ 399k/đêm cùng Workpro",
+      "image": "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80"
+    }
+  ],
+  "destinations": [
+    {
+      "id": 1,
+      "name": "Hội An",
+      "region": "Quảng Nam",
+      "description": "Phố cổ lung linh, thơ mộng bên dòng sông Thu Bồn.",
+      "image": "https://hoiancreativecity.com/uploads/images/thang%202-2023/hoi-an-gd659f3b8f_1920-1280x853.jpg",
+      "tags": ["Trải nghiệm ẩm thực", "Nhiếp ảnh", "Lễ hội"]
+    },
+    {
+      "id": 2,
+      "name": "Đà Nẵng",
+      "region": "Miền Trung",
+      "description": "Bãi biển Mỹ Khê và cầu Rồng huyền thoại.",
+      "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+      "tags": ["Biển", "Nhiếp ảnh"]
+    },
+    {
+      "id": 3,
+      "name": "Hạ Long",
+      "region": "Quảng Ninh",
+      "description": "Kỳ quan thiên nhiên với hàng nghìn đảo đá vôi.",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5SpfqOAFzZ3O3_3EvX3oTvdsT1Cr7VUjo_Q&s",
+      "tags": ["Biển", "Nhiếp ảnh"]
+    },
+    {
+      "id": 4,
+      "name": "Đà Lạt",
+      "region": "Tây Nguyên",
+      "description": "Thành phố ngàn hoa với khí hậu mát mẻ quanh năm.",
+      "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+      "tags": ["Núi rừng", "Nhiếp ảnh"]
+    },
+    {
+      "id": 5,
+      "name": "Phú Quốc",
+      "region": "Kiên Giang",
+      "description": "Hòn đảo ngọc với bãi cát trắng và nước biển trong xanh.",
+      "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+      "tags": ["Biển", "Trải nghiệm ẩm thực"]
+    }
+  ],
+  "tags": [
+    { "id": 1, "name": "Trải nghiệm ẩm thực" },
+    { "id": 2, "name": "Nhiếp ảnh" },
+    { "id": 3, "name": "Biển" },
+    { "id": 4, "name": "Núi rừng" },
+    { "id": 5, "name": "Lễ hội" }
+  ],
+  "rooms": [
+    {
+      "id": 1,
+      "name": "Phòng Deluxe View Biển",
+      "address": "Bãi Sau, Vũng Tàu",
+      "city": "Vũng Tàu",
+      "propertyType": "Deluxe",
+      "rating": 4,
+      "reviews": 128,
+      "guests": 4,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "area": "32 m²",
+      "price": "1.200.000 đ/đêm",
+      "description": "Một phòng deluxe hiện đại với view biển thơ mộng, ban công rộng và tiện nghi cao cấp cho chuyến nghỉ dưỡng thư giãn.",
+      "images": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1400&q=80"
+      ],
+      "amenities": ["Wi-Fi miễn phí", "Bể bơi ngoài trời", "Điều hòa", "TV thông minh", "Minibar"],
+      "policies": [
+        "Nhận phòng: 14:00 - Trả phòng: 12:00",
+        "Hủy phòng miễn phí trước 24 giờ.",
+        "Không được hút thuốc trong phòng.",
+        "Không cho phép mang theo vật nuôi."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Suite Sang Trọng Trung Tâm",
+      "address": "Quận 1, TP. Hồ Chí Minh",
+      "city": "Hồ Chí Minh",
+      "propertyType": "Suite",
+      "rating": 5,
+      "reviews": 215,
+      "guests": 3,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "area": "45 m²",
+      "price": "2.350.000 đ/đêm",
+      "description": "Suite cao cấp giữa trung tâm thành phố, không gian sang trọng, thuận tiện cho công việc và du lịch khám phá.",
+      "images": [
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=80"
+      ],
+      "amenities": ["Wifi tốc độ cao", "Dịch vụ phòng 24/7", "Két an toàn", "Xe đưa đón sân bay"],
+      "policies": [
+        "Nhận phòng bắt đầu từ 15:00.",
+        "Hủy phòng trước 48 giờ để được hoàn tiền.",
+        "Yêu cầu đặt cọc khi nhận phòng.",
+        "Cho phép phụ huynh mang theo trẻ em."
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Phòng Twin Đà Lạt",
+      "address": "Đà Lạt, Lâm Đồng",
+      "city": "Đà Lạt",
+      "propertyType": "Twin Room",
+      "rating": 4,
+      "reviews": 87,
+      "guests": 2,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "area": "28 m²",
+      "price": "900.000 đ/đêm",
+      "description": "Không gian ấm cúng, hai giường tiện nghi phù hợp cho bạn và người thân trong chuyến du lịch Đà Lạt mát mẻ.",
+      "images": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80"
+      ],
+      "amenities": ["Lò sưởi ấm áp", "Trà/cà phê miễn phí", "Tủ lạnh", "Bàn làm việc"],
+      "policies": [
+        "Nhận phòng 14:00, trả phòng 11:00.",
+        "Hủy phòng trước 24 giờ miễn phí.",
+        "Không cho phép tổ chức tiệc.",
+        "Chỉ phục vụ khách không hút thuốc."
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Phòng Family Hồ Tây",
+      "address": "Hà Nội",
+      "city": "Hà Nội",
+      "propertyType": "Family Room",
+      "rating": 5,
+      "reviews": 142,
+      "guests": 5,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "area": "58 m²",
+      "price": "1.650.000 đ/đêm",
+      "description": "Phòng gia đình rộng rãi, phù hợp các chuyến nghỉ dưỡng và khám phá thủ đô cùng nhóm bạn hoặc gia đình.",
+      "images": [
+        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=80"
+      ],
+      "amenities": ["Khu vực tiếp khách", "Bếp nhỏ", "Kênh truyền hình quốc tế", "Dịch vụ giặt ủi"],
+      "policies": [
+        "Nhận phòng 15:00, trả phòng 12:00.",
+        "Đặt cọc bằng thẻ khi nhận phòng.",
+        "Miễn phí bữa sáng cho 2 khách.",
+        "Yêu cầu giấy tờ tùy thân khi nhận phòng."
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Phòng Standard Gần biển",
+      "address": "Nha Trang",
+      "city": "Nha Trang",
+      "propertyType": "Standard",
+      "rating": 4,
+      "reviews": 103,
+      "guests": 2,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "area": "30 m²",
+      "price": "780.000 đ/đêm",
+      "description": "Phòng tiêu chuẩn hiện đại, nằm gần biển, dễ dàng di chuyển đến các bãi tắm và điểm tham quan nổi tiếng.",
+      "images": [
+        "https://images.unsplash.com/photo-1496417263034-38ec4f0b665a?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=80",
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80"
+      ],
+      "amenities": ["Gần biển", "Wifi miễn phí", "Thuê xe đạp", "Bảo vệ 24/7"],
+      "policies": [
+        "Nhận phòng sau 14:00.",
+        "Hủy phòng trước 24 giờ miễn phí.",
+        "Không chấp nhận mang vật nuôi.",
+        "Không hút thuốc trong phòng."
+      ]
+    }
+  ]
+}

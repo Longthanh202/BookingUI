@@ -1,0 +1,47 @@
+.home-header {
+  width: 100%;
+  background: linear-gradient(90deg, #2563eb 0%, #9333ea 100%);
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.12);
+}
+
+.home-header__inner {
+  width: 100%;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.home-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.home-header__logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #fff;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.home-header__title {
+  margin: 0;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.home-header__actions {
+  display: flex;
+  gap: 12px;
+}
