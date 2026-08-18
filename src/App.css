@@ -28,6 +28,15 @@
   color: #61dafb;
 }
 
+.base-modal-dialog {
+  max-width: 960px;
+  width: 100%;
+}
+
+.base-modal-dialog .modal-content {
+  max-height: 80vh;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

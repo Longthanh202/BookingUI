@@ -10,20 +10,21 @@ import CustomerLogin from "../pages/login/CustomerLogin";
 import Register from "../pages/login/Register";
 import Dashboard from "../pages/dashboard/Dashboard";
 import AdminLayout from "../layouts/AdminLayout";
-import OwnerHotels from "../pages/khachsans/OwnerHotels";
-import OwnerHotelDetail from "../pages/khachsans/OwnerHotelDetail";
+import OwnerLayout from "../layouts/OwnerLayout";
+import OwnerHotels from "../pages/khachsansOwner/OwnerHotels";
+import OwnerHotelDetail from "../pages/khachsansOwner/OwnerHotelDetail";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./AdminRoute";
 import HotelRoute from "./HotelRoute";
 import CustomerRoute from "./CustomerRoute";
+import HoaHongPage from "../pages/HoaHongOwner/HoaHong";
 
 const AppRouters = () => {
     return (
         <Routes>
 
             {/* ================= PUBLIC ================= */}
-
-            <Route element={<PublicRoute />}>
+          
 
                 <Route index element={<HomePage />} />
 
@@ -41,7 +42,6 @@ const AppRouters = () => {
 
                 <Route path="booking/payment" element={<PaymentPage />} />
 
-            </Route>
 
             {/* ================= CUSTOMER ================= */}
 
@@ -53,40 +53,27 @@ const AppRouters = () => {
 
             {/* ================= HOTEL OWNER ================= */}
 
-            <Route
-                path="/hotel"
-                // element={
-                //     <HotelRoute>
-                //         <HotelLayout />
-                //     </HotelRoute>
-                // }
-            >
-                {/* <Route index element={<HotelDashboard />} />
-
-                <Route path="rooms" element={<HotelRooms />} />
-
-                <Route path="bookings" element={<HotelBookings />} />
-
-                <Route path="revenue" element={<HotelRevenue />} /> */}
+            <Route path="/owner" element={<HotelRoute />}>
+                <Route element={<OwnerLayout />}>
+                  <Route index element={<Navigate to="hotels" replace />} />
+                  <Route path="hotels" element={<OwnerHotels />} />
+                  <Route path="hotels/:id" element={<OwnerHotelDetail />} />
+                  <Route path="hoahong" element={<HoaHongPage />}/>
+                </Route>
             </Route>
 
             {/* ================= ADMIN ================= */}
 
-            <Route
-                path="/admin"
-                // element={
-                //     <AdminRoute>
-                //         <AdminLayout />
-                //     </AdminRoute>
-                // }
-            >
-                <Route index element={<Dashboard />} />
+            <Route path="/admin" element={<PrivateRoute />}>
+                <Route element={<AdminLayout />}>
+                  <Route index element={<Dashboard />} />
 
-                <Route path="hotels" element={<OwnerHotels />} />
+                  <Route path="hotels" element={<OwnerHotels />} />
 
-                <Route path="hotels/:id" element={<OwnerHotelDetail />} />
+                  <Route path="hotels/:id" element={<OwnerHotelDetail />} />
 
-                {/* <Route path="payments" element={<AdminPayments />} /> */}
+                  {/* <Route path="payments" element={<AdminPayments />} /> */}
+                </Route>
             </Route>
 
             <Route

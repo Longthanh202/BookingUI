@@ -25,7 +25,7 @@ const HotelList = (input: HotelFilterParams) => {
         </div>
       ) : (
         <Row className="row-cols-1 row-cols-md-3 row-cols-xl-4 g-4">
-          {rooms.slice(0, 6).map((room) => (
+          {rooms.slice(0, 10).map((room) => (
             <Col key={room.id}>
               <HotelCard room={room} filter={input} />
             </Col>

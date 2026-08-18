@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
+import DatePicker from "react-datepicker";
 import { HotelFilterParams } from "../../../../types/khachsan/KhachSan.types";
 import { useProvinces } from "../../../../hooks/useProvinces";
 import "./SearchTopBar.css";
@@ -44,14 +45,32 @@ const getNextDay = (dateString: string) => {
   return formatDate(date);
 };
 
+const CustomDateInput = React.forwardRef<HTMLInputElement, any>(
+  ({ value, onClick }, ref) => (
+    <Form.Control
+      ref={ref}
+      value={value}
+      onClick={onClick}
+      readOnly
+      placeholder="Chọn ngày nhận và trả phòng"
+      style={{ minHeight: 48, borderRadius: 12, cursor: "pointer" }}
+    />
+  ),
+);
+CustomDateInput.displayName = "CustomDateInput";
+
 const SearchTopBar = ({ filter, setFilter }: Props) => {
   const [keyword, setKeyword] = useState(filter.Keyword || "");
   const [province, setProvince] = useState<string | null>(filter.ProvinceCode || null);
   const [provinceQuery, setProvinceQuery] = useState("");
   const [showProvinceDropdown, setShowProvinceDropdown] = useState(false);
   const [guests, setGuests] = useState<number | null>(filter.SoKhach || 2);
-  const [checkin, setCheckin] = useState<string>(filter.NgayNhanPhong || "");
-  const [checkout, setCheckout] = useState<string>(filter.NgayTraPhong || "");
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
+    filter.NgayNhanPhong ? new Date(filter.NgayNhanPhong) : new Date(),
+    filter.NgayTraPhong ? new Date(filter.NgayTraPhong) : getTomorrow(),
+  ]);
+  const [checkin, setCheckin] = useState<string>(filter.NgayNhanPhong || formatDate(new Date()));
+  const [checkout, setCheckout] = useState<string>(filter.NgayTraPhong || formatDate(getTomorrow()));
   const { data: provincesData = [] } = useProvinces();
   const provinceDropdownRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
@@ -62,8 +81,13 @@ const SearchTopBar = ({ filter, setFilter }: Props) => {
     setKeyword(filter.Keyword || "");
     setProvince(filter.ProvinceCode || null);
     setGuests(filter.SoKhach || 2);
-    setCheckin(filter.NgayNhanPhong || "");
-    setCheckout(filter.NgayTraPhong || "");
+
+    const startDate = filter.NgayNhanPhong ? new Date(filter.NgayNhanPhong) : new Date();
+    const endDate = filter.NgayTraPhong ? new Date(filter.NgayTraPhong) : getTomorrow();
+
+    setDateRange([startDate, endDate]);
+    setCheckin(formatDate(startDate));
+    setCheckout(formatDate(endDate));
   }, [filter]);
 
   useEffect(() => {
@@ -78,10 +102,21 @@ const SearchTopBar = ({ filter, setFilter }: Props) => {
   }, []);
 
   useEffect(() => {
-    if (checkin && checkout && checkout <= checkin) {
-      setCheckout(getNextDay(checkin));
+    const [start, end] = dateRange;
+    if (start) {
+      setCheckin(formatDate(start));
     }
-  }, [checkin, checkout]);
+    if (end) {
+      setCheckout(formatDate(end));
+    }
+
+    if (start && end && end <= start) {
+      const next = getNextDay(formatDate(start));
+      const nextDate = new Date(next);
+      setDateRange([start, nextDate]);
+      setCheckout(next);
+    }
+  }, [dateRange]);
 
   const filteredProvinceOptions = (provincesData as any[])
     .filter((p) => {
@@ -120,8 +155,8 @@ const SearchTopBar = ({ filter, setFilter }: Props) => {
       Keyword: keyword,
       ProvinceCode: province || null,
       SoKhach: guests || null,
-      NgayNhanPhong: checkin || null,
-      NgayTraPhong: checkout || null,
+      NgayNhanPhong: checkin || formatDate(new Date()),
+      NgayTraPhong: checkout || formatDate(getTomorrow()),
       Page: 1,
     };
 
@@ -253,32 +288,25 @@ const SearchTopBar = ({ filter, setFilter }: Props) => {
                   </div>
                 </Form.Group>
               </Col>
-              <Col xs={12} sm={6} lg={3}>
-                <Form.Group controlId="checkin" className="mb-0">
-                  <Form.Label className="mb-1">Ngày nhận</Form.Label>
-                  <Form.Control
-                    type="date"
-                    value={checkin}
-                    onChange={(e) => setCheckin(e.target.value)}
-                    min={tomorrow}
-                    style={{ minHeight: 48, borderRadius: 12 }}
-                  />
-                </Form.Group>
-              </Col>
-              <Col xs={12} sm={6} lg={3}>
-                <Form.Group controlId="checkout" className="mb-0">
-                  <Form.Label className="mb-1">Ngày trả</Form.Label>
-                  <Form.Control
-                    type="date"
-                    value={checkout}
-                    onChange={(e) => {
-                      const next = e.target.value;
-                      if (!checkin || next > checkin) {
-                        setCheckout(next);
-                      }
+              <Col xs={12} sm={6} lg={4}>
+                <Form.Group controlId="dateRange" className="mb-0">
+                  <Form.Label className="mb-1">Ngày nhận - Ngày trả</Form.Label>
+                  <DatePicker
+                    selectsRange
+                    startDate={dateRange[0]}
+                    endDate={dateRange[1]}
+                    minDate={new Date()}
+                    monthsShown={2}
+                    wrapperClassName="w-100"
+                    className="form-control"
+                    dateFormat="dd/MM/yyyy"
+                    placeholderText="Chọn ngày nhận và trả phòng"
+                    onChange={(update) => {
+                      setDateRange(update as [Date | null, Date | null]);
+                      if (update[0]) setCheckin(formatDate(update[0]));
+                      if (update[1]) setCheckout(formatDate(update[1]));
                     }}
-                    min={checkin ? getNextDay(checkin) : getNextDay(tomorrow)}
-                    style={{ minHeight: 48, borderRadius: 12 }}
+                    customInput={<CustomDateInput />}
                   />
                 </Form.Group>
               </Col>

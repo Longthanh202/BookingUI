@@ -18,15 +18,24 @@ const BaseModal = ({
   onOk,
   onCancel,
   confirmLoading = false,
-  width = 600,
+  width = 900,
   children,
 }: ModalProps) => {
+  const size = width >= 1000 ? "xl" : "lg";
+
   return (
-    <Modal show={open} onHide={onCancel} centered size="lg">
+    <Modal
+      show={open}
+      onHide={onCancel}
+      centered
+      size={size}
+      dialogClassName="base-modal-dialog modal-xl"
+      scrollable
+    >
       <Modal.Header closeButton>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>{children}</Modal.Body>
+      <Modal.Body style={{ maxHeight: "65vh", overflowY: "auto" }}>{children}</Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onCancel}>
           Hủy

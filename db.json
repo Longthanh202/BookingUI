@@ -26,7 +26,11 @@
       "region": "Quảng Nam",
       "description": "Phố cổ lung linh, thơ mộng bên dòng sông Thu Bồn.",
       "image": "https://hoiancreativecity.com/uploads/images/thang%202-2023/hoi-an-gd659f3b8f_1920-1280x853.jpg",
-      "tags": ["Trải nghiệm ẩm thực", "Nhiếp ảnh", "Lễ hội"]
+      "tags": [
+        "Trải nghiệm ẩm thực",
+        "Nhiếp ảnh",
+        "Lễ hội"
+      ]
     },
     {
       "id": 2,
@@ -34,7 +38,10 @@
       "region": "Miền Trung",
       "description": "Bãi biển Mỹ Khê và cầu Rồng huyền thoại.",
       "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
-      "tags": ["Biển", "Nhiếp ảnh"]
+      "tags": [
+        "Biển",
+        "Nhiếp ảnh"
+      ]
     },
     {
       "id": 3,
@@ -42,7 +49,10 @@
       "region": "Quảng Ninh",
       "description": "Kỳ quan thiên nhiên với hàng nghìn đảo đá vôi.",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5SpfqOAFzZ3O3_3EvX3oTvdsT1Cr7VUjo_Q&s",
-      "tags": ["Biển", "Nhiếp ảnh"]
+      "tags": [
+        "Biển",
+        "Nhiếp ảnh"
+      ]
     },
     {
       "id": 4,
@@ -50,7 +60,10 @@
       "region": "Tây Nguyên",
       "description": "Thành phố ngàn hoa với khí hậu mát mẻ quanh năm.",
       "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
-      "tags": ["Núi rừng", "Nhiếp ảnh"]
+      "tags": [
+        "Núi rừng",
+        "Nhiếp ảnh"
+      ]
     },
     {
       "id": 5,
@@ -58,15 +71,33 @@
       "region": "Kiên Giang",
       "description": "Hòn đảo ngọc với bãi cát trắng và nước biển trong xanh.",
       "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
-      "tags": ["Biển", "Trải nghiệm ẩm thực"]
+      "tags": [
+        "Biển",
+        "Trải nghiệm ẩm thực"
+      ]
     }
   ],
   "tags": [
-    { "id": 1, "name": "Trải nghiệm ẩm thực" },
-    { "id": 2, "name": "Nhiếp ảnh" },
-    { "id": 3, "name": "Biển" },
-    { "id": 4, "name": "Núi rừng" },
-    { "id": 5, "name": "Lễ hội" }
+    {
+      "id": 1,
+      "name": "Trải nghiệm ẩm thực"
+    },
+    {
+      "id": 2,
+      "name": "Nhiếp ảnh"
+    },
+    {
+      "id": 3,
+      "name": "Biển"
+    },
+    {
+      "id": 4,
+      "name": "Núi rừng"
+    },
+    {
+      "id": 5,
+      "name": "Lễ hội"
+    }
   ],
   "rooms": [
     {
@@ -89,7 +120,13 @@
         "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80",
         "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1400&q=80"
       ],
-      "amenities": ["Wi-Fi miễn phí", "Bể bơi ngoài trời", "Điều hòa", "TV thông minh", "Minibar"],
+      "amenities": [
+        "Wi-Fi miễn phí",
+        "Bể bơi ngoài trời",
+        "Điều hòa",
+        "TV thông minh",
+        "Minibar"
+      ],
       "policies": [
         "Nhận phòng: 14:00 - Trả phòng: 12:00",
         "Hủy phòng miễn phí trước 24 giờ.",
@@ -116,7 +153,12 @@
         "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1400&q=80",
         "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=80"
       ],
-      "amenities": ["Wifi tốc độ cao", "Dịch vụ phòng 24/7", "Két an toàn", "Xe đưa đón sân bay"],
+      "amenities": [
+        "Wifi tốc độ cao",
+        "Dịch vụ phòng 24/7",
+        "Két an toàn",
+        "Xe đưa đón sân bay"
+      ],
       "policies": [
         "Nhận phòng bắt đầu từ 15:00.",
         "Hủy phòng trước 48 giờ để được hoàn tiền.",
@@ -143,7 +185,12 @@
         "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1400&q=80",
         "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80"
       ],
-      "amenities": ["Lò sưởi ấm áp", "Trà/cà phê miễn phí", "Tủ lạnh", "Bàn làm việc"],
+      "amenities": [
+        "Lò sưởi ấm áp",
+        "Trà/cà phê miễn phí",
+        "Tủ lạnh",
+        "Bàn làm việc"
+      ],
       "policies": [
         "Nhận phòng 14:00, trả phòng 11:00.",
         "Hủy phòng trước 24 giờ miễn phí.",
@@ -170,7 +217,12 @@
         "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1400&q=80",
         "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=80"
       ],
-      "amenities": ["Khu vực tiếp khách", "Bếp nhỏ", "Kênh truyền hình quốc tế", "Dịch vụ giặt ủi"],
+      "amenities": [
+        "Khu vực tiếp khách",
+        "Bếp nhỏ",
+        "Kênh truyền hình quốc tế",
+        "Dịch vụ giặt ủi"
+      ],
       "policies": [
         "Nhận phòng 15:00, trả phòng 12:00.",
         "Đặt cọc bằng thẻ khi nhận phòng.",
@@ -197,13 +249,4451 @@
         "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=80",
         "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80"
       ],
-      "amenities": ["Gần biển", "Wifi miễn phí", "Thuê xe đạp", "Bảo vệ 24/7"],
+      "amenities": [
+        "Gần biển",
+        "Wifi miễn phí",
+        "Thuê xe đạp",
+        "Bảo vệ 24/7"
+      ],
       "policies": [
         "Nhận phòng sau 14:00.",
         "Hủy phòng trước 24 giờ miễn phí.",
         "Không chấp nhận mang vật nuôi.",
         "Không hút thuốc trong phòng."
       ]
+    }
+  ],
+  "khachsans": [
+    {
+      "id": "6b5e0cf2-01ea-40d5-9f40-1b4fa83f64e9",
+      "tenKhachSan": "Khách Sạn Hà Nội 1",
+      "moTa": "Khách sạn Khách Sạn Hà Nội 1 tọa lạc tại Hà Nội. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "163 Đường Chính, Hà Nội",
+      "thanhPho": "Hà Nội",
+      "soSao": 3,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "1e3d79d4-2dcc-4a48-84c8-cfc530e0794f",
+      "tenKhachSan": "Khách Sạn Hồ Chí Minh 2",
+      "moTa": "Khách sạn Khách Sạn Hồ Chí Minh 2 tọa lạc tại Hồ Chí Minh. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "37 Đường Chính, Hồ Chí Minh",
+      "thanhPho": "Hồ Chí Minh",
+      "soSao": 3,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "08d7d5d6-38c0-4a71-a6e0-643fe04dd9b8",
+      "tenKhachSan": "Khách Sạn Đà Nẵng 3",
+      "moTa": "Khách sạn Khách Sạn Đà Nẵng 3 tọa lạc tại Đà Nẵng. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "32 Đường Chính, Đà Nẵng",
+      "thanhPho": "Đà Nẵng",
+      "soSao": 3,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "ad659a05-2210-464c-a4df-d041a5be225a",
+      "tenKhachSan": "Khách Sạn Quảng Ninh 4",
+      "moTa": "Khách sạn Khách Sạn Quảng Ninh 4 tọa lạc tại Quảng Ninh. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "52 Đường Chính, Quảng Ninh",
+      "thanhPho": "Quảng Ninh",
+      "soSao": 3,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "0b28c50c-58b9-443d-a8d4-a531925bf56d",
+      "tenKhachSan": "Khách Sạn Khánh Hòa 5",
+      "moTa": "Khách sạn Khách Sạn Khánh Hòa 5 tọa lạc tại Khánh Hòa. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "10 Đường Chính, Khánh Hòa",
+      "thanhPho": "Khánh Hòa",
+      "soSao": 3,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "e9227f55-95f4-4212-b4fb-eed1bf857e45",
+      "tenKhachSan": "Khách Sạn Lâm Đồng 6",
+      "moTa": "Khách sạn Khách Sạn Lâm Đồng 6 tọa lạc tại Lâm Đồng. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "55 Đường Chính, Lâm Đồng",
+      "thanhPho": "Lâm Đồng",
+      "soSao": 4,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "e972eda9-0a24-40b4-81a3-87083eddaff1",
+      "tenKhachSan": "Khách Sạn Kiên Giang 7",
+      "moTa": "Khách sạn Khách Sạn Kiên Giang 7 tọa lạc tại Kiên Giang. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "156 Đường Chính, Kiên Giang",
+      "thanhPho": "Kiên Giang",
+      "soSao": 5,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "77b2a8fa-52fc-4933-b020-557393861106",
+      "tenKhachSan": "Khách Sạn Cần Thơ 8",
+      "moTa": "Khách sạn Khách Sạn Cần Thơ 8 tọa lạc tại Cần Thơ. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "175 Đường Chính, Cần Thơ",
+      "thanhPho": "Cần Thơ",
+      "soSao": 5,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "f11fdb43-baea-4f26-8d55-049bc186bf1d",
+      "tenKhachSan": "Khách Sạn Hải Phòng 9",
+      "moTa": "Khách sạn Khách Sạn Hải Phòng 9 tọa lạc tại Hải Phòng. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "46 Đường Chính, Hải Phòng",
+      "thanhPho": "Hải Phòng",
+      "soSao": 4,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "57d0c94a-4c35-432a-a6a3-86720a24b784",
+      "tenKhachSan": "Khách Sạn Bình Thuận 10",
+      "moTa": "Khách sạn Khách Sạn Bình Thuận 10 tọa lạc tại Bình Thuận. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "18 Đường Chính, Bình Thuận",
+      "thanhPho": "Bình Thuận",
+      "soSao": 4,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "b9903f93-51d7-44e8-8089-1cb8b8df9bce",
+      "tenKhachSan": "Khách Sạn Bà Rịa-Vũng Tàu 11",
+      "moTa": "Khách sạn Khách Sạn Bà Rịa-Vũng Tàu 11 tọa lạc tại Bà Rịa-Vũng Tàu. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "183 Đường Chính, Bà Rịa-Vũng Tàu",
+      "thanhPho": "Bà Rịa-Vũng Tàu",
+      "soSao": 4,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "881dbd6d-3818-410c-8a7f-b0b97610104f",
+      "tenKhachSan": "Khách Sạn Ninh Bình 12",
+      "moTa": "Khách sạn Khách Sạn Ninh Bình 12 tọa lạc tại Ninh Bình. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "11 Đường Chính, Ninh Bình",
+      "thanhPho": "Ninh Bình",
+      "soSao": 4,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "8ffc2b01-614d-437e-b20a-e426520411cc",
+      "tenKhachSan": "Khách Sạn Thanh Hóa 13",
+      "moTa": "Khách sạn Khách Sạn Thanh Hóa 13 tọa lạc tại Thanh Hóa. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "196 Đường Chính, Thanh Hóa",
+      "thanhPho": "Thanh Hóa",
+      "soSao": 3,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "b2c595bb-9459-40f5-be05-7417f5b2634f",
+      "tenKhachSan": "Khách Sạn Quảng Nam 14",
+      "moTa": "Khách sạn Khách Sạn Quảng Nam 14 tọa lạc tại Quảng Nam. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "94 Đường Chính, Quảng Nam",
+      "thanhPho": "Quảng Nam",
+      "soSao": 3,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "cbd789bd-4728-4282-865c-05b89d012f39",
+      "tenKhachSan": "Khách Sạn Thừa Thiên Huế 15",
+      "moTa": "Khách sạn Khách Sạn Thừa Thiên Huế 15 tọa lạc tại Thừa Thiên Huế. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "53 Đường Chính, Thừa Thiên Huế",
+      "thanhPho": "Thừa Thiên Huế",
+      "soSao": 4,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "8dd6fad8-374d-42cd-9351-e5af9a44ed76",
+      "tenKhachSan": "Khách Sạn Nghệ An 16",
+      "moTa": "Khách sạn Khách Sạn Nghệ An 16 tọa lạc tại Nghệ An. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "52 Đường Chính, Nghệ An",
+      "thanhPho": "Nghệ An",
+      "soSao": 4,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "42e80c04-438e-49e9-afe3-8b2c41fec622",
+      "tenKhachSan": "Khách Sạn Bình Dương 17",
+      "moTa": "Khách sạn Khách Sạn Bình Dương 17 tọa lạc tại Bình Dương. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "136 Đường Chính, Bình Dương",
+      "thanhPho": "Bình Dương",
+      "soSao": 5,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "b4914e53-f5f0-491c-afef-2aa2a456949f",
+      "tenKhachSan": "Khách Sạn Hưng Yên 18",
+      "moTa": "Khách sạn Khách Sạn Hưng Yên 18 tọa lạc tại Hưng Yên. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "131 Đường Chính, Hưng Yên",
+      "thanhPho": "Hưng Yên",
+      "soSao": 4,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "96f245fe-4b89-4a9f-ac51-e90f4d471c86",
+      "tenKhachSan": "Khách Sạn Phú Yên 19",
+      "moTa": "Khách sạn Khách Sạn Phú Yên 19 tọa lạc tại Phú Yên. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "181 Đường Chính, Phú Yên",
+      "thanhPho": "Phú Yên",
+      "soSao": 4,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "0eeced9a-c730-4efc-bff9-a4b0b8562142",
+      "tenKhachSan": "Khách Sạn Bình Định 20",
+      "moTa": "Khách sạn Khách Sạn Bình Định 20 tọa lạc tại Bình Định. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "153 Đường Chính, Bình Định",
+      "thanhPho": "Bình Định",
+      "soSao": 4,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "d5f99b1c-4626-41a9-9f2e-2e06a0f105ed",
+      "tenKhachSan": "Khách Sạn Quảng Ngãi 21",
+      "moTa": "Khách sạn Khách Sạn Quảng Ngãi 21 tọa lạc tại Quảng Ngãi. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "198 Đường Chính, Quảng Ngãi",
+      "thanhPho": "Quảng Ngãi",
+      "soSao": 4,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "b8d284a6-3954-45fa-903d-5c24a0e60d7c",
+      "tenKhachSan": "Khách Sạn Kon Tum 22",
+      "moTa": "Khách sạn Khách Sạn Kon Tum 22 tọa lạc tại Kon Tum. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "125 Đường Chính, Kon Tum",
+      "thanhPho": "Kon Tum",
+      "soSao": 4,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "be1f66d5-f1e3-4281-bb0b-bfc4c7f5c32e",
+      "tenKhachSan": "Khách Sạn Gia Lai 23",
+      "moTa": "Khách sạn Khách Sạn Gia Lai 23 tọa lạc tại Gia Lai. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "126 Đường Chính, Gia Lai",
+      "thanhPho": "Gia Lai",
+      "soSao": 4,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "b835b517-ce29-4298-970f-f9cc9c79dfa9",
+      "tenKhachSan": "Khách Sạn Đắk Lắk 24",
+      "moTa": "Khách sạn Khách Sạn Đắk Lắk 24 tọa lạc tại Đắk Lắk. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "132 Đường Chính, Đắk Lắk",
+      "thanhPho": "Đắk Lắk",
+      "soSao": 4,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "93d13f23-fcd6-47c2-987a-a4ecc815c241",
+      "tenKhachSan": "Khách Sạn An Giang 25",
+      "moTa": "Khách sạn Khách Sạn An Giang 25 tọa lạc tại An Giang. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "172 Đường Chính, An Giang",
+      "thanhPho": "An Giang",
+      "soSao": 3,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "70f70dcb-8ce8-439c-b00a-ca56376ee14a",
+      "tenKhachSan": "Khách Sạn Long An 26",
+      "moTa": "Khách sạn Khách Sạn Long An 26 tọa lạc tại Long An. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "143 Đường Chính, Long An",
+      "thanhPho": "Long An",
+      "soSao": 5,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "28ab9ee3-8e16-4d90-8986-348ca805fc95",
+      "tenKhachSan": "Khách Sạn Tiền Giang 27",
+      "moTa": "Khách sạn Khách Sạn Tiền Giang 27 tọa lạc tại Tiền Giang. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "157 Đường Chính, Tiền Giang",
+      "thanhPho": "Tiền Giang",
+      "soSao": 3,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "b181d34b-d400-44cd-95b0-08019aa914bb",
+      "tenKhachSan": "Khách Sạn Vĩnh Phúc 28",
+      "moTa": "Khách sạn Khách Sạn Vĩnh Phúc 28 tọa lạc tại Vĩnh Phúc. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "129 Đường Chính, Vĩnh Phúc",
+      "thanhPho": "Vĩnh Phúc",
+      "soSao": 3,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "061e39c6-ca63-4550-9380-11f24201fb25",
+      "tenKhachSan": "Khách Sạn Nam Định 29",
+      "moTa": "Khách sạn Khách Sạn Nam Định 29 tọa lạc tại Nam Định. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "15 Đường Chính, Nam Định",
+      "thanhPho": "Nam Định",
+      "soSao": 4,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    },
+    {
+      "id": "3d5e3ae6-34f4-49b0-b12a-91479c2503ad",
+      "tenKhachSan": "Khách Sạn Hòa Bình 30",
+      "moTa": "Khách sạn Khách Sạn Hòa Bình 30 tọa lạc tại Hòa Bình. Tiện nghi đầy đủ, thích hợp cho du lịch và công tác.",
+      "diaChi": "12 Đường Chính, Hòa Bình",
+      "thanhPho": "Hòa Bình",
+      "soSao": 3,
+      "gioNhanPhong": "14:00",
+      "gioTraPhong": "12:00",
+      "trangThai": "ACTIVE"
+    }
+  ],
+  "khachsanimages": [
+    {
+      "id": "65293714-1617-4105-8290-0b018e08ef16",
+      "khachSanId": "6b5e0cf2-01ea-40d5-9f40-1b4fa83f64e9",
+      "url": "https://source.unsplash.com/collection/190727/800x600?H%C3%A0%20N%E1%BB%99i%20hotel&sig=10"
+    },
+    {
+      "id": "8b234db0-0340-4e88-a893-c630cdde7d8f",
+      "khachSanId": "6b5e0cf2-01ea-40d5-9f40-1b4fa83f64e9",
+      "url": "https://source.unsplash.com/collection/190727/800x600?H%C3%A0%20N%E1%BB%99i%20hotel&sig=11"
+    },
+    {
+      "id": "c0535fd1-0f79-4925-bbae-3ab43c096a27",
+      "khachSanId": "6b5e0cf2-01ea-40d5-9f40-1b4fa83f64e9",
+      "url": "https://source.unsplash.com/collection/190727/800x600?H%C3%A0%20N%E1%BB%99i%20hotel&sig=12"
+    },
+    {
+      "id": "867bc1bf-f004-4c19-a9a2-f80161f7c154",
+      "khachSanId": "1e3d79d4-2dcc-4a48-84c8-cfc530e0794f",
+      "url": "https://source.unsplash.com/collection/190727/800x600?H%E1%BB%93%20Ch%C3%AD%20Minh%20hotel&sig=20"
+    },
+    {
+      "id": "f318eeac-1dc1-43e5-8f77-1e875224edab",
+      "khachSanId": "1e3d79d4-2dcc-4a48-84c8-cfc530e0794f",
+      "url": "https://source.unsplash.com/collection/190727/800x600?H%E1%BB%93%20Ch%C3%AD%20Minh%20hotel&sig=21"
+    },
+    {
+      "id": "339f0037-4f78-4ae0-ab82-e7c04dbd5ad2",
+      "khachSanId": "08d7d5d6-38c0-4a71-a6e0-643fe04dd9b8",
+      "url": "https://source.unsplash.com/collection/190727/800x600?%C4%90%C3%A0%20N%E1%BA%B5ng%20hotel&sig=30"
+    },
+    {
+      "id": "69aa335d-3819-412a-a460-e1455bf52094",
+      "khachSanId": "08d7d5d6-38c0-4a71-a6e0-643fe04dd9b8",
+      "url": "https://source.unsplash.com/collection/190727/800x600?%C4%90%C3%A0%20N%E1%BA%B5ng%20hotel&sig=31"
+    },
+    {
+      "id": "8d76dde5-8ec7-410c-bc06-c177085b1563",
+      "khachSanId": "ad659a05-2210-464c-a4df-d041a5be225a",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Qu%E1%BA%A3ng%20Ninh%20hotel&sig=40"
+    },
+    {
+      "id": "092f56b8-33b8-4efc-a531-b48e8520c4c3",
+      "khachSanId": "ad659a05-2210-464c-a4df-d041a5be225a",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Qu%E1%BA%A3ng%20Ninh%20hotel&sig=41"
+    },
+    {
+      "id": "af851016-cccf-498d-a44b-13359275e3af",
+      "khachSanId": "ad659a05-2210-464c-a4df-d041a5be225a",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Qu%E1%BA%A3ng%20Ninh%20hotel&sig=42"
+    },
+    {
+      "id": "3bc3d246-71e6-45b8-ba47-1a2c90ecad6f",
+      "khachSanId": "ad659a05-2210-464c-a4df-d041a5be225a",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Qu%E1%BA%A3ng%20Ninh%20hotel&sig=43"
+    },
+    {
+      "id": "30d35228-4f94-44e7-b4a1-5657a91e660d",
+      "khachSanId": "ad659a05-2210-464c-a4df-d041a5be225a",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Qu%E1%BA%A3ng%20Ninh%20hotel&sig=44"
+    },
+    {
+      "id": "a3d6cc99-12fc-4b07-a1d5-4e96764f4853",
+      "khachSanId": "0b28c50c-58b9-443d-a8d4-a531925bf56d",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Kh%C3%A1nh%20H%C3%B2a%20hotel&sig=50"
+    },
+    {
+      "id": "a522aee0-f1cb-49bb-a2d6-8cb6e24ecc67",
+      "khachSanId": "0b28c50c-58b9-443d-a8d4-a531925bf56d",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Kh%C3%A1nh%20H%C3%B2a%20hotel&sig=51"
+    },
+    {
+      "id": "91650dd9-ee3c-498a-b605-75e31314753d",
+      "khachSanId": "e9227f55-95f4-4212-b4fb-eed1bf857e45",
+      "url": "https://source.unsplash.com/collection/190727/800x600?L%C3%A2m%20%C4%90%E1%BB%93ng%20hotel&sig=60"
+    },
+    {
+      "id": "b6cf8ae1-d47d-42dc-bd65-0448056d0159",
+      "khachSanId": "e9227f55-95f4-4212-b4fb-eed1bf857e45",
+      "url": "https://source.unsplash.com/collection/190727/800x600?L%C3%A2m%20%C4%90%E1%BB%93ng%20hotel&sig=61"
+    },
+    {
+      "id": "f221e3cf-798b-4bd1-96b4-624f1dc3e0ec",
+      "khachSanId": "e9227f55-95f4-4212-b4fb-eed1bf857e45",
+      "url": "https://source.unsplash.com/collection/190727/800x600?L%C3%A2m%20%C4%90%E1%BB%93ng%20hotel&sig=62"
+    },
+    {
+      "id": "45bc3443-5556-4f8b-b96d-db4d6e943dab",
+      "khachSanId": "e9227f55-95f4-4212-b4fb-eed1bf857e45",
+      "url": "https://source.unsplash.com/collection/190727/800x600?L%C3%A2m%20%C4%90%E1%BB%93ng%20hotel&sig=63"
+    },
+    {
+      "id": "ed420100-3b6c-49a1-992a-8fa08ec3fb93",
+      "khachSanId": "e9227f55-95f4-4212-b4fb-eed1bf857e45",
+      "url": "https://source.unsplash.com/collection/190727/800x600?L%C3%A2m%20%C4%90%E1%BB%93ng%20hotel&sig=64"
+    },
+    {
+      "id": "5ce9b306-0ce2-4bea-8a40-96dcab0eb42f",
+      "khachSanId": "e972eda9-0a24-40b4-81a3-87083eddaff1",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ki%C3%AAn%20Giang%20hotel&sig=70"
+    },
+    {
+      "id": "6683a009-c913-4a65-8aa9-80379a357de9",
+      "khachSanId": "e972eda9-0a24-40b4-81a3-87083eddaff1",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ki%C3%AAn%20Giang%20hotel&sig=71"
+    },
+    {
+      "id": "77ef3625-2948-4f12-890a-8e2a100cef90",
+      "khachSanId": "e972eda9-0a24-40b4-81a3-87083eddaff1",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ki%C3%AAn%20Giang%20hotel&sig=72"
+    },
+    {
+      "id": "3a82907c-7678-4c97-a2c0-4f596eff300d",
+      "khachSanId": "e972eda9-0a24-40b4-81a3-87083eddaff1",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ki%C3%AAn%20Giang%20hotel&sig=73"
+    },
+    {
+      "id": "bb3039d1-84a6-4394-8478-89161cf71e4a",
+      "khachSanId": "e972eda9-0a24-40b4-81a3-87083eddaff1",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ki%C3%AAn%20Giang%20hotel&sig=74"
+    },
+    {
+      "id": "af4aa3ac-d479-474c-8896-ba14fa75e640",
+      "khachSanId": "77b2a8fa-52fc-4933-b020-557393861106",
+      "url": "https://source.unsplash.com/collection/190727/800x600?C%E1%BA%A7n%20Th%C6%A1%20hotel&sig=80"
+    },
+    {
+      "id": "cbdf5bff-8fde-4fee-998c-d22673e3db86",
+      "khachSanId": "77b2a8fa-52fc-4933-b020-557393861106",
+      "url": "https://source.unsplash.com/collection/190727/800x600?C%E1%BA%A7n%20Th%C6%A1%20hotel&sig=81"
+    },
+    {
+      "id": "1ca696f8-9112-4edd-b48d-23b3cbd453cf",
+      "khachSanId": "77b2a8fa-52fc-4933-b020-557393861106",
+      "url": "https://source.unsplash.com/collection/190727/800x600?C%E1%BA%A7n%20Th%C6%A1%20hotel&sig=82"
+    },
+    {
+      "id": "b1139cfd-5147-478f-86dd-decb37820550",
+      "khachSanId": "77b2a8fa-52fc-4933-b020-557393861106",
+      "url": "https://source.unsplash.com/collection/190727/800x600?C%E1%BA%A7n%20Th%C6%A1%20hotel&sig=83"
+    },
+    {
+      "id": "528036b7-d67c-4a1b-be7b-91e735473ecd",
+      "khachSanId": "77b2a8fa-52fc-4933-b020-557393861106",
+      "url": "https://source.unsplash.com/collection/190727/800x600?C%E1%BA%A7n%20Th%C6%A1%20hotel&sig=84"
+    },
+    {
+      "id": "47a39c96-adbb-43b6-bea6-89ae969bb66e",
+      "khachSanId": "f11fdb43-baea-4f26-8d55-049bc186bf1d",
+      "url": "https://source.unsplash.com/collection/190727/800x600?H%E1%BA%A3i%20Ph%C3%B2ng%20hotel&sig=90"
+    },
+    {
+      "id": "000c6839-dcbc-4b48-8b2f-385e5b927898",
+      "khachSanId": "f11fdb43-baea-4f26-8d55-049bc186bf1d",
+      "url": "https://source.unsplash.com/collection/190727/800x600?H%E1%BA%A3i%20Ph%C3%B2ng%20hotel&sig=91"
+    },
+    {
+      "id": "f87942f4-58c9-46ee-90a7-b7abee7096f1",
+      "khachSanId": "f11fdb43-baea-4f26-8d55-049bc186bf1d",
+      "url": "https://source.unsplash.com/collection/190727/800x600?H%E1%BA%A3i%20Ph%C3%B2ng%20hotel&sig=92"
+    },
+    {
+      "id": "b27c204c-de09-4667-ba39-c4907f678483",
+      "khachSanId": "f11fdb43-baea-4f26-8d55-049bc186bf1d",
+      "url": "https://source.unsplash.com/collection/190727/800x600?H%E1%BA%A3i%20Ph%C3%B2ng%20hotel&sig=93"
+    },
+    {
+      "id": "245f706c-aed5-400c-b5de-3e023ed5c085",
+      "khachSanId": "57d0c94a-4c35-432a-a6a3-86720a24b784",
+      "url": "https://source.unsplash.com/collection/190727/800x600?B%C3%ACnh%20Thu%E1%BA%ADn%20hotel&sig=100"
+    },
+    {
+      "id": "d920723e-1e72-4d63-bd90-40b8044aa73f",
+      "khachSanId": "57d0c94a-4c35-432a-a6a3-86720a24b784",
+      "url": "https://source.unsplash.com/collection/190727/800x600?B%C3%ACnh%20Thu%E1%BA%ADn%20hotel&sig=101"
+    },
+    {
+      "id": "a2e30c14-df9f-4e1f-b17b-3892ae0e1eee",
+      "khachSanId": "57d0c94a-4c35-432a-a6a3-86720a24b784",
+      "url": "https://source.unsplash.com/collection/190727/800x600?B%C3%ACnh%20Thu%E1%BA%ADn%20hotel&sig=102"
+    },
+    {
+      "id": "653cd3a4-e3dd-46f8-92e5-92cc3843944f",
+      "khachSanId": "b9903f93-51d7-44e8-8089-1cb8b8df9bce",
+      "url": "https://source.unsplash.com/collection/190727/800x600?B%C3%A0%20R%E1%BB%8Ba-V%C5%A9ng%20T%C3%A0u%20hotel&sig=110"
+    },
+    {
+      "id": "1381cd09-0de0-4684-bb16-3a51074aeff0",
+      "khachSanId": "b9903f93-51d7-44e8-8089-1cb8b8df9bce",
+      "url": "https://source.unsplash.com/collection/190727/800x600?B%C3%A0%20R%E1%BB%8Ba-V%C5%A9ng%20T%C3%A0u%20hotel&sig=111"
+    },
+    {
+      "id": "05cbaa5a-ece1-4e7c-8a3c-6ba09a926289",
+      "khachSanId": "b9903f93-51d7-44e8-8089-1cb8b8df9bce",
+      "url": "https://source.unsplash.com/collection/190727/800x600?B%C3%A0%20R%E1%BB%8Ba-V%C5%A9ng%20T%C3%A0u%20hotel&sig=112"
+    },
+    {
+      "id": "83e9d6ac-223e-4752-9daa-462cfa5bc635",
+      "khachSanId": "b9903f93-51d7-44e8-8089-1cb8b8df9bce",
+      "url": "https://source.unsplash.com/collection/190727/800x600?B%C3%A0%20R%E1%BB%8Ba-V%C5%A9ng%20T%C3%A0u%20hotel&sig=113"
+    },
+    {
+      "id": "042a5a3f-61d3-4ad7-a33d-b260ee15b0f6",
+      "khachSanId": "b9903f93-51d7-44e8-8089-1cb8b8df9bce",
+      "url": "https://source.unsplash.com/collection/190727/800x600?B%C3%A0%20R%E1%BB%8Ba-V%C5%A9ng%20T%C3%A0u%20hotel&sig=114"
+    },
+    {
+      "id": "ee256b71-6fce-430a-bbc9-418f73c0e500",
+      "khachSanId": "881dbd6d-3818-410c-8a7f-b0b97610104f",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ninh%20B%C3%ACnh%20hotel&sig=120"
+    },
+    {
+      "id": "7f79920b-67f1-46ae-979f-ec333f5f8c18",
+      "khachSanId": "881dbd6d-3818-410c-8a7f-b0b97610104f",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ninh%20B%C3%ACnh%20hotel&sig=121"
+    },
+    {
+      "id": "2ac06565-436e-44b0-8adf-253bad645fe2",
+      "khachSanId": "881dbd6d-3818-410c-8a7f-b0b97610104f",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ninh%20B%C3%ACnh%20hotel&sig=122"
+    },
+    {
+      "id": "740891c2-2f0e-4471-a9e2-abf635cd7d38",
+      "khachSanId": "881dbd6d-3818-410c-8a7f-b0b97610104f",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ninh%20B%C3%ACnh%20hotel&sig=123"
+    },
+    {
+      "id": "3fe16b31-b3ac-496c-bef8-888a3483098d",
+      "khachSanId": "881dbd6d-3818-410c-8a7f-b0b97610104f",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ninh%20B%C3%ACnh%20hotel&sig=124"
+    },
+    {
+      "id": "109082eb-bc7f-4fc3-95c1-e956c0d6daab",
+      "khachSanId": "8ffc2b01-614d-437e-b20a-e426520411cc",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Thanh%20H%C3%B3a%20hotel&sig=130"
+    },
+    {
+      "id": "70da2bda-1b4e-4094-963f-a61a74b35490",
+      "khachSanId": "8ffc2b01-614d-437e-b20a-e426520411cc",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Thanh%20H%C3%B3a%20hotel&sig=131"
+    },
+    {
+      "id": "e5aa99d9-8e3b-46b7-8a89-cd6a4a55bb2d",
+      "khachSanId": "8ffc2b01-614d-437e-b20a-e426520411cc",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Thanh%20H%C3%B3a%20hotel&sig=132"
+    },
+    {
+      "id": "54e3cac1-5f43-4f8e-ba6c-b4d117415244",
+      "khachSanId": "b2c595bb-9459-40f5-be05-7417f5b2634f",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Qu%E1%BA%A3ng%20Nam%20hotel&sig=140"
+    },
+    {
+      "id": "1bfcc705-1f4d-45c8-b83b-9ee7be7e1062",
+      "khachSanId": "b2c595bb-9459-40f5-be05-7417f5b2634f",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Qu%E1%BA%A3ng%20Nam%20hotel&sig=141"
+    },
+    {
+      "id": "9ea4ebda-b230-4943-be54-e1021706aeff",
+      "khachSanId": "b2c595bb-9459-40f5-be05-7417f5b2634f",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Qu%E1%BA%A3ng%20Nam%20hotel&sig=142"
+    },
+    {
+      "id": "d18fd0d7-1b57-4552-b24e-12233b70fd44",
+      "khachSanId": "b2c595bb-9459-40f5-be05-7417f5b2634f",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Qu%E1%BA%A3ng%20Nam%20hotel&sig=143"
+    },
+    {
+      "id": "84dae85c-28c5-4ffd-a671-3a97c365aced",
+      "khachSanId": "b2c595bb-9459-40f5-be05-7417f5b2634f",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Qu%E1%BA%A3ng%20Nam%20hotel&sig=144"
+    },
+    {
+      "id": "65a4988a-e8b6-46ac-8c69-d418ea351d2b",
+      "khachSanId": "cbd789bd-4728-4282-865c-05b89d012f39",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Th%E1%BB%ABa%20Thi%C3%AAn%20Hu%E1%BA%BF%20hotel&sig=150"
+    },
+    {
+      "id": "6609f6ff-1905-4c20-a5a7-10ff0c42e600",
+      "khachSanId": "cbd789bd-4728-4282-865c-05b89d012f39",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Th%E1%BB%ABa%20Thi%C3%AAn%20Hu%E1%BA%BF%20hotel&sig=151"
+    },
+    {
+      "id": "6bd7864a-eda3-4323-9171-56a550036520",
+      "khachSanId": "cbd789bd-4728-4282-865c-05b89d012f39",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Th%E1%BB%ABa%20Thi%C3%AAn%20Hu%E1%BA%BF%20hotel&sig=152"
+    },
+    {
+      "id": "cbf39d20-9f32-4e5f-b06d-f0cccfdb4212",
+      "khachSanId": "8dd6fad8-374d-42cd-9351-e5af9a44ed76",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ngh%E1%BB%87%20An%20hotel&sig=160"
+    },
+    {
+      "id": "9df6af76-8fa8-4c67-8822-3017ac4fded8",
+      "khachSanId": "8dd6fad8-374d-42cd-9351-e5af9a44ed76",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ngh%E1%BB%87%20An%20hotel&sig=161"
+    },
+    {
+      "id": "80264abb-ef57-475e-9ec2-a5d52bb5192f",
+      "khachSanId": "8dd6fad8-374d-42cd-9351-e5af9a44ed76",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ngh%E1%BB%87%20An%20hotel&sig=162"
+    },
+    {
+      "id": "5feab385-35a5-478a-95cc-fad6fac000f5",
+      "khachSanId": "8dd6fad8-374d-42cd-9351-e5af9a44ed76",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ngh%E1%BB%87%20An%20hotel&sig=163"
+    },
+    {
+      "id": "b8043be3-491d-4312-b81a-a82dc399ff24",
+      "khachSanId": "8dd6fad8-374d-42cd-9351-e5af9a44ed76",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ngh%E1%BB%87%20An%20hotel&sig=164"
+    },
+    {
+      "id": "90d5232a-974a-43a3-81bd-281cd1854843",
+      "khachSanId": "42e80c04-438e-49e9-afe3-8b2c41fec622",
+      "url": "https://source.unsplash.com/collection/190727/800x600?B%C3%ACnh%20D%C6%B0%C6%A1ng%20hotel&sig=170"
+    },
+    {
+      "id": "0d896a64-253b-4629-91f3-e7b41026c297",
+      "khachSanId": "42e80c04-438e-49e9-afe3-8b2c41fec622",
+      "url": "https://source.unsplash.com/collection/190727/800x600?B%C3%ACnh%20D%C6%B0%C6%A1ng%20hotel&sig=171"
+    },
+    {
+      "id": "46c573b4-d633-4483-b487-83614c7bde43",
+      "khachSanId": "42e80c04-438e-49e9-afe3-8b2c41fec622",
+      "url": "https://source.unsplash.com/collection/190727/800x600?B%C3%ACnh%20D%C6%B0%C6%A1ng%20hotel&sig=172"
+    },
+    {
+      "id": "1ff78aef-24d3-4776-a36c-a4a334292a05",
+      "khachSanId": "42e80c04-438e-49e9-afe3-8b2c41fec622",
+      "url": "https://source.unsplash.com/collection/190727/800x600?B%C3%ACnh%20D%C6%B0%C6%A1ng%20hotel&sig=173"
+    },
+    {
+      "id": "46970c90-4919-4195-a4a2-972ece9d6819",
+      "khachSanId": "42e80c04-438e-49e9-afe3-8b2c41fec622",
+      "url": "https://source.unsplash.com/collection/190727/800x600?B%C3%ACnh%20D%C6%B0%C6%A1ng%20hotel&sig=174"
+    },
+    {
+      "id": "d90506b8-71ce-4371-adeb-51b986dc43d7",
+      "khachSanId": "b4914e53-f5f0-491c-afef-2aa2a456949f",
+      "url": "https://source.unsplash.com/collection/190727/800x600?H%C6%B0ng%20Y%C3%AAn%20hotel&sig=180"
+    },
+    {
+      "id": "0ee167e4-1298-4abc-b559-6b0da0cefa23",
+      "khachSanId": "b4914e53-f5f0-491c-afef-2aa2a456949f",
+      "url": "https://source.unsplash.com/collection/190727/800x600?H%C6%B0ng%20Y%C3%AAn%20hotel&sig=181"
+    },
+    {
+      "id": "1d5240d0-f8f9-47a1-a767-8ca6d9014e51",
+      "khachSanId": "b4914e53-f5f0-491c-afef-2aa2a456949f",
+      "url": "https://source.unsplash.com/collection/190727/800x600?H%C6%B0ng%20Y%C3%AAn%20hotel&sig=182"
+    },
+    {
+      "id": "7a233f68-0946-4bdf-855c-02bae6353f7f",
+      "khachSanId": "b4914e53-f5f0-491c-afef-2aa2a456949f",
+      "url": "https://source.unsplash.com/collection/190727/800x600?H%C6%B0ng%20Y%C3%AAn%20hotel&sig=183"
+    },
+    {
+      "id": "09c16da8-16d8-4dc1-b39f-be5e6a104ed0",
+      "khachSanId": "96f245fe-4b89-4a9f-ac51-e90f4d471c86",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ph%C3%BA%20Y%C3%AAn%20hotel&sig=190"
+    },
+    {
+      "id": "654e5d29-2274-45cc-85c5-23b963041e51",
+      "khachSanId": "96f245fe-4b89-4a9f-ac51-e90f4d471c86",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ph%C3%BA%20Y%C3%AAn%20hotel&sig=191"
+    },
+    {
+      "id": "8d042481-14d1-4599-a770-e6db821684d0",
+      "khachSanId": "96f245fe-4b89-4a9f-ac51-e90f4d471c86",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ph%C3%BA%20Y%C3%AAn%20hotel&sig=192"
+    },
+    {
+      "id": "198aed54-d0ba-47c3-ba46-ea2035884fd9",
+      "khachSanId": "0eeced9a-c730-4efc-bff9-a4b0b8562142",
+      "url": "https://source.unsplash.com/collection/190727/800x600?B%C3%ACnh%20%C4%90%E1%BB%8Bnh%20hotel&sig=200"
+    },
+    {
+      "id": "b30aa80f-2eea-4138-9111-06b7e3033285",
+      "khachSanId": "0eeced9a-c730-4efc-bff9-a4b0b8562142",
+      "url": "https://source.unsplash.com/collection/190727/800x600?B%C3%ACnh%20%C4%90%E1%BB%8Bnh%20hotel&sig=201"
+    },
+    {
+      "id": "fb78e0a3-4982-413a-a5d4-b60a0a427e6e",
+      "khachSanId": "0eeced9a-c730-4efc-bff9-a4b0b8562142",
+      "url": "https://source.unsplash.com/collection/190727/800x600?B%C3%ACnh%20%C4%90%E1%BB%8Bnh%20hotel&sig=202"
+    },
+    {
+      "id": "4ef0bc65-5ba4-4b5b-ab6e-9d13be7df4fb",
+      "khachSanId": "d5f99b1c-4626-41a9-9f2e-2e06a0f105ed",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Qu%E1%BA%A3ng%20Ng%C3%A3i%20hotel&sig=210"
+    },
+    {
+      "id": "17ce899f-fe8b-43d1-9b8b-d6a66036f260",
+      "khachSanId": "d5f99b1c-4626-41a9-9f2e-2e06a0f105ed",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Qu%E1%BA%A3ng%20Ng%C3%A3i%20hotel&sig=211"
+    },
+    {
+      "id": "f1a94704-73f7-4766-9f33-293818f5bcf9",
+      "khachSanId": "d5f99b1c-4626-41a9-9f2e-2e06a0f105ed",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Qu%E1%BA%A3ng%20Ng%C3%A3i%20hotel&sig=212"
+    },
+    {
+      "id": "e352aa70-5efa-442e-8c88-10f93ddfcd14",
+      "khachSanId": "d5f99b1c-4626-41a9-9f2e-2e06a0f105ed",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Qu%E1%BA%A3ng%20Ng%C3%A3i%20hotel&sig=213"
+    },
+    {
+      "id": "ebc73fbc-f51b-413d-892a-a1ef48eba8d8",
+      "khachSanId": "b8d284a6-3954-45fa-903d-5c24a0e60d7c",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Kon%20Tum%20hotel&sig=220"
+    },
+    {
+      "id": "bffe5682-c272-4f1f-808c-7c604113ac68",
+      "khachSanId": "b8d284a6-3954-45fa-903d-5c24a0e60d7c",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Kon%20Tum%20hotel&sig=221"
+    },
+    {
+      "id": "9cae98c5-d69c-4d32-86d6-b83b0810b162",
+      "khachSanId": "b8d284a6-3954-45fa-903d-5c24a0e60d7c",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Kon%20Tum%20hotel&sig=222"
+    },
+    {
+      "id": "f340f107-b2a5-4490-9fa5-d55ae99065ae",
+      "khachSanId": "be1f66d5-f1e3-4281-bb0b-bfc4c7f5c32e",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Gia%20Lai%20hotel&sig=230"
+    },
+    {
+      "id": "e085036b-e7bb-48a7-96ac-3e0390f6569e",
+      "khachSanId": "be1f66d5-f1e3-4281-bb0b-bfc4c7f5c32e",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Gia%20Lai%20hotel&sig=231"
+    },
+    {
+      "id": "2e22b2e8-2a36-4923-926c-f07f977d0eca",
+      "khachSanId": "be1f66d5-f1e3-4281-bb0b-bfc4c7f5c32e",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Gia%20Lai%20hotel&sig=232"
+    },
+    {
+      "id": "8d9c8ebe-2d79-463a-a369-6612722211b8",
+      "khachSanId": "be1f66d5-f1e3-4281-bb0b-bfc4c7f5c32e",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Gia%20Lai%20hotel&sig=233"
+    },
+    {
+      "id": "59f85d2d-14e7-4802-ba1e-a4fbc84840cc",
+      "khachSanId": "be1f66d5-f1e3-4281-bb0b-bfc4c7f5c32e",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Gia%20Lai%20hotel&sig=234"
+    },
+    {
+      "id": "16191380-3496-4e3d-a30c-819f8595544f",
+      "khachSanId": "b835b517-ce29-4298-970f-f9cc9c79dfa9",
+      "url": "https://source.unsplash.com/collection/190727/800x600?%C4%90%E1%BA%AFk%20L%E1%BA%AFk%20hotel&sig=240"
+    },
+    {
+      "id": "6045e5f5-960f-43fd-a493-c122dbf47f27",
+      "khachSanId": "b835b517-ce29-4298-970f-f9cc9c79dfa9",
+      "url": "https://source.unsplash.com/collection/190727/800x600?%C4%90%E1%BA%AFk%20L%E1%BA%AFk%20hotel&sig=241"
+    },
+    {
+      "id": "468af9ef-9d9c-4e4a-bffe-c1c5995fc514",
+      "khachSanId": "b835b517-ce29-4298-970f-f9cc9c79dfa9",
+      "url": "https://source.unsplash.com/collection/190727/800x600?%C4%90%E1%BA%AFk%20L%E1%BA%AFk%20hotel&sig=242"
+    },
+    {
+      "id": "8dacf4a3-c875-4685-8c86-cd407c47dc88",
+      "khachSanId": "b835b517-ce29-4298-970f-f9cc9c79dfa9",
+      "url": "https://source.unsplash.com/collection/190727/800x600?%C4%90%E1%BA%AFk%20L%E1%BA%AFk%20hotel&sig=243"
+    },
+    {
+      "id": "5082078a-8b46-446d-8e5a-9e1c0e480d0d",
+      "khachSanId": "b835b517-ce29-4298-970f-f9cc9c79dfa9",
+      "url": "https://source.unsplash.com/collection/190727/800x600?%C4%90%E1%BA%AFk%20L%E1%BA%AFk%20hotel&sig=244"
+    },
+    {
+      "id": "09cce116-86c2-4128-889b-a5f7b17d6e2d",
+      "khachSanId": "93d13f23-fcd6-47c2-987a-a4ecc815c241",
+      "url": "https://source.unsplash.com/collection/190727/800x600?An%20Giang%20hotel&sig=250"
+    },
+    {
+      "id": "952cdcd8-06b3-4e80-93a2-b84301b89040",
+      "khachSanId": "93d13f23-fcd6-47c2-987a-a4ecc815c241",
+      "url": "https://source.unsplash.com/collection/190727/800x600?An%20Giang%20hotel&sig=251"
+    },
+    {
+      "id": "d0001888-7207-4725-a394-05e53e0f6bb5",
+      "khachSanId": "93d13f23-fcd6-47c2-987a-a4ecc815c241",
+      "url": "https://source.unsplash.com/collection/190727/800x600?An%20Giang%20hotel&sig=252"
+    },
+    {
+      "id": "4cd66e95-b1c3-4548-af56-f7a8c701aaff",
+      "khachSanId": "93d13f23-fcd6-47c2-987a-a4ecc815c241",
+      "url": "https://source.unsplash.com/collection/190727/800x600?An%20Giang%20hotel&sig=253"
+    },
+    {
+      "id": "cd202fe2-80d0-4150-a1b8-78835ca929ab",
+      "khachSanId": "93d13f23-fcd6-47c2-987a-a4ecc815c241",
+      "url": "https://source.unsplash.com/collection/190727/800x600?An%20Giang%20hotel&sig=254"
+    },
+    {
+      "id": "f67f0e5f-71cd-4313-95b4-de687ae9d038",
+      "khachSanId": "70f70dcb-8ce8-439c-b00a-ca56376ee14a",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Long%20An%20hotel&sig=260"
+    },
+    {
+      "id": "8b030eda-2d84-4fdb-8855-7fef52f83a47",
+      "khachSanId": "70f70dcb-8ce8-439c-b00a-ca56376ee14a",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Long%20An%20hotel&sig=261"
+    },
+    {
+      "id": "f1901806-b373-49fc-8cef-cae83609abeb",
+      "khachSanId": "28ab9ee3-8e16-4d90-8986-348ca805fc95",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ti%E1%BB%81n%20Giang%20hotel&sig=270"
+    },
+    {
+      "id": "735e1c83-d1af-493c-b02b-ecb9af4abc68",
+      "khachSanId": "28ab9ee3-8e16-4d90-8986-348ca805fc95",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ti%E1%BB%81n%20Giang%20hotel&sig=271"
+    },
+    {
+      "id": "52f343cb-35c4-4622-a6de-87b47d26d7d5",
+      "khachSanId": "28ab9ee3-8e16-4d90-8986-348ca805fc95",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Ti%E1%BB%81n%20Giang%20hotel&sig=272"
+    },
+    {
+      "id": "452f9494-88c2-4534-8dda-83871a1c03f4",
+      "khachSanId": "b181d34b-d400-44cd-95b0-08019aa914bb",
+      "url": "https://source.unsplash.com/collection/190727/800x600?V%C4%A9nh%20Ph%C3%BAc%20hotel&sig=280"
+    },
+    {
+      "id": "b2815f2b-454a-4ae8-9be6-d06d4a3d04b7",
+      "khachSanId": "b181d34b-d400-44cd-95b0-08019aa914bb",
+      "url": "https://source.unsplash.com/collection/190727/800x600?V%C4%A9nh%20Ph%C3%BAc%20hotel&sig=281"
+    },
+    {
+      "id": "c093cfc4-a759-4afa-9ec2-9299e2e7cb8c",
+      "khachSanId": "b181d34b-d400-44cd-95b0-08019aa914bb",
+      "url": "https://source.unsplash.com/collection/190727/800x600?V%C4%A9nh%20Ph%C3%BAc%20hotel&sig=282"
+    },
+    {
+      "id": "6cbf5c53-bbe9-4687-b01f-a04e0da6a366",
+      "khachSanId": "061e39c6-ca63-4550-9380-11f24201fb25",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Nam%20%C4%90%E1%BB%8Bnh%20hotel&sig=290"
+    },
+    {
+      "id": "b1025fa1-277e-45a4-b6dd-e92c7b053464",
+      "khachSanId": "061e39c6-ca63-4550-9380-11f24201fb25",
+      "url": "https://source.unsplash.com/collection/190727/800x600?Nam%20%C4%90%E1%BB%8Bnh%20hotel&sig=291"
+    },
+    {
+      "id": "f25b7cc0-2e45-46a9-a07d-0f9566d00eb2",
+      "khachSanId": "3d5e3ae6-34f4-49b0-b12a-91479c2503ad",
+      "url": "https://source.unsplash.com/collection/190727/800x600?H%C3%B2a%20B%C3%ACnh%20hotel&sig=300"
+    },
+    {
+      "id": "d10fbe7e-5f28-40d8-87e8-7e7e79c8690d",
+      "khachSanId": "3d5e3ae6-34f4-49b0-b12a-91479c2503ad",
+      "url": "https://source.unsplash.com/collection/190727/800x600?H%C3%B2a%20B%C3%ACnh%20hotel&sig=301"
+    },
+    {
+      "id": "41b3a98e-79a6-4ebb-835d-0fac3de52b3f",
+      "khachSanId": "3d5e3ae6-34f4-49b0-b12a-91479c2503ad",
+      "url": "https://source.unsplash.com/collection/190727/800x600?H%C3%B2a%20B%C3%ACnh%20hotel&sig=302"
+    },
+    {
+      "id": "7652c7f7-0386-4138-9906-fa5772f293b8",
+      "khachSanId": "3d5e3ae6-34f4-49b0-b12a-91479c2503ad",
+      "url": "https://source.unsplash.com/collection/190727/800x600?H%C3%B2a%20B%C3%ACnh%20hotel&sig=303"
+    },
+    {
+      "id": "d0db1fa1-b069-4d6b-98ae-463219c8f189",
+      "khachSanId": "3d5e3ae6-34f4-49b0-b12a-91479c2503ad",
+      "url": "https://source.unsplash.com/collection/190727/800x600?H%C3%B2a%20B%C3%ACnh%20hotel&sig=304"
+    }
+  ],
+  "loaiphong": [
+    {
+      "id": "3e2f3791-9e40-4c2d-aea4-469c13376546",
+      "khachSanId": "6b5e0cf2-01ea-40d5-9f40-1b4fa83f64e9",
+      "tenLoaiPhong": "Phòng Superior",
+      "gia": 713711
+    },
+    {
+      "id": "37c50730-483a-48b2-b258-54aad07f1380",
+      "khachSanId": "6b5e0cf2-01ea-40d5-9f40-1b4fa83f64e9",
+      "tenLoaiPhong": "Suite 2",
+      "gia": 947627
+    },
+    {
+      "id": "777a7faa-cc80-4fcf-a003-1228f2485d5d",
+      "khachSanId": "1e3d79d4-2dcc-4a48-84c8-cfc530e0794f",
+      "tenLoaiPhong": "Suite",
+      "gia": 1204548
+    },
+    {
+      "id": "0b84b432-8ad9-46b4-8ea6-81d62aaacf0d",
+      "khachSanId": "1e3d79d4-2dcc-4a48-84c8-cfc530e0794f",
+      "tenLoaiPhong": "Phòng Đơn 2",
+      "gia": 1152375
+    },
+    {
+      "id": "90db23e2-5e81-4768-aed9-dc9c076ff386",
+      "khachSanId": "1e3d79d4-2dcc-4a48-84c8-cfc530e0794f",
+      "tenLoaiPhong": "Phòng Family 3",
+      "gia": 1417993
+    },
+    {
+      "id": "99c03ed8-0f52-49b3-9aeb-fb1dffea210a",
+      "khachSanId": "08d7d5d6-38c0-4a71-a6e0-643fe04dd9b8",
+      "tenLoaiPhong": "Phòng Deluxe",
+      "gia": 1760100
+    },
+    {
+      "id": "f73754b4-e80a-4cdd-a3f3-7835c17cd2f5",
+      "khachSanId": "08d7d5d6-38c0-4a71-a6e0-643fe04dd9b8",
+      "tenLoaiPhong": "Suite 2",
+      "gia": 1873456
+    },
+    {
+      "id": "a8cb74af-0c77-49c1-a2b3-030e08f71a2e",
+      "khachSanId": "08d7d5d6-38c0-4a71-a6e0-643fe04dd9b8",
+      "tenLoaiPhong": "Phòng Standard 3",
+      "gia": 1648078
+    },
+    {
+      "id": "c4707f81-c998-4d98-b0da-1eee013deb13",
+      "khachSanId": "08d7d5d6-38c0-4a71-a6e0-643fe04dd9b8",
+      "tenLoaiPhong": "Phòng Deluxe 4",
+      "gia": 1688042
+    },
+    {
+      "id": "6315b66f-b75e-437d-bafc-fd14cbad4d4b",
+      "khachSanId": "ad659a05-2210-464c-a4df-d041a5be225a",
+      "tenLoaiPhong": "Phòng Family",
+      "gia": 1213682
+    },
+    {
+      "id": "8e7677bc-34fc-4882-b32a-74f90d7b4903",
+      "khachSanId": "ad659a05-2210-464c-a4df-d041a5be225a",
+      "tenLoaiPhong": "Phòng Superior 2",
+      "gia": 1922738
+    },
+    {
+      "id": "a1fb8245-4c64-4fac-a9fa-27adeb3b6198",
+      "khachSanId": "0b28c50c-58b9-443d-a8d4-a531925bf56d",
+      "tenLoaiPhong": "Phòng Đôi",
+      "gia": 1942017
+    },
+    {
+      "id": "026cf507-edb5-4f4f-9c53-67fcded0f320",
+      "khachSanId": "0b28c50c-58b9-443d-a8d4-a531925bf56d",
+      "tenLoaiPhong": "Suite 2",
+      "gia": 946032
+    },
+    {
+      "id": "45efc8be-2881-41e1-a32c-5ed802a43495",
+      "khachSanId": "e9227f55-95f4-4212-b4fb-eed1bf857e45",
+      "tenLoaiPhong": "Suite",
+      "gia": 942285
+    },
+    {
+      "id": "96e96d30-7f6d-4a55-8bca-7caeb48531ea",
+      "khachSanId": "e9227f55-95f4-4212-b4fb-eed1bf857e45",
+      "tenLoaiPhong": "Phòng Standard 2",
+      "gia": 2312766
+    },
+    {
+      "id": "ac75d320-8cb7-452e-93bb-f8c66e662a49",
+      "khachSanId": "e9227f55-95f4-4212-b4fb-eed1bf857e45",
+      "tenLoaiPhong": "Phòng Đôi 3",
+      "gia": 2475049
+    },
+    {
+      "id": "943000f8-c0a0-4092-99c9-25ae76b95b55",
+      "khachSanId": "e9227f55-95f4-4212-b4fb-eed1bf857e45",
+      "tenLoaiPhong": "Phòng Standard 4",
+      "gia": 1890713
+    },
+    {
+      "id": "0b39b87b-47d0-4f3e-a70b-3804847fa30f",
+      "khachSanId": "e972eda9-0a24-40b4-81a3-87083eddaff1",
+      "tenLoaiPhong": "Phòng Superior",
+      "gia": 603057
+    },
+    {
+      "id": "2a7f55bc-397d-4fc3-b888-21254c2c6c5c",
+      "khachSanId": "e972eda9-0a24-40b4-81a3-87083eddaff1",
+      "tenLoaiPhong": "Phòng Đôi 2",
+      "gia": 1647203
+    },
+    {
+      "id": "898e8a87-8316-412a-aef9-85229c6b79d6",
+      "khachSanId": "e972eda9-0a24-40b4-81a3-87083eddaff1",
+      "tenLoaiPhong": "Phòng Family 3",
+      "gia": 1865727
+    },
+    {
+      "id": "6cec41e5-a1b5-43cb-8bbc-10bff693b97b",
+      "khachSanId": "77b2a8fa-52fc-4933-b020-557393861106",
+      "tenLoaiPhong": "Phòng Đơn",
+      "gia": 2026741
+    },
+    {
+      "id": "1cbf18e1-7a60-4ac7-98c6-9c920940aa9d",
+      "khachSanId": "77b2a8fa-52fc-4933-b020-557393861106",
+      "tenLoaiPhong": "Phòng Superior 2",
+      "gia": 754724
+    },
+    {
+      "id": "4d715980-c8ed-4318-aaef-bbc0ecdce9d0",
+      "khachSanId": "f11fdb43-baea-4f26-8d55-049bc186bf1d",
+      "tenLoaiPhong": "Phòng Superior",
+      "gia": 1806582
+    },
+    {
+      "id": "733a0147-c8bf-42af-b60a-85866162b40d",
+      "khachSanId": "f11fdb43-baea-4f26-8d55-049bc186bf1d",
+      "tenLoaiPhong": "Phòng Family 2",
+      "gia": 650057
+    },
+    {
+      "id": "3a26371d-9f4f-44ac-ab4c-5aaef5021c7c",
+      "khachSanId": "f11fdb43-baea-4f26-8d55-049bc186bf1d",
+      "tenLoaiPhong": "Phòng Deluxe 3",
+      "gia": 1406231
+    },
+    {
+      "id": "db05b850-be33-4df7-8554-303b73256548",
+      "khachSanId": "f11fdb43-baea-4f26-8d55-049bc186bf1d",
+      "tenLoaiPhong": "Phòng Deluxe 4",
+      "gia": 1846510
+    },
+    {
+      "id": "3d7a9260-3690-4a0d-86ba-fce0057ec5fc",
+      "khachSanId": "57d0c94a-4c35-432a-a6a3-86720a24b784",
+      "tenLoaiPhong": "Phòng Standard",
+      "gia": 1431806
+    },
+    {
+      "id": "00985a15-c1b5-4215-ae2f-8f15b64f4903",
+      "khachSanId": "57d0c94a-4c35-432a-a6a3-86720a24b784",
+      "tenLoaiPhong": "Phòng Standard 2",
+      "gia": 407179
+    },
+    {
+      "id": "c2e5070e-32b2-4f23-a969-9d1ebc98bc1b",
+      "khachSanId": "57d0c94a-4c35-432a-a6a3-86720a24b784",
+      "tenLoaiPhong": "Suite 3",
+      "gia": 787603
+    },
+    {
+      "id": "3cbe195c-315a-4876-8c0e-8afa357f8b81",
+      "khachSanId": "57d0c94a-4c35-432a-a6a3-86720a24b784",
+      "tenLoaiPhong": "Phòng Deluxe 4",
+      "gia": 445759
+    },
+    {
+      "id": "0558e082-7b1c-42b9-a38e-abf14353c55e",
+      "khachSanId": "b9903f93-51d7-44e8-8089-1cb8b8df9bce",
+      "tenLoaiPhong": "Phòng Đôi",
+      "gia": 2404862
+    },
+    {
+      "id": "0b11170b-caa9-4104-bcb6-a157ec2063e3",
+      "khachSanId": "b9903f93-51d7-44e8-8089-1cb8b8df9bce",
+      "tenLoaiPhong": "Phòng Đôi 2",
+      "gia": 2401639
+    },
+    {
+      "id": "78c6bc44-029b-44cd-bb3a-2670290f5c80",
+      "khachSanId": "b9903f93-51d7-44e8-8089-1cb8b8df9bce",
+      "tenLoaiPhong": "Phòng Deluxe 3",
+      "gia": 1159495
+    },
+    {
+      "id": "c84204b2-0b99-421b-a6f8-8674c2985a4f",
+      "khachSanId": "b9903f93-51d7-44e8-8089-1cb8b8df9bce",
+      "tenLoaiPhong": "Phòng Đơn 4",
+      "gia": 1337890
+    },
+    {
+      "id": "1eb01c17-bd86-4d25-a55d-bcc7802ff79a",
+      "khachSanId": "881dbd6d-3818-410c-8a7f-b0b97610104f",
+      "tenLoaiPhong": "Phòng Deluxe",
+      "gia": 639864
+    },
+    {
+      "id": "fa24beb0-132f-47be-8a66-a10e91346ff1",
+      "khachSanId": "881dbd6d-3818-410c-8a7f-b0b97610104f",
+      "tenLoaiPhong": "Phòng Đôi 2",
+      "gia": 2122313
+    },
+    {
+      "id": "76b8444d-14ee-43df-91a1-80358ef5a624",
+      "khachSanId": "881dbd6d-3818-410c-8a7f-b0b97610104f",
+      "tenLoaiPhong": "Phòng Đơn 3",
+      "gia": 1951028
+    },
+    {
+      "id": "e358abe1-de19-4c54-8a14-5fc922d0a787",
+      "khachSanId": "881dbd6d-3818-410c-8a7f-b0b97610104f",
+      "tenLoaiPhong": "Phòng Đơn 4",
+      "gia": 935548
+    },
+    {
+      "id": "8318426b-f3d0-4af5-821e-f7504fb800e4",
+      "khachSanId": "8ffc2b01-614d-437e-b20a-e426520411cc",
+      "tenLoaiPhong": "Phòng Deluxe",
+      "gia": 2398189
+    },
+    {
+      "id": "6f7d5918-9da0-404c-8179-2ac09fd656cd",
+      "khachSanId": "8ffc2b01-614d-437e-b20a-e426520411cc",
+      "tenLoaiPhong": "Phòng Đơn 2",
+      "gia": 463284
+    },
+    {
+      "id": "13e2ab29-1910-4fde-990b-f5cf72ba2fc6",
+      "khachSanId": "8ffc2b01-614d-437e-b20a-e426520411cc",
+      "tenLoaiPhong": "Phòng Standard 3",
+      "gia": 1403411
+    },
+    {
+      "id": "648629e1-1413-441c-9589-af6b6c404ec8",
+      "khachSanId": "8ffc2b01-614d-437e-b20a-e426520411cc",
+      "tenLoaiPhong": "Phòng Family 4",
+      "gia": 1306827
+    },
+    {
+      "id": "6754b03a-407b-4bcf-b75f-e3a1e8f46e61",
+      "khachSanId": "b2c595bb-9459-40f5-be05-7417f5b2634f",
+      "tenLoaiPhong": "Suite",
+      "gia": 1309404
+    },
+    {
+      "id": "beabd5fb-2f3c-4f17-9717-1ef40e6ea48a",
+      "khachSanId": "b2c595bb-9459-40f5-be05-7417f5b2634f",
+      "tenLoaiPhong": "Phòng Đơn 2",
+      "gia": 767701
+    },
+    {
+      "id": "4f67f032-142d-47c6-be33-91052d2b4f68",
+      "khachSanId": "cbd789bd-4728-4282-865c-05b89d012f39",
+      "tenLoaiPhong": "Phòng Superior",
+      "gia": 1641155
+    },
+    {
+      "id": "c040536e-5c9a-41ca-a48c-f52f963c58a6",
+      "khachSanId": "cbd789bd-4728-4282-865c-05b89d012f39",
+      "tenLoaiPhong": "Phòng Đơn 2",
+      "gia": 1005606
+    },
+    {
+      "id": "0ecafcd9-db2a-4bd2-acef-f947931bc004",
+      "khachSanId": "8dd6fad8-374d-42cd-9351-e5af9a44ed76",
+      "tenLoaiPhong": "Phòng Family",
+      "gia": 2160991
+    },
+    {
+      "id": "ce7adbb6-bf7a-4024-859b-c23fa88135c2",
+      "khachSanId": "8dd6fad8-374d-42cd-9351-e5af9a44ed76",
+      "tenLoaiPhong": "Phòng Đơn 2",
+      "gia": 544794
+    },
+    {
+      "id": "1d3a5072-58aa-4b4d-8ee5-d871fee12e82",
+      "khachSanId": "8dd6fad8-374d-42cd-9351-e5af9a44ed76",
+      "tenLoaiPhong": "Phòng Deluxe 3",
+      "gia": 1897323
+    },
+    {
+      "id": "7c7c04e6-d298-4e14-9114-3245d5f05e7e",
+      "khachSanId": "42e80c04-438e-49e9-afe3-8b2c41fec622",
+      "tenLoaiPhong": "Phòng Family",
+      "gia": 498081
+    },
+    {
+      "id": "c2983768-8673-4ccc-adc5-2c47e3e77ffd",
+      "khachSanId": "42e80c04-438e-49e9-afe3-8b2c41fec622",
+      "tenLoaiPhong": "Phòng Đơn 2",
+      "gia": 848418
+    },
+    {
+      "id": "1592d703-1ce5-41bc-a9b0-6e001363d0b2",
+      "khachSanId": "42e80c04-438e-49e9-afe3-8b2c41fec622",
+      "tenLoaiPhong": "Phòng Family 3",
+      "gia": 832872
+    },
+    {
+      "id": "49ff1d99-a7fd-4935-9789-b2f461e785dc",
+      "khachSanId": "b4914e53-f5f0-491c-afef-2aa2a456949f",
+      "tenLoaiPhong": "Phòng Standard",
+      "gia": 2469396
+    },
+    {
+      "id": "0939f50d-e434-4088-a9e1-a85fa7799a39",
+      "khachSanId": "b4914e53-f5f0-491c-afef-2aa2a456949f",
+      "tenLoaiPhong": "Phòng Deluxe 2",
+      "gia": 865994
+    },
+    {
+      "id": "70f3d8ab-fddc-4e21-849d-6219bc4e8458",
+      "khachSanId": "96f245fe-4b89-4a9f-ac51-e90f4d471c86",
+      "tenLoaiPhong": "Phòng Deluxe",
+      "gia": 1131272
+    },
+    {
+      "id": "c09428f7-5546-4a54-80a1-52bee758c4fa",
+      "khachSanId": "96f245fe-4b89-4a9f-ac51-e90f4d471c86",
+      "tenLoaiPhong": "Phòng Family 2",
+      "gia": 1360977
+    },
+    {
+      "id": "60a62186-b82b-4d46-9bc2-f5a029ca80e2",
+      "khachSanId": "0eeced9a-c730-4efc-bff9-a4b0b8562142",
+      "tenLoaiPhong": "Phòng Superior",
+      "gia": 1549998
+    },
+    {
+      "id": "1bf6d6d7-b62b-47e0-bbdc-ba7e296d9437",
+      "khachSanId": "0eeced9a-c730-4efc-bff9-a4b0b8562142",
+      "tenLoaiPhong": "Phòng Đôi 2",
+      "gia": 1275339
+    },
+    {
+      "id": "420f8e1d-38b5-4843-9801-94d1df64efb4",
+      "khachSanId": "0eeced9a-c730-4efc-bff9-a4b0b8562142",
+      "tenLoaiPhong": "Phòng Standard 3",
+      "gia": 1150187
+    },
+    {
+      "id": "53236831-9926-449d-9b81-5cc72682cc8f",
+      "khachSanId": "d5f99b1c-4626-41a9-9f2e-2e06a0f105ed",
+      "tenLoaiPhong": "Phòng Đơn",
+      "gia": 2302707
+    },
+    {
+      "id": "e5604a65-4b82-4228-b3a7-33f588c2ad7d",
+      "khachSanId": "d5f99b1c-4626-41a9-9f2e-2e06a0f105ed",
+      "tenLoaiPhong": "Phòng Đơn 2",
+      "gia": 1430028
+    },
+    {
+      "id": "89a32e2b-3767-4076-8022-18aa626eba55",
+      "khachSanId": "d5f99b1c-4626-41a9-9f2e-2e06a0f105ed",
+      "tenLoaiPhong": "Phòng Đôi 3",
+      "gia": 1279585
+    },
+    {
+      "id": "6f11d74e-e868-4d94-ac44-1f0e47ab1b39",
+      "khachSanId": "b8d284a6-3954-45fa-903d-5c24a0e60d7c",
+      "tenLoaiPhong": "Phòng Deluxe",
+      "gia": 1767767
+    },
+    {
+      "id": "7015098a-5a8e-4687-a13a-4e5267571375",
+      "khachSanId": "b8d284a6-3954-45fa-903d-5c24a0e60d7c",
+      "tenLoaiPhong": "Phòng Superior 2",
+      "gia": 740283
+    },
+    {
+      "id": "7b322858-f119-47cc-8858-4e77b3606ed0",
+      "khachSanId": "b8d284a6-3954-45fa-903d-5c24a0e60d7c",
+      "tenLoaiPhong": "Phòng Đôi 3",
+      "gia": 1620914
+    },
+    {
+      "id": "1e212438-4a87-4fb2-bd74-9d7cb92767e3",
+      "khachSanId": "b8d284a6-3954-45fa-903d-5c24a0e60d7c",
+      "tenLoaiPhong": "Phòng Deluxe 4",
+      "gia": 898152
+    },
+    {
+      "id": "0ed43816-b227-4574-a499-567f6d18e2df",
+      "khachSanId": "be1f66d5-f1e3-4281-bb0b-bfc4c7f5c32e",
+      "tenLoaiPhong": "Phòng Standard",
+      "gia": 1020225
+    },
+    {
+      "id": "69b97d90-df39-4763-8886-ed62e8ac0ba3",
+      "khachSanId": "be1f66d5-f1e3-4281-bb0b-bfc4c7f5c32e",
+      "tenLoaiPhong": "Phòng Standard 2",
+      "gia": 2007280
+    },
+    {
+      "id": "cdfd0844-4b19-410c-be8d-ac9b1f7f1d05",
+      "khachSanId": "be1f66d5-f1e3-4281-bb0b-bfc4c7f5c32e",
+      "tenLoaiPhong": "Suite 3",
+      "gia": 461875
+    },
+    {
+      "id": "e4360361-1526-492d-8eaa-b05a121a48f4",
+      "khachSanId": "b835b517-ce29-4298-970f-f9cc9c79dfa9",
+      "tenLoaiPhong": "Phòng Standard",
+      "gia": 956219
+    },
+    {
+      "id": "c63068e6-ff2d-483a-b04e-3a5a900023a4",
+      "khachSanId": "b835b517-ce29-4298-970f-f9cc9c79dfa9",
+      "tenLoaiPhong": "Suite 2",
+      "gia": 1686500
+    },
+    {
+      "id": "018f7c19-7bac-4532-aae9-52116f646285",
+      "khachSanId": "b835b517-ce29-4298-970f-f9cc9c79dfa9",
+      "tenLoaiPhong": "Phòng Family 3",
+      "gia": 1027347
+    },
+    {
+      "id": "6cc2c368-b4ce-405c-8563-2e5ff91c6dbd",
+      "khachSanId": "93d13f23-fcd6-47c2-987a-a4ecc815c241",
+      "tenLoaiPhong": "Phòng Superior",
+      "gia": 1155752
+    },
+    {
+      "id": "e890e1d9-91ab-4caf-badd-96a78581c147",
+      "khachSanId": "93d13f23-fcd6-47c2-987a-a4ecc815c241",
+      "tenLoaiPhong": "Phòng Đơn 2",
+      "gia": 1754475
+    },
+    {
+      "id": "efc5262e-d3ac-41c6-ba8a-fdaf7036f89d",
+      "khachSanId": "93d13f23-fcd6-47c2-987a-a4ecc815c241",
+      "tenLoaiPhong": "Phòng Standard 3",
+      "gia": 1429057
+    },
+    {
+      "id": "3d8285ec-e441-426e-8bb1-330bce5096ba",
+      "khachSanId": "93d13f23-fcd6-47c2-987a-a4ecc815c241",
+      "tenLoaiPhong": "Phòng Deluxe 4",
+      "gia": 881497
+    },
+    {
+      "id": "6fee4372-ece5-4db5-a6f4-04874436dba8",
+      "khachSanId": "70f70dcb-8ce8-439c-b00a-ca56376ee14a",
+      "tenLoaiPhong": "Phòng Superior",
+      "gia": 418473
+    },
+    {
+      "id": "ef0a3cfa-5ba0-4e72-bccf-c272f62e2fe0",
+      "khachSanId": "70f70dcb-8ce8-439c-b00a-ca56376ee14a",
+      "tenLoaiPhong": "Phòng Đôi 2",
+      "gia": 810285
+    },
+    {
+      "id": "aaa166b9-1288-42cc-9d71-3704b34b1e4d",
+      "khachSanId": "70f70dcb-8ce8-439c-b00a-ca56376ee14a",
+      "tenLoaiPhong": "Phòng Deluxe 3",
+      "gia": 637899
+    },
+    {
+      "id": "e36c1765-04cc-4d9d-a8e3-9c02abb87fab",
+      "khachSanId": "28ab9ee3-8e16-4d90-8986-348ca805fc95",
+      "tenLoaiPhong": "Phòng Family",
+      "gia": 1492119
+    },
+    {
+      "id": "29e90f98-48f5-4c35-92d2-e4fd5ba6b947",
+      "khachSanId": "28ab9ee3-8e16-4d90-8986-348ca805fc95",
+      "tenLoaiPhong": "Phòng Deluxe 2",
+      "gia": 1639667
+    },
+    {
+      "id": "997f5224-6815-4ed6-8343-ce9beb18dc7d",
+      "khachSanId": "28ab9ee3-8e16-4d90-8986-348ca805fc95",
+      "tenLoaiPhong": "Phòng Standard 3",
+      "gia": 918901
+    },
+    {
+      "id": "c4b7f593-5a54-4132-9e3c-0ba93d61ff4b",
+      "khachSanId": "b181d34b-d400-44cd-95b0-08019aa914bb",
+      "tenLoaiPhong": "Phòng Superior",
+      "gia": 1123129
+    },
+    {
+      "id": "f92276b8-53a3-4a5b-b13c-2b61e0f0728a",
+      "khachSanId": "b181d34b-d400-44cd-95b0-08019aa914bb",
+      "tenLoaiPhong": "Suite 2",
+      "gia": 2138711
+    },
+    {
+      "id": "7d229d21-cf48-45e5-b426-9ee92dd92467",
+      "khachSanId": "061e39c6-ca63-4550-9380-11f24201fb25",
+      "tenLoaiPhong": "Phòng Deluxe",
+      "gia": 516026
+    },
+    {
+      "id": "7203801c-fb50-4525-99e4-285f1c899ec8",
+      "khachSanId": "061e39c6-ca63-4550-9380-11f24201fb25",
+      "tenLoaiPhong": "Suite 2",
+      "gia": 1918761
+    },
+    {
+      "id": "ab9e513a-15ff-4da4-bffd-0c4e22a4a3f6",
+      "khachSanId": "3d5e3ae6-34f4-49b0-b12a-91479c2503ad",
+      "tenLoaiPhong": "Phòng Đơn",
+      "gia": 1688601
+    },
+    {
+      "id": "dc58966d-843a-4157-bda1-717ae6be0444",
+      "khachSanId": "3d5e3ae6-34f4-49b0-b12a-91479c2503ad",
+      "tenLoaiPhong": "Suite 2",
+      "gia": 1088079
+    },
+    {
+      "id": "4d30abee-f1e5-4e73-b144-d736556738bb",
+      "khachSanId": "3d5e3ae6-34f4-49b0-b12a-91479c2503ad",
+      "tenLoaiPhong": "Phòng Deluxe 3",
+      "gia": 2337208
+    },
+    {
+      "id": "a62afe77-01a0-4285-a030-1e7b1b7bba7d",
+      "khachSanId": "3d5e3ae6-34f4-49b0-b12a-91479c2503ad",
+      "tenLoaiPhong": "Phòng Standard 4",
+      "gia": 1801617
+    }
+  ],
+  "giaphong": [
+    {
+      "id": "2ac201dd-65ae-499f-ac19-46e506c4a0cb",
+      "loaiPhongId": "3e2f3791-9e40-4c2d-aea4-469c13376546",
+      "gia": 713711
+    },
+    {
+      "id": "9d3ca3b2-9ebb-4850-bf7a-8c3c0228c503",
+      "loaiPhongId": "37c50730-483a-48b2-b258-54aad07f1380",
+      "gia": 947627
+    },
+    {
+      "id": "df5f5dc0-e410-4a0c-9a77-1773ec60d8ca",
+      "loaiPhongId": "777a7faa-cc80-4fcf-a003-1228f2485d5d",
+      "gia": 1204548
+    },
+    {
+      "id": "af896588-3950-40a4-8057-4960dd51a8b1",
+      "loaiPhongId": "0b84b432-8ad9-46b4-8ea6-81d62aaacf0d",
+      "gia": 1152375
+    },
+    {
+      "id": "c1cc5132-5d4a-4784-802f-be8edbaa44d7",
+      "loaiPhongId": "90db23e2-5e81-4768-aed9-dc9c076ff386",
+      "gia": 1417993
+    },
+    {
+      "id": "0dce6b09-106a-40dd-a41e-cda109ca77f4",
+      "loaiPhongId": "99c03ed8-0f52-49b3-9aeb-fb1dffea210a",
+      "gia": 1760100
+    },
+    {
+      "id": "83111d10-1bce-4499-ad88-12ed45fdd11d",
+      "loaiPhongId": "f73754b4-e80a-4cdd-a3f3-7835c17cd2f5",
+      "gia": 1873456
+    },
+    {
+      "id": "395c5b4f-2561-420f-bb22-db6e5b02736a",
+      "loaiPhongId": "a8cb74af-0c77-49c1-a2b3-030e08f71a2e",
+      "gia": 1648078
+    },
+    {
+      "id": "c20bb291-fd5c-4ae5-8f28-b88851047873",
+      "loaiPhongId": "c4707f81-c998-4d98-b0da-1eee013deb13",
+      "gia": 1688042
+    },
+    {
+      "id": "de7942bd-930c-488c-8345-c4e66ea40478",
+      "loaiPhongId": "6315b66f-b75e-437d-bafc-fd14cbad4d4b",
+      "gia": 1213682
+    },
+    {
+      "id": "3316e8e6-b816-475e-87b8-7762363923e7",
+      "loaiPhongId": "8e7677bc-34fc-4882-b32a-74f90d7b4903",
+      "gia": 1922738
+    },
+    {
+      "id": "c77b19a3-159a-4562-a5ae-b36fa84e7313",
+      "loaiPhongId": "a1fb8245-4c64-4fac-a9fa-27adeb3b6198",
+      "gia": 1942017
+    },
+    {
+      "id": "60d8cb8d-2ac0-43ee-b150-3e7c1ce29dbc",
+      "loaiPhongId": "026cf507-edb5-4f4f-9c53-67fcded0f320",
+      "gia": 946032
+    },
+    {
+      "id": "faf14c5b-9187-4a10-80e9-44df937d4bd4",
+      "loaiPhongId": "45efc8be-2881-41e1-a32c-5ed802a43495",
+      "gia": 942285
+    },
+    {
+      "id": "6efd39e6-3086-43cf-96e3-ac6d163af375",
+      "loaiPhongId": "96e96d30-7f6d-4a55-8bca-7caeb48531ea",
+      "gia": 2312766
+    },
+    {
+      "id": "c9070305-6d00-483a-8aa7-aaa6d0803009",
+      "loaiPhongId": "ac75d320-8cb7-452e-93bb-f8c66e662a49",
+      "gia": 2475049
+    },
+    {
+      "id": "a728050f-050b-4afa-8963-a0b537a1a359",
+      "loaiPhongId": "943000f8-c0a0-4092-99c9-25ae76b95b55",
+      "gia": 1890713
+    },
+    {
+      "id": "4b0c0fdd-c192-403a-a6de-440cddb83c5c",
+      "loaiPhongId": "0b39b87b-47d0-4f3e-a70b-3804847fa30f",
+      "gia": 603057
+    },
+    {
+      "id": "7adea8bd-2bea-4980-8f62-28cc079b6ddb",
+      "loaiPhongId": "2a7f55bc-397d-4fc3-b888-21254c2c6c5c",
+      "gia": 1647203
+    },
+    {
+      "id": "05470627-dc99-4c5c-9701-a6db72a6e560",
+      "loaiPhongId": "898e8a87-8316-412a-aef9-85229c6b79d6",
+      "gia": 1865727
+    },
+    {
+      "id": "a285fba3-b603-41c8-8eec-9e55d7159b52",
+      "loaiPhongId": "6cec41e5-a1b5-43cb-8bbc-10bff693b97b",
+      "gia": 2026741
+    },
+    {
+      "id": "59ae3735-c107-4bc5-8340-245c9c9c17cc",
+      "loaiPhongId": "1cbf18e1-7a60-4ac7-98c6-9c920940aa9d",
+      "gia": 754724
+    },
+    {
+      "id": "33625ff9-1dee-475f-87bb-eeb4a4cebcac",
+      "loaiPhongId": "4d715980-c8ed-4318-aaef-bbc0ecdce9d0",
+      "gia": 1806582
+    },
+    {
+      "id": "067259fa-6b5c-440a-ad35-4f51a33350da",
+      "loaiPhongId": "733a0147-c8bf-42af-b60a-85866162b40d",
+      "gia": 650057
+    },
+    {
+      "id": "7266af5a-362b-46a1-a789-a295545c2051",
+      "loaiPhongId": "3a26371d-9f4f-44ac-ab4c-5aaef5021c7c",
+      "gia": 1406231
+    },
+    {
+      "id": "a91f78fe-13d1-49b7-9a16-0b0f5be4b806",
+      "loaiPhongId": "db05b850-be33-4df7-8554-303b73256548",
+      "gia": 1846510
+    },
+    {
+      "id": "f0ea1474-743b-441f-a5cf-eb8940a20739",
+      "loaiPhongId": "3d7a9260-3690-4a0d-86ba-fce0057ec5fc",
+      "gia": 1431806
+    },
+    {
+      "id": "0c2d8924-2a8c-4522-a1a6-b7f16b410cda",
+      "loaiPhongId": "00985a15-c1b5-4215-ae2f-8f15b64f4903",
+      "gia": 407179
+    },
+    {
+      "id": "c842b51b-55ed-4a75-8636-920f7a5deb55",
+      "loaiPhongId": "c2e5070e-32b2-4f23-a969-9d1ebc98bc1b",
+      "gia": 787603
+    },
+    {
+      "id": "140a9541-2d54-4fb5-a0f6-3ce0a93bf359",
+      "loaiPhongId": "3cbe195c-315a-4876-8c0e-8afa357f8b81",
+      "gia": 445759
+    },
+    {
+      "id": "2bf5e096-9043-4057-9392-6c7576c1bdb8",
+      "loaiPhongId": "0558e082-7b1c-42b9-a38e-abf14353c55e",
+      "gia": 2404862
+    },
+    {
+      "id": "16ac357a-2a27-40e7-8a06-6a7e84ee7609",
+      "loaiPhongId": "0b11170b-caa9-4104-bcb6-a157ec2063e3",
+      "gia": 2401639
+    },
+    {
+      "id": "1cd31a49-26fb-4245-b0e0-76e0f69de333",
+      "loaiPhongId": "78c6bc44-029b-44cd-bb3a-2670290f5c80",
+      "gia": 1159495
+    },
+    {
+      "id": "8e290dc6-a44b-48c8-87e1-0ee7ebd3b922",
+      "loaiPhongId": "c84204b2-0b99-421b-a6f8-8674c2985a4f",
+      "gia": 1337890
+    },
+    {
+      "id": "a4eb2ca0-4a45-4aa4-a7e9-b0c8632e2f19",
+      "loaiPhongId": "1eb01c17-bd86-4d25-a55d-bcc7802ff79a",
+      "gia": 639864
+    },
+    {
+      "id": "bb02bf29-6b8e-47b9-b006-e44f3463459c",
+      "loaiPhongId": "fa24beb0-132f-47be-8a66-a10e91346ff1",
+      "gia": 2122313
+    },
+    {
+      "id": "6e460c75-38c7-4b8f-a0ed-a3dc32c6f8e2",
+      "loaiPhongId": "76b8444d-14ee-43df-91a1-80358ef5a624",
+      "gia": 1951028
+    },
+    {
+      "id": "6a97ac77-e433-4850-baa1-1fa5902c1011",
+      "loaiPhongId": "e358abe1-de19-4c54-8a14-5fc922d0a787",
+      "gia": 935548
+    },
+    {
+      "id": "40e199cf-725d-4573-8f8f-ee28d743c9e8",
+      "loaiPhongId": "8318426b-f3d0-4af5-821e-f7504fb800e4",
+      "gia": 2398189
+    },
+    {
+      "id": "52f935e5-2a71-4755-b3db-221328dd0691",
+      "loaiPhongId": "6f7d5918-9da0-404c-8179-2ac09fd656cd",
+      "gia": 463284
+    },
+    {
+      "id": "4905f3cf-ba43-4a01-ab98-ccc563541689",
+      "loaiPhongId": "13e2ab29-1910-4fde-990b-f5cf72ba2fc6",
+      "gia": 1403411
+    },
+    {
+      "id": "b3028b85-d1a6-465f-905f-486b6916bbc6",
+      "loaiPhongId": "648629e1-1413-441c-9589-af6b6c404ec8",
+      "gia": 1306827
+    },
+    {
+      "id": "5146a738-6413-4714-8d9d-83b806f46460",
+      "loaiPhongId": "6754b03a-407b-4bcf-b75f-e3a1e8f46e61",
+      "gia": 1309404
+    },
+    {
+      "id": "7a5d938b-ba65-4d2d-9562-44d6088ebf01",
+      "loaiPhongId": "beabd5fb-2f3c-4f17-9717-1ef40e6ea48a",
+      "gia": 767701
+    },
+    {
+      "id": "c30fb94f-2801-4da5-9b59-623357718771",
+      "loaiPhongId": "4f67f032-142d-47c6-be33-91052d2b4f68",
+      "gia": 1641155
+    },
+    {
+      "id": "ae0cabd6-c00f-4117-a93c-158c92eb31c4",
+      "loaiPhongId": "c040536e-5c9a-41ca-a48c-f52f963c58a6",
+      "gia": 1005606
+    },
+    {
+      "id": "600ed15a-bb8b-4d71-9809-b693b7946b4e",
+      "loaiPhongId": "0ecafcd9-db2a-4bd2-acef-f947931bc004",
+      "gia": 2160991
+    },
+    {
+      "id": "bb550183-77b2-4c30-a693-f6752c04d372",
+      "loaiPhongId": "ce7adbb6-bf7a-4024-859b-c23fa88135c2",
+      "gia": 544794
+    },
+    {
+      "id": "570c4d31-7da4-4fd3-a30a-4da29ef5e065",
+      "loaiPhongId": "1d3a5072-58aa-4b4d-8ee5-d871fee12e82",
+      "gia": 1897323
+    },
+    {
+      "id": "8a4b4753-8ced-45cb-aae1-0c9444a06b36",
+      "loaiPhongId": "7c7c04e6-d298-4e14-9114-3245d5f05e7e",
+      "gia": 498081
+    },
+    {
+      "id": "c0fc3efc-d81c-4e93-9a98-03d8c0555494",
+      "loaiPhongId": "c2983768-8673-4ccc-adc5-2c47e3e77ffd",
+      "gia": 848418
+    },
+    {
+      "id": "915e466d-b564-428c-8385-cf0b7d0d5389",
+      "loaiPhongId": "1592d703-1ce5-41bc-a9b0-6e001363d0b2",
+      "gia": 832872
+    },
+    {
+      "id": "88d990d1-1ec5-489d-b73e-c22d134bfbb2",
+      "loaiPhongId": "49ff1d99-a7fd-4935-9789-b2f461e785dc",
+      "gia": 2469396
+    },
+    {
+      "id": "a4a142e7-ebc1-422b-a3e0-93a3123b58d6",
+      "loaiPhongId": "0939f50d-e434-4088-a9e1-a85fa7799a39",
+      "gia": 865994
+    },
+    {
+      "id": "60c48c78-a267-470c-9863-cac28ab82865",
+      "loaiPhongId": "70f3d8ab-fddc-4e21-849d-6219bc4e8458",
+      "gia": 1131272
+    },
+    {
+      "id": "08c279a4-1b33-4c5e-9cd3-e5786072fcf3",
+      "loaiPhongId": "c09428f7-5546-4a54-80a1-52bee758c4fa",
+      "gia": 1360977
+    },
+    {
+      "id": "9da15e63-3c86-4f8c-b2fc-532576ae72f6",
+      "loaiPhongId": "60a62186-b82b-4d46-9bc2-f5a029ca80e2",
+      "gia": 1549998
+    },
+    {
+      "id": "22ac36f3-f5ca-49fb-8316-830cc8f84f63",
+      "loaiPhongId": "1bf6d6d7-b62b-47e0-bbdc-ba7e296d9437",
+      "gia": 1275339
+    },
+    {
+      "id": "d6cfb4c7-10ff-4a50-9b4e-809aa443b003",
+      "loaiPhongId": "420f8e1d-38b5-4843-9801-94d1df64efb4",
+      "gia": 1150187
+    },
+    {
+      "id": "75cef2f6-7ebe-48db-9253-6c493ab63597",
+      "loaiPhongId": "53236831-9926-449d-9b81-5cc72682cc8f",
+      "gia": 2302707
+    },
+    {
+      "id": "a5488719-ced7-4edf-be01-d41e693f4a1a",
+      "loaiPhongId": "e5604a65-4b82-4228-b3a7-33f588c2ad7d",
+      "gia": 1430028
+    },
+    {
+      "id": "6474ffa8-9a4e-4588-a32b-dfbacc5f10b0",
+      "loaiPhongId": "89a32e2b-3767-4076-8022-18aa626eba55",
+      "gia": 1279585
+    },
+    {
+      "id": "00e5b346-3125-445a-9d29-a580a0544da7",
+      "loaiPhongId": "6f11d74e-e868-4d94-ac44-1f0e47ab1b39",
+      "gia": 1767767
+    },
+    {
+      "id": "cd91d05b-a28b-4a73-b572-2dbb0bb36ac5",
+      "loaiPhongId": "7015098a-5a8e-4687-a13a-4e5267571375",
+      "gia": 740283
+    },
+    {
+      "id": "5b5227d0-298b-41b6-ba29-83dbe4b0ccae",
+      "loaiPhongId": "7b322858-f119-47cc-8858-4e77b3606ed0",
+      "gia": 1620914
+    },
+    {
+      "id": "fa10681c-d657-4fa3-a1fa-23c098c24ad5",
+      "loaiPhongId": "1e212438-4a87-4fb2-bd74-9d7cb92767e3",
+      "gia": 898152
+    },
+    {
+      "id": "0517a456-9b4f-42f5-814b-e6c98212b641",
+      "loaiPhongId": "0ed43816-b227-4574-a499-567f6d18e2df",
+      "gia": 1020225
+    },
+    {
+      "id": "d6836a5d-bc6f-4e02-9db9-beb67e1db0d0",
+      "loaiPhongId": "69b97d90-df39-4763-8886-ed62e8ac0ba3",
+      "gia": 2007280
+    },
+    {
+      "id": "ceeed82a-8f50-4820-a46a-9a0c2c554c71",
+      "loaiPhongId": "cdfd0844-4b19-410c-be8d-ac9b1f7f1d05",
+      "gia": 461875
+    },
+    {
+      "id": "6840097a-b1e4-4dde-8f3e-9e1167d3a6a6",
+      "loaiPhongId": "e4360361-1526-492d-8eaa-b05a121a48f4",
+      "gia": 956219
+    },
+    {
+      "id": "cd95a674-9212-427e-a199-23c93cf796e1",
+      "loaiPhongId": "c63068e6-ff2d-483a-b04e-3a5a900023a4",
+      "gia": 1686500
+    },
+    {
+      "id": "a156f6bb-44a0-4e6d-a61c-dc8f141e27e5",
+      "loaiPhongId": "018f7c19-7bac-4532-aae9-52116f646285",
+      "gia": 1027347
+    },
+    {
+      "id": "4078c562-163b-45c4-bc5f-193d0ef339b9",
+      "loaiPhongId": "6cc2c368-b4ce-405c-8563-2e5ff91c6dbd",
+      "gia": 1155752
+    },
+    {
+      "id": "f3e747a2-ad9f-45d8-ad7d-4fc8eece39ba",
+      "loaiPhongId": "e890e1d9-91ab-4caf-badd-96a78581c147",
+      "gia": 1754475
+    },
+    {
+      "id": "5d3fd3be-c790-4738-8d10-fc4d90e9f436",
+      "loaiPhongId": "efc5262e-d3ac-41c6-ba8a-fdaf7036f89d",
+      "gia": 1429057
+    },
+    {
+      "id": "461ee0cd-df02-4ad8-9607-f95d3169b80e",
+      "loaiPhongId": "3d8285ec-e441-426e-8bb1-330bce5096ba",
+      "gia": 881497
+    },
+    {
+      "id": "a06b84de-1f43-4bc4-9811-54f5d4662149",
+      "loaiPhongId": "6fee4372-ece5-4db5-a6f4-04874436dba8",
+      "gia": 418473
+    },
+    {
+      "id": "19aca97c-68cc-4dd6-8d64-65f244c27639",
+      "loaiPhongId": "ef0a3cfa-5ba0-4e72-bccf-c272f62e2fe0",
+      "gia": 810285
+    },
+    {
+      "id": "12b758d5-8f96-4e0f-8206-932dd2a327f8",
+      "loaiPhongId": "aaa166b9-1288-42cc-9d71-3704b34b1e4d",
+      "gia": 637899
+    },
+    {
+      "id": "12e01cb6-25ae-4d81-bb63-a39dafee1803",
+      "loaiPhongId": "e36c1765-04cc-4d9d-a8e3-9c02abb87fab",
+      "gia": 1492119
+    },
+    {
+      "id": "20c00134-e721-4cf1-a7ad-650841a19602",
+      "loaiPhongId": "29e90f98-48f5-4c35-92d2-e4fd5ba6b947",
+      "gia": 1639667
+    },
+    {
+      "id": "2f7fc759-fc5e-4929-8364-b2e136c09c69",
+      "loaiPhongId": "997f5224-6815-4ed6-8343-ce9beb18dc7d",
+      "gia": 918901
+    },
+    {
+      "id": "ba38b5f0-9d64-459e-ac23-6804338f792b",
+      "loaiPhongId": "c4b7f593-5a54-4132-9e3c-0ba93d61ff4b",
+      "gia": 1123129
+    },
+    {
+      "id": "1e725597-1a9b-46e6-a168-6887c4ce59b5",
+      "loaiPhongId": "f92276b8-53a3-4a5b-b13c-2b61e0f0728a",
+      "gia": 2138711
+    },
+    {
+      "id": "cae63fa1-a958-4527-a4b2-f2aaf5ed6183",
+      "loaiPhongId": "7d229d21-cf48-45e5-b426-9ee92dd92467",
+      "gia": 516026
+    },
+    {
+      "id": "bf5bf86b-3c16-401f-aa69-f27e73ca4f78",
+      "loaiPhongId": "7203801c-fb50-4525-99e4-285f1c899ec8",
+      "gia": 1918761
+    },
+    {
+      "id": "46732fc5-79c0-42e9-b8f3-77d702d93647",
+      "loaiPhongId": "ab9e513a-15ff-4da4-bffd-0c4e22a4a3f6",
+      "gia": 1688601
+    },
+    {
+      "id": "c2ee3980-7c1b-4704-88be-c5532dcda567",
+      "loaiPhongId": "dc58966d-843a-4157-bda1-717ae6be0444",
+      "gia": 1088079
+    },
+    {
+      "id": "b405fb52-aabc-493a-9ce1-a90446f4ac3f",
+      "loaiPhongId": "4d30abee-f1e5-4e73-b144-d736556738bb",
+      "gia": 2337208
+    },
+    {
+      "id": "c8ab2b14-3539-43f0-94f5-411003185ea8",
+      "loaiPhongId": "a62afe77-01a0-4285-a030-1e7b1b7bba7d",
+      "gia": 1801617
+    }
+  ],
+  "phong": [
+    {
+      "id": "9630eb91-e5db-400a-b71f-fae2453b4af7",
+      "loaiPhongId": "3e2f3791-9e40-4c2d-aea4-469c13376546",
+      "soPhong": "163",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "6584c7b1-d603-4574-962e-3eafff3f0044",
+      "loaiPhongId": "3e2f3791-9e40-4c2d-aea4-469c13376546",
+      "soPhong": "293",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "c60f3c93-6c68-411c-beb6-8abf1f1a57d7",
+      "loaiPhongId": "3e2f3791-9e40-4c2d-aea4-469c13376546",
+      "soPhong": "635",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "3e14ebc8-a9cb-4260-8ca7-6c76dc1c70a9",
+      "loaiPhongId": "3e2f3791-9e40-4c2d-aea4-469c13376546",
+      "soPhong": "716",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "4e2d6f2c-5fac-495d-8ecb-a36a1029b0ac",
+      "loaiPhongId": "37c50730-483a-48b2-b258-54aad07f1380",
+      "soPhong": "718",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "b3ebb72f-16bd-44d0-a5e7-94f5c6754d87",
+      "loaiPhongId": "37c50730-483a-48b2-b258-54aad07f1380",
+      "soPhong": "241",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "965f5d18-1278-4d37-b033-457e7d66a6a0",
+      "loaiPhongId": "37c50730-483a-48b2-b258-54aad07f1380",
+      "soPhong": "805",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "0bb1e55e-909b-414a-a3a8-60240da20ae4",
+      "loaiPhongId": "37c50730-483a-48b2-b258-54aad07f1380",
+      "soPhong": "156",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "4e806eda-c7b5-490d-9d68-9fb746528f7a",
+      "loaiPhongId": "777a7faa-cc80-4fcf-a003-1228f2485d5d",
+      "soPhong": "187",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "f0b6a83c-e04a-4a2f-b9d0-aac1693ba82e",
+      "loaiPhongId": "777a7faa-cc80-4fcf-a003-1228f2485d5d",
+      "soPhong": "029",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "3f2e85b8-25c4-4e1d-85f6-83b81cf9081c",
+      "loaiPhongId": "777a7faa-cc80-4fcf-a003-1228f2485d5d",
+      "soPhong": "311",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "8b56f9b9-956d-4684-a744-ee83c7dacffe",
+      "loaiPhongId": "0b84b432-8ad9-46b4-8ea6-81d62aaacf0d",
+      "soPhong": "212",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "a57bf1e1-7109-4c91-8002-8cc8756f3b21",
+      "loaiPhongId": "0b84b432-8ad9-46b4-8ea6-81d62aaacf0d",
+      "soPhong": "149",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "9b65edd1-b4d0-444a-bfeb-e30677e511d9",
+      "loaiPhongId": "90db23e2-5e81-4768-aed9-dc9c076ff386",
+      "soPhong": "127",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "7b778f13-99e0-4143-a6a4-095dfd98d05b",
+      "loaiPhongId": "99c03ed8-0f52-49b3-9aeb-fb1dffea210a",
+      "soPhong": "744",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "768b37ea-dbe6-49f9-9694-d4aca0ab38ba",
+      "loaiPhongId": "99c03ed8-0f52-49b3-9aeb-fb1dffea210a",
+      "soPhong": "886",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "0551e01d-b315-4d42-bd41-8910f5ec3ade",
+      "loaiPhongId": "99c03ed8-0f52-49b3-9aeb-fb1dffea210a",
+      "soPhong": "031",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "0128cdc7-8e3b-4a25-a087-caa38e9ccf7e",
+      "loaiPhongId": "99c03ed8-0f52-49b3-9aeb-fb1dffea210a",
+      "soPhong": "819",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "c34f3d18-4d94-4bde-95ac-cc1dc8786113",
+      "loaiPhongId": "f73754b4-e80a-4cdd-a3f3-7835c17cd2f5",
+      "soPhong": "051",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "d336fe8a-152f-4268-a643-f23b7187b8d7",
+      "loaiPhongId": "f73754b4-e80a-4cdd-a3f3-7835c17cd2f5",
+      "soPhong": "198",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "aafa0d04-ee38-4683-9d79-fc28b1d275e0",
+      "loaiPhongId": "a8cb74af-0c77-49c1-a2b3-030e08f71a2e",
+      "soPhong": "729",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "e2f05903-33a5-4955-bbec-f488083df1e8",
+      "loaiPhongId": "a8cb74af-0c77-49c1-a2b3-030e08f71a2e",
+      "soPhong": "390",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "74d0e1f7-d1e7-4110-a717-3e9c1a9476e3",
+      "loaiPhongId": "a8cb74af-0c77-49c1-a2b3-030e08f71a2e",
+      "soPhong": "848",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "814a217c-91ec-4d5d-9f19-95d24911e13b",
+      "loaiPhongId": "c4707f81-c998-4d98-b0da-1eee013deb13",
+      "soPhong": "159",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "bd029c85-4dcb-4119-88c4-95d26637f508",
+      "loaiPhongId": "6315b66f-b75e-437d-bafc-fd14cbad4d4b",
+      "soPhong": "160",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "4adca5c6-e7d6-4853-a12a-f6411c0c289d",
+      "loaiPhongId": "6315b66f-b75e-437d-bafc-fd14cbad4d4b",
+      "soPhong": "075",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "1c37f3a0-58f3-4bb5-b1fc-638fac8dd545",
+      "loaiPhongId": "6315b66f-b75e-437d-bafc-fd14cbad4d4b",
+      "soPhong": "835",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "1478c737-8bd3-4729-af47-e2bfc53d140d",
+      "loaiPhongId": "6315b66f-b75e-437d-bafc-fd14cbad4d4b",
+      "soPhong": "942",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "9440adb6-140f-4c25-83bf-a4c96664a154",
+      "loaiPhongId": "8e7677bc-34fc-4882-b32a-74f90d7b4903",
+      "soPhong": "508",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "85975414-d0f6-49d3-b271-fc74e814a20b",
+      "loaiPhongId": "8e7677bc-34fc-4882-b32a-74f90d7b4903",
+      "soPhong": "771",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "2cf3ecc3-1af0-498f-8196-be5076f1e6c4",
+      "loaiPhongId": "a1fb8245-4c64-4fac-a9fa-27adeb3b6198",
+      "soPhong": "745",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "caab8d3f-8212-4d70-8ae0-6306327f5471",
+      "loaiPhongId": "a1fb8245-4c64-4fac-a9fa-27adeb3b6198",
+      "soPhong": "500",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "fdb521ce-c8be-4041-b41d-757b055f19c1",
+      "loaiPhongId": "a1fb8245-4c64-4fac-a9fa-27adeb3b6198",
+      "soPhong": "177",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "5adcfd84-5b70-4b04-83de-be7d27b434ea",
+      "loaiPhongId": "026cf507-edb5-4f4f-9c53-67fcded0f320",
+      "soPhong": "736",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "6d60e2c7-8d8f-4085-b4c9-4cb9ff62b98f",
+      "loaiPhongId": "45efc8be-2881-41e1-a32c-5ed802a43495",
+      "soPhong": "502",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "1ffec6a9-23f0-4a78-89c0-511abe662c1d",
+      "loaiPhongId": "45efc8be-2881-41e1-a32c-5ed802a43495",
+      "soPhong": "248",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "6fb964c7-06c3-4d74-b3d9-684117754e7e",
+      "loaiPhongId": "45efc8be-2881-41e1-a32c-5ed802a43495",
+      "soPhong": "405",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "9ff6e8d3-51cf-463a-af30-1e145dfcc53f",
+      "loaiPhongId": "45efc8be-2881-41e1-a32c-5ed802a43495",
+      "soPhong": "828",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "73d89fdc-48f2-4ee2-9200-6011580cde82",
+      "loaiPhongId": "96e96d30-7f6d-4a55-8bca-7caeb48531ea",
+      "soPhong": "316",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "b75da9be-1c3c-4591-b13e-344d1f6f6e4a",
+      "loaiPhongId": "96e96d30-7f6d-4a55-8bca-7caeb48531ea",
+      "soPhong": "116",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "734c788a-9760-41df-95fa-ce80cfda2cdc",
+      "loaiPhongId": "96e96d30-7f6d-4a55-8bca-7caeb48531ea",
+      "soPhong": "964",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "b5dc3f36-5a70-4bfb-93ee-2bdc3d27d574",
+      "loaiPhongId": "ac75d320-8cb7-452e-93bb-f8c66e662a49",
+      "soPhong": "134",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "9958ec96-b975-47f5-90e1-daa15f1c2657",
+      "loaiPhongId": "ac75d320-8cb7-452e-93bb-f8c66e662a49",
+      "soPhong": "648",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "201016ff-ddac-4949-a1e7-de6f3dc0c0e1",
+      "loaiPhongId": "ac75d320-8cb7-452e-93bb-f8c66e662a49",
+      "soPhong": "175",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "994591a0-cefe-49b2-a186-d1f53375c69f",
+      "loaiPhongId": "943000f8-c0a0-4092-99c9-25ae76b95b55",
+      "soPhong": "713",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "5514e2b9-d5fd-4ae3-b5a7-754c06d7efbc",
+      "loaiPhongId": "943000f8-c0a0-4092-99c9-25ae76b95b55",
+      "soPhong": "392",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "5f57199d-ffde-48b5-9468-51b0f8d749dc",
+      "loaiPhongId": "943000f8-c0a0-4092-99c9-25ae76b95b55",
+      "soPhong": "474",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "136ba65b-9e8f-4f49-a3d3-d6f30c958d05",
+      "loaiPhongId": "943000f8-c0a0-4092-99c9-25ae76b95b55",
+      "soPhong": "985",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "9dd4bd6d-d015-471b-9467-5e219d3974f3",
+      "loaiPhongId": "0b39b87b-47d0-4f3e-a70b-3804847fa30f",
+      "soPhong": "361",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "9bd908c5-1b0e-4947-a9f2-4b5f0c6bf1c6",
+      "loaiPhongId": "0b39b87b-47d0-4f3e-a70b-3804847fa30f",
+      "soPhong": "757",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "422cae4e-5cf0-4261-be85-ed66982627c1",
+      "loaiPhongId": "0b39b87b-47d0-4f3e-a70b-3804847fa30f",
+      "soPhong": "534",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "cf2d7989-509f-4eb5-9ffe-21dbc382f7d0",
+      "loaiPhongId": "0b39b87b-47d0-4f3e-a70b-3804847fa30f",
+      "soPhong": "748",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "e2a9b32b-a9ed-4412-bf7a-5219ba61ca20",
+      "loaiPhongId": "2a7f55bc-397d-4fc3-b888-21254c2c6c5c",
+      "soPhong": "637",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "493327a7-9a15-4496-aaaf-d70ed03daef9",
+      "loaiPhongId": "898e8a87-8316-412a-aef9-85229c6b79d6",
+      "soPhong": "074",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "ca1c1d2c-ffe7-4828-b128-69980336e726",
+      "loaiPhongId": "898e8a87-8316-412a-aef9-85229c6b79d6",
+      "soPhong": "283",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "d8f5efa5-8a2c-4b28-837f-6ebbbbf3a878",
+      "loaiPhongId": "898e8a87-8316-412a-aef9-85229c6b79d6",
+      "soPhong": "198",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "6e44a2ab-dd7b-4ec1-b079-63bdf442cb25",
+      "loaiPhongId": "6cec41e5-a1b5-43cb-8bbc-10bff693b97b",
+      "soPhong": "308",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "e9cafee0-149b-4121-b14d-7df754e4f242",
+      "loaiPhongId": "6cec41e5-a1b5-43cb-8bbc-10bff693b97b",
+      "soPhong": "504",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "aadbcc35-a4e7-4bd0-8ddd-7bb234a2d749",
+      "loaiPhongId": "6cec41e5-a1b5-43cb-8bbc-10bff693b97b",
+      "soPhong": "039",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "4ce2d858-18ca-48c8-97ad-dae7e691f328",
+      "loaiPhongId": "6cec41e5-a1b5-43cb-8bbc-10bff693b97b",
+      "soPhong": "662",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "ebc42068-3533-43d1-b8ab-b0f4323a9e3e",
+      "loaiPhongId": "1cbf18e1-7a60-4ac7-98c6-9c920940aa9d",
+      "soPhong": "226",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "14960873-8971-469d-9773-0b557f31b95b",
+      "loaiPhongId": "1cbf18e1-7a60-4ac7-98c6-9c920940aa9d",
+      "soPhong": "189",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "0fbe722a-ed1d-49f6-9ce6-a2e4e0975626",
+      "loaiPhongId": "1cbf18e1-7a60-4ac7-98c6-9c920940aa9d",
+      "soPhong": "087",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "7c539ac8-72f2-4f12-8b27-9b6e8c4a62b3",
+      "loaiPhongId": "1cbf18e1-7a60-4ac7-98c6-9c920940aa9d",
+      "soPhong": "070",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "cb3d1199-db4a-4a22-9dfb-8710c06a734c",
+      "loaiPhongId": "4d715980-c8ed-4318-aaef-bbc0ecdce9d0",
+      "soPhong": "704",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "8e696864-b6ff-4e64-81dd-e199d4cf8800",
+      "loaiPhongId": "4d715980-c8ed-4318-aaef-bbc0ecdce9d0",
+      "soPhong": "672",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "3ab02745-7e1f-4efb-bad0-cbd0b7d85d90",
+      "loaiPhongId": "733a0147-c8bf-42af-b60a-85866162b40d",
+      "soPhong": "496",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "c6790040-6e62-4466-b547-4966522aab9b",
+      "loaiPhongId": "3a26371d-9f4f-44ac-ab4c-5aaef5021c7c",
+      "soPhong": "079",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "547cb3b0-6e13-4f2a-a1a2-cb448abf27a1",
+      "loaiPhongId": "3a26371d-9f4f-44ac-ab4c-5aaef5021c7c",
+      "soPhong": "195",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "81caf557-0777-45d4-b6ac-b5397576a524",
+      "loaiPhongId": "3a26371d-9f4f-44ac-ab4c-5aaef5021c7c",
+      "soPhong": "381",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "44695df5-e0cd-46b7-af91-d7e7d2565661",
+      "loaiPhongId": "db05b850-be33-4df7-8554-303b73256548",
+      "soPhong": "340",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "a7f15c48-f766-470d-96c9-0d2ce96881a0",
+      "loaiPhongId": "db05b850-be33-4df7-8554-303b73256548",
+      "soPhong": "357",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "16ae4676-3492-42a8-9aa8-9af21caaae8c",
+      "loaiPhongId": "db05b850-be33-4df7-8554-303b73256548",
+      "soPhong": "817",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "69b279c4-ccce-4e77-824f-a4b37e28373c",
+      "loaiPhongId": "db05b850-be33-4df7-8554-303b73256548",
+      "soPhong": "323",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "5398232e-e529-4086-b527-41fb2cf68f34",
+      "loaiPhongId": "3d7a9260-3690-4a0d-86ba-fce0057ec5fc",
+      "soPhong": "895",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "521634b7-3c76-44db-935a-cb51a1a40d0c",
+      "loaiPhongId": "3d7a9260-3690-4a0d-86ba-fce0057ec5fc",
+      "soPhong": "302",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "7e4e2219-af19-4667-9eef-2020ed87d734",
+      "loaiPhongId": "00985a15-c1b5-4215-ae2f-8f15b64f4903",
+      "soPhong": "870",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "2924615c-1979-44a7-b4f9-6a0243e37e09",
+      "loaiPhongId": "00985a15-c1b5-4215-ae2f-8f15b64f4903",
+      "soPhong": "648",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "b64b98dc-7f64-4d15-96c0-641637ba3224",
+      "loaiPhongId": "00985a15-c1b5-4215-ae2f-8f15b64f4903",
+      "soPhong": "406",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "ca9490a3-1f9f-4e00-888a-484f81996b9c",
+      "loaiPhongId": "00985a15-c1b5-4215-ae2f-8f15b64f4903",
+      "soPhong": "047",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "bafbc648-3a78-4bc4-bf32-08e9a1e09cb7",
+      "loaiPhongId": "c2e5070e-32b2-4f23-a969-9d1ebc98bc1b",
+      "soPhong": "677",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "2e67d74f-2bff-4624-b106-d344b5ae7e1b",
+      "loaiPhongId": "c2e5070e-32b2-4f23-a969-9d1ebc98bc1b",
+      "soPhong": "311",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "59a85f0d-b1b8-4120-a79a-2d1cb67d29fb",
+      "loaiPhongId": "c2e5070e-32b2-4f23-a969-9d1ebc98bc1b",
+      "soPhong": "846",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "f6ff6000-2f7c-4273-addf-0afdf406bac1",
+      "loaiPhongId": "c2e5070e-32b2-4f23-a969-9d1ebc98bc1b",
+      "soPhong": "543",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "1e6997ba-b757-48e9-b90a-cdb087845998",
+      "loaiPhongId": "3cbe195c-315a-4876-8c0e-8afa357f8b81",
+      "soPhong": "408",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "8284a9e8-7099-4a4a-9fb7-3dbeac0de3fc",
+      "loaiPhongId": "3cbe195c-315a-4876-8c0e-8afa357f8b81",
+      "soPhong": "277",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "2732e25b-937b-43a0-a67a-2cbe345bcd73",
+      "loaiPhongId": "3cbe195c-315a-4876-8c0e-8afa357f8b81",
+      "soPhong": "675",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "0ec2d53d-f889-48db-81da-e579441ccdfe",
+      "loaiPhongId": "3cbe195c-315a-4876-8c0e-8afa357f8b81",
+      "soPhong": "161",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "af4edd9c-2e88-480a-b1bf-38b4fdf7b9dc",
+      "loaiPhongId": "0558e082-7b1c-42b9-a38e-abf14353c55e",
+      "soPhong": "822",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "cb4d1c78-6052-46f8-bc8b-492e8c406c3b",
+      "loaiPhongId": "0558e082-7b1c-42b9-a38e-abf14353c55e",
+      "soPhong": "781",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "c6f3699a-6201-44ac-84b4-988f4f4e58a4",
+      "loaiPhongId": "0b11170b-caa9-4104-bcb6-a157ec2063e3",
+      "soPhong": "961",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "2daa5a98-eabd-438a-b7e2-67451994ec63",
+      "loaiPhongId": "0b11170b-caa9-4104-bcb6-a157ec2063e3",
+      "soPhong": "479",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "6cd8ba65-03fa-4251-ab28-263a338b5aec",
+      "loaiPhongId": "0b11170b-caa9-4104-bcb6-a157ec2063e3",
+      "soPhong": "984",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "544bea75-bb8b-483b-aa83-52ca68c78cea",
+      "loaiPhongId": "0b11170b-caa9-4104-bcb6-a157ec2063e3",
+      "soPhong": "904",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "32302312-9dc8-4ce5-8715-2b79d2563d84",
+      "loaiPhongId": "78c6bc44-029b-44cd-bb3a-2670290f5c80",
+      "soPhong": "937",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "395ccedf-5d50-42d9-80a6-a49debb3a926",
+      "loaiPhongId": "78c6bc44-029b-44cd-bb3a-2670290f5c80",
+      "soPhong": "060",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "e918510d-088a-4f78-b741-fe6fb3abea07",
+      "loaiPhongId": "c84204b2-0b99-421b-a6f8-8674c2985a4f",
+      "soPhong": "081",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "1a5423d1-4db5-4cb1-bc6f-80a13b383058",
+      "loaiPhongId": "c84204b2-0b99-421b-a6f8-8674c2985a4f",
+      "soPhong": "890",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "24d8e309-c57f-4d59-8d7f-4e640b042294",
+      "loaiPhongId": "c84204b2-0b99-421b-a6f8-8674c2985a4f",
+      "soPhong": "263",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "3e66d89c-228d-4499-b018-7a91b0f5c906",
+      "loaiPhongId": "c84204b2-0b99-421b-a6f8-8674c2985a4f",
+      "soPhong": "049",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "5e3802d9-0256-46f8-85b6-5f176aa2dcac",
+      "loaiPhongId": "1eb01c17-bd86-4d25-a55d-bcc7802ff79a",
+      "soPhong": "951",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "672a25bd-f1ed-485e-ba1b-df1d37ea0559",
+      "loaiPhongId": "fa24beb0-132f-47be-8a66-a10e91346ff1",
+      "soPhong": "841",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "9cdff645-87e2-42f0-a93a-52f110c5dd42",
+      "loaiPhongId": "fa24beb0-132f-47be-8a66-a10e91346ff1",
+      "soPhong": "691",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "6752d767-9cf2-48a0-acd1-bc27cc531104",
+      "loaiPhongId": "76b8444d-14ee-43df-91a1-80358ef5a624",
+      "soPhong": "967",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "8b658ff2-af4c-4b74-9e83-df71093f7838",
+      "loaiPhongId": "76b8444d-14ee-43df-91a1-80358ef5a624",
+      "soPhong": "079",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "6a05db28-af5a-4961-81b5-be4b04e55486",
+      "loaiPhongId": "76b8444d-14ee-43df-91a1-80358ef5a624",
+      "soPhong": "622",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "9cb2a281-5d8a-4697-b0db-8dce65003d84",
+      "loaiPhongId": "e358abe1-de19-4c54-8a14-5fc922d0a787",
+      "soPhong": "625",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "46282109-ce0f-46e7-9c92-9ea65dfc8046",
+      "loaiPhongId": "e358abe1-de19-4c54-8a14-5fc922d0a787",
+      "soPhong": "655",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "066f793e-c571-45e8-b73b-0115ff51dfa2",
+      "loaiPhongId": "8318426b-f3d0-4af5-821e-f7504fb800e4",
+      "soPhong": "219",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "b9777a53-48cb-4732-8b0d-a2ecfadb40df",
+      "loaiPhongId": "8318426b-f3d0-4af5-821e-f7504fb800e4",
+      "soPhong": "049",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "cce11fa9-dbd0-4667-a1a4-5356479a740f",
+      "loaiPhongId": "8318426b-f3d0-4af5-821e-f7504fb800e4",
+      "soPhong": "806",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "cee91aa9-f736-4feb-8724-5f15e247ab35",
+      "loaiPhongId": "8318426b-f3d0-4af5-821e-f7504fb800e4",
+      "soPhong": "745",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "79d62924-68ed-4890-9ddf-7fbe1606cbe1",
+      "loaiPhongId": "6f7d5918-9da0-404c-8179-2ac09fd656cd",
+      "soPhong": "163",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "dd7131a8-a767-4211-8cbc-fa9e60c836cd",
+      "loaiPhongId": "13e2ab29-1910-4fde-990b-f5cf72ba2fc6",
+      "soPhong": "836",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "90b2251e-fa63-456f-a97d-9fe764c34d7c",
+      "loaiPhongId": "648629e1-1413-441c-9589-af6b6c404ec8",
+      "soPhong": "315",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "e67d419b-3ae4-4cf8-ac9a-b80814b9960a",
+      "loaiPhongId": "6754b03a-407b-4bcf-b75f-e3a1e8f46e61",
+      "soPhong": "984",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "bc0898b6-2331-4fba-9c64-71e300c034dc",
+      "loaiPhongId": "6754b03a-407b-4bcf-b75f-e3a1e8f46e61",
+      "soPhong": "636",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "ca4cceb1-6c9a-4de3-a71a-c692f0df5450",
+      "loaiPhongId": "6754b03a-407b-4bcf-b75f-e3a1e8f46e61",
+      "soPhong": "777",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "bbdb5859-e6b0-434b-ad31-bc12706809b1",
+      "loaiPhongId": "beabd5fb-2f3c-4f17-9717-1ef40e6ea48a",
+      "soPhong": "084",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "99982985-36c0-4fdc-8a50-936fd6b844c3",
+      "loaiPhongId": "beabd5fb-2f3c-4f17-9717-1ef40e6ea48a",
+      "soPhong": "286",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "da9b33d5-1745-4f4e-b76c-72106159367a",
+      "loaiPhongId": "beabd5fb-2f3c-4f17-9717-1ef40e6ea48a",
+      "soPhong": "919",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "507e187a-d7ac-4914-90b4-4e28e053f810",
+      "loaiPhongId": "beabd5fb-2f3c-4f17-9717-1ef40e6ea48a",
+      "soPhong": "846",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "0043b84b-7333-49cf-b9da-d5c6b2efc087",
+      "loaiPhongId": "4f67f032-142d-47c6-be33-91052d2b4f68",
+      "soPhong": "417",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "442e9498-abe7-4435-88e1-0a7f59008968",
+      "loaiPhongId": "4f67f032-142d-47c6-be33-91052d2b4f68",
+      "soPhong": "208",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "1d042774-e1d5-4113-9410-5c95284ee963",
+      "loaiPhongId": "4f67f032-142d-47c6-be33-91052d2b4f68",
+      "soPhong": "688",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "e14dde27-bd74-4178-9f4e-2f2114c7d299",
+      "loaiPhongId": "c040536e-5c9a-41ca-a48c-f52f963c58a6",
+      "soPhong": "142",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "817077bb-7ab0-4a4e-953d-ef788b78d07c",
+      "loaiPhongId": "0ecafcd9-db2a-4bd2-acef-f947931bc004",
+      "soPhong": "063",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "9de8f4e2-6bb9-45b0-adb3-abe78c5e3c79",
+      "loaiPhongId": "0ecafcd9-db2a-4bd2-acef-f947931bc004",
+      "soPhong": "273",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "de8ef61a-bf4b-4879-90e8-e449b7a81430",
+      "loaiPhongId": "ce7adbb6-bf7a-4024-859b-c23fa88135c2",
+      "soPhong": "238",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "750e2b33-1357-447a-a368-359b57ae7896",
+      "loaiPhongId": "ce7adbb6-bf7a-4024-859b-c23fa88135c2",
+      "soPhong": "789",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "ee1d58ed-9982-4188-bc13-584dc3dd2691",
+      "loaiPhongId": "1d3a5072-58aa-4b4d-8ee5-d871fee12e82",
+      "soPhong": "309",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "7f0c2043-153f-441c-958c-df21db4c5b45",
+      "loaiPhongId": "7c7c04e6-d298-4e14-9114-3245d5f05e7e",
+      "soPhong": "881",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "9d9b8632-bc12-4c24-a26f-a0b955459526",
+      "loaiPhongId": "7c7c04e6-d298-4e14-9114-3245d5f05e7e",
+      "soPhong": "085",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "fb293ca3-aa93-4c74-ae5a-ecff37ec7710",
+      "loaiPhongId": "c2983768-8673-4ccc-adc5-2c47e3e77ffd",
+      "soPhong": "933",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "7aa25ab4-693c-48b2-a2f0-005f5472dd95",
+      "loaiPhongId": "c2983768-8673-4ccc-adc5-2c47e3e77ffd",
+      "soPhong": "671",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "641b452c-be4f-43b3-b2d4-3119b5b35ea3",
+      "loaiPhongId": "c2983768-8673-4ccc-adc5-2c47e3e77ffd",
+      "soPhong": "327",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "89cfc901-af7a-4e31-807a-924767d446cf",
+      "loaiPhongId": "1592d703-1ce5-41bc-a9b0-6e001363d0b2",
+      "soPhong": "578",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "918312cc-eece-4e53-86df-a436523e540e",
+      "loaiPhongId": "1592d703-1ce5-41bc-a9b0-6e001363d0b2",
+      "soPhong": "098",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "3e2c8fb4-7a6e-4cd2-8413-539f06ec32b3",
+      "loaiPhongId": "1592d703-1ce5-41bc-a9b0-6e001363d0b2",
+      "soPhong": "601",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "3177c61e-7eae-4656-90db-30db87f849d9",
+      "loaiPhongId": "49ff1d99-a7fd-4935-9789-b2f461e785dc",
+      "soPhong": "848",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "1b4a82ea-88f9-444a-9b4f-90280acd499d",
+      "loaiPhongId": "49ff1d99-a7fd-4935-9789-b2f461e785dc",
+      "soPhong": "959",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "5b6774c2-c891-4c3c-b389-8c5525996b79",
+      "loaiPhongId": "49ff1d99-a7fd-4935-9789-b2f461e785dc",
+      "soPhong": "609",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "7bd5d20d-18c7-498a-bba9-1d7d97f14b36",
+      "loaiPhongId": "0939f50d-e434-4088-a9e1-a85fa7799a39",
+      "soPhong": "676",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "e048fab7-ce86-4b70-81cd-b8ee57e7a42d",
+      "loaiPhongId": "70f3d8ab-fddc-4e21-849d-6219bc4e8458",
+      "soPhong": "492",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "dbe5a384-ce15-4a14-9fe6-ac1bd2c3b79f",
+      "loaiPhongId": "c09428f7-5546-4a54-80a1-52bee758c4fa",
+      "soPhong": "130",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "601cd740-93cd-43dc-9ffa-b87c1fd0b056",
+      "loaiPhongId": "c09428f7-5546-4a54-80a1-52bee758c4fa",
+      "soPhong": "631",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "b4bb356c-1c13-4477-9556-cb373ff1e2cb",
+      "loaiPhongId": "60a62186-b82b-4d46-9bc2-f5a029ca80e2",
+      "soPhong": "236",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "c1ef7f76-aed9-4e6d-9f7c-04fef20c5907",
+      "loaiPhongId": "1bf6d6d7-b62b-47e0-bbdc-ba7e296d9437",
+      "soPhong": "400",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "0850071f-b9c7-44fa-a3ac-2421b1238460",
+      "loaiPhongId": "420f8e1d-38b5-4843-9801-94d1df64efb4",
+      "soPhong": "893",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "14fe358d-099f-4b08-b157-1db163d14978",
+      "loaiPhongId": "420f8e1d-38b5-4843-9801-94d1df64efb4",
+      "soPhong": "504",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "29c4c880-ebd0-4dd8-b774-5f9bf8b2e087",
+      "loaiPhongId": "420f8e1d-38b5-4843-9801-94d1df64efb4",
+      "soPhong": "023",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "5c2b5a05-0ca4-47dc-9415-ef958576bc7a",
+      "loaiPhongId": "53236831-9926-449d-9b81-5cc72682cc8f",
+      "soPhong": "937",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "00e3d176-2fb2-4cb8-b070-ff0ecc136b5c",
+      "loaiPhongId": "53236831-9926-449d-9b81-5cc72682cc8f",
+      "soPhong": "768",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "41f320bb-b7cd-4dc1-89cb-62d2014dc34b",
+      "loaiPhongId": "53236831-9926-449d-9b81-5cc72682cc8f",
+      "soPhong": "235",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "bd8ed681-75af-4603-9252-2e9286ad5be4",
+      "loaiPhongId": "e5604a65-4b82-4228-b3a7-33f588c2ad7d",
+      "soPhong": "137",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "147aa99b-f577-4833-90ba-c01d3f94608b",
+      "loaiPhongId": "e5604a65-4b82-4228-b3a7-33f588c2ad7d",
+      "soPhong": "340",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "7b74a11e-9a2f-44db-b532-fafd6aff5264",
+      "loaiPhongId": "e5604a65-4b82-4228-b3a7-33f588c2ad7d",
+      "soPhong": "564",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "31f3fc77-1a97-4111-9ac1-4edd86385aa0",
+      "loaiPhongId": "89a32e2b-3767-4076-8022-18aa626eba55",
+      "soPhong": "695",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "ec6ffe14-456d-4e42-8ca0-e9bb05b46902",
+      "loaiPhongId": "6f11d74e-e868-4d94-ac44-1f0e47ab1b39",
+      "soPhong": "776",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "cfce69c2-ea15-4e3d-b33b-de19436b6e91",
+      "loaiPhongId": "6f11d74e-e868-4d94-ac44-1f0e47ab1b39",
+      "soPhong": "291",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "6666bfd7-eb13-4908-8cfd-4da775819625",
+      "loaiPhongId": "6f11d74e-e868-4d94-ac44-1f0e47ab1b39",
+      "soPhong": "903",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "1d51e388-c41a-4106-b613-9a1ac502c3bd",
+      "loaiPhongId": "6f11d74e-e868-4d94-ac44-1f0e47ab1b39",
+      "soPhong": "431",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "c06155fc-b802-4e36-90ee-5c74fe6c04ce",
+      "loaiPhongId": "7015098a-5a8e-4687-a13a-4e5267571375",
+      "soPhong": "845",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "37e80007-53e1-446f-81c8-715b71ba6f37",
+      "loaiPhongId": "7b322858-f119-47cc-8858-4e77b3606ed0",
+      "soPhong": "130",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "e95dbf27-7214-402e-a9bc-5684cc03dbd4",
+      "loaiPhongId": "1e212438-4a87-4fb2-bd74-9d7cb92767e3",
+      "soPhong": "253",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "8beab044-f42d-4b31-b91f-09f8713b5056",
+      "loaiPhongId": "1e212438-4a87-4fb2-bd74-9d7cb92767e3",
+      "soPhong": "675",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "32a60166-a9a7-421c-9c8f-32b87bdf2c71",
+      "loaiPhongId": "0ed43816-b227-4574-a499-567f6d18e2df",
+      "soPhong": "200",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "a759116b-0b8f-448e-96eb-bcc8da0cf1fa",
+      "loaiPhongId": "0ed43816-b227-4574-a499-567f6d18e2df",
+      "soPhong": "425",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "442f0335-2d8c-4141-91df-cac9cbe95ab8",
+      "loaiPhongId": "69b97d90-df39-4763-8886-ed62e8ac0ba3",
+      "soPhong": "956",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "42effad4-288b-4fe3-92ed-b6b4aecf1563",
+      "loaiPhongId": "cdfd0844-4b19-410c-be8d-ac9b1f7f1d05",
+      "soPhong": "203",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "0ecb4bed-025d-433a-8142-745c9b37038e",
+      "loaiPhongId": "cdfd0844-4b19-410c-be8d-ac9b1f7f1d05",
+      "soPhong": "446",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "54048ae1-6cd4-482d-a929-711a8f4ae4cf",
+      "loaiPhongId": "cdfd0844-4b19-410c-be8d-ac9b1f7f1d05",
+      "soPhong": "636",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "a5a35a24-28ca-479d-85da-20cf42b28cf1",
+      "loaiPhongId": "e4360361-1526-492d-8eaa-b05a121a48f4",
+      "soPhong": "759",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "172f0ed1-c89a-4c3f-b1d9-b8316dd485da",
+      "loaiPhongId": "c63068e6-ff2d-483a-b04e-3a5a900023a4",
+      "soPhong": "085",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "e6dd0d48-d506-4363-b917-9d4389399b41",
+      "loaiPhongId": "c63068e6-ff2d-483a-b04e-3a5a900023a4",
+      "soPhong": "319",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "b57042ac-7600-4146-99bc-13d0c2643138",
+      "loaiPhongId": "c63068e6-ff2d-483a-b04e-3a5a900023a4",
+      "soPhong": "024",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "ce10b29f-b5b9-4846-b2b1-7abdc1ffecda",
+      "loaiPhongId": "c63068e6-ff2d-483a-b04e-3a5a900023a4",
+      "soPhong": "307",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "e980f081-3ee2-4b28-83bf-e025c605e12a",
+      "loaiPhongId": "018f7c19-7bac-4532-aae9-52116f646285",
+      "soPhong": "531",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "821c373a-0fa1-49ad-b122-b0a5e501e837",
+      "loaiPhongId": "018f7c19-7bac-4532-aae9-52116f646285",
+      "soPhong": "763",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "228ce7df-8fb2-413a-ab44-3d25a26d68e8",
+      "loaiPhongId": "018f7c19-7bac-4532-aae9-52116f646285",
+      "soPhong": "949",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "760145b8-66ea-4dd6-ad9c-3c5fda4cd744",
+      "loaiPhongId": "018f7c19-7bac-4532-aae9-52116f646285",
+      "soPhong": "417",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "3443b0cd-0431-4c32-bfc4-37e486933485",
+      "loaiPhongId": "6cc2c368-b4ce-405c-8563-2e5ff91c6dbd",
+      "soPhong": "622",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "8d911fcf-df30-4766-8df7-da0b2b18318e",
+      "loaiPhongId": "e890e1d9-91ab-4caf-badd-96a78581c147",
+      "soPhong": "684",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "4192915a-abab-4985-8739-986dbd9049af",
+      "loaiPhongId": "e890e1d9-91ab-4caf-badd-96a78581c147",
+      "soPhong": "875",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "73a27213-5d76-477b-a7c7-f69d517e717d",
+      "loaiPhongId": "e890e1d9-91ab-4caf-badd-96a78581c147",
+      "soPhong": "352",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "095c85df-7209-44bc-8946-1be1c6acc633",
+      "loaiPhongId": "e890e1d9-91ab-4caf-badd-96a78581c147",
+      "soPhong": "877",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "f525f8e6-788d-44df-9f22-742c64a0991c",
+      "loaiPhongId": "efc5262e-d3ac-41c6-ba8a-fdaf7036f89d",
+      "soPhong": "169",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "7a5acd45-0853-41ea-8cc7-78a0a3b20f72",
+      "loaiPhongId": "efc5262e-d3ac-41c6-ba8a-fdaf7036f89d",
+      "soPhong": "730",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "558ac6a5-02de-4ed0-8ed2-8cb497b62ac7",
+      "loaiPhongId": "efc5262e-d3ac-41c6-ba8a-fdaf7036f89d",
+      "soPhong": "031",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "a453f484-850e-4ae7-bd24-d3b79104c2fc",
+      "loaiPhongId": "efc5262e-d3ac-41c6-ba8a-fdaf7036f89d",
+      "soPhong": "302",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "cf312921-62da-4d83-8bbe-ac3e95cb131e",
+      "loaiPhongId": "3d8285ec-e441-426e-8bb1-330bce5096ba",
+      "soPhong": "813",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "95b12776-999a-41d6-aa53-aa4a628e1168",
+      "loaiPhongId": "3d8285ec-e441-426e-8bb1-330bce5096ba",
+      "soPhong": "074",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "a77e83aa-4316-4b60-82f3-17f0b28a71b8",
+      "loaiPhongId": "3d8285ec-e441-426e-8bb1-330bce5096ba",
+      "soPhong": "884",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "6a92db77-4ac5-4f3d-86ea-092ca9de1d64",
+      "loaiPhongId": "6fee4372-ece5-4db5-a6f4-04874436dba8",
+      "soPhong": "593",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "87e4bf8d-c680-4f35-9893-c48b34b7b00a",
+      "loaiPhongId": "6fee4372-ece5-4db5-a6f4-04874436dba8",
+      "soPhong": "284",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "c847baa4-8b17-4576-aff9-de8817d4f2b4",
+      "loaiPhongId": "ef0a3cfa-5ba0-4e72-bccf-c272f62e2fe0",
+      "soPhong": "874",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "257e1383-9387-485a-809b-0b676caff029",
+      "loaiPhongId": "aaa166b9-1288-42cc-9d71-3704b34b1e4d",
+      "soPhong": "367",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "c8c8a7a4-f3ed-4365-9108-0970b768414e",
+      "loaiPhongId": "aaa166b9-1288-42cc-9d71-3704b34b1e4d",
+      "soPhong": "779",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "c8e2f223-c029-4d14-bb91-63cc920caba0",
+      "loaiPhongId": "aaa166b9-1288-42cc-9d71-3704b34b1e4d",
+      "soPhong": "463",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "8e931f61-91f6-45bf-9a9c-0942914fd589",
+      "loaiPhongId": "e36c1765-04cc-4d9d-a8e3-9c02abb87fab",
+      "soPhong": "398",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "5f1618b4-05aa-4259-b194-2afa22d05702",
+      "loaiPhongId": "e36c1765-04cc-4d9d-a8e3-9c02abb87fab",
+      "soPhong": "238",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "2584d5a7-e541-43c3-9cb6-999c7b49e200",
+      "loaiPhongId": "29e90f98-48f5-4c35-92d2-e4fd5ba6b947",
+      "soPhong": "078",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "53f98b35-7289-4bf8-8974-2a3d5db89833",
+      "loaiPhongId": "997f5224-6815-4ed6-8343-ce9beb18dc7d",
+      "soPhong": "392",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "4fd9cc4c-5340-41f3-8165-9508634dbe6b",
+      "loaiPhongId": "997f5224-6815-4ed6-8343-ce9beb18dc7d",
+      "soPhong": "496",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "717aea56-b0d4-4c3e-8e01-3a8cf374f992",
+      "loaiPhongId": "997f5224-6815-4ed6-8343-ce9beb18dc7d",
+      "soPhong": "409",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "ef3afd47-7273-4034-9683-56e4d94744fd",
+      "loaiPhongId": "c4b7f593-5a54-4132-9e3c-0ba93d61ff4b",
+      "soPhong": "372",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "823aa85f-39a0-4fb4-87d3-2ddeb70c6acd",
+      "loaiPhongId": "c4b7f593-5a54-4132-9e3c-0ba93d61ff4b",
+      "soPhong": "900",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "3feb063c-85ca-40fb-bedd-23d62cf00a45",
+      "loaiPhongId": "c4b7f593-5a54-4132-9e3c-0ba93d61ff4b",
+      "soPhong": "881",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "9a32ef9d-931d-4272-83ba-60a5b45f74c7",
+      "loaiPhongId": "f92276b8-53a3-4a5b-b13c-2b61e0f0728a",
+      "soPhong": "259",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "3a32a510-f9e8-4874-ae8c-3657b1dcf659",
+      "loaiPhongId": "f92276b8-53a3-4a5b-b13c-2b61e0f0728a",
+      "soPhong": "318",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "a221c2a1-8493-4eef-ac3e-94553ddfc0ab",
+      "loaiPhongId": "f92276b8-53a3-4a5b-b13c-2b61e0f0728a",
+      "soPhong": "990",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "a9fcb251-8ee3-4413-90a7-28857a31fa04",
+      "loaiPhongId": "7d229d21-cf48-45e5-b426-9ee92dd92467",
+      "soPhong": "768",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "6acad8fd-9019-417e-ba19-4fd2ed65eff3",
+      "loaiPhongId": "7d229d21-cf48-45e5-b426-9ee92dd92467",
+      "soPhong": "264",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "ef767bff-dc28-42f0-8892-c720c9429a7d",
+      "loaiPhongId": "7d229d21-cf48-45e5-b426-9ee92dd92467",
+      "soPhong": "522",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "53905208-be9a-439e-be2c-9b0953c81c03",
+      "loaiPhongId": "7d229d21-cf48-45e5-b426-9ee92dd92467",
+      "soPhong": "883",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "49ed5ffa-b53d-4625-b5b0-0f0291eff80c",
+      "loaiPhongId": "7203801c-fb50-4525-99e4-285f1c899ec8",
+      "soPhong": "742",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "b88f5661-1325-41da-b41b-9dfd2e51d8e4",
+      "loaiPhongId": "7203801c-fb50-4525-99e4-285f1c899ec8",
+      "soPhong": "131",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "8f851742-6c86-4c04-b0e5-00fa9b013fef",
+      "loaiPhongId": "7203801c-fb50-4525-99e4-285f1c899ec8",
+      "soPhong": "770",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "cf1885b3-c653-4d20-b804-55f6d5b8f45f",
+      "loaiPhongId": "7203801c-fb50-4525-99e4-285f1c899ec8",
+      "soPhong": "097",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "cc5f5873-19eb-4599-8c4c-548147158726",
+      "loaiPhongId": "ab9e513a-15ff-4da4-bffd-0c4e22a4a3f6",
+      "soPhong": "418",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "d0f8d3b7-a044-4103-8496-3acb94505ec9",
+      "loaiPhongId": "ab9e513a-15ff-4da4-bffd-0c4e22a4a3f6",
+      "soPhong": "559",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "5935a10e-1c1d-4b66-acbd-adfbffb5bfbf",
+      "loaiPhongId": "dc58966d-843a-4157-bda1-717ae6be0444",
+      "soPhong": "522",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "76000faa-c796-4504-8064-67d3435cf8b2",
+      "loaiPhongId": "dc58966d-843a-4157-bda1-717ae6be0444",
+      "soPhong": "149",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "329c28d9-2bc2-40ee-ae9e-db9785410b3b",
+      "loaiPhongId": "dc58966d-843a-4157-bda1-717ae6be0444",
+      "soPhong": "043",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "99c742b3-6639-4684-ac16-af8ec794fe6f",
+      "loaiPhongId": "4d30abee-f1e5-4e73-b144-d736556738bb",
+      "soPhong": "978",
+      "trangThai": "DANG_SU_DUNG"
+    },
+    {
+      "id": "aed9a437-3f80-468f-8100-e1a921da5db2",
+      "loaiPhongId": "4d30abee-f1e5-4e73-b144-d736556738bb",
+      "soPhong": "370",
+      "trangThai": "DA_DON"
+    },
+    {
+      "id": "72d2cdff-3960-406f-9275-336a98d14799",
+      "loaiPhongId": "4d30abee-f1e5-4e73-b144-d736556738bb",
+      "soPhong": "210",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "a215290e-c385-46c3-9bf9-3cd72826bac8",
+      "loaiPhongId": "4d30abee-f1e5-4e73-b144-d736556738bb",
+      "soPhong": "365",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "04bc711d-deab-45b8-b706-12c7c51a5322",
+      "loaiPhongId": "a62afe77-01a0-4285-a030-1e7b1b7bba7d",
+      "soPhong": "569",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "f60ac0c7-efc7-4a14-893c-fb922ed44909",
+      "loaiPhongId": "a62afe77-01a0-4285-a030-1e7b1b7bba7d",
+      "soPhong": "272",
+      "trangThai": "TRONG"
+    },
+    {
+      "id": "314ea2e8-6916-44d4-8282-6ce15e17cc34",
+      "loaiPhongId": "a62afe77-01a0-4285-a030-1e7b1b7bba7d",
+      "soPhong": "832",
+      "trangThai": "TRONG"
+    }
+  ],
+  "tienich": [
+    {
+      "id": "53d9c573-10b7-4f67-a222-6635d66309ff",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "11ad13dd-817e-4f73-b945-3a13124a61a5",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "bc593445-1990-4a82-97c4-c52e339cdf97",
+      "tenTienIch": "Wi-Fi miễn phí"
+    },
+    {
+      "id": "4dae23d9-21ff-4325-bd9a-fec18dbd474c",
+      "tenTienIch": "TV"
+    },
+    {
+      "id": "58ed8f5e-e4db-408b-90d9-21f51d656ebb",
+      "tenTienIch": "Đỗ xe miễn phí"
+    },
+    {
+      "id": "761f46a5-589f-46ab-ace4-3b457969919f",
+      "tenTienIch": "Máy sấy tóc"
+    },
+    {
+      "id": "690357be-8cc8-455a-a1f7-6c1e023e8fe3",
+      "tenTienIch": "Bể bơi"
+    },
+    {
+      "id": "1dd9cb30-7d7b-4d57-8fc4-b2500ee50c79",
+      "tenTienIch": "Gym"
+    },
+    {
+      "id": "a8fc8410-4aa8-4109-8712-672f867a8fb4",
+      "tenTienIch": "TV"
+    },
+    {
+      "id": "af2058d1-c89e-4558-b5c8-1aeb05d6cf68",
+      "tenTienIch": "Bar"
+    },
+    {
+      "id": "f344f2e8-a4b1-4a3b-9c4d-32d2ff2c2933",
+      "tenTienIch": "Két an toàn"
+    },
+    {
+      "id": "ec5c5875-d3c4-4676-89c2-c7503830c705",
+      "tenTienIch": "Điều hòa"
+    },
+    {
+      "id": "771bfb90-bfe7-48a4-8117-e9ed2e5096bb",
+      "tenTienIch": "TV"
+    },
+    {
+      "id": "573b825c-fa94-4aa1-896a-eaabf561f902",
+      "tenTienIch": "Dịch vụ phòng 24/7"
+    },
+    {
+      "id": "f73bf3fd-2989-446e-a06a-d385d5d7c017",
+      "tenTienIch": "Dịch vụ phòng 24/7"
+    },
+    {
+      "id": "c4f2ff30-0429-484e-87d2-252655d27e32",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "564651bf-6213-4ef2-a79e-b9723327c15f",
+      "tenTienIch": "Wi-Fi miễn phí"
+    },
+    {
+      "id": "725ad474-0122-4bb7-917d-2b93989ae9e6",
+      "tenTienIch": "Dịch vụ phòng 24/7"
+    },
+    {
+      "id": "059f6adb-92fc-4dba-8a33-ad8da042b84b",
+      "tenTienIch": "Bar"
+    },
+    {
+      "id": "889702f1-d9f4-4d39-b898-cb1c36cca7a0",
+      "tenTienIch": "TV"
+    },
+    {
+      "id": "907993bb-7037-4722-bf73-148209a5e1c3",
+      "tenTienIch": "Tivi"
+    },
+    {
+      "id": "f1e1573e-a152-4061-9d6a-7e2b218fd733",
+      "tenTienIch": "Dịch vụ phòng 24/7"
+    },
+    {
+      "id": "53d9481c-cb8e-4f39-9e48-45b08d414bc6",
+      "tenTienIch": "Điều hòa"
+    },
+    {
+      "id": "53247906-45e1-4b65-ac77-51a769691bd6",
+      "tenTienIch": "Máy sấy tóc"
+    },
+    {
+      "id": "5b872e26-8bfe-45ad-9df4-965912e5a94c",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "fea03e46-b4fa-4cce-bf80-ea2f4a4859e0",
+      "tenTienIch": "Nhận/trả phòng nhanh"
+    },
+    {
+      "id": "d0ae309c-9b78-4698-a24b-d7ff04d972f9",
+      "tenTienIch": "Bể bơi"
+    },
+    {
+      "id": "502f3d95-7da6-4f3f-824f-d3955bb5c662",
+      "tenTienIch": "Nhà hàng"
+    },
+    {
+      "id": "e9691dfb-ece7-4dc6-943a-7754462b3b84",
+      "tenTienIch": "Tivi"
+    },
+    {
+      "id": "f758c1a2-454f-4ca7-bd98-941d3ab08ce9",
+      "tenTienIch": "Tivi"
+    },
+    {
+      "id": "b32d44a1-df41-435e-9871-f8c7ebbbebd8",
+      "tenTienIch": "Két an toàn"
+    },
+    {
+      "id": "e059da96-505e-4536-a52c-4300167c0abe",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "8565ce0e-ba28-41da-a8c8-0f6c8ce1cbe1",
+      "tenTienIch": "Wi-Fi miễn phí"
+    },
+    {
+      "id": "e3160b5d-15a0-4266-a48f-c6d4c1b9bd8d",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "618cb723-8a0c-4b03-b3f5-a7b40335acf0",
+      "tenTienIch": "Gym"
+    },
+    {
+      "id": "9daf7154-bedc-4531-b579-a9727ebcd669",
+      "tenTienIch": "Nhà hàng"
+    },
+    {
+      "id": "af7e171a-c4aa-453c-9b0d-6b7a4486c83c",
+      "tenTienIch": "Gym"
+    },
+    {
+      "id": "d392f960-3e61-4b08-9d76-95a187598cf3",
+      "tenTienIch": "Máy sấy tóc"
+    },
+    {
+      "id": "5450a5bf-bb82-4748-a4a6-89e10e0b2875",
+      "tenTienIch": "Đỗ xe miễn phí"
+    },
+    {
+      "id": "194172e2-43d4-4aa4-82c1-a967d761e52e",
+      "tenTienIch": "Ăn sáng miễn phí"
+    },
+    {
+      "id": "074d065c-56c5-4669-a8ef-46a595b0311a",
+      "tenTienIch": "Gym"
+    },
+    {
+      "id": "f05d4bad-fe29-4a10-9c45-661d88cc501f",
+      "tenTienIch": "Máy sấy tóc"
+    },
+    {
+      "id": "8109c206-eb14-46d4-9291-c75318a45c0f",
+      "tenTienIch": "Đỗ xe miễn phí"
+    },
+    {
+      "id": "fd43e402-58a3-4ed3-9ffe-a22b961a4fb9",
+      "tenTienIch": "Két an toàn"
+    },
+    {
+      "id": "bba71ed2-871c-4972-a781-11191f1ddd37",
+      "tenTienIch": "Bể bơi"
+    },
+    {
+      "id": "56c303e8-fe8e-4777-b28d-3229e088f6a8",
+      "tenTienIch": "Ăn sáng miễn phí"
+    },
+    {
+      "id": "7bc3bc2b-0f06-467a-bf6c-e56926ff9977",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "e240cf70-5ae2-4da6-8bc2-c4620f7d0e63",
+      "tenTienIch": "Dịch vụ phòng 24/7"
+    },
+    {
+      "id": "d2ab85b9-ed99-4e1d-a263-a0028d2237a5",
+      "tenTienIch": "Nhận/trả phòng nhanh"
+    },
+    {
+      "id": "6e87d6d4-2ccb-4d04-809d-b616855f62ff",
+      "tenTienIch": "Dịch vụ phòng 24/7"
+    },
+    {
+      "id": "76054cf3-8a95-43bb-9147-f620590a9482",
+      "tenTienIch": "Tivi"
+    },
+    {
+      "id": "dde4cf5c-a449-4db8-8540-5cdbb11ed9aa",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "11101bbf-964f-4d83-a3bb-d13a1b903754",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "88bb59ff-0f38-4eff-a0c6-ca633b1446fe",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "96af6735-a45e-4c1d-9a78-acdab2c706d6",
+      "tenTienIch": "Nhận/trả phòng nhanh"
+    },
+    {
+      "id": "9fe43e0c-e72c-4bfa-9482-b6395ee4d639",
+      "tenTienIch": "Két an toàn"
+    },
+    {
+      "id": "d30a1422-71c4-437b-9ed4-9e53cc9ce7a1",
+      "tenTienIch": "Nhà hàng"
+    },
+    {
+      "id": "99c209f4-a054-4169-8082-9f4a6d3a7090",
+      "tenTienIch": "Điều hòa"
+    },
+    {
+      "id": "e36b5831-d6c4-4156-9cb2-3f38b803b667",
+      "tenTienIch": "Gym"
+    },
+    {
+      "id": "6437d6ce-6118-476d-903f-36a130792c3b",
+      "tenTienIch": "Điều hòa"
+    },
+    {
+      "id": "950f4588-f654-4070-81fb-2c50fd090473",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "6c8acfe2-98cd-4747-a82d-379b79580460",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "3ca5ffca-44c2-4e5a-8acc-fc60100a1a9f",
+      "tenTienIch": "Két an toàn"
+    },
+    {
+      "id": "bb3c817f-c909-4dba-9589-02de697711e6",
+      "tenTienIch": "Bar"
+    },
+    {
+      "id": "ae2e62d3-ba4d-406d-8baa-86832659a7f2",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "52c81bbb-66fe-468a-9526-88d717122aa5",
+      "tenTienIch": "TV"
+    },
+    {
+      "id": "e7d4d3c7-1f07-4f2c-a775-df4aa128894d",
+      "tenTienIch": "Nhà hàng"
+    },
+    {
+      "id": "fa1ea1cd-1769-4074-a9c6-b8fa6160dd7e",
+      "tenTienIch": "Dịch vụ phòng 24/7"
+    },
+    {
+      "id": "54c97f48-8cff-4cff-9240-5f845e1b500c",
+      "tenTienIch": "Máy sấy tóc"
+    },
+    {
+      "id": "89ff6281-0c5f-45c4-bafe-f804cd8ebd02",
+      "tenTienIch": "Két an toàn"
+    },
+    {
+      "id": "fb6327ca-8cb9-43a9-bf19-ad4560bbb5f8",
+      "tenTienIch": "TV"
+    },
+    {
+      "id": "e8e2edbe-991f-47c4-9f6b-5411e6fc64ed",
+      "tenTienIch": "Tivi"
+    },
+    {
+      "id": "8dddb442-c7a7-4c4b-9a81-d7add65e72c5",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "84fb1f64-1fd4-479b-a160-c00af51497d6",
+      "tenTienIch": "Két an toàn"
+    },
+    {
+      "id": "43bbe6c0-4f35-4377-9e7f-96613fe10168",
+      "tenTienIch": "Tivi"
+    },
+    {
+      "id": "233d2c20-e227-453b-aa4f-133f86a3a2ad",
+      "tenTienIch": "Gym"
+    },
+    {
+      "id": "ade2af14-2224-491e-96ae-b0bddb7c1d7c",
+      "tenTienIch": "Bể bơi"
+    },
+    {
+      "id": "1a3397d6-96db-48ce-abef-d228d8be397c",
+      "tenTienIch": "Nhà hàng"
+    },
+    {
+      "id": "bc7c7dcf-af5a-402f-b82c-c0788e9decac",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "8edce569-15ce-43c7-9efb-89ff4a34a08c",
+      "tenTienIch": "Tivi"
+    },
+    {
+      "id": "4fea8a2e-1432-4f89-8416-7a5ef516066b",
+      "tenTienIch": "Điều hòa"
+    },
+    {
+      "id": "f6749ba6-64dd-4992-ab55-a068c0a6ad96",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "8d82726c-702d-4d6d-b2d1-9ec65ac6f5e7",
+      "tenTienIch": "Nhận/trả phòng nhanh"
+    },
+    {
+      "id": "0345ec6b-4b81-4993-828c-08421255d6d1",
+      "tenTienIch": "TV"
+    },
+    {
+      "id": "e4bbca2c-f268-4862-bb2f-97b6492c841e",
+      "tenTienIch": "Nhận/trả phòng nhanh"
+    },
+    {
+      "id": "9c24f5bf-6e6c-4139-8b9c-fa16712d1dde",
+      "tenTienIch": "Ăn sáng miễn phí"
+    },
+    {
+      "id": "5dfd301a-8937-4892-8f1d-6b02133f854c",
+      "tenTienIch": "Bar"
+    },
+    {
+      "id": "4be945c1-beb4-44a5-90f6-48de4b36c16e",
+      "tenTienIch": "Máy sấy tóc"
+    },
+    {
+      "id": "8f2f80d1-e02d-4761-a616-5de697e9d3a8",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "7654f06a-06e1-445b-a790-b679de2a0b1b",
+      "tenTienIch": "Máy sấy tóc"
+    },
+    {
+      "id": "7bb1bf5c-d53a-47c1-8df6-c2c86956d3db",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "7cd0ad66-0143-4fb4-9b7f-ffbb8cf8afd2",
+      "tenTienIch": "Dịch vụ phòng 24/7"
+    },
+    {
+      "id": "a6f11ae1-8b52-4ff2-a7c2-efe661509359",
+      "tenTienIch": "Bar"
+    },
+    {
+      "id": "6c4b6b53-fbd4-4564-b87c-83a6584dd9ae",
+      "tenTienIch": "Nhận/trả phòng nhanh"
+    },
+    {
+      "id": "b260016e-17dd-4286-af40-e3928cbda2b5",
+      "tenTienIch": "Nhận/trả phòng nhanh"
+    },
+    {
+      "id": "6d13a097-a2a1-466e-8e87-cdbde5ecd6e0",
+      "tenTienIch": "Điều hòa"
+    },
+    {
+      "id": "dbad9ce3-cbf4-4d61-971c-b93c6b75425e",
+      "tenTienIch": "Đỗ xe miễn phí"
+    },
+    {
+      "id": "b50c096d-3e7b-4af1-a6df-13069733e2f9",
+      "tenTienIch": "Dịch vụ phòng 24/7"
+    },
+    {
+      "id": "ebed6aaf-d36d-4ea9-a542-3d2d256de425",
+      "tenTienIch": "Đỗ xe miễn phí"
+    },
+    {
+      "id": "2f87254f-b6e1-4cc4-b4ce-973f4a32d6f2",
+      "tenTienIch": "Nhà hàng"
+    },
+    {
+      "id": "51c6bf37-09bc-46a7-9964-0a28d46abf7b",
+      "tenTienIch": "Spa"
+    },
+    {
+      "id": "f74c6324-ad96-4db1-aaae-263e63ea2839",
+      "tenTienIch": "Nhận/trả phòng nhanh"
+    },
+    {
+      "id": "0613b176-8a3e-4b15-b75d-6f20945401ab",
+      "tenTienIch": "Máy sấy tóc"
+    },
+    {
+      "id": "c255d56f-c686-4f37-a588-38e109d29fad",
+      "tenTienIch": "Gym"
+    },
+    {
+      "id": "3aed676d-0c9c-4b87-8561-34ce43da457c",
+      "tenTienIch": "Nhà hàng"
+    },
+    {
+      "id": "75bf501c-9234-4ecc-9d29-c56c5f491962",
+      "tenTienIch": "Gym"
+    },
+    {
+      "id": "6ad70311-60ef-4c85-9f85-1e3891ec95ca",
+      "tenTienIch": "TV"
+    },
+    {
+      "id": "b189f1bc-2e4e-4cfb-a4e3-748b57f31c2a",
+      "tenTienIch": "Bar"
+    },
+    {
+      "id": "172dc05e-1395-4aac-b2b3-9524982349f8",
+      "tenTienIch": "Gym"
+    },
+    {
+      "id": "6ac6de13-6c0d-4ead-88ca-f64ed037c6e8",
+      "tenTienIch": "Dịch vụ phòng 24/7"
+    },
+    {
+      "id": "6067fa8a-99fc-4e21-b7ff-5e5780cfd179",
+      "tenTienIch": "Ăn sáng miễn phí"
+    },
+    {
+      "id": "5b7ce7dc-4b5d-4f58-837d-cd2034a8fb2e",
+      "tenTienIch": "Bể bơi"
+    },
+    {
+      "id": "5d2ced15-bb4c-453b-8068-6f0ac76bae9f",
+      "tenTienIch": "Bể bơi"
+    },
+    {
+      "id": "22b7c434-e801-41d7-9696-54da68737feb",
+      "tenTienIch": "Tivi"
+    },
+    {
+      "id": "93a6be85-543c-4a85-99c8-de7f42750e84",
+      "tenTienIch": "Nhận/trả phòng nhanh"
+    },
+    {
+      "id": "bd487606-bfaf-4ab4-8b20-2fa67997ce3a",
+      "tenTienIch": "Ăn sáng miễn phí"
+    },
+    {
+      "id": "6f60d566-f14c-4fb2-b188-d1801695aeee",
+      "tenTienIch": "Nhà hàng"
+    },
+    {
+      "id": "8e10054e-48ad-4c37-97c9-261922953ef9",
+      "tenTienIch": "Gym"
+    },
+    {
+      "id": "91a173c9-7ad3-4edf-ba58-4cf24a737672",
+      "tenTienIch": "Gym"
+    },
+    {
+      "id": "d50b8b67-9181-40a8-92e5-ffcc20942e34",
+      "tenTienIch": "Tivi"
+    },
+    {
+      "id": "adf9ad33-5062-4ce9-b7c1-daad63ba4052",
+      "tenTienIch": "Bể bơi"
+    },
+    {
+      "id": "06deb6a9-8aa3-4665-bd8f-cb5e67bec399",
+      "tenTienIch": "TV"
+    },
+    {
+      "id": "d808682b-a7a7-492e-9aa3-42e6c3bdf5fd",
+      "tenTienIch": "Két an toàn"
+    },
+    {
+      "id": "deffb7ee-3d77-4fb6-b736-eb295f7e321a",
+      "tenTienIch": "Wi-Fi miễn phí"
+    },
+    {
+      "id": "6026edd1-2d58-45a0-80e1-e9a808e78f1a",
+      "tenTienIch": "Ăn sáng miễn phí"
+    },
+    {
+      "id": "be90ef18-df31-4c01-b935-d41e77e87834",
+      "tenTienIch": "Wi-Fi miễn phí"
+    },
+    {
+      "id": "60edf586-8cf1-4d39-bc8a-cd8a8f21d7cd",
+      "tenTienIch": "Wi-Fi miễn phí"
+    }
+  ],
+  "khachsan_tienich": [
+    {
+      "id": "7104c125-4530-4797-abef-d4f93cfeaff7",
+      "khachSanId": "6b5e0cf2-01ea-40d5-9f40-1b4fa83f64e9",
+      "tienIchId": "53d9c573-10b7-4f67-a222-6635d66309ff"
+    },
+    {
+      "id": "177e27df-a62d-402e-8bf6-2f556f75573b",
+      "khachSanId": "6b5e0cf2-01ea-40d5-9f40-1b4fa83f64e9",
+      "tienIchId": "11ad13dd-817e-4f73-b945-3a13124a61a5"
+    },
+    {
+      "id": "59686f72-01d0-4390-b4eb-6b134376c1e3",
+      "khachSanId": "6b5e0cf2-01ea-40d5-9f40-1b4fa83f64e9",
+      "tienIchId": "bc593445-1990-4a82-97c4-c52e339cdf97"
+    },
+    {
+      "id": "1acfa8f4-72b6-45dc-a52a-f36539f04e38",
+      "khachSanId": "6b5e0cf2-01ea-40d5-9f40-1b4fa83f64e9",
+      "tienIchId": "4dae23d9-21ff-4325-bd9a-fec18dbd474c"
+    },
+    {
+      "id": "03a26bc6-1be4-4b66-ab98-01ca1bafb324",
+      "khachSanId": "6b5e0cf2-01ea-40d5-9f40-1b4fa83f64e9",
+      "tienIchId": "58ed8f5e-e4db-408b-90d9-21f51d656ebb"
+    },
+    {
+      "id": "e874bd34-62cd-4150-8f09-da39cd92cf89",
+      "khachSanId": "6b5e0cf2-01ea-40d5-9f40-1b4fa83f64e9",
+      "tienIchId": "761f46a5-589f-46ab-ace4-3b457969919f"
+    },
+    {
+      "id": "3ccbaa79-2a3c-40d7-9e20-bd0cc3b86341",
+      "khachSanId": "1e3d79d4-2dcc-4a48-84c8-cfc530e0794f",
+      "tienIchId": "690357be-8cc8-455a-a1f7-6c1e023e8fe3"
+    },
+    {
+      "id": "507fb286-cf9a-478e-b6e8-92328cc0f4c3",
+      "khachSanId": "1e3d79d4-2dcc-4a48-84c8-cfc530e0794f",
+      "tienIchId": "1dd9cb30-7d7b-4d57-8fc4-b2500ee50c79"
+    },
+    {
+      "id": "19408efe-84c1-4a02-b12d-59fd9f46695a",
+      "khachSanId": "1e3d79d4-2dcc-4a48-84c8-cfc530e0794f",
+      "tienIchId": "a8fc8410-4aa8-4109-8712-672f867a8fb4"
+    },
+    {
+      "id": "ca2457b4-4319-4d93-bc5c-0591e6bd1cf7",
+      "khachSanId": "1e3d79d4-2dcc-4a48-84c8-cfc530e0794f",
+      "tienIchId": "af2058d1-c89e-4558-b5c8-1aeb05d6cf68"
+    },
+    {
+      "id": "130956ae-881b-4540-bf2b-08692390656b",
+      "khachSanId": "08d7d5d6-38c0-4a71-a6e0-643fe04dd9b8",
+      "tienIchId": "f344f2e8-a4b1-4a3b-9c4d-32d2ff2c2933"
+    },
+    {
+      "id": "fc7bb038-1a9a-4732-9bd6-4e41b9d17e30",
+      "khachSanId": "08d7d5d6-38c0-4a71-a6e0-643fe04dd9b8",
+      "tienIchId": "ec5c5875-d3c4-4676-89c2-c7503830c705"
+    },
+    {
+      "id": "7b489cca-95b2-465a-82bb-e91e9d0da71a",
+      "khachSanId": "08d7d5d6-38c0-4a71-a6e0-643fe04dd9b8",
+      "tienIchId": "771bfb90-bfe7-48a4-8117-e9ed2e5096bb"
+    },
+    {
+      "id": "d723fdde-b6fe-40c5-afc9-07a13efee4d2",
+      "khachSanId": "ad659a05-2210-464c-a4df-d041a5be225a",
+      "tienIchId": "573b825c-fa94-4aa1-896a-eaabf561f902"
+    },
+    {
+      "id": "276eea99-0691-4311-8759-b5248f4b39d5",
+      "khachSanId": "ad659a05-2210-464c-a4df-d041a5be225a",
+      "tienIchId": "f73bf3fd-2989-446e-a06a-d385d5d7c017"
+    },
+    {
+      "id": "0c6b93b9-aeef-439e-bca3-9ff53308ff3b",
+      "khachSanId": "ad659a05-2210-464c-a4df-d041a5be225a",
+      "tienIchId": "c4f2ff30-0429-484e-87d2-252655d27e32"
+    },
+    {
+      "id": "f43b0604-cf1d-4200-8b5a-10b56c249b54",
+      "khachSanId": "0b28c50c-58b9-443d-a8d4-a531925bf56d",
+      "tienIchId": "564651bf-6213-4ef2-a79e-b9723327c15f"
+    },
+    {
+      "id": "cee50aed-9108-4963-b736-1abbc03c66ca",
+      "khachSanId": "0b28c50c-58b9-443d-a8d4-a531925bf56d",
+      "tienIchId": "725ad474-0122-4bb7-917d-2b93989ae9e6"
+    },
+    {
+      "id": "295d7fe8-8a25-4fe7-a406-496235f82401",
+      "khachSanId": "0b28c50c-58b9-443d-a8d4-a531925bf56d",
+      "tienIchId": "059f6adb-92fc-4dba-8a33-ad8da042b84b"
+    },
+    {
+      "id": "1d60b744-5c24-46a2-934b-8af2a46e3c08",
+      "khachSanId": "e9227f55-95f4-4212-b4fb-eed1bf857e45",
+      "tienIchId": "889702f1-d9f4-4d39-b898-cb1c36cca7a0"
+    },
+    {
+      "id": "f7563d93-c1c6-4aff-a088-ce63c2357f14",
+      "khachSanId": "e9227f55-95f4-4212-b4fb-eed1bf857e45",
+      "tienIchId": "907993bb-7037-4722-bf73-148209a5e1c3"
+    },
+    {
+      "id": "e0ca9aea-8e72-4213-8807-0887e996bd1e",
+      "khachSanId": "e9227f55-95f4-4212-b4fb-eed1bf857e45",
+      "tienIchId": "f1e1573e-a152-4061-9d6a-7e2b218fd733"
+    },
+    {
+      "id": "92341812-def2-4fd2-aec5-cc2ab0d45722",
+      "khachSanId": "e9227f55-95f4-4212-b4fb-eed1bf857e45",
+      "tienIchId": "53d9481c-cb8e-4f39-9e48-45b08d414bc6"
+    },
+    {
+      "id": "a507cf9b-0985-4788-b500-5ca655f0f859",
+      "khachSanId": "e972eda9-0a24-40b4-81a3-87083eddaff1",
+      "tienIchId": "53247906-45e1-4b65-ac77-51a769691bd6"
+    },
+    {
+      "id": "e5dd9ac2-97a4-4273-9346-c89ae7f65391",
+      "khachSanId": "e972eda9-0a24-40b4-81a3-87083eddaff1",
+      "tienIchId": "5b872e26-8bfe-45ad-9df4-965912e5a94c"
+    },
+    {
+      "id": "37b59209-f7ca-424e-893f-df2d6945b280",
+      "khachSanId": "e972eda9-0a24-40b4-81a3-87083eddaff1",
+      "tienIchId": "fea03e46-b4fa-4cce-bf80-ea2f4a4859e0"
+    },
+    {
+      "id": "61e4e11a-bc76-48f4-946e-a1e3663ee86c",
+      "khachSanId": "e972eda9-0a24-40b4-81a3-87083eddaff1",
+      "tienIchId": "d0ae309c-9b78-4698-a24b-d7ff04d972f9"
+    },
+    {
+      "id": "c2f39f15-e10d-4fe8-8d1a-aebb6994e07e",
+      "khachSanId": "e972eda9-0a24-40b4-81a3-87083eddaff1",
+      "tienIchId": "502f3d95-7da6-4f3f-824f-d3955bb5c662"
+    },
+    {
+      "id": "a24d109d-cbdf-42ac-a5c4-48610695f17d",
+      "khachSanId": "e972eda9-0a24-40b4-81a3-87083eddaff1",
+      "tienIchId": "e9691dfb-ece7-4dc6-943a-7754462b3b84"
+    },
+    {
+      "id": "12b7249c-00d7-4503-b414-a688d57c1b5b",
+      "khachSanId": "77b2a8fa-52fc-4933-b020-557393861106",
+      "tienIchId": "f758c1a2-454f-4ca7-bd98-941d3ab08ce9"
+    },
+    {
+      "id": "9e91674d-4c46-4d78-af98-fbb59088057d",
+      "khachSanId": "77b2a8fa-52fc-4933-b020-557393861106",
+      "tienIchId": "b32d44a1-df41-435e-9871-f8c7ebbbebd8"
+    },
+    {
+      "id": "fc607bc8-8667-4de6-ae3c-0ba203b1ffa2",
+      "khachSanId": "77b2a8fa-52fc-4933-b020-557393861106",
+      "tienIchId": "e059da96-505e-4536-a52c-4300167c0abe"
+    },
+    {
+      "id": "6014f930-019f-45e2-9785-3aa99c06af3c",
+      "khachSanId": "f11fdb43-baea-4f26-8d55-049bc186bf1d",
+      "tienIchId": "8565ce0e-ba28-41da-a8c8-0f6c8ce1cbe1"
+    },
+    {
+      "id": "5974054d-624a-4e3a-9341-1783eb5433fa",
+      "khachSanId": "f11fdb43-baea-4f26-8d55-049bc186bf1d",
+      "tienIchId": "e3160b5d-15a0-4266-a48f-c6d4c1b9bd8d"
+    },
+    {
+      "id": "f1e03229-f49f-4488-84b2-9605fd2e9070",
+      "khachSanId": "f11fdb43-baea-4f26-8d55-049bc186bf1d",
+      "tienIchId": "618cb723-8a0c-4b03-b3f5-a7b40335acf0"
+    },
+    {
+      "id": "ad9a0e4b-fadd-4ab3-ac90-e2d4d2793afa",
+      "khachSanId": "57d0c94a-4c35-432a-a6a3-86720a24b784",
+      "tienIchId": "9daf7154-bedc-4531-b579-a9727ebcd669"
+    },
+    {
+      "id": "c1edf349-ec70-445e-8e6e-7153426d0c50",
+      "khachSanId": "57d0c94a-4c35-432a-a6a3-86720a24b784",
+      "tienIchId": "af7e171a-c4aa-453c-9b0d-6b7a4486c83c"
+    },
+    {
+      "id": "cc7661f8-6b5e-4d1c-9ed9-f4a5badce9ea",
+      "khachSanId": "57d0c94a-4c35-432a-a6a3-86720a24b784",
+      "tienIchId": "d392f960-3e61-4b08-9d76-95a187598cf3"
+    },
+    {
+      "id": "10d20c7f-5097-40be-a6a0-11e9fea7980b",
+      "khachSanId": "57d0c94a-4c35-432a-a6a3-86720a24b784",
+      "tienIchId": "5450a5bf-bb82-4748-a4a6-89e10e0b2875"
+    },
+    {
+      "id": "badcb0b2-747b-4d7d-a646-69ba4091b71b",
+      "khachSanId": "b9903f93-51d7-44e8-8089-1cb8b8df9bce",
+      "tienIchId": "194172e2-43d4-4aa4-82c1-a967d761e52e"
+    },
+    {
+      "id": "3a5bc22e-f1c1-47d9-90a6-5088d35d9ebb",
+      "khachSanId": "b9903f93-51d7-44e8-8089-1cb8b8df9bce",
+      "tienIchId": "074d065c-56c5-4669-a8ef-46a595b0311a"
+    },
+    {
+      "id": "ed943107-8f46-442e-ba12-dfb18268e7a3",
+      "khachSanId": "b9903f93-51d7-44e8-8089-1cb8b8df9bce",
+      "tienIchId": "f05d4bad-fe29-4a10-9c45-661d88cc501f"
+    },
+    {
+      "id": "8e0a9b8e-68ba-4084-8ae5-3c4bd6708151",
+      "khachSanId": "881dbd6d-3818-410c-8a7f-b0b97610104f",
+      "tienIchId": "8109c206-eb14-46d4-9291-c75318a45c0f"
+    },
+    {
+      "id": "2f93d2d4-a842-4f83-bf2a-f2920c06696e",
+      "khachSanId": "881dbd6d-3818-410c-8a7f-b0b97610104f",
+      "tienIchId": "fd43e402-58a3-4ed3-9ffe-a22b961a4fb9"
+    },
+    {
+      "id": "b2705c4b-6ecc-4571-a97e-2e0011a52202",
+      "khachSanId": "881dbd6d-3818-410c-8a7f-b0b97610104f",
+      "tienIchId": "bba71ed2-871c-4972-a781-11191f1ddd37"
+    },
+    {
+      "id": "bc31fb23-d524-4fe5-9161-583e42dc00cf",
+      "khachSanId": "881dbd6d-3818-410c-8a7f-b0b97610104f",
+      "tienIchId": "56c303e8-fe8e-4777-b28d-3229e088f6a8"
+    },
+    {
+      "id": "5380f653-9518-4482-8caf-f677797a4ab6",
+      "khachSanId": "8ffc2b01-614d-437e-b20a-e426520411cc",
+      "tienIchId": "7bc3bc2b-0f06-467a-bf6c-e56926ff9977"
+    },
+    {
+      "id": "6ca75490-a615-4db8-ba0d-d00a666ff2d0",
+      "khachSanId": "8ffc2b01-614d-437e-b20a-e426520411cc",
+      "tienIchId": "e240cf70-5ae2-4da6-8bc2-c4620f7d0e63"
+    },
+    {
+      "id": "16e9ae45-10b3-4ed7-8435-cd40fe3cfe8f",
+      "khachSanId": "8ffc2b01-614d-437e-b20a-e426520411cc",
+      "tienIchId": "d2ab85b9-ed99-4e1d-a263-a0028d2237a5"
+    },
+    {
+      "id": "e15a5f61-9d7a-496b-a463-792f045c0a0a",
+      "khachSanId": "b2c595bb-9459-40f5-be05-7417f5b2634f",
+      "tienIchId": "6e87d6d4-2ccb-4d04-809d-b616855f62ff"
+    },
+    {
+      "id": "e8d9df25-3f7c-461f-be25-ba3e149a6628",
+      "khachSanId": "b2c595bb-9459-40f5-be05-7417f5b2634f",
+      "tienIchId": "76054cf3-8a95-43bb-9147-f620590a9482"
+    },
+    {
+      "id": "0a56ab96-423c-4a2c-93ed-e7012942cba1",
+      "khachSanId": "b2c595bb-9459-40f5-be05-7417f5b2634f",
+      "tienIchId": "dde4cf5c-a449-4db8-8540-5cdbb11ed9aa"
+    },
+    {
+      "id": "8a5e07a9-82af-4620-9dbd-5ce1604ae0b7",
+      "khachSanId": "b2c595bb-9459-40f5-be05-7417f5b2634f",
+      "tienIchId": "11101bbf-964f-4d83-a3bb-d13a1b903754"
+    },
+    {
+      "id": "1674ce4f-5f07-47c3-8e2e-8ca04f49f0b8",
+      "khachSanId": "b2c595bb-9459-40f5-be05-7417f5b2634f",
+      "tienIchId": "88bb59ff-0f38-4eff-a0c6-ca633b1446fe"
+    },
+    {
+      "id": "1a149138-2eeb-4b98-a232-24a204e01f7a",
+      "khachSanId": "b2c595bb-9459-40f5-be05-7417f5b2634f",
+      "tienIchId": "96af6735-a45e-4c1d-9a78-acdab2c706d6"
+    },
+    {
+      "id": "1d89aaa1-61c6-42a6-9016-8b99204f4bab",
+      "khachSanId": "cbd789bd-4728-4282-865c-05b89d012f39",
+      "tienIchId": "9fe43e0c-e72c-4bfa-9482-b6395ee4d639"
+    },
+    {
+      "id": "94b19749-06c2-4f9a-b7b8-ae24e35460b5",
+      "khachSanId": "cbd789bd-4728-4282-865c-05b89d012f39",
+      "tienIchId": "d30a1422-71c4-437b-9ed4-9e53cc9ce7a1"
+    },
+    {
+      "id": "0c2892ac-df8c-4082-ac9a-ec57588e7303",
+      "khachSanId": "cbd789bd-4728-4282-865c-05b89d012f39",
+      "tienIchId": "99c209f4-a054-4169-8082-9f4a6d3a7090"
+    },
+    {
+      "id": "5faeb5b0-07b1-47fe-bec0-28d7dbcc2f61",
+      "khachSanId": "cbd789bd-4728-4282-865c-05b89d012f39",
+      "tienIchId": "e36b5831-d6c4-4156-9cb2-3f38b803b667"
+    },
+    {
+      "id": "7c6659de-161b-4407-8fe6-c466f581459f",
+      "khachSanId": "cbd789bd-4728-4282-865c-05b89d012f39",
+      "tienIchId": "6437d6ce-6118-476d-903f-36a130792c3b"
+    },
+    {
+      "id": "d6f6234a-3f4b-4be7-9910-4238cd674aa6",
+      "khachSanId": "8dd6fad8-374d-42cd-9351-e5af9a44ed76",
+      "tienIchId": "950f4588-f654-4070-81fb-2c50fd090473"
+    },
+    {
+      "id": "34962fc8-bf43-480d-b58c-e3022c8db312",
+      "khachSanId": "8dd6fad8-374d-42cd-9351-e5af9a44ed76",
+      "tienIchId": "6c8acfe2-98cd-4747-a82d-379b79580460"
+    },
+    {
+      "id": "a4a070d6-2d21-49ee-b631-179e8cdbddb3",
+      "khachSanId": "8dd6fad8-374d-42cd-9351-e5af9a44ed76",
+      "tienIchId": "3ca5ffca-44c2-4e5a-8acc-fc60100a1a9f"
+    },
+    {
+      "id": "4db0df44-28e4-4d99-8d9a-957687196785",
+      "khachSanId": "8dd6fad8-374d-42cd-9351-e5af9a44ed76",
+      "tienIchId": "bb3c817f-c909-4dba-9589-02de697711e6"
+    },
+    {
+      "id": "9759e9f6-4b3a-4fa8-94aa-6c4722e1fa0d",
+      "khachSanId": "42e80c04-438e-49e9-afe3-8b2c41fec622",
+      "tienIchId": "ae2e62d3-ba4d-406d-8baa-86832659a7f2"
+    },
+    {
+      "id": "fb142260-e01a-4589-8994-3e85c62c7aa8",
+      "khachSanId": "42e80c04-438e-49e9-afe3-8b2c41fec622",
+      "tienIchId": "52c81bbb-66fe-468a-9526-88d717122aa5"
+    },
+    {
+      "id": "d89ff537-5050-4e90-962f-ef08559d5f51",
+      "khachSanId": "42e80c04-438e-49e9-afe3-8b2c41fec622",
+      "tienIchId": "e7d4d3c7-1f07-4f2c-a775-df4aa128894d"
+    },
+    {
+      "id": "f3e09db7-623d-4122-836f-0249003e05a9",
+      "khachSanId": "42e80c04-438e-49e9-afe3-8b2c41fec622",
+      "tienIchId": "fa1ea1cd-1769-4074-a9c6-b8fa6160dd7e"
+    },
+    {
+      "id": "855d4036-b260-4a75-ad8d-d3f616adaa54",
+      "khachSanId": "42e80c04-438e-49e9-afe3-8b2c41fec622",
+      "tienIchId": "54c97f48-8cff-4cff-9240-5f845e1b500c"
+    },
+    {
+      "id": "d8103b44-6a95-45b5-8dc7-07cc018babb0",
+      "khachSanId": "42e80c04-438e-49e9-afe3-8b2c41fec622",
+      "tienIchId": "89ff6281-0c5f-45c4-bafe-f804cd8ebd02"
+    },
+    {
+      "id": "ab7d90c9-e6d0-4b69-a76d-b27066785ca3",
+      "khachSanId": "b4914e53-f5f0-491c-afef-2aa2a456949f",
+      "tienIchId": "fb6327ca-8cb9-43a9-bf19-ad4560bbb5f8"
+    },
+    {
+      "id": "163952d8-3206-45da-a194-0230c16a710d",
+      "khachSanId": "b4914e53-f5f0-491c-afef-2aa2a456949f",
+      "tienIchId": "e8e2edbe-991f-47c4-9f6b-5411e6fc64ed"
+    },
+    {
+      "id": "17313230-93d3-4b15-8cc0-6cf37debbe89",
+      "khachSanId": "b4914e53-f5f0-491c-afef-2aa2a456949f",
+      "tienIchId": "8dddb442-c7a7-4c4b-9a81-d7add65e72c5"
+    },
+    {
+      "id": "8e6169da-aeb5-4140-bc52-e4de92a82859",
+      "khachSanId": "96f245fe-4b89-4a9f-ac51-e90f4d471c86",
+      "tienIchId": "84fb1f64-1fd4-479b-a160-c00af51497d6"
+    },
+    {
+      "id": "69336d00-fae4-4d47-9fd6-384b1ac68203",
+      "khachSanId": "96f245fe-4b89-4a9f-ac51-e90f4d471c86",
+      "tienIchId": "43bbe6c0-4f35-4377-9e7f-96613fe10168"
+    },
+    {
+      "id": "34acb1c3-7660-40e5-ab3d-7ccdea67bea3",
+      "khachSanId": "96f245fe-4b89-4a9f-ac51-e90f4d471c86",
+      "tienIchId": "233d2c20-e227-453b-aa4f-133f86a3a2ad"
+    },
+    {
+      "id": "5e214fca-378a-4463-9164-8fb785e96b9b",
+      "khachSanId": "96f245fe-4b89-4a9f-ac51-e90f4d471c86",
+      "tienIchId": "ade2af14-2224-491e-96ae-b0bddb7c1d7c"
+    },
+    {
+      "id": "24b874a9-f594-4dfb-b96a-692bdbd4590a",
+      "khachSanId": "0eeced9a-c730-4efc-bff9-a4b0b8562142",
+      "tienIchId": "1a3397d6-96db-48ce-abef-d228d8be397c"
+    },
+    {
+      "id": "5ce46eeb-bc72-42b1-acec-db683ba1efc3",
+      "khachSanId": "0eeced9a-c730-4efc-bff9-a4b0b8562142",
+      "tienIchId": "bc7c7dcf-af5a-402f-b82c-c0788e9decac"
+    },
+    {
+      "id": "2866a78d-fced-483c-94c1-f5478f590231",
+      "khachSanId": "0eeced9a-c730-4efc-bff9-a4b0b8562142",
+      "tienIchId": "8edce569-15ce-43c7-9efb-89ff4a34a08c"
+    },
+    {
+      "id": "7d482ff5-249c-4bda-9f2f-e5a791044af1",
+      "khachSanId": "0eeced9a-c730-4efc-bff9-a4b0b8562142",
+      "tienIchId": "4fea8a2e-1432-4f89-8416-7a5ef516066b"
+    },
+    {
+      "id": "900ac595-19ca-44c4-adeb-768e0bcc88dc",
+      "khachSanId": "d5f99b1c-4626-41a9-9f2e-2e06a0f105ed",
+      "tienIchId": "f6749ba6-64dd-4992-ab55-a068c0a6ad96"
+    },
+    {
+      "id": "1dee76d9-2489-4342-8264-a8b446d7b0e8",
+      "khachSanId": "d5f99b1c-4626-41a9-9f2e-2e06a0f105ed",
+      "tienIchId": "8d82726c-702d-4d6d-b2d1-9ec65ac6f5e7"
+    },
+    {
+      "id": "37db130d-fe9a-4a92-8588-813440955d8f",
+      "khachSanId": "d5f99b1c-4626-41a9-9f2e-2e06a0f105ed",
+      "tienIchId": "0345ec6b-4b81-4993-828c-08421255d6d1"
+    },
+    {
+      "id": "ea537463-ab0d-4c65-b9cd-be52a1c4ec6e",
+      "khachSanId": "d5f99b1c-4626-41a9-9f2e-2e06a0f105ed",
+      "tienIchId": "e4bbca2c-f268-4862-bb2f-97b6492c841e"
+    },
+    {
+      "id": "41167e23-245a-4470-b964-0c3bc744bfcc",
+      "khachSanId": "d5f99b1c-4626-41a9-9f2e-2e06a0f105ed",
+      "tienIchId": "9c24f5bf-6e6c-4139-8b9c-fa16712d1dde"
+    },
+    {
+      "id": "ca7155a5-81c0-4f20-892b-7cd310490e8b",
+      "khachSanId": "b8d284a6-3954-45fa-903d-5c24a0e60d7c",
+      "tienIchId": "5dfd301a-8937-4892-8f1d-6b02133f854c"
+    },
+    {
+      "id": "a39b8ff0-ae57-48db-86ec-b46d0dd05023",
+      "khachSanId": "b8d284a6-3954-45fa-903d-5c24a0e60d7c",
+      "tienIchId": "4be945c1-beb4-44a5-90f6-48de4b36c16e"
+    },
+    {
+      "id": "f0bc5534-75b2-42f2-af07-1d86fda3ef8f",
+      "khachSanId": "b8d284a6-3954-45fa-903d-5c24a0e60d7c",
+      "tienIchId": "8f2f80d1-e02d-4761-a616-5de697e9d3a8"
+    },
+    {
+      "id": "dd114b05-261b-480c-9872-0d5e319cc4a3",
+      "khachSanId": "b8d284a6-3954-45fa-903d-5c24a0e60d7c",
+      "tienIchId": "7654f06a-06e1-445b-a790-b679de2a0b1b"
+    },
+    {
+      "id": "20c69e7c-3031-4002-87eb-2c03ae3b7833",
+      "khachSanId": "b8d284a6-3954-45fa-903d-5c24a0e60d7c",
+      "tienIchId": "7bb1bf5c-d53a-47c1-8df6-c2c86956d3db"
+    },
+    {
+      "id": "b180bdc9-bb1a-4a65-b84d-5b89cb832be4",
+      "khachSanId": "be1f66d5-f1e3-4281-bb0b-bfc4c7f5c32e",
+      "tienIchId": "7cd0ad66-0143-4fb4-9b7f-ffbb8cf8afd2"
+    },
+    {
+      "id": "b05c4dfa-5a23-4eb4-a693-bb6c8214d5ee",
+      "khachSanId": "be1f66d5-f1e3-4281-bb0b-bfc4c7f5c32e",
+      "tienIchId": "a6f11ae1-8b52-4ff2-a7c2-efe661509359"
+    },
+    {
+      "id": "fb63a17c-0211-4bcb-9e41-aacf660521e1",
+      "khachSanId": "be1f66d5-f1e3-4281-bb0b-bfc4c7f5c32e",
+      "tienIchId": "6c4b6b53-fbd4-4564-b87c-83a6584dd9ae"
+    },
+    {
+      "id": "cb289ea2-a9ac-4279-9aec-5a49553b33d6",
+      "khachSanId": "be1f66d5-f1e3-4281-bb0b-bfc4c7f5c32e",
+      "tienIchId": "b260016e-17dd-4286-af40-e3928cbda2b5"
+    },
+    {
+      "id": "c5857280-3e5b-4f66-9751-a2cfc951f002",
+      "khachSanId": "be1f66d5-f1e3-4281-bb0b-bfc4c7f5c32e",
+      "tienIchId": "6d13a097-a2a1-466e-8e87-cdbde5ecd6e0"
+    },
+    {
+      "id": "07ca8654-da9a-4fcf-88db-fb2670f8d9d3",
+      "khachSanId": "b835b517-ce29-4298-970f-f9cc9c79dfa9",
+      "tienIchId": "dbad9ce3-cbf4-4d61-971c-b93c6b75425e"
+    },
+    {
+      "id": "2d9b4bbf-2c7b-4371-bb48-85b3bf659696",
+      "khachSanId": "b835b517-ce29-4298-970f-f9cc9c79dfa9",
+      "tienIchId": "b50c096d-3e7b-4af1-a6df-13069733e2f9"
+    },
+    {
+      "id": "e0da84e4-908d-4065-830a-c45ecbea6ae2",
+      "khachSanId": "b835b517-ce29-4298-970f-f9cc9c79dfa9",
+      "tienIchId": "ebed6aaf-d36d-4ea9-a542-3d2d256de425"
+    },
+    {
+      "id": "7dc38fff-d9d5-484f-879c-aa9a534748d1",
+      "khachSanId": "b835b517-ce29-4298-970f-f9cc9c79dfa9",
+      "tienIchId": "2f87254f-b6e1-4cc4-b4ce-973f4a32d6f2"
+    },
+    {
+      "id": "3bf14262-4181-42ee-be0f-ca4e5fdbf674",
+      "khachSanId": "93d13f23-fcd6-47c2-987a-a4ecc815c241",
+      "tienIchId": "51c6bf37-09bc-46a7-9964-0a28d46abf7b"
+    },
+    {
+      "id": "5217451a-1d85-4e2b-b1cf-e8211d7ab185",
+      "khachSanId": "93d13f23-fcd6-47c2-987a-a4ecc815c241",
+      "tienIchId": "f74c6324-ad96-4db1-aaae-263e63ea2839"
+    },
+    {
+      "id": "093a424d-2f91-4bb1-9c26-1aec1f458b48",
+      "khachSanId": "93d13f23-fcd6-47c2-987a-a4ecc815c241",
+      "tienIchId": "0613b176-8a3e-4b15-b75d-6f20945401ab"
+    },
+    {
+      "id": "caea1adc-d425-44c3-aa6a-8f7a7ec14656",
+      "khachSanId": "93d13f23-fcd6-47c2-987a-a4ecc815c241",
+      "tienIchId": "c255d56f-c686-4f37-a588-38e109d29fad"
+    },
+    {
+      "id": "2e66a44e-10f3-453d-8465-02457d59a1e0",
+      "khachSanId": "93d13f23-fcd6-47c2-987a-a4ecc815c241",
+      "tienIchId": "3aed676d-0c9c-4b87-8561-34ce43da457c"
+    },
+    {
+      "id": "ddbda58f-8e99-42b6-b73c-c925b83e393d",
+      "khachSanId": "70f70dcb-8ce8-439c-b00a-ca56376ee14a",
+      "tienIchId": "75bf501c-9234-4ecc-9d29-c56c5f491962"
+    },
+    {
+      "id": "b0e15e34-590e-410a-ac63-f2b7b1bf0660",
+      "khachSanId": "70f70dcb-8ce8-439c-b00a-ca56376ee14a",
+      "tienIchId": "6ad70311-60ef-4c85-9f85-1e3891ec95ca"
+    },
+    {
+      "id": "6834b8cc-25bb-4986-b14c-a9805c085533",
+      "khachSanId": "70f70dcb-8ce8-439c-b00a-ca56376ee14a",
+      "tienIchId": "b189f1bc-2e4e-4cfb-a4e3-748b57f31c2a"
+    },
+    {
+      "id": "2373aa77-e470-4d91-83e2-8edd7093e6ed",
+      "khachSanId": "70f70dcb-8ce8-439c-b00a-ca56376ee14a",
+      "tienIchId": "172dc05e-1395-4aac-b2b3-9524982349f8"
+    },
+    {
+      "id": "855cf2ec-988b-4d70-b525-4b27837a7751",
+      "khachSanId": "70f70dcb-8ce8-439c-b00a-ca56376ee14a",
+      "tienIchId": "6ac6de13-6c0d-4ead-88ca-f64ed037c6e8"
+    },
+    {
+      "id": "e6d5c31a-93d9-4a96-a59d-482d6aa3b76a",
+      "khachSanId": "28ab9ee3-8e16-4d90-8986-348ca805fc95",
+      "tienIchId": "6067fa8a-99fc-4e21-b7ff-5e5780cfd179"
+    },
+    {
+      "id": "14d3ef01-529d-4364-aca2-7b8ac25fb48d",
+      "khachSanId": "28ab9ee3-8e16-4d90-8986-348ca805fc95",
+      "tienIchId": "5b7ce7dc-4b5d-4f58-837d-cd2034a8fb2e"
+    },
+    {
+      "id": "077e7acd-4ff7-43be-aff2-b930eff076e0",
+      "khachSanId": "28ab9ee3-8e16-4d90-8986-348ca805fc95",
+      "tienIchId": "5d2ced15-bb4c-453b-8068-6f0ac76bae9f"
+    },
+    {
+      "id": "bcdd2f66-f698-4646-860e-0d28904270b4",
+      "khachSanId": "28ab9ee3-8e16-4d90-8986-348ca805fc95",
+      "tienIchId": "22b7c434-e801-41d7-9696-54da68737feb"
+    },
+    {
+      "id": "fe6367c6-a420-4f2c-a05a-dac05edae840",
+      "khachSanId": "28ab9ee3-8e16-4d90-8986-348ca805fc95",
+      "tienIchId": "93a6be85-543c-4a85-99c8-de7f42750e84"
+    },
+    {
+      "id": "e6a13d20-37a0-4c4d-9d27-ec33dd59b4e9",
+      "khachSanId": "b181d34b-d400-44cd-95b0-08019aa914bb",
+      "tienIchId": "bd487606-bfaf-4ab4-8b20-2fa67997ce3a"
+    },
+    {
+      "id": "737b65ab-fbab-4220-88a1-51571b68ef14",
+      "khachSanId": "b181d34b-d400-44cd-95b0-08019aa914bb",
+      "tienIchId": "6f60d566-f14c-4fb2-b188-d1801695aeee"
+    },
+    {
+      "id": "10ab79e4-d75c-4710-93fc-63a8b7e4e963",
+      "khachSanId": "b181d34b-d400-44cd-95b0-08019aa914bb",
+      "tienIchId": "8e10054e-48ad-4c37-97c9-261922953ef9"
+    },
+    {
+      "id": "e2372e01-4a56-45db-b139-39ac5df6af07",
+      "khachSanId": "061e39c6-ca63-4550-9380-11f24201fb25",
+      "tienIchId": "91a173c9-7ad3-4edf-ba58-4cf24a737672"
+    },
+    {
+      "id": "0d0a8ebe-1ab2-488e-b86f-61d20fd70c2c",
+      "khachSanId": "061e39c6-ca63-4550-9380-11f24201fb25",
+      "tienIchId": "d50b8b67-9181-40a8-92e5-ffcc20942e34"
+    },
+    {
+      "id": "25fc0c32-38a5-416b-83c4-8504ae2d1d4d",
+      "khachSanId": "061e39c6-ca63-4550-9380-11f24201fb25",
+      "tienIchId": "adf9ad33-5062-4ce9-b7c1-daad63ba4052"
+    },
+    {
+      "id": "25f94674-db8c-42ab-94df-469e22faf0c6",
+      "khachSanId": "3d5e3ae6-34f4-49b0-b12a-91479c2503ad",
+      "tienIchId": "06deb6a9-8aa3-4665-bd8f-cb5e67bec399"
+    },
+    {
+      "id": "a459b75d-7087-40fa-9878-a6c563e00c42",
+      "khachSanId": "3d5e3ae6-34f4-49b0-b12a-91479c2503ad",
+      "tienIchId": "d808682b-a7a7-492e-9aa3-42e6c3bdf5fd"
+    },
+    {
+      "id": "66df3b39-be02-4a19-a73d-ca1cab196aa0",
+      "khachSanId": "3d5e3ae6-34f4-49b0-b12a-91479c2503ad",
+      "tienIchId": "deffb7ee-3d77-4fb6-b736-eb295f7e321a"
+    },
+    {
+      "id": "ca9a4383-4427-4be9-a3f8-0aacc2531962",
+      "khachSanId": "3d5e3ae6-34f4-49b0-b12a-91479c2503ad",
+      "tienIchId": "6026edd1-2d58-45a0-80e1-e9a808e78f1a"
+    },
+    {
+      "id": "ffe6d9da-f170-456b-9e0c-ad7eb90c08d6",
+      "khachSanId": "3d5e3ae6-34f4-49b0-b12a-91479c2503ad",
+      "tienIchId": "be90ef18-df31-4c01-b935-d41e77e87834"
+    },
+    {
+      "id": "a8e44e7f-5702-44dd-b66d-e2784fca2e3f",
+      "khachSanId": "3d5e3ae6-34f4-49b0-b12a-91479c2503ad",
+      "tienIchId": "60edf586-8cf1-4d39-bc8a-cd8a8f21d7cd"
     }
   ]
 }

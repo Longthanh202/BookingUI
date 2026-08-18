@@ -14,3 +14,7 @@ export interface HotelFilterParams extends KhachSanListParams {
     NgayNhanPhong?: string | null;
     NgayTraPhong?: string | null;
 }
+
+export interface KhachSanListOwnerParams{
+    Page?: number;
+}

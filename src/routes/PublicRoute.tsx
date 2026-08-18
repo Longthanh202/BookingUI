@@ -13,8 +13,8 @@ const PublicRoute = () => {
         case "ADMIN":
             return <Navigate to="/admin" replace />;
 
-        case "HOTEL":
-            return <Navigate to="/hotel" replace />;
+        case "OWNER":
+            return <Navigate to="/owner" replace />;
 
         default:
             return <Navigate to="/" replace />;

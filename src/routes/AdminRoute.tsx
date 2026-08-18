@@ -6,10 +6,12 @@ const AdminRoute = () => {
     const user = getUser();
 
     if (!user)
-        return <Navigate to="/admin/login" replace />;
+        return <Navigate to="/login" replace />;
 
-    if (user.Role !== "ADMIN")
+    if (user.Role !== "ADMIN") {
+        if (user.Role === "OWNER") return <Navigate to="/owner" replace />;
         return <Navigate to="/" replace />;
+    }
 
     return <Outlet />;
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Container from "react-bootstrap/Container";
@@ -14,7 +14,7 @@ import { getHotelDetailById } from "../../api/khachsan/khachsan.api";
 import HomeHeader from "../../components/home/home-page/HomeHeader/HomeHeader";
 import SearchTopBar from "../../components/home/home-page/SearchTopBar/SearchTopBar";
 import { HotelFilterParams } from "../../types/khachsan/KhachSan.types";
-import HotelRooms from "../../components/hotel/HotelRooms";
+import { HotelRooms } from "../../components/hotel/HotelRooms";
 
 
 interface HotelAmenity {
@@ -58,7 +58,10 @@ const HotelDetail = () => {
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  const [activeImage, setActiveImage] = useState<string>("");
+  const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
+  const [imageLoaded, setImageLoaded] = useState<boolean>(false);
+  const imageRef = useRef<HTMLImageElement | null>(null);
+  const thumbnailRefs = useRef<Array<HTMLDivElement | null>>([]);
   const [checkInDate, setCheckInDate] = useState<string>("");
   const [checkOutDate, setCheckOutDate] = useState<string>("");
   const [guestsCount, setGuestsCount] = useState<number>(2);
@@ -81,9 +84,12 @@ const HotelDetail = () => {
   });
 
   const hotel = data;
-  const images = (data?.khachSanImages ?? [])
-    .map((item) => item.url)
-    .filter(Boolean) as string[];
+  const images = useMemo(
+    () => (data?.khachSanImages ?? []).map((item) => item.url).filter(Boolean) as string[],
+    [data?.khachSanImages],
+  );
+  const imageCount = images.length;
+  const imageToShow = images[activeImageIndex] || images[0] || "https://placehold.co/900x600?text=No+Image";
   const amenities = (
     data?.tienIchs?.length
       ? data.tienIchs
@@ -91,11 +97,71 @@ const HotelDetail = () => {
   ) as HotelAmenity[];
 
   useEffect(() => {
-    if (images.length) {
-      setActiveImage(images[0]);
+    if (imageCount) {
+      setActiveImageIndex(0);
     }
+  }, [imageCount]);
+
+  useEffect(() => {
+    if (activeImageIndex >= imageCount) {
+      setActiveImageIndex(0);
+    }
+  }, [imageCount, activeImageIndex]);
+
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [activeImageIndex]);
+
+  useEffect(() => {
+    if (!images.length) return;
+
+    const interval = window.setInterval(() => {
+      setActiveImageIndex((current) => (current + 1) % images.length);
+    }, 2000);
+
+    return () => window.clearInterval(interval);
   }, [images]);
 
+  useEffect(() => {
+    if (imageRef.current?.complete && imageRef.current.naturalWidth > 0) {
+      setImageLoaded(true);
+    }
+  }, [imageToShow]);
+
+  const thumbnailContainerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+  const container = thumbnailContainerRef.current;
+  const thumbnail = thumbnailRefs.current[activeImageIndex];
+
+  if (!container || !thumbnail) return;
+
+  const containerRect = container.getBoundingClientRect();
+  const thumbnailRect = thumbnail.getBoundingClientRect();
+
+  const isLeft =
+    thumbnailRect.left < containerRect.left;
+
+  const isRight =
+    thumbnailRect.right > containerRect.right;
+
+  if (isLeft) {
+    container.scrollTo({
+      left:
+        container.scrollLeft -
+        (containerRect.left - thumbnailRect.left),
+      behavior: "smooth",
+    });
+  } else if (isRight) {
+    container.scrollTo({
+      left:
+        container.scrollLeft +
+        (thumbnailRect.right - containerRect.right),
+      behavior: "smooth",
+    });
+  }
+}, [activeImageIndex, imageCount]);
+  
   useEffect(() => {
     if (location.state?.filter) {
       const filter = location.state.filter as HotelFilterParams;
@@ -166,48 +232,143 @@ const HotelDetail = () => {
             <Card.Body>
               <Row className="g-4">
                 <Col xs={12} lg={8}>
-                  <div className="rounded-4 overflow-hidden">
-                    <Image
-                      src={
-                        activeImage ||
-                        images[0] ||
-                        "https://placehold.co/900x600?text=No+Image"
-                      }
+                  <div className="rounded-4 overflow-hidden position-relative d-flex justify-content-center align-items-center" style={{ background: "#f3f4f6", minHeight: 420 }}>
+                    <img
+                      ref={imageRef}
+                      key={imageToShow}
+                      src={imageToShow}
                       alt={hotel.tenKhachSan}
-                      fluid
-                      style={{ width: "100%", height: 420, objectFit: "cover" }}
+                      style={{
+                        width: "100%",
+                        maxWidth: 1200,
+                        height: "auto",
+                        maxHeight: 420,
+                        objectFit: "contain",
+                        display: "block",
+                        opacity: imageLoaded ? 1 : 0,
+                        transition: "opacity 0.4s ease-in-out",
+                        background: "#f3f4f6",
+                      }}
+                      onLoad={() => setImageLoaded(true)}
+                      onError={() => setImageLoaded(true)}
                     />
+
+                    {imageCount > 1 && (
+                      <>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setActiveImageIndex((current) => (current - 1 + imageCount) % imageCount);
+                            setImageLoaded(false);
+                          }}
+                          style={{
+                            position: "absolute",
+                            left: 12,
+                            top: "50%",
+                            transform: "translateY(-50%)",
+                            width: 40,
+                            height: 40,
+                            borderRadius: 999,
+                            border: "none",
+                            background: "rgba(0,0,0,0.45)",
+                            color: "#fff",
+                            cursor: "pointer",
+                          }}
+                        >
+                          ‹
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setActiveImageIndex((current) => (current + 1) % imageCount);
+                            setImageLoaded(false);
+                          }}
+                          style={{
+                            position: "absolute",
+                            right: 12,
+                            top: "50%",
+                            transform: "translateY(-50%)",
+                            width: 40,
+                            height: 40,
+                            borderRadius: 999,
+                            border: "none",
+                            background: "rgba(0,0,0,0.45)",
+                            color: "#fff",
+                            cursor: "pointer",
+                          }}
+                        >
+                          ›
+                        </button>
+                        <div
+                          style={{
+                            position: "absolute",
+                            left: "50%",
+                            bottom: 12,
+                            transform: "translateX(-50%)",
+                            padding: "4px 10px",
+                            borderRadius: 999,
+                            background: "rgba(0,0,0,0.5)",
+                            color: "#fff",
+                            fontSize: 14,
+                          }}
+                        >
+                          {activeImageIndex + 1}/{imageCount}
+                        </div>
+                      </>
+                    )}
                   </div>
 
                   {images.length > 1 && (
-                    <Row className="g-2 mt-3">
-                      {images.map((src) => (
-                        <Col key={src} xs={4} sm={3}>
-                          <div
-                            className="rounded-3 overflow-hidden"
+                    <div
+                    ref={thumbnailContainerRef}
+                      style={{
+                        display: "flex",
+                        gap: 12,
+                        overflowX: "auto",
+                        paddingTop: 16,
+                        paddingBottom: 6,
+                        paddingLeft: 4,
+                        paddingRight: 4,
+                      }}
+                    >
+                      {images.map((src, index) => (
+                        <div
+                          key={src}
+                          ref={(el) => (thumbnailRefs.current[index] = el)}
+                          className="rounded-3 overflow-hidden"
+                          style={{
+                            width: 120,
+                            height: 96,
+                            flex: "0 0 auto",
+                            border:
+                              activeImageIndex === index
+                                ? "2px solid #7c3aed"
+                                : "1px solid #dee2e6",
+                            cursor: "pointer",
+                            transform: activeImageIndex === index ? "scale(1.03)" : "scale(1)",
+                            transition: "transform 0.25s ease, border-color 0.25s ease",
+                          }}
+                          onClick={() => {
+                            if (index === activeImageIndex) {
+                              return;
+                            }
+                            setActiveImageIndex(index);
+                            setImageLoaded(false);
+                          }}
+                        >
+                          <Image
+                            src={src}
+                            alt={`${hotel.tenKhachSan} ${index + 1}`}
+                            fluid
                             style={{
-                              border:
-                                activeImage === src
-                                  ? "2px solid #7c3aed"
-                                  : "1px solid #dee2e6",
-                              cursor: "pointer",
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "cover",
                             }}
-                            onClick={() => setActiveImage(src)}
-                          >
-                            <Image
-                              src={src}
-                              alt={hotel.tenKhachSan}
-                              fluid
-                              style={{
-                                width: "100%",
-                                height: 96,
-                                objectFit: "cover",
-                              }}
-                            />
-                          </div>
-                        </Col>
+                          />
+                        </div>
                       ))}
-                    </Row>
+                    </div>
                   )}
                 </Col>
 
@@ -259,8 +420,15 @@ const HotelDetail = () => {
                 </Card.Body>
               </Card>
             </Col>
-          </Row> 
-          {hotel && <HotelRooms hotelId={hotel.id} />}                        
+          </Row>
+          {hotel && (
+            <HotelRooms
+              hotelId={hotel.id}
+              hotelName={hotel.tenKhachSan}
+              hotelAddress={hotel.diaChi}
+              hotelImage={images[0]}
+            />
+          )}
         </Container>
       </div>
     </div>

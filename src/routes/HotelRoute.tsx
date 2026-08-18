@@ -6,10 +6,12 @@ const HotelRoute = () => {
     const user = getUser();
 
     if (!user)
-        return <Navigate to="/hotel/login" replace />;
+        return <Navigate to="/login" replace />;
 
-    if (user.Role !== "HOTEL")
+    if (user.Role !== "OWNER") {
+        if (user.Role === "ADMIN") return <Navigate to="/admin" replace />;
         return <Navigate to="/" replace />;
+    }
 
     return <Outlet />;
 };

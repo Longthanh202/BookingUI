@@ -134,7 +134,7 @@ const SearchBanner = ({ filter, setFilter }: Props) => {
       if (!query) return true;
       return name.includes(query) || code.includes(query);
     })
-    .slice(0, 10);
+    .slice(0, 40);
 
   const selectedProvinceLabel =
     (provincesData as any[]).find(

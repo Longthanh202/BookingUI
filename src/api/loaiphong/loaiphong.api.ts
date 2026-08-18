@@ -19,3 +19,14 @@ export const getHotelRooms = async (
 
   return response.data;
 };
+
+export const getOwnerRoomTypes = async (khachSanId: string): Promise<RoomResponse[]> => {
+  console.log("getOwnerRoomTypes called with khachSanId:", khachSanId);
+  // backend expects the raw id in the request body (same pattern as other endpoints)
+  const response = await api.post<RoomResponse[]>(
+    "/api/LoaiPhong/owner/loai-phong",
+    khachSanId
+  );
+  console.log("getOwnerRoomTypes response:", response.data);
+  return response.data;
+};

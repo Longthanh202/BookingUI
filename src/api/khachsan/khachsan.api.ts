@@ -1,9 +1,9 @@
 import api from "../axiosInstance";
-import { HotelFilterParams, KhachSanListParams } from "../../types/khachsan/KhachSan.types";
+import { HotelFilterParams, KhachSanListOwnerParams, KhachSanListParams } from "../../types/khachsan/KhachSan.types";
 import { KhachSan } from "../../types/khachsan/KhachSan";
 
-export const GetDanhSachKhachSan = async (dto: KhachSanListParams) => {
-  const res = await api.post("/api/KhachSan/get", dto);
+export const GetDanhSachKhachSanOwner = async (dto: KhachSanListOwnerParams) => {
+  const res = await api.post("/api/KhachSan/owner-get", dto);
   return res.data;
 };
 

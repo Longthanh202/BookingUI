@@ -1,0 +1,8 @@
+import { HoaHong } from "../../types/HoaHongs/HoaHong";
+import api from "../axiosInstance";
+export const GetHoaHongOwner = async () => {
+  const response = await api.get<HoaHong[]>(
+    "/api/HoaHong/owner");
+
+  return response.data;
+};

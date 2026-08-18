@@ -4,8 +4,7 @@ import { RoomSearchRequest } from "../types/loaiphong/RoomSearchRequest";
 
 
 export const useHotelRooms = (
-  request: RoomSearchRequest,
-  enabled: boolean
+  request: RoomSearchRequest
 ) => {
   return useQuery({
     queryKey: [
@@ -22,7 +21,6 @@ export const useHotelRooms = (
         request.ngayNhan,
         request.ngayTra
       ),
-    enabled,
     staleTime: 1000 * 60 * 5,
   });
 };

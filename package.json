@@ -16,6 +16,7 @@
     "@types/react-dom": "^18.2.18",
     "axios": "^1.13.4",
     "bootstrap": "^5.3.8",
+    "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.2",
     "react-datepicker": "^9.1.0",
@@ -28,6 +29,7 @@
   "scripts": {
     "start": "react-scripts start",
     "mock:server": "json-server --watch db.json --port 4000",
+    "seed:hotels": "node scripts/seed_hotels.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
