@@ -30,3 +30,20 @@ export const getOwnerRoomTypes = async (khachSanId: string): Promise<RoomRespons
   console.log("getOwnerRoomTypes response:", response.data);
   return response.data;
 };
+
+export const createRoomTypes = async (
+  payload: Array<{
+    khachSanId: string;
+    tenLoaiPhong: string;
+    soKhachToiDa: number;
+    kieuGiuong: string;
+    moTa: string;
+  }>
+) => {
+  const response = await api.post(
+    "/api/LoaiPhong/tao",
+    payload
+  );
+
+  return response.data;
+};

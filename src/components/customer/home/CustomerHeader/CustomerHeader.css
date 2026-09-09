@@ -1,0 +1,126 @@
+.home-header {
+  width: 100%;
+  background: rgba(255, 253, 249, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(20, 22, 43, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.home-header__inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.home-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.home-header__title {
+  margin: 0;
+  color: #14162b;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 27px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.home-header__dot { width: 10px; height: 10px; border-radius: 50%; background: #ff5a3c; transform: translateY(-8px); }
+.home-header__nav { display: flex; gap: 34px; font-size: 15px; font-weight: 600; }
+.home-header__nav a, .home-header__login { color: #14162b; text-decoration: none; }
+.home-header__nav a:hover, .home-header__login:hover { color: #ff5a3c; }
+
+.home-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.home-header__outline, .home-header__primary { padding: 11px 18px; border-radius: 100px; font-weight: 700; text-decoration: none; }
+.home-header__outline { border: 2px solid #14162b; color: #14162b; }
+.home-header__outline:hover { background: #14162b; color: #fff; }
+.home-header__primary { background: #ff5a3c; color: #fff; box-shadow: 0 5px 0 #e14322; }
+
+.avatar-dropdown {
+  position: relative;
+  cursor: pointer;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+
+  /* Tắt mũi tên mặc định của Bootstrap */
+  display: inline-flex !important;
+  align-items: center;
+}
+
+.avatar-dropdown::after {
+  display: none !important;
+}
+
+.avatar-image,
+.avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.avatar-image {
+  object-fit: cover;
+  display: block;
+}
+
+.avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #14162b;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+}
+
+@media (max-width: 760px) {
+  .home-header__inner { padding: 16px 20px; }
+  .home-header__nav, .home-header__outline { display: none; }
+  .home-header__login { font-size: 13px; }
+  .home-header__primary { padding: 10px 12px; font-size: 12px; }
+}
+
+/* Vòng tròn nhỏ chứa icon */
+.avatar-chevron {
+  position: absolute;
+
+  right: -4px;
+  bottom: -2px;
+
+  width: 16px;
+  height: 16px;
+
+  border-radius: 50%;
+
+  background-color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 8px;
+  color: #495057;
+
+  border: 1px solid #dee2e6;
+}

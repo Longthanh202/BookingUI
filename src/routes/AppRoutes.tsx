@@ -1,23 +1,23 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import HomePage from "../pages/home/HomePage";
-import SearchResults from "../pages/home/SearchResults";
-import HotelDetail from "../pages/home/HotelDetail";
-import BookingSummary from "../pages/home/BookingSummary";
-import BookingHistory from "../pages/home/BookingHistory";
-import PaymentPage from "../pages/home/PaymentPage";
-import Login from "../pages/login/Login";
-import CustomerLogin from "../pages/login/CustomerLogin";
-import Register from "../pages/login/Register";
+import CustomerHomePage from "../pages/customer/CustomerHomePage";
+import HotelSearchResultsPage from "../pages/customer/HotelSearchResultsPage";
+import HotelDetailPage from "../pages/customer/HotelDetailPage";
+import BookingSummaryPage from "../pages/customer/BookingSummaryPage";
+import BookingHistoryPage from "../pages/customer/BookingHistoryPage";
+import PaymentPage from "../pages/customer/PaymentPage";
+import AdminLoginPage from "../pages/auth/AdminLoginPage";
+import CustomerLoginPage from "../pages/auth/CustomerLoginPage";
+import CustomerRegistrationPage from "../pages/auth/CustomerRegistrationPage";
 import Dashboard from "../pages/dashboard/Dashboard";
 import AdminLayout from "../layouts/AdminLayout";
 import OwnerLayout from "../layouts/OwnerLayout";
-import OwnerHotels from "../pages/khachsansOwner/OwnerHotels";
-import OwnerHotelDetail from "../pages/khachsansOwner/OwnerHotelDetail";
+import OwnerHotelListPage from "../pages/owner/OwnerHotelListPage";
+import OwnerHotelDetailPage from "../pages/owner/OwnerHotelDetailPage";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./AdminRoute";
 import HotelRoute from "./HotelRoute";
 import CustomerRoute from "./CustomerRoute";
-import HoaHongPage from "../pages/HoaHongOwner/HoaHong";
+import OwnerCommissionPage from "../pages/commission/OwnerCommissionPage";
 
 const AppRouters = () => {
     return (
@@ -26,19 +26,19 @@ const AppRouters = () => {
             {/* ================= PUBLIC ================= */}
           
 
-                <Route index element={<HomePage />} />
+                <Route index element={<CustomerHomePage />} />
 
-                <Route path="search-results" element={<SearchResults />} />
+                <Route path="search-results" element={<HotelSearchResultsPage />} />
 
-                <Route path="login" element={<Login />} />
+                <Route path="login" element={<AdminLoginPage />} />
 
-                <Route path="customer-login" element={<CustomerLogin />} />
+                <Route path="customer-login" element={<CustomerLoginPage />} />
 
-                <Route path="register" element={<Register />} />
+                <Route path="register" element={<CustomerRegistrationPage />} />
 
-                <Route path="rooms/:id" element={<HotelDetail />} />
+                <Route path="rooms/:id" element={<HotelDetailPage />} />
 
-                <Route path="booking/summary" element={<BookingSummary />} />
+                <Route path="booking/summary" element={<BookingSummaryPage />} />
 
                 <Route path="booking/payment" element={<PaymentPage />} />
 
@@ -47,7 +47,7 @@ const AppRouters = () => {
 
             <Route element={<CustomerRoute />}>
 
-                <Route path="bookings" element={<BookingHistory />} />
+                <Route path="bookings" element={<BookingHistoryPage />} />
 
             </Route>
 
@@ -56,9 +56,9 @@ const AppRouters = () => {
             <Route path="/owner" element={<HotelRoute />}>
                 <Route element={<OwnerLayout />}>
                   <Route index element={<Navigate to="hotels" replace />} />
-                  <Route path="hotels" element={<OwnerHotels />} />
-                  <Route path="hotels/:id" element={<OwnerHotelDetail />} />
-                  <Route path="hoahong" element={<HoaHongPage />}/>
+                  <Route path="hotels" element={<OwnerHotelListPage />} />
+                  <Route path="hotels/:id" element={<OwnerHotelDetailPage />} />
+                  <Route path="hoahong" element={<OwnerCommissionPage />}/>
                 </Route>
             </Route>
 
@@ -68,9 +68,9 @@ const AppRouters = () => {
                 <Route element={<AdminLayout />}>
                   <Route index element={<Dashboard />} />
 
-                  <Route path="hotels" element={<OwnerHotels />} />
+                  <Route path="hotels" element={<OwnerHotelListPage />} />
 
-                  <Route path="hotels/:id" element={<OwnerHotelDetail />} />
+                  <Route path="hotels/:id" element={<OwnerHotelDetailPage />} />
 
                   {/* <Route path="payments" element={<AdminPayments />} /> */}
                 </Route>

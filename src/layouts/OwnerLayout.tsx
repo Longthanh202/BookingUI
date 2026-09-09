@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getProfileApi } from "../api/auth/auth.api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faChevronDown, faHotel, faMoneyBillTransfer, faWallet } from "@fortawesome/free-solid-svg-icons";
-import Sidebar from "../components/sidebar/Sidebar";
+import Sidebar from "../components/common/navigation/Sidebar";
 import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
 import "./OwnerLayout.css";

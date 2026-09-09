@@ -9,7 +9,6 @@ export interface KhachSanListParams {
 }
 
 export interface HotelFilterParams extends KhachSanListParams {
-    ProvinceCode?: string | null;
     SoKhach?: number | null;
     NgayNhanPhong?: string | null;
     NgayTraPhong?: string | null;
