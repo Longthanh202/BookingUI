@@ -62,6 +62,7 @@ const CustomerHeader = () => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
+                <Dropdown.Item onClick={() => navigate("/account/profile")}>Tài khoản của tôi</Dropdown.Item>
                 <Dropdown.Item onClick={openBookingHistory}>Lịch sử đặt phòng</Dropdown.Item>
                 <Dropdown.Item onClick={handleLogout}>
                   Đăng xuất

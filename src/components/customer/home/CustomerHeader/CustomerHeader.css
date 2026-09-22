@@ -1,3 +1,7 @@
+.home-header__title,.home-header__nav a,.home-header__login{color:#38566b!important}
+.home-header__outline{border-color:#38566b!important;color:#38566b!important}
+.home-header__outline:hover{background:#38566b!important}
+.avatar-placeholder{background-color:#38566b!important}
 .home-header {
   width: 100%;
   background: rgba(255, 253, 249, 0.94);
