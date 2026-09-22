@@ -3,13 +3,18 @@ import { HotelFilterParams, KhachSanListOwnerParams, KhachSanListParams } from "
 import { KhachSan } from "../../types/khachsan/KhachSan";
 
 export const GetDanhSachKhachSanOwner = async (dto: KhachSanListOwnerParams) => {
-  const res = await api.post("/api/KhachSan/owner-get", dto);
+  const res = await api.post("/api/hotels/owner/search", dto);
+  return res.data;
+};
+
+export const searchHotelsAdmin = async (dto: Record<string, unknown>) => {
+  const res = await api.post("/api/hotels/admin/search", dto);
   return res.data;
 };
 
 export const ThemKhachSan = async (dto: KhachSan | FormData) => {
   try {
-    const res = await api.post("/api/KhachSan/tao", dto, {
+    const res = await api.post("/api/hotels", dto, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -26,17 +31,17 @@ export const ThemKhachSan = async (dto: KhachSan | FormData) => {
 };
 
 export const CapNhatKhachSan = async (dto: KhachSan | FormData) => {
-  const res = await api.put("/api/khachsan/cap-nhat", dto);
+  const res = await api.put("/api/hotels", dto);
   return res.data;
 };
 
 export const XoaKhachSan = async (id: string) => {
-  const res = await api.delete(`/api/khachsan/xoa/${id}`);
+  const res = await api.delete(`/api/hotels/${id}`);
   return res.data;
 };
 
 export const FilterHotels = async (dto: HotelFilterParams) => {
-  const res = await api.post(`/api/KhachSan/filter`, dto);
+  const res = await api.post(`/api/hotels/search`, dto);
   return res.data;
 };
 
@@ -46,11 +51,7 @@ export const getHotelDetailById = async (id: string) => {
   }
 
   try {
-    const response = await api.post("/api/KhachSan/chitiet", id, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await api.get(`/api/hotels/${id}`);
 
     return response.data?.data ?? response.data;
   } catch (error) {

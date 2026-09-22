@@ -10,7 +10,7 @@ const mockApi = axios.create({
 });
 
 export const getBanners = async () => {
-  const res = await api.get("/api/Banner/get");
+  const res = await api.get("/api/banners/active");
   return res.data;
 };
 
@@ -31,7 +31,7 @@ export const getTags = async () => {
 // };
 
 export const FilterKhachSan = async (dto: HotelFilterParams) => {
-  const res = await api.post("/api/KhachSan/filter", dto);
+  const res = await api.post("/api/hotels/search", dto);
   return res.data.data;
 };
 
