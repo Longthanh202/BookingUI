@@ -18,6 +18,9 @@ import PrivateRoute from "./AdminRoute";
 import HotelRoute from "./HotelRoute";
 import CustomerRoute from "./CustomerRoute";
 import OwnerCommissionPage from "../pages/commission/OwnerCommissionPage";
+import OwnerWorkspacePage from "../pages/owner/OwnerWorkspacePage";
+import CustomerAccountPage from "../pages/customer/CustomerAccountPage";
+import CustomerRecoveryPage from "../pages/auth/CustomerRecoveryPage";
 
 const AppRouters = () => {
     return (
@@ -41,6 +44,7 @@ const AppRouters = () => {
                 <Route path="booking/summary" element={<BookingSummaryPage />} />
 
                 <Route path="booking/payment" element={<PaymentPage />} />
+                <Route path="forgot-password" element={<CustomerRecoveryPage />} />
 
 
             {/* ================= CUSTOMER ================= */}
@@ -48,6 +52,8 @@ const AppRouters = () => {
             <Route element={<CustomerRoute />}>
 
                 <Route path="bookings" element={<BookingHistoryPage />} />
+                <Route path="account" element={<CustomerAccountPage />} />
+                <Route path="account/:section" element={<CustomerAccountPage />} />
 
             </Route>
 
@@ -55,9 +61,20 @@ const AppRouters = () => {
 
             <Route path="/owner" element={<HotelRoute />}>
                 <Route element={<OwnerLayout />}>
-                  <Route index element={<Navigate to="hotels" replace />} />
+                                    <Route index element={<Navigate to="dashboard" replace />} />
+                                    <Route path="dashboard" element={<OwnerWorkspacePage />} />
                   <Route path="hotels" element={<OwnerHotelListPage />} />
                   <Route path="hotels/:id" element={<OwnerHotelDetailPage />} />
+                                    <Route path="bookings" element={<OwnerWorkspacePage />} />
+                                    <Route path="calendar" element={<OwnerWorkspacePage />} />
+                                    <Route path="rooms" element={<OwnerWorkspacePage />} />
+                                    <Route path="pricing" element={<OwnerWorkspacePage />} />
+                                    <Route path="customers" element={<OwnerWorkspacePage />} />
+                                    <Route path="reports" element={<OwnerWorkspacePage />} />
+                                    <Route path="reviews" element={<OwnerWorkspacePage />} />
+                                    <Route path="staff" element={<OwnerWorkspacePage />} />
+                                    <Route path="notifications" element={<OwnerWorkspacePage />} />
+                                      <Route path="wallet" element={<OwnerWorkspacePage />} />
                   <Route path="hoahong" element={<OwnerCommissionPage />}/>
                 </Route>
             </Route>
