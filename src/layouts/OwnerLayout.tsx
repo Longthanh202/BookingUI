@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProfileApi } from "../api/auth/auth.api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faChevronDown, faHotel, faMoneyBillTransfer, faWallet } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBell, faCalendarDays, faChartLine, faChevronDown, faClipboardList, faBed, faHotel, faMoneyBillTransfer, faPeopleGroup, faPercent, faStar, faUsers, faWallet } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../components/common/navigation/Sidebar";
 import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
@@ -16,22 +16,28 @@ interface Profile {
 }
 
 const menuItems = [
+  { key: "dashboard", label: "Tổng quan", path: "/owner/dashboard", icon: <FontAwesomeIcon icon={faChartLine} /> },
   {
     key: "hotels",
-    label: "Khách sạn",
+    label: "Property của tôi",
     path: "/owner/hotels",
     icon: <FontAwesomeIcon icon={faHotel} />,
   },
-  {
-    key: "hoahong",
-    label: "Hoa hồng",
-    path: "/owner/hoahong",
-    icon: <FontAwesomeIcon icon={faMoneyBillTransfer} />,
-  }
+  { key: "bookings", label: "Booking", path: "/owner/bookings", icon: <FontAwesomeIcon icon={faClipboardList} /> },
+  { key: "calendar", label: "Lịch phòng", path: "/owner/calendar", icon: <FontAwesomeIcon icon={faCalendarDays} /> },
+  { key: "rooms", label: "Phòng & resource", path: "/owner/rooms", icon: <FontAwesomeIcon icon={faBed} /> },
+  { key: "pricing", label: "Giá & khuyến mãi", path: "/owner/pricing", icon: <FontAwesomeIcon icon={faPercent} /> },
+  { key: "customers", label: "Khách hàng", path: "/owner/customers", icon: <FontAwesomeIcon icon={faUsers} /> },
+  { key: "reports", label: "Báo cáo", path: "/owner/reports", icon: <FontAwesomeIcon icon={faChartLine} /> },
+  { key: "reviews", label: "Review", path: "/owner/reviews", icon: <FontAwesomeIcon icon={faStar} /> },
+  { key: "staff", label: "Nhân sự", path: "/owner/staff", icon: <FontAwesomeIcon icon={faPeopleGroup} /> },
+  { key: "notifications", label: "Thông báo", path: "/owner/notifications", icon: <FontAwesomeIcon icon={faBell} /> },
+  { key: "wallet", label: "Ví & giao dịch", path: "/owner/wallet", icon: <FontAwesomeIcon icon={faWallet} /> },
+  { key: "hoahong", label: "Hoa hồng", path: "/owner/hoahong", icon: <FontAwesomeIcon icon={faMoneyBillTransfer} /> },
 ];
 
 const OwnerLayout = () => {
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
 
   const { data: profile } = useQuery<Profile>({
@@ -60,7 +66,7 @@ const OwnerLayout = () => {
             <FontAwesomeIcon icon={faBars} />
           </Button>
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <div style={{ fontWeight: 600, fontSize: 18 }}>Quản lý khách sạn</div>
+            <div style={{ fontWeight: 700, fontSize: 18 }}>Trung tâm vận hành</div>
             <Dropdown align="end">
             <Dropdown.Toggle
               as="div"
