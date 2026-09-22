@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import { Link, useNavigate } from "react-router-dom";
-import {registerCustomer} from "../../api/auth/auth.api"
-import {RegisterRequest} from "../../types/auth/RegisterRequest";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faArrowRight, faCheck, faEnvelope, faLocationDot, faLock, faPhone, faUser } from "@fortawesome/free-solid-svg-icons";
+import { registerCustomer } from "../../api/auth/auth.api";
+import { RegisterRequest } from "../../types/auth/RegisterRequest";
+import "./CustomerRegistrationPage.css";
 
 const CustomerRegistrationPage = () => {
   const navigate = useNavigate();
@@ -14,152 +12,77 @@ const CustomerRegistrationPage = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
 
+  const handleChange = (field: keyof typeof form, value: string) => {
+    setForm((current) => ({ ...current, [field]: value }));
+    setErrors((current) => ({ ...current, [field]: "" }));
+  };
+
   const validate = () => {
-    const e: Record<string, string> = {};
-    if (!form.username.trim()) e.username = "Nhập tên đăng nhập";
-    if (!form.password) e.password = "Nhập mật khẩu";
-    if (!form.fullName.trim()) e.fullName = "Nhập họ và tên";
-    if (!form.phone.trim()) e.phone = "Nhập số điện thoại";
-    if (!form.email.trim()) e.email = "Nhập email";
-    else if (!/^\S+@\S+\.\S+$/.test(form.email)) e.email = "Email không hợp lệ";
-    // address is optional
-    setErrors(e);
-    return Object.keys(e).length === 0;
+    const nextErrors: Record<string, string> = {};
+    if (!form.username.trim()) nextErrors.username = "Nhập tên đăng nhập";
+    if (form.password.length < 6) nextErrors.password = "Mật khẩu tối thiểu 6 ký tự";
+    if (!form.fullName.trim()) nextErrors.fullName = "Nhập họ và tên";
+    if (!form.phone.trim()) nextErrors.phone = "Nhập số điện thoại";
+    if (!form.email.trim()) nextErrors.email = "Nhập email";
+    else if (!/^\S+@\S+\.\S+$/.test(form.email)) nextErrors.email = "Email không hợp lệ";
+    setErrors(nextErrors);
+    return Object.keys(nextErrors).length === 0;
   };
 
-  const handleChange = (field: string, value: string) => {
-    setForm((prev) => ({ ...prev, [field]: value }));
-    setErrors((prev) => ({ ...prev, [field]: "" }));
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!validate()) return;
+    setSubmitting(true);
+    try {
+      const input: RegisterRequest = {
+        username: form.username.trim(), password: form.password, fullName: form.fullName.trim(),
+        phone: form.phone.trim(), address: form.address.trim(), email: form.email.trim(),
+      };
+      await registerCustomer(input);
+      window.alert("Đăng ký thành công");
+      navigate("/customer-login");
+    } catch (error: any) {
+      const message = error?.response?.data?.message || error?.response?.data?.Message || "Đăng ký thất bại";
+      setErrors({ form: message });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  const handleSubmit = async (ev?: React.FormEvent) => {
-  ev?.preventDefault();
-
-  if (!validate()) return;
-
-  setSubmitting(true);
-
-  try {
-    const input: RegisterRequest = {
-      username: form.username.trim(),
-      password: form.password,
-      fullName: form.fullName.trim(),
-      phone: form.phone.trim(),
-      address: form.address.trim(),
-      email: form.email.trim(),
-    };
-
-    const result = await registerCustomer(input);
-
-    window.alert("Đăng ký thành công");
-
-    navigate("/customer-login");
-  } catch (err: any) {
-    console.error("Register error:", err);
-
-    const message =
-      err?.response?.data?.message ||
-      err?.response?.data?.Message ||
-      "Đăng ký thất bại";
-
-    window.alert(message);
-  } finally {
-    setSubmitting(false);
-  }
-};
+  const field = (id: keyof typeof form, label: string, icon: any, type = "text", placeholder = "") => (
+    <div className={`customer-register-field ${errors[id] ? "has-error" : ""}`}>
+      <label htmlFor={`register-${id}`}>{label}</label>
+      <div className="customer-register-input"><FontAwesomeIcon icon={icon} /><input id={`register-${id}`} type={type} value={form[id]} placeholder={placeholder} onChange={(event) => handleChange(id, event.target.value)} autoComplete={id === "password" ? "new-password" : id} /></div>
+      {errors[id] && <small>{errors[id]}</small>}
+    </div>
+  );
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "#f3f6fb",
-        padding: 24,
-      }}
-    >
-      <Card
-        style={{
-          width: "100%",
-          maxWidth: 820,
-          borderRadius: 20,
-          boxShadow: "0 20px 60px rgba(15, 23, 42, 0.12)",
-          border: "none",
-        }}
-      >
-        <Card.Body>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
-            <div>
-              <h2 style={{ marginBottom: 4 }}>Đăng ký tài khoản</h2>
-              <div className="text-secondary">Vui lòng điền thông tin bên dưới. Trường "Địa chỉ" là không bắt buộc.</div>
-            </div>
+    <main className="customer-register-page">
+      <section className="customer-register-shell">
+        <div className="customer-register-story">
+          <Link to="/" className="customer-register-logo">Stayro<span /></Link>
+          <div className="customer-register-story-copy">
+            <div className="customer-register-kicker"><span /> JOIN THE JOURNEY</div>
+            <h1>Một tài khoản,<br /><em>ngàn chuyến đi.</em></h1>
+            <p>Lưu lại những nơi bạn yêu thích, quản lý booking dễ dàng và nhận ưu đãi riêng cho mỗi hành trình.</p>
           </div>
-
-          <Form onSubmit={handleSubmit} className="mt-3">
-            <Row className="g-3">
-              <Col sm={6}>
-                <Form.Group controlId="username">
-                  <Form.Label className="small text-muted">Tên đăng nhập</Form.Label>
-                  <Form.Control size="lg" value={form.username} onChange={(e) => handleChange("username", e.target.value)} isInvalid={!!errors.username} placeholder="user123" />
-                  <Form.Control.Feedback type="invalid">{errors.username}</Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-
-              <Col sm={6}>
-                <Form.Group controlId="password">
-                  <Form.Label className="small text-muted">Mật khẩu</Form.Label>
-                  <Form.Control size="lg" type="password" value={form.password} onChange={(e) => handleChange("password", e.target.value)} isInvalid={!!errors.password} placeholder="******" />
-                  <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-
-              <Col sm={12}>
-                <Form.Group controlId="fullName">
-                  <Form.Label className="small text-muted">Họ và tên</Form.Label>
-                  <Form.Control value={form.fullName} onChange={(e) => handleChange("fullName", e.target.value)} isInvalid={!!errors.fullName} placeholder="Nguyễn Văn A" />
-                  <Form.Control.Feedback type="invalid">{errors.fullName}</Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-
-              <Col sm={6}>
-                <Form.Group controlId="email">
-                  <Form.Label className="small text-muted">Email</Form.Label>
-                  <Form.Control type="email" value={form.email} onChange={(e) => handleChange("email", e.target.value)} isInvalid={!!errors.email} placeholder="name@example.com" />
-                  <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-
-              <Col sm={6}>
-                <Form.Group controlId="phone">
-                  <Form.Label className="small text-muted">Số điện thoại</Form.Label>
-                  <Form.Control value={form.phone} onChange={(e) => handleChange("phone", e.target.value)} isInvalid={!!errors.phone} placeholder="0912345678" />
-                  <Form.Control.Feedback type="invalid">{errors.phone}</Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-
-              <Col sm={12}>
-                <Form.Group controlId="address">
-                  <Form.Label className="small text-muted">Địa chỉ (không bắt buộc)</Form.Label>
-                  <Form.Control value={form.address} onChange={(e) => handleChange("address", e.target.value)} placeholder="Số nhà, đường, quận, thành phố" />
-                </Form.Group>
-              </Col>
-
-              <Col sm={12} className="d-flex justify-content-between align-items-center mt-2">
-                <div>
-                  <Button type="submit" variant="primary" size="lg" disabled={submitting}>
-                    {submitting ? "Đang gửi..." : "Đăng ký"}
-                  </Button>
-                  <Link to="/customer-login" style={{ marginLeft: 12 }}>
-                    <Button variant="outline-secondary" size="lg">Đăng nhập</Button>
-                  </Link>
-                </div>
-              </Col>
-            </Row>
-          </Form>
-        </Card.Body>
-      </Card>
-    </div>
+          <div className="customer-register-benefits"><div><FontAwesomeIcon icon={faCheck} /><span>Đặt phòng nhanh hơn</span></div><div><FontAwesomeIcon icon={faCheck} /><span>Theo dõi booking mọi lúc</span></div><div><FontAwesomeIcon icon={faCheck} /><span>Ưu đãi dành riêng cho bạn</span></div></div>
+          <Link to="/" className="customer-register-back"><FontAwesomeIcon icon={faArrowLeft} /> Về trang khám phá</Link>
+        </div>
+        <div className="customer-register-form-panel">
+          <Link to="/" className="customer-register-mobile-logo">Stayro<span /></Link>
+          <div className="customer-register-heading"><h2>Tạo tài khoản Stayro</h2><p>Bắt đầu lưu lại những nơi bạn muốn đến.</p></div>
+          <form onSubmit={handleSubmit} className="customer-register-form">
+            {errors.form && <div className="customer-register-error" role="alert">{errors.form}</div>}
+            <div className="customer-register-grid">{field("fullName", "Họ và tên", faUser, "text", "Nguyễn Văn A")}{field("username", "Tên đăng nhập", faUser, "text", "user123")}{field("email", "Email", faEnvelope, "email", "name@example.com")}{field("phone", "Số điện thoại", faPhone, "tel", "0912 345 678")}{field("password", "Mật khẩu", faLock, "password", "Tối thiểu 6 ký tự")}<div className="customer-register-field"> <label htmlFor="register-address">Địa chỉ <span>(không bắt buộc)</span></label><div className="customer-register-input"><FontAwesomeIcon icon={faLocationDot} /><input id="register-address" type="text" value={form.address} placeholder="Số nhà, đường, thành phố" onChange={(event) => handleChange("address", event.target.value)} /></div></div></div>
+            <label className="customer-register-check"><input type="checkbox" required /><span>Tôi đồng ý với <a href="/" onClick={(event) => event.preventDefault()}>Điều khoản sử dụng</a> và <a href="/" onClick={(event) => event.preventDefault()}>Chính sách bảo mật</a>.</span></label>
+            <button type="submit" className="customer-register-submit" disabled={submitting}>{submitting ? "Đang tạo tài khoản..." : <>Tạo tài khoản <FontAwesomeIcon icon={faArrowRight} /></>}</button>
+          </form>
+          <p className="customer-register-login">Đã có tài khoản? <Link to="/customer-login">Đăng nhập</Link></p>
+        </div>
+      </section>
+    </main>
   );
 };
 

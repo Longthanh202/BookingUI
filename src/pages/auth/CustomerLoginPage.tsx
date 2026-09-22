@@ -1,177 +1,94 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Card from "react-bootstrap/Card";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { useGoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faArrowRight, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { loginApi } from "../../api/auth/auth.api";
-
-interface GooglePayload {
-  email: string;
-  name: string;
-  picture: string;
-  sub: string;
-}
+import "./CustomerLoginPage.css";
 
 const CustomerLoginPage = () => {
   const navigate = useNavigate();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
-        const response = await fetch(
-          "https://www.googleapis.com/oauth2/v3/userinfo",
-          {
-            headers: {
-              Authorization: `Bearer ${tokenResponse.access_token}`,
-            },
-          },
-        );
-
+        const response = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+        });
         const user = await response.json();
-
         localStorage.setItem("accessToken", tokenResponse.access_token);
-
         localStorage.setItem("customerInfo", JSON.stringify(user));
-
-        alert(`Xin chào ${user.name}`);
-
-        navigate("/hotels");
-      } catch (error) {
-        console.error(error);
-        alert("Đăng nhập Google thất bại");
+        navigate("/");
+      } catch {
+        setError("Đăng nhập Google thất bại. Vui lòng thử lại.");
       }
     },
-
-    onError: () => {
-      alert("Đăng nhập Google thất bại");
-    },
+    onError: () => setError("Đăng nhập Google thất bại. Vui lòng thử lại."),
   });
 
   const handleCustomerLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!username || !password) {
-      window.alert("Vui lòng nhập tên đăng nhập và mật khẩu.");
+    if (!username.trim() || !password) {
+      setError("Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu.");
       return;
     }
-    const res = await loginApi(username, password);
-    localStorage.setItem("accessToken", res.token);
-    window.alert("Đăng nhập thành công");
-    navigate("/");
+    setSubmitting(true);
+    setError("");
+    try {
+      const response = await loginApi(username.trim(), password);
+      localStorage.setItem("accessToken", response.token);
+      navigate("/");
+    } catch (requestError: any) {
+      setError(requestError?.response?.data?.message || "Tên đăng nhập hoặc mật khẩu chưa đúng.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "#f3f6fb",
-        padding: 24,
-      }}
-    >
-      <Card
-        style={{
-          width: "100%",
-          maxWidth: 480,
-          borderRadius: 24,
-          boxShadow: "0 24px 90px rgba(15, 23, 42, 0.12)",
-        }}
-      >
-        <Card.Body>
-          <div style={{ textAlign: "center", marginBottom: 24 }}>
-            <h2 style={{ marginBottom: 8 }}>Đăng nhập</h2>
-            <p className="text-secondary">
-              Sử dụng email hoặc đăng nhập nhanh với Facebook/Google
-            </p>
+    <main className="customer-login-page">
+      <section className="customer-login-shell">
+        <div className="customer-login-story">
+          <Link to="/" className="customer-login-logo">Stayro<span /></Link>
+          <div className="customer-login-story-copy">
+            <div className="customer-login-kicker"><span /> YOUR NEXT STAY</div>
+            <h1>Mỗi chuyến đi,<br /><em>một nơi để nhớ.</em></h1>
+            <p>Đăng nhập để tiếp tục những kế hoạch còn dang dở, theo dõi booking và nhận ưu đãi dành riêng cho bạn.</p>
+          </div>
+          <div className="customer-login-trip-card">
+            <div className="customer-login-trip-image" />
+            <div><small>Được yêu thích tuần này</small><strong>Villa bên biển · Phú Quốc</strong><span>★ 4.9 · 128 đánh giá</span></div>
+          </div>
+          <Link to="/" className="customer-login-back"><FontAwesomeIcon icon={faArrowLeft} /> Về trang khám phá</Link>
+        </div>
+
+        <div className="customer-login-form-panel">
+          <div className="customer-login-form-heading">
+            <span className="customer-login-mobile-logo">Stayro<span /></span>
+            <h2>Chào mừng trở lại</h2>
+            <p>Đăng nhập để bắt đầu chuyến đi tiếp theo.</p>
           </div>
 
-          <Form onSubmit={handleCustomerLogin}>
-            <Form.Group className="mb-3" controlId="customerEmail">
-              <Form.Label>UserName</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="example"
-                value={username}
-                onChange={(e) => setUserName(e.target.value)}
-                required
-              />
-            </Form.Group>
+          <form onSubmit={handleCustomerLogin} className="customer-login-form">
+            {error && <div className="customer-login-error" role="alert">{error}</div>}
+            <label htmlFor="customer-username">Tên đăng nhập</label>
+            <div className="customer-login-input-wrap"><FontAwesomeIcon icon={faUser} /><input id="customer-username" type="text" placeholder="Nhập tên đăng nhập" value={username} onChange={(event) => setUserName(event.target.value)} autoComplete="username" /></div>
+            <div className="customer-login-password-label"><label htmlFor="customer-password">Mật khẩu</label><Link to="/forgot-password">Quên mật khẩu?</Link></div>
+            <div className="customer-login-input-wrap"><FontAwesomeIcon icon={faLock} /><input id="customer-password" type="password" placeholder="Nhập mật khẩu" value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="current-password" /></div>
+            <button type="submit" className="customer-login-submit" disabled={submitting}>{submitting ? "Đang đăng nhập..." : <>Đăng nhập <FontAwesomeIcon icon={faArrowRight} /></>}</button>
+          </form>
 
-            <Form.Group className="mb-4" controlId="customerPassword">
-              <Form.Label>Mật khẩu</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Nhập mật khẩu"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </Form.Group>
-
-            <Button type="submit" variant="primary" className="w-100 mb-3">
-              Đăng nhập
-            </Button>
-          </Form>
-
-          <div className="text-center my-3">Hoặc</div>
-
-          <div
-            style={{
-              display: "flex",
-              gap: 12,
-              justifyContent: "space-between",
-            }}
-          >
-            <Button
-              variant="primary"
-              style={{
-                flex: 1,
-                backgroundColor: "#1877f2",
-                borderColor: "#1877f2",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 8,
-              }}
-              onClick={() => alert("Đăng nhập Facebook chưa được triển khai")}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                <path d="M22 12a10 10 0 10-11.5 9.9v-7h-2.3V12h2.3V9.8c0-2.3 1.4-3.6 3.4-3.6.98 0 2 .18 2 .18v2.2h-1.12c-1.1 0-1.44.68-1.44 1.38V12h2.45l-.39 2.9h-2.06v7A10 10 0 0022 12z" />
-              </svg>
-              Facebook
-            </Button>
-
-            <Button
-              variant="outline-primary"
-              style={{
-                flex: 1,
-                borderColor: "#4285f4",
-                color: "#4285f4",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 8,
-              }}
-              onClick={() => googleLogin()}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden>
-                <path fill="#EA4335" d="M12 11.5v3.9h5.2c-.2 1.4-1.6 4.1-5.2 4.1-3.1 0-5.7-2.6-5.7-5.8s2.6-5.8 5.7-5.8c1.8 0 3 .8 3.7 1.5l2.5-2.4C17.4 4.6 15 3.5 12 3.5 7 3.5 3 7.5 3 12.5S7 21.5 12 21.5c6 0 9-4.5 9-8.5 0-.6-.1-1-.2-1.4H12z" />
-              </svg>
-              Google
-            </Button>
-          </div>
-
-          <div className="text-center mt-4">
-            <Link to="/customer-login">Quay lại</Link>
-          </div>
-        </Card.Body>
-      </Card>
-    </div>
+          <div className="customer-login-divider"><span>Hoặc tiếp tục với</span></div>
+          <div className="customer-login-socials"><button type="button" className="customer-login-social customer-login-google" onClick={() => googleLogin()}><b>G</b> Google</button><button type="button" className="customer-login-social customer-login-facebook" onClick={() => setError("Đăng nhập Facebook chưa được triển khai.")}><b>f</b> Facebook</button></div>
+          <p className="customer-login-register">Chưa có tài khoản? <Link to="/register">Đăng ký miễn phí</Link></p>
+          <small className="customer-login-terms">Bằng việc tiếp tục, bạn đồng ý với Điều khoản sử dụng và Chính sách bảo mật của Stayro.</small>
+        </div>
+      </section>
+    </main>
   );
 };
 
