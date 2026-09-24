@@ -1,12 +1,12 @@
 ﻿import { useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProfileApi } from "../api/auth/auth.api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faChevronDown, faStar, faHotel, faCreditCard, faPeopleRoof, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faStar, faHotel, faCreditCard, faPeopleRoof, faUser, faClipboardList, faWallet, faBullhorn, faImage } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../components/common/navigation/Sidebar";
-import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
+import AccountMenu from "../components/common/AccountMenu";
 
 interface Profile {
   fullName: string;
@@ -14,21 +14,26 @@ interface Profile {
 }
 
 const moduleConfig: Record<string, { label: string; path: string; icon: React.ReactNode }> = {
-  khachsan: { label: "Khách sạn", path: "/hotels", icon: <FontAwesomeIcon icon={faHotel} /> },
-  phong: { label: "Phòng", path: "/rooms", icon: <FontAwesomeIcon icon={faPeopleRoof} /> },
-  danhgia: { label: "Đánh giá", path: "/reviews", icon: <FontAwesomeIcon icon={faStar} /> },
-  payment: { label: "Thanh toán", path: "/payments", icon: <FontAwesomeIcon icon={faCreditCard} /> },
-  user: { label: "Người dùng", path: "/users", icon: <FontAwesomeIcon icon={faUser} /> },
+  khachsan: { label: "Khách sạn", path: "/admin/hotels", icon: <FontAwesomeIcon icon={faHotel} /> },
+  phong: { label: "Phòng", path: "/admin/rooms", icon: <FontAwesomeIcon icon={faPeopleRoof} /> },
+  danhgia: { label: "Đánh giá", path: "/admin/reviews", icon: <FontAwesomeIcon icon={faStar} /> },
+  payment: { label: "Thanh toán", path: "/admin/payments", icon: <FontAwesomeIcon icon={faCreditCard} /> },
+  user: { label: "Người dùng", path: "/admin/users", icon: <FontAwesomeIcon icon={faUser} /> },
+  booking: { label: "Booking", path: "/admin/bookings", icon: <FontAwesomeIcon icon={faClipboardList} /> },
+  commission: { label: "Hoa hồng", path: "/admin/commissions", icon: <FontAwesomeIcon icon={faWallet} /> },
+  finance: { label: "Rút tiền", path: "/admin/withdrawals", icon: <FontAwesomeIcon icon={faWallet} /> },
+  advertising: { label: "Quảng cáo", path: "/admin/advertising", icon: <FontAwesomeIcon icon={faBullhorn} /> },
+  banner: { label: "Banner", path: "/admin/banners", icon: <FontAwesomeIcon icon={faImage} /> },
 };
 
 const buildMenuFromPermissions = (permissions: string[]) => {
-  const allowed = new Set(["khachsan", "phong", "danhgia", "payment", "user"]);
+  const allowed = new Set(["khachsan", "phong", "danhgia", "payment", "user", "booking", "commission", "finance", "advertising", "banner"]);
   const moduleSet = new Set(
     permissions
       .map((p) => p.split("_")[0])
       .filter((key) => allowed.has(key))
   );
-  const order = ["khachsan", "phong", "danhgia", "payment", "user"];
+  const order = ["khachsan", "booking", "payment", "commission", "finance", "advertising", "banner", "phong", "danhgia", "user"];
   const orderedModules = order.filter((key) => moduleSet.has(key));
 
   return orderedModules.map((module) => ({
@@ -41,7 +46,6 @@ const buildMenuFromPermissions = (permissions: string[]) => {
 
 const AdminLayout = () => {
   const [collapsed, setCollapsed] = useState(true);
-  const navigate = useNavigate();
 
   const { data: profile } = useQuery<Profile>({
     queryKey: ["profile"],
@@ -70,24 +74,7 @@ const AdminLayout = () => {
           <Button variant="link" onClick={() => setCollapsed(!collapsed)}>
             <FontAwesomeIcon icon={faBars} />
           </Button>
-          <Dropdown align="end">
-            <Dropdown.Toggle variant="secondary" id="dropdown-user">
-              {profile?.fullName || "Tài khoản"} <FontAwesomeIcon icon={faChevronDown} />
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item as={Link} to="/profile">
-                Thông tin tài khoản
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  localStorage.removeItem("accessToken");
-                  navigate("/login");
-                }}
-              >
-                Đăng xuất
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+          <AccountMenu mode="admin" name={profile?.fullName} />
         </header>
         <main style={{ padding: "1rem", backgroundColor: "#f3f5f7", minHeight: "100%" }}>
           <Outlet />
