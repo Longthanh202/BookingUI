@@ -1,8 +1,13 @@
 import api from "../axiosInstance";
 import {RegisterRequest} from "../../types/auth/RegisterRequest";
 
+export const googleLoginApi = async (idToken: string) => {
+    const res = await api.post("/api/auth/google-login", { idToken });
+    return res.data;
+}
+
 export const loginApi = async (username: string, password: string) => {
-    const res = await api.post("/api/users/login", { Username: username, Password: password });
+    const res = await api.post("/api/users/login", { username, password });
     return res.data;
 }
 
@@ -18,8 +23,11 @@ export const registerCustomer = async(input: RegisterRequest) =>{
 
 export const refreshTokenApi = async () => (await api.post("/api/users/refresh-token")).data;
 
-export const setRolePermissions = async (payload: { RoleId: string; Permissions: unknown[] }) =>
+export const setRolePermissions = async (payload: { roleId: string; permissions: unknown[] }) =>
     (await api.post("/api/users/role-permissions", payload)).data;
 
 export const forgotPassword = async (username: string) =>
-    (await api.post(`/api/users/forgot-password?username=${encodeURIComponent(username)}`)).data;
+    (await api.post("/api/users/forgot-password", { username })).data;
+
+export const resetPassword = async (payload: { username: string; code: string; newPassword: string }) =>
+    (await api.post("/api/users/reset-password", payload)).data;

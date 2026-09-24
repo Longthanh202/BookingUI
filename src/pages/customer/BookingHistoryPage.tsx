@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
@@ -10,7 +10,7 @@ import Modal from "react-bootstrap/Modal";
 
 import CustomerHeader from "../../components/customer/home/CustomerHeader/CustomerHeader";
 
-import { getAllBookingsHistory } from "../../api/booking/booking.api";
+import { cancelBooking, getAllBookingsHistory } from "../../api/booking/booking.api";
 
 import {
   Booking,
@@ -23,6 +23,14 @@ const BookingHistoryPage = () => {
 
   const [selectedBooking, setSelectedBooking] =
     useState<Booking | null>(null);
+  const queryClient = useQueryClient();
+  const cancelMutation = useMutation({
+    mutationFn: cancelBooking,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["bookings-history"] });
+      setSelectedBooking(null);
+    },
+  });
 
   const { data, isLoading } =
     useQuery<BookingHistoryResponse, Error>({
@@ -1108,6 +1116,15 @@ const BookingHistoryPage = () => {
               >
                 Đóng
               </Button>
+              {selectedBooking && ["CHO_XAC_NHAN", "DA_XAC_NHAN"].includes(selectedBooking.trangThai) && (
+                <Button
+                  variant="outline-danger"
+                  disabled={cancelMutation.isPending}
+                  onClick={() => cancelMutation.mutate(selectedBooking.id)}
+                >
+                  {cancelMutation.isPending ? "Đang hủy..." : "Hủy booking"}
+                </Button>
+              )}
             </Modal.Footer>
           </>
         )}

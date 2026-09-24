@@ -1,25 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./CustomerHeader.css";
 import { getUser } from "../../../../utils/auth/auth";
-import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { Dropdown } from "react-bootstrap";
+import AccountMenu from "../../../common/AccountMenu";
 
 const CustomerHeader = () => {
   const user = getUser();
-   const navigate = useNavigate();
-
   const profile = user;
-
-  const handleLogout = () => {
-    localStorage.removeItem("accessToken");
-    navigate("/customer-login");
-  };
-
-  const openBookingHistory = () => {
-    navigate("/bookings");
-  }
 
   return (
     <header className="home-header">
@@ -35,40 +21,7 @@ const CustomerHeader = () => {
 
         {user ? (
           <div className="home-header__actions">
-            <Dropdown align="end">
-              <Dropdown.Toggle
-                as="div"
-                id="dropdown-owner-user"
-                className="avatar-dropdown"
-              >
-                {profile?.avatar ? (
-                  <img
-                    src={profile.avatar}
-                    alt={profile.fullName || "Avatar"}
-                    className="avatar-image"
-                  />
-                ) : (
-                  <div className="avatar-placeholder">
-                    {profile?.fullName
-                      ?.trim()
-                      ?.charAt(0)
-                      ?.toUpperCase() || "U"}
-                  </div>
-                )}
-
-                <span className="avatar-chevron">
-                  <FontAwesomeIcon icon={faChevronDown} />
-                </span>
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={() => navigate("/account/profile")}>Tài khoản của tôi</Dropdown.Item>
-                <Dropdown.Item onClick={openBookingHistory}>Lịch sử đặt phòng</Dropdown.Item>
-                <Dropdown.Item onClick={handleLogout}>
-                  Đăng xuất
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+            <AccountMenu mode="customer" name={profile?.fullName} avatar={profile?.avatar} />
           </div>
         ) : (
           <div className="home-header__actions">

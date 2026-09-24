@@ -8,6 +8,7 @@ import Col from "react-bootstrap/Col";
 import Badge from "react-bootstrap/Badge";
 import CustomerHeader from "../../components/customer/home/CustomerHeader/CustomerHeader";
 import { createBooking } from "../../api/booking/booking.api";
+import { showToast } from "../../components/common/Toast";
 
 const PaymentPage = () => {
   const location = useLocation();
@@ -181,12 +182,12 @@ const PaymentPage = () => {
 
   const handlePayment = async () => {
     if (!hotelId) {
-      window.alert("Không xác định được khách sạn.");
+      showToast("Không xác định được khách sạn.", "error");
       return;
     }
 
     if (!rooms || rooms.length === 0) {
-      window.alert("Chưa có phòng được chọn.");
+      showToast("Chưa có phòng được chọn.", "info");
       return;
     }
 
@@ -220,7 +221,7 @@ const PaymentPage = () => {
 
       await createBooking(payload as any);
 
-      window.alert(
+      showToast(
         "Đặt phòng thành công!"
       );
 
@@ -228,7 +229,7 @@ const PaymentPage = () => {
     } catch (error) {
       console.error(error);
 
-      window.alert(
+      showToast(
         "Thanh toán thất bại. Vui lòng thử lại."
       );
     } finally {

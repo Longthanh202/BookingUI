@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight, faCheck, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
-import { forgotPassword } from "../../api/auth/auth.api";
+import { forgotPassword, resetPassword } from "../../api/auth/auth.api";
 import "./CustomerLoginPage.css";
 
 const CustomerRecoveryPage = () => {
@@ -23,6 +23,7 @@ const CustomerRecoveryPage = () => {
     }
     try {
       if (!isReset) await forgotPassword(username.trim());
+      else await resetPassword({ username: username.trim(), code: params.get("token") || "", newPassword: password });
       setSent(true);
     } catch (requestError: any) {
       setError(requestError?.response?.data?.message || "Không thể gửi yêu cầu lúc này. Vui lòng thử lại.");

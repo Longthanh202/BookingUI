@@ -12,10 +12,10 @@ import Badge from "react-bootstrap/Badge";
 import Spinner from "react-bootstrap/Spinner";
 import { getHotelDetailById } from "../../api/khachsan/khachsan.api";
 import CustomerHeader from "../../components/customer/home/CustomerHeader/CustomerHeader";
+import { showToast } from "../../components/common/Toast";
 import { HotelFilterParams } from "../../types/khachsan/KhachSan.types";
 import { HotelRoomSelector } from "../../components/hotel/HotelRoomSelector";
 import "./HotelDetailPage.css";
-
 
 interface HotelAmenity {
   id?: string | number;
@@ -42,16 +42,12 @@ interface HotelDetailResponse {
 const defaultAmenities = ["Wi-Fi miễn phí", "Hồ bơi", "Phòng xông hơi", "Gym"];
 
 const getAmenityIcon = (amenity?: HotelAmenity) => {
-  const name = (amenity?.tenTienIch || "").toLowerCase();
-
-  if (name.includes("gym")) return "💪";
-  if (name.includes("thang máy") || name.includes("thang-may")) return "🛗";
-  if (name.includes("đậu xe") || name.includes("dau xe")) return "🅿️";
-  if (name.includes("wifi")) return "📶";
-  if (name.includes("hồ bơi") || name.includes("boi")) return "🏊";
-  if (name.includes("xông hơi") || name.includes("xong hoi")) return "♨️";
-
-  return amenity?.icon || "✨";
+  // Nếu có icon (chuỗi HTML thẻ <i class="...">) trả về icon đó
+  if (amenity?.icon && amenity.icon.trim() !== "") {
+    return amenity.icon;
+  }
+  // Fallback nếu không có icon trong DB
+  return '<i class="fa-solid fa-star"></i>';
 };
 
 const HotelDetailPage = () => {
@@ -84,11 +80,17 @@ const HotelDetailPage = () => {
 
   const hotel = data;
   const images = useMemo(
-    () => (data?.khachSanImages ?? []).map((item) => item.url).filter(Boolean) as string[],
+    () =>
+      (data?.khachSanImages ?? [])
+        .map((item) => item.url)
+        .filter(Boolean) as string[],
     [data?.khachSanImages],
   );
   const imageCount = images.length;
-  const imageToShow = images[activeImageIndex] || images[0] || "https://placehold.co/900x600?text=No+Image";
+  const imageToShow =
+    images[activeImageIndex] ||
+    images[0] ||
+    "https://placehold.co/900x600?text=No+Image";
   const amenities = (
     data?.tienIchs?.length
       ? data.tienIchs
@@ -130,37 +132,32 @@ const HotelDetailPage = () => {
   const thumbnailContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-  const container = thumbnailContainerRef.current;
-  const thumbnail = thumbnailRefs.current[activeImageIndex];
+    const container = thumbnailContainerRef.current;
+    const thumbnail = thumbnailRefs.current[activeImageIndex];
 
-  if (!container || !thumbnail) return;
+    if (!container || !thumbnail) return;
 
-  const containerRect = container.getBoundingClientRect();
-  const thumbnailRect = thumbnail.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    const thumbnailRect = thumbnail.getBoundingClientRect();
 
-  const isLeft =
-    thumbnailRect.left < containerRect.left;
+    const isLeft = thumbnailRect.left < containerRect.left;
 
-  const isRight =
-    thumbnailRect.right > containerRect.right;
+    const isRight = thumbnailRect.right > containerRect.right;
 
-  if (isLeft) {
-    container.scrollTo({
-      left:
-        container.scrollLeft -
-        (containerRect.left - thumbnailRect.left),
-      behavior: "smooth",
-    });
-  } else if (isRight) {
-    container.scrollTo({
-      left:
-        container.scrollLeft +
-        (thumbnailRect.right - containerRect.right),
-      behavior: "smooth",
-    });
-  }
-}, [activeImageIndex, imageCount]);
-  
+    if (isLeft) {
+      container.scrollTo({
+        left: container.scrollLeft - (containerRect.left - thumbnailRect.left),
+        behavior: "smooth",
+      });
+    } else if (isRight) {
+      container.scrollTo({
+        left:
+          container.scrollLeft + (thumbnailRect.right - containerRect.right),
+        behavior: "smooth",
+      });
+    }
+  }, [activeImageIndex, imageCount]);
+
   useEffect(() => {
     if (location.state?.filter) {
       const filter = location.state.filter as HotelFilterParams;
@@ -187,9 +184,9 @@ const HotelDetailPage = () => {
   const handleShare = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
-      window.alert("Đã sao chép đường dẫn khách sạn");
+      showToast("Đã sao chép đường dẫn khách sạn", "success");
     } catch {
-      window.alert("Không thể sao chép đường dẫn");
+      showToast("Không thể sao chép đường dẫn", "error");
     }
   };
 
@@ -225,12 +222,17 @@ const HotelDetailPage = () => {
       <CustomerHeader />
       <div className="stayro-detail__surface">
         <Container fluid style={{ maxWidth: 1280 }}>
-          <div className="stayro-detail__breadcrumb">Stayro <span>/</span> Khám phá <span>/</span> {hotel.tenKhachSan}</div>
+          <div className="stayro-detail__breadcrumb">
+            Stayro <span>/</span> Khám phá <span>/</span> {hotel.tenKhachSan}
+          </div>
           <Card className="stayro-detail__hero shadow-sm rounded-4 overflow-hidden">
             <Card.Body>
               <Row className="g-4">
                 <Col xs={12} lg={8}>
-                  <div className="rounded-4 overflow-hidden position-relative d-flex justify-content-center align-items-center" style={{ background: "#f3f4f6", minHeight: 420 }}>
+                  <div
+                    className="rounded-4 overflow-hidden position-relative d-flex justify-content-center align-items-center"
+                    style={{ background: "#f3f4f6", minHeight: 420 }}
+                  >
                     <img
                       ref={imageRef}
                       key={imageToShow}
@@ -256,7 +258,10 @@ const HotelDetailPage = () => {
                         <button
                           type="button"
                           onClick={() => {
-                            setActiveImageIndex((current) => (current - 1 + imageCount) % imageCount);
+                            setActiveImageIndex(
+                              (current) =>
+                                (current - 1 + imageCount) % imageCount,
+                            );
                             setImageLoaded(false);
                           }}
                           style={{
@@ -278,7 +283,9 @@ const HotelDetailPage = () => {
                         <button
                           type="button"
                           onClick={() => {
-                            setActiveImageIndex((current) => (current + 1) % imageCount);
+                            setActiveImageIndex(
+                              (current) => (current + 1) % imageCount,
+                            );
                             setImageLoaded(false);
                           }}
                           style={{
@@ -318,7 +325,7 @@ const HotelDetailPage = () => {
 
                   {images.length > 1 && (
                     <div
-                    ref={thumbnailContainerRef}
+                      ref={thumbnailContainerRef}
                       style={{
                         display: "flex",
                         gap: 12,
@@ -343,8 +350,12 @@ const HotelDetailPage = () => {
                                 ? "2px solid #7c3aed"
                                 : "1px solid #dee2e6",
                             cursor: "pointer",
-                            transform: activeImageIndex === index ? "scale(1.03)" : "scale(1)",
-                            transition: "transform 0.25s ease, border-color 0.25s ease",
+                            transform:
+                              activeImageIndex === index
+                                ? "scale(1.03)"
+                                : "scale(1)",
+                            transition:
+                              "transform 0.25s ease, border-color 0.25s ease",
                           }}
                           onClick={() => {
                             if (index === activeImageIndex) {
@@ -373,8 +384,12 @@ const HotelDetailPage = () => {
                 <Col xs={12} lg={4}>
                   <div className="d-flex flex-column justify-content-between h-100 gap-4">
                     <div>
-                      <div className="stayro-detail__eyebrow">STAYRO VERIFIED</div>
-                      <h1 className="stayro-detail__title">{hotel.tenKhachSan}</h1>
+                      <div className="stayro-detail__eyebrow">
+                        STAYRO VERIFIED
+                      </div>
+                      <h1 className="stayro-detail__title">
+                        {hotel.tenKhachSan}
+                      </h1>
                       <div className="stayro-detail__rating mb-3">
                         {Array.from({ length: hotel.soSao || 0 }).map(
                           (_, index) => (
@@ -388,11 +403,20 @@ const HotelDetailPage = () => {
                         📍 {hotel.diaChi}
                       </div>
                       <div className="stayro-detail__facts">
-                        <span><b>Nhận phòng</b>{hotel.gioNhanPhong || "14:00"}</span>
-                        <span><b>Trả phòng</b>{hotel.gioTraPhong || "12:00"}</span>
+                        <span>
+                          <b>Nhận phòng</b>
+                          {hotel.gioNhanPhong || "14:00"}
+                        </span>
+                        <span>
+                          <b>Trả phòng</b>
+                          {hotel.gioTraPhong || "12:00"}
+                        </span>
                       </div>
                     </div>
-                    <Button className="stayro-share-button" onClick={handleShare}>
+                    <Button
+                      className="stayro-share-button"
+                      onClick={handleShare}
+                    >
                       ↗ Chia sẻ chỗ ở
                     </Button>
                   </div>
@@ -405,7 +429,9 @@ const HotelDetailPage = () => {
             <Col xs={12} lg={8}>
               <Card className="stayro-detail__description shadow-sm rounded-4">
                 <Card.Body>
-                  <h2 className="stayro-detail__section-title mb-3">Về chỗ ở này</h2>
+                  <h2 className="stayro-detail__section-title mb-3">
+                    Về chỗ ở này
+                  </h2>
                   <div
                     style={{ color: "#475569", lineHeight: 1.8 }}
                     dangerouslySetInnerHTML={{
@@ -415,7 +441,12 @@ const HotelDetailPage = () => {
                   <div className="stayro-amenities d-flex flex-wrap gap-2">
                     {amenities.map((item) => (
                       <Badge key={item.id ?? item.tenTienIch} pill bg="primary">
-                        <span className="me-1">{getAmenityIcon(item)}</span>
+                        <span
+                          className="me-1"
+                          dangerouslySetInnerHTML={{
+                            __html: getAmenityIcon(item),
+                          }}
+                        />
                         {item.tenTienIch}
                       </Badge>
                     ))}

@@ -87,7 +87,7 @@ const CustomerHomePage = () => {
       <header className="stayro-header"><div className="stayro-header__inner">
         <Link to="/" className="stayro-logo">Stayro<span /></Link>
         <nav className="stayro-nav"><a href="#stays">Khám phá</a><a href="#deals">Ưu đãi</a><a href="#community">Cộng đồng</a></nav>
-        <div className="stayro-actions">{user ? <Link className="stayro-login" to="/bookings">Lịch sử đặt phòng</Link> : <Link className="stayro-login" to="/customer-login">Đăng nhập</Link>}<Link className="stayro-outline" to="/owner/hotels">Đăng chỗ ở</Link><a className="stayro-primary stayro-primary--small" href="#search">Đặt phòng ngay</a></div>
+        <div className="stayro-actions">{user ? <Link className="stayro-login" to="/bookings">Lịch sử đặt phòng</Link> : <Link className="stayro-login" to="/customer-login">Đăng nhập</Link>}<Link className="stayro-outline" to="/owner/login">Đăng chỗ ở</Link><a className="stayro-primary stayro-primary--small" href="#search">Đặt phòng ngay</a></div>
       </div></header>
 
       <main>
@@ -108,7 +108,7 @@ const CustomerHomePage = () => {
 
         <section className="stayro-cta"><h2>Chuyến đi tiếp theo đang chờ bạn</h2><p>Hàng ngàn chỗ ở mới được thêm mỗi tuần. Tìm chỗ, đọc đánh giá, đặt ngay.</p><a className="stayro-dark-button" href="#search">Khám phá chỗ ở</a></section>
       </main>
-      <footer className="stayro-footer"><div className="stayro-container"><div className="stayro-footer__top"><div><Link to="/" className="stayro-logo stayro-logo--light">Stayro<span /></Link><p>Nền tảng đặt chỗ ở cho những người thích đi vào phút chót.</p></div><div><b>Về Stayro</b><a href="#community">Giới thiệu</a><a href="#deals">Ưu đãi</a></div><div><b>Hỗ trợ</b><a href="#search">Trung tâm trợ giúp</a><a href="#search">Liên hệ</a></div><div><b>Đối tác</b><Link to="/owner/hotels">Đăng chỗ ở của bạn</Link><a href="#deals">Đối tác doanh nghiệp</a></div></div><div className="stayro-footer__bottom">© 2026 Stayro. Mọi chuyến đi đều đáng có chỗ ở tốt.<span>Điều khoản · Bảo mật</span></div></div></footer>
+      <footer className="stayro-footer"><div className="stayro-container"><div className="stayro-footer__top"><div><Link to="/" className="stayro-logo stayro-logo--light">Stayro<span /></Link><p>Nền tảng đặt chỗ ở cho những người thích đi vào phút chót.</p></div><div><b>Về Stayro</b><a href="#community">Giới thiệu</a><a href="#deals">Ưu đãi</a></div><div><b>Hỗ trợ</b><a href="#search">Trung tâm trợ giúp</a><a href="#search">Liên hệ</a></div><div><b>Đối tác</b><Link to="/owner/login">Đăng chỗ ở của bạn</Link><a href="#deals">Đối tác doanh nghiệp</a></div></div><div className="stayro-footer__bottom">© 2026 Stayro. Mọi chuyến đi đều đáng có chỗ ở tốt.<span>Điều khoản · Bảo mật</span></div></div></footer>
     </div>
   );
 };

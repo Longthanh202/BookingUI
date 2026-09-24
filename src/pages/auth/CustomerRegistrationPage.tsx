@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight, faCheck, faEnvelope, faLocationDot, faLock, faPhone, faUser } from "@fortawesome/free-solid-svg-icons";
 import { registerCustomer } from "../../api/auth/auth.api";
+import { showToast } from "../../components/common/Toast";
 import { RegisterRequest } from "../../types/auth/RegisterRequest";
 import "./CustomerRegistrationPage.css";
 
@@ -39,7 +40,7 @@ const CustomerRegistrationPage = () => {
         phone: form.phone.trim(), address: form.address.trim(), email: form.email.trim(),
       };
       await registerCustomer(input);
-      window.alert("Đăng ký thành công");
+      showToast("Đăng ký thành công", "success");
       navigate("/customer-login");
     } catch (error: any) {
       const message = error?.response?.data?.message || error?.response?.data?.Message || "Đăng ký thất bại";

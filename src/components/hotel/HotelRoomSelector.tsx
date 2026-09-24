@@ -10,6 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useHotelRooms } from "../../hooks/useHotelRooms";
 import { RoomResponse } from "../../types/loaiphong/RoomResponse";
+import { showToast } from "../common/Toast";
 
 interface Props {
   hotelId: string;
@@ -87,7 +88,7 @@ const canBook = Boolean(
 
   const handleBook = () => {
   if (!canBook) {
-    window.alert("Vui lòng chọn phòng và ngày để đặt phòng.");
+    showToast("Vui lòng chọn phòng và ngày để đặt phòng.", "info");
     return;
   }
 

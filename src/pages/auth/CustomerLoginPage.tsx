@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
-import { loginApi } from "../../api/auth/auth.api";
+import { googleLoginApi, loginApi } from "../../api/auth/auth.api";
 import "./CustomerLoginPage.css";
 
 const CustomerLoginPage = () => {
@@ -13,22 +13,15 @@ const CustomerLoginPage = () => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
-  const googleLogin = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      try {
-        const response = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
-          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-        });
-        const user = await response.json();
-        localStorage.setItem("accessToken", tokenResponse.access_token);
-        localStorage.setItem("customerInfo", JSON.stringify(user));
-        navigate("/");
-      } catch {
-        setError("Đăng nhập Google thất bại. Vui lòng thử lại.");
-      }
-    },
-    onError: () => setError("Đăng nhập Google thất bại. Vui lòng thử lại."),
-  });
+  const handleGoogleLogin = async (credential: string) => {
+    try {
+      const response = await googleLoginApi(credential);
+      localStorage.setItem("accessToken", response.token);
+      navigate("/");
+    } catch {
+      setError("Đăng nhập Google thất bại. Vui lòng thử lại.");
+    }
+  };
 
   const handleCustomerLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -83,7 +76,7 @@ const CustomerLoginPage = () => {
           </form>
 
           <div className="customer-login-divider"><span>Hoặc tiếp tục với</span></div>
-          <div className="customer-login-socials"><button type="button" className="customer-login-social customer-login-google" onClick={() => googleLogin()}><b>G</b> Google</button><button type="button" className="customer-login-social customer-login-facebook" onClick={() => setError("Đăng nhập Facebook chưa được triển khai.")}><b>f</b> Facebook</button></div>
+          <div className="customer-login-socials"><GoogleLogin onSuccess={(response) => response.credential && handleGoogleLogin(response.credential)} onError={() => setError("Đăng nhập Google thất bại. Vui lòng thử lại.")} /><button type="button" className="customer-login-social customer-login-facebook" onClick={() => setError("Đăng nhập Facebook chưa được triển khai.")}><b>f</b> Facebook</button></div>
           <p className="customer-login-register">Chưa có tài khoản? <Link to="/register">Đăng ký miễn phí</Link></p>
           <small className="customer-login-terms">Bằng việc tiếp tục, bạn đồng ý với Điều khoản sử dụng và Chính sách bảo mật của Stayro.</small>
         </div>

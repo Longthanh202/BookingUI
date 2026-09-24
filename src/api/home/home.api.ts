@@ -31,7 +31,21 @@ export const getTags = async () => {
 // };
 
 export const FilterKhachSan = async (dto: HotelFilterParams) => {
-  const res = await api.post("/api/hotels/search", dto);
+  const res = await api.get("/api/hotels/search", {
+    params: {
+      keyword: dto.Keyword,
+      thanhPho: dto.ThanhPho,
+      viDo: dto.ViDo,
+      kinhDo: dto.KinhDo,
+      soSao: dto.SoSao,
+      trangThai: dto.TrangThai,
+      soKhach: dto.SoKhach,
+      ngayNhanPhong: dto.NgayNhanPhong,
+      ngayTraPhong: dto.NgayTraPhong,
+      page: dto.Page,
+      pageSize: dto.PageSize,
+    },
+  });
   return res.data.data;
 };
 
