@@ -6,3 +6,6 @@ export const GetHoaHongOwner = async () => {
 
   return response.data;
 };
+
+export const getPendingCommissions = async () =>
+  (await api.get("/api/commissions/admin/pending")).data;

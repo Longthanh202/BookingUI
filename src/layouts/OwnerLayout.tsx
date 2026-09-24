@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProfileApi } from "../api/auth/auth.api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faBell, faCalendarDays, faChartLine, faChevronDown, faClipboardList, faBed, faHotel, faMoneyBillTransfer, faPeopleGroup, faPercent, faStar, faUsers, faWallet } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBell, faCalendarDays, faChartLine, faClipboardList, faBed, faHotel, faMoneyBillTransfer, faPeopleGroup, faPercent, faStar, faUsers, faWallet, faBullhorn } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../components/common/navigation/Sidebar";
-import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
 import "./OwnerLayout.css";
+import AccountMenu from "../components/common/AccountMenu";
 
 interface Profile {
   fullName: string;
@@ -33,13 +33,12 @@ const menuItems = [
   { key: "staff", label: "Nhân sự", path: "/owner/staff", icon: <FontAwesomeIcon icon={faPeopleGroup} /> },
   { key: "notifications", label: "Thông báo", path: "/owner/notifications", icon: <FontAwesomeIcon icon={faBell} /> },
   { key: "wallet", label: "Ví & giao dịch", path: "/owner/wallet", icon: <FontAwesomeIcon icon={faWallet} /> },
+  { key: "advertising", label: "Quảng cáo", path: "/owner/advertising", icon: <FontAwesomeIcon icon={faBullhorn} /> },
   { key: "hoahong", label: "Hoa hồng", path: "/owner/hoahong", icon: <FontAwesomeIcon icon={faMoneyBillTransfer} /> },
 ];
 
 const OwnerLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const navigate = useNavigate();
-
   const { data: profile } = useQuery<Profile>({
     queryKey: ["profile"],
     queryFn: getProfileApi,
@@ -67,40 +66,7 @@ const OwnerLayout = () => {
           </Button>
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
             <div style={{ fontWeight: 700, fontSize: 18 }}>Trung tâm vận hành</div>
-            <Dropdown align="end">
-            <Dropdown.Toggle
-              as="div"
-              id="dropdown-owner-user"
-              className="avatar-dropdown"
-            >
-              {profile?.avatar ? (
-                <img
-                  src={profile.avatar}
-                  alt={profile.fullName || "Avatar"}
-                  className="avatar-image"
-                />
-              ) : (
-                <div className="avatar-placeholder">
-                  {profile?.fullName?.trim()?.charAt(0)?.toUpperCase() || "U"}
-                </div>
-              )}
-
-    <span className="avatar-chevron">
-      <FontAwesomeIcon icon={faChevronDown} />
-    </span>
-  </Dropdown.Toggle>
-
-  <Dropdown.Menu>
-    <Dropdown.Item
-      onClick={() => {
-        localStorage.removeItem("accessToken");
-        navigate("/login");
-      }}
-    >
-      Đăng xuất
-    </Dropdown.Item>
-  </Dropdown.Menu>
-</Dropdown>
+            <AccountMenu mode="owner" name={profile?.fullName} avatar={profile?.avatar} />
           </div>
         </header>
         <main style={{ padding: "1rem", backgroundColor: "#f3f5f7", minHeight: "100%" }}>

@@ -18,9 +18,21 @@ import PrivateRoute from "./AdminRoute";
 import HotelRoute from "./HotelRoute";
 import CustomerRoute from "./CustomerRoute";
 import OwnerCommissionPage from "../pages/commission/OwnerCommissionPage";
-import OwnerWorkspacePage from "../pages/owner/OwnerWorkspacePage";
+import DashboardOwnerPage from "../pages/owner/DashboardOwnerPage";
+import BookingOwnerPage from "../pages/owner/BookingOwnerPage";
+import CalendarOwnerPage from "../pages/owner/CalendarOwnerPage";
+import CustomerOwnerPage from "../pages/owner/CustomerOwnerPage";
+import ReportOwnerPage from "../pages/owner/ReportOwnerPage";
+import StaffOwnerPage from "../pages/owner/StaffOwnerPage";
+import NotificationOwnerPage from "../pages/owner/NotificationOwnerPage";
 import CustomerAccountPage from "../pages/customer/CustomerAccountPage";
 import CustomerRecoveryPage from "../pages/auth/CustomerRecoveryPage";
+import RoomOwnerPage from "../pages/owner/RoomOwnerPage";
+import PricingOwnerPage from "../pages/owner/PricingOwnerPage";
+import ReviewOwnerPage from "../pages/owner/ReviewOwnerPage";
+import WalletOwnerPage from "../pages/owner/WalletOwnerPage";
+import AdvertisingOwnerPage from "../pages/owner/AdvertisingOwnerPage";
+import AdminOperationsPage from "../pages/dashboard/AdminOperationsPage";
 
 const AppRouters = () => {
     return (
@@ -34,6 +46,8 @@ const AppRouters = () => {
                 <Route path="search-results" element={<HotelSearchResultsPage />} />
 
                 <Route path="login" element={<AdminLoginPage />} />
+
+                <Route path="owner/login" element={<AdminLoginPage />} />
 
                 <Route path="customer-login" element={<CustomerLoginPage />} />
 
@@ -62,19 +76,20 @@ const AppRouters = () => {
             <Route path="/owner" element={<HotelRoute />}>
                 <Route element={<OwnerLayout />}>
                                     <Route index element={<Navigate to="dashboard" replace />} />
-                                    <Route path="dashboard" element={<OwnerWorkspacePage />} />
+                                    <Route path="dashboard" element={<DashboardOwnerPage />} />
                   <Route path="hotels" element={<OwnerHotelListPage />} />
                   <Route path="hotels/:id" element={<OwnerHotelDetailPage />} />
-                                    <Route path="bookings" element={<OwnerWorkspacePage />} />
-                                    <Route path="calendar" element={<OwnerWorkspacePage />} />
-                                    <Route path="rooms" element={<OwnerWorkspacePage />} />
-                                    <Route path="pricing" element={<OwnerWorkspacePage />} />
-                                    <Route path="customers" element={<OwnerWorkspacePage />} />
-                                    <Route path="reports" element={<OwnerWorkspacePage />} />
-                                    <Route path="reviews" element={<OwnerWorkspacePage />} />
-                                    <Route path="staff" element={<OwnerWorkspacePage />} />
-                                    <Route path="notifications" element={<OwnerWorkspacePage />} />
-                                      <Route path="wallet" element={<OwnerWorkspacePage />} />
+                                    <Route path="bookings" element={<BookingOwnerPage />} />
+                                    <Route path="calendar" element={<CalendarOwnerPage />} />
+                                    <Route path="rooms" element={<RoomOwnerPage />} />
+                                    <Route path="pricing" element={<PricingOwnerPage />} />
+                                    <Route path="customers" element={<CustomerOwnerPage />} />
+                                    <Route path="reports" element={<ReportOwnerPage />} />
+                                    <Route path="reviews" element={<ReviewOwnerPage />} />
+                                    <Route path="staff" element={<StaffOwnerPage />} />
+                                    <Route path="notifications" element={<NotificationOwnerPage />} />
+                                    <Route path="wallet" element={<WalletOwnerPage />} />
+                                    <Route path="advertising" element={<AdvertisingOwnerPage />} />
                   <Route path="hoahong" element={<OwnerCommissionPage />}/>
                 </Route>
             </Route>
@@ -88,8 +103,12 @@ const AppRouters = () => {
                   <Route path="hotels" element={<OwnerHotelListPage />} />
 
                   <Route path="hotels/:id" element={<OwnerHotelDetailPage />} />
-
-                  {/* <Route path="payments" element={<AdminPayments />} /> */}
+                  <Route path="bookings" element={<AdminOperationsPage />} />
+                  <Route path="payments" element={<AdminOperationsPage />} />
+                  <Route path="commissions" element={<AdminOperationsPage />} />
+                  <Route path="withdrawals" element={<AdminOperationsPage />} />
+                  <Route path="advertising" element={<AdminOperationsPage />} />
+                  <Route path="banners" element={<AdminOperationsPage />} />
                 </Route>
             </Route>
 

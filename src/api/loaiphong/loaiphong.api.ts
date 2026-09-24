@@ -21,10 +21,9 @@ export const getHotelRooms = async (
 };
 
 export const getOwnerRoomTypes = async (khachSanId: string): Promise<RoomResponse[]> => {
-  const response = await api.post<RoomResponse[]>(
-    "/api/room-types/owner",
-    khachSanId
-  );
+  const response = await api.get<RoomResponse[]>("/api/room-types/owner", {
+    params: { khachSanId },
+  });
   return response.data;
 };
 

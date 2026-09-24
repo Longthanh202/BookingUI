@@ -6,6 +6,7 @@ export interface KhachSanListParams {
     SoSao?: number;
     TrangThai?: string;
     Page?: number;
+    PageSize?: number;
 }
 
 export interface HotelFilterParams extends KhachSanListParams {
@@ -16,4 +17,5 @@ export interface HotelFilterParams extends KhachSanListParams {
 
 export interface KhachSanListOwnerParams{
     Page?: number;
+    PageSize?: number;
 }

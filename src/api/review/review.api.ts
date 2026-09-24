@@ -1,0 +1,8 @@
+import api from "../axiosInstance";
+
+export interface CreateReviewRequest { khachSanId: string; soSao: number; noiDung: string; }
+export const getHotelReviews = async (hotelId: string) => (await api.get(`/api/reviews/hotel/${hotelId}`)).data;
+export const getMyReviews = async () => (await api.get("/api/reviews/mine")).data;
+export const createReview = async (payload: CreateReviewRequest) => (await api.post("/api/reviews", payload)).data;
+export const getOwnerHotelReviews = async (hotelId: string) => (await api.get(`/api/reviews/owner/hotel/${hotelId}`)).data;
+export const deleteReview = async (reviewId: string) => (await api.delete(`/api/reviews/${reviewId}`)).data;

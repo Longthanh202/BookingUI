@@ -1,33 +1,20 @@
 import api from "../axiosInstance";
-import { Booking } from "../../types/booking/Booking";
 import { BookingRequest } from "../../types/booking/BookingRequest";
 
 export const createBooking = async (payload: BookingRequest) => {
   return api.post("/api/bookings", payload).then((res) => res.data);
 };
 
-export const getBookingsByUser = (userId: string | number) => {
-  return api.get(`/api/bookings?userId=${userId}`).then((res) => res.data);
-};
-
 export const getAllBookingsHistory = (
   pageIndex: number,
   pageSize: number
 ) => {
-  return api.get(`/api/bookings/history?pageIndex=${pageIndex}&pageSize=${pageSize}`)
+  return api.get("/api/bookings/history", { params: { pageIndex, pageSize } })
     .then((res) => res.data);
 };
 
-export const getBookingById = (id: string | number) => {
-  return api.get(`/api/bookings/${id}`).then((res) => res.data);
-};
-
 export const getOwnerBookings = (payload: { khachSanId: string; page: number; pageSize: number }) => {
-  return api.post(`/api/bookings/owner`, {
-    KhachSanId: payload.khachSanId,
-    Page: payload.page,
-    PageSize: payload.pageSize,
-  }).then((res) => res.data);
+  return api.post("/api/bookings/owner", payload).then((res) => res.data);
 };
 
 export const checkInBooking = async (id: string) => {
@@ -56,8 +43,25 @@ export const confirmBooking = async (
   return response.data;
 };
 
-export const getOwnerAllBookings = (payload: { Page?: number; PageSize?: number }) =>
+export const getOwnerAllBookings = (payload: { page?: number; pageSize?: number }) =>
   api.post("/api/bookings/owner/all", payload).then((res) => res.data);
 
-export const getOwnerBookingStatistics = (payload: { HotelId: string; StartDate: string; EndDate: string; Status?: string }) =>
+export const getOwnerBookingStatistics = (payload: { hotelId: string; startDate: string; endDate: string; status?: string }) =>
   api.post("/api/bookings/owner/statistics", payload).then((res) => res.data);
+
+export const getBooking = async (id: string) => (await api.get(`/api/bookings/${id}`)).data;
+
+export const cancelBooking = async (id: string) =>
+  (await api.put(`/api/bookings/${id}/cancel`)).data;
+
+export interface AdminBookingSearchRequest {
+  hotelId?: string;
+  customerId?: string;
+  trangThai?: string;
+  ngayTao?: string;
+  page?: number;
+  pageSize?: number;
+}
+
+export const searchBookingsAdmin = async (payload: AdminBookingSearchRequest) =>
+  (await api.post("/api/bookings/admin/search", payload)).data;

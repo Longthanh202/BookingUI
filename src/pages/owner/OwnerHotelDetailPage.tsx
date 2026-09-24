@@ -27,6 +27,7 @@ import {
   faWifi,
   faCalendarCheck,
   faClock,
+  faRotate,
   faLocationDot,
   faStar,
   faUsers,
@@ -54,6 +55,8 @@ import {
 } from "../../api/loaiphong/loaiphong.api";
 
 import { RoomResponse } from "../../types/loaiphong/RoomResponse";
+import { showToast } from "../../components/common/Toast";
+import "./OwnerWorkspacePage.css";
 
 interface HotelRoomType {
   id?: string;
@@ -115,6 +118,7 @@ const OwnerHotelDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const today = useMemo(() => new Intl.DateTimeFormat("vi-VN", { weekday: "long", day: "numeric", month: "long" }).format(new Date()), []);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -193,7 +197,7 @@ const OwnerHotelDetailPage = () => {
     checkInBooking(bookingId),
 
   onSuccess: () => {
-    window.alert("Check-in thành công!");
+    showToast("Check-in thành công!");
 
     queryClient.invalidateQueries({
       queryKey: ["hotelBookings", id],
@@ -206,7 +210,7 @@ const OwnerHotelDetailPage = () => {
       error?.response?.data ||
       "Check-in thất bại";
 
-    window.alert(message);
+    showToast(message);
   },
 });
 
@@ -215,7 +219,7 @@ const checkOutMutation = useMutation({
     checkOutBooking(bookingId),
 
   onSuccess: () => {
-    window.alert("Check-out thành công!");
+    showToast("Check-out thành công!");
 
     queryClient.invalidateQueries({
       queryKey: ["hotelBookings", id],
@@ -228,7 +232,7 @@ const checkOutMutation = useMutation({
       error?.response?.data ||
       "Check-out thất bại";
 
-    window.alert(message);
+    showToast(message);
   },
 });
 
@@ -239,10 +243,10 @@ const confirmMutation = useMutation({
       queryKey: ["hotelBookings", id],
     });
 
-    window.alert("Xác nhận đặt phòng thành công");
+    showToast("Xác nhận đặt phòng thành công");
   },
   onError: () => {
-    window.alert("Xác nhận đặt phòng thất bại");
+    showToast("Xác nhận đặt phòng thất bại");
   },
 });
 
@@ -518,7 +522,7 @@ const handleCheckOut = (bookingId: string) => {
     mutationFn: CapNhatKhachSan,
 
     onSuccess: () => {
-      window.alert(
+      showToast(
         "Cập nhật thông tin khách sạn thành công"
       );
 
@@ -536,7 +540,7 @@ const handleCheckOut = (bookingId: string) => {
     },
 
     onError: () => {
-      window.alert(
+      showToast(
         "Cập nhật khách sạn thất bại"
       );
     },
@@ -560,7 +564,7 @@ const handleCheckOut = (bookingId: string) => {
         response?.data?.message ||
         "Thêm loại phòng thành công";
 
-      window.alert(message);
+      showToast(message);
 
       queryClient.invalidateQueries({
         queryKey: ["ownerRoomTypes", id],
@@ -582,7 +586,7 @@ const handleCheckOut = (bookingId: string) => {
         error?.response?.data ||
         "Thêm loại phòng thất bại";
 
-      window.alert(message);
+      showToast(message);
     },
   });
 
@@ -649,7 +653,7 @@ const handleCheckOut = (bookingId: string) => {
         uploadedImages.length >
       8
     ) {
-      window.alert(
+      showToast(
         "Tối đa 8 ảnh cho khách sạn."
       );
 
@@ -699,7 +703,7 @@ const handleCheckOut = (bookingId: string) => {
 
   const handleSave = () => {
     if (!validateForm()) {
-      window.alert(
+      showToast(
         "Vui lòng hoàn thiện thông tin trước khi lưu."
       );
 
@@ -857,8 +861,7 @@ const handleCheckOut = (bookingId: string) => {
       >
         <Container fluid>
           <div
-            className="d-flex justify-content-between
-            align-items-center flex-wrap gap-3"
+            className="owner-page-heading mb-0"
             style={{
               minHeight: 82,
             }}
@@ -880,15 +883,6 @@ const handleCheckOut = (bookingId: string) => {
 
               <div>
                 <div
-                  className="text-secondary"
-                  style={{
-                    fontSize: 13,
-                  }}
-                >
-                  QUẢN LÝ KHÁCH SẠN
-                </div>
-
-                <div
                   className="fw-bold"
                   style={{
                     fontSize: 22,
@@ -900,7 +894,11 @@ const handleCheckOut = (bookingId: string) => {
               </div>
             </div>
 
-            <div className="d-flex align-items-center gap-2">
+            <div className="owner-date">
+              <FontAwesomeIcon icon={faCalendarCheck} /> {today}
+              <Button variant="light" title="Làm mới" onClick={() => queryClient.invalidateQueries({ queryKey: ["hotelDetailOwner", id] })}>
+                <FontAwesomeIcon icon={faRotate} />
+              </Button>
               <Badge
                 bg={
                   hotel.trangThai ===
@@ -910,10 +908,7 @@ const handleCheckOut = (bookingId: string) => {
                 }
                 className="px-3 py-2"
               >
-                <FontAwesomeIcon
-                  icon={faCheckCircle}
-                  className="me-2"
-                />
+                <FontAwesomeIcon icon={faCheckCircle} className="me-2" />
 
                 {hotel.trangThai ===
                 "DA_DUYET"

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useMemo, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -20,9 +20,13 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Badge from "react-bootstrap/Badge";
 import Spinner from "react-bootstrap/Spinner";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarDays, faRotate } from "@fortawesome/free-solid-svg-icons";
 
 import ConfirmationModal from "../../components/common/ConfirmationModal";
 import ActionButton from "../../components/common/ActionButton";
+import { showToast } from "../../components/common/Toast";
+import "./OwnerWorkspacePage.css";
 
 const initialFormValues = {
   TenKhachSan: "",
@@ -77,6 +81,7 @@ const OwnerHotelListPage = () => {
     useRef<HTMLInputElement>(null);
 
   const queryClient = useQueryClient();
+  const today = useMemo(() => new Intl.DateTimeFormat("vi-VN", { weekday: "long", day: "numeric", month: "long" }).format(new Date()), []);
 
   const dto: KhachSanListOwnerParams = {
     Page: page,
@@ -95,7 +100,7 @@ const OwnerHotelListPage = () => {
     mutationFn: ThemKhachSan,
 
     onSuccess: () => {
-      window.alert("Thêm khách sạn thành công");
+      showToast("Thêm khách sạn thành công");
 
       queryClient.invalidateQueries({
         queryKey: ["KhachSanOwner"],
@@ -105,7 +110,7 @@ const OwnerHotelListPage = () => {
     },
 
     onError: () => {
-      window.alert("Thêm khách sạn thất bại");
+      showToast("Thêm khách sạn thất bại");
     },
   });
 
@@ -122,7 +127,7 @@ const OwnerHotelListPage = () => {
     mutationFn: CapNhatKhachSan,
 
     onSuccess: () => {
-      window.alert("Cập nhật khách sạn thành công");
+      showToast("Cập nhật khách sạn thành công");
 
       queryClient.invalidateQueries({
         queryKey: ["KhachSanOwner"],
@@ -132,7 +137,7 @@ const OwnerHotelListPage = () => {
     },
 
     onError: () => {
-      window.alert("Cập nhật khách sạn thất bại");
+      showToast("Cập nhật khách sạn thất bại");
     },
   });
 
@@ -149,7 +154,7 @@ const OwnerHotelListPage = () => {
     mutationFn: XoaKhachSan,
 
     onSuccess: () => {
-      window.alert("Xóa khách sạn thành công");
+      showToast("Xóa khách sạn thành công");
 
       queryClient.invalidateQueries({
         queryKey: ["KhachSanOwner"],
@@ -157,7 +162,7 @@ const OwnerHotelListPage = () => {
     },
 
     onError: () => {
-      window.alert("Xóa khách sạn thất bại");
+      showToast("Xóa khách sạn thất bại");
     },
   });
 
@@ -227,7 +232,7 @@ const OwnerHotelListPage = () => {
       uploadedImages.length + newFiles.length;
 
     if (totalImages > 4) {
-      window.alert(
+      showToast(
         "Tối đa 4 ảnh cho một khách sạn"
       );
 
@@ -299,7 +304,7 @@ const OwnerHotelListPage = () => {
 
   const handleSubmit = async () => {
     if (!validateForm()) {
-      window.alert(
+      showToast(
         "Vui lòng điền đầy đủ thông tin form."
       );
 
@@ -493,46 +498,21 @@ const OwnerHotelListPage = () => {
         {/* PAGE HEADER */}
         {/* ================================================= */}
 
-        <div
-          className="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4"
-        >
+        <div className="owner-page-heading">
           <div>
-            <div
-              style={{
-                fontSize: 13,
-                color: "#64748b",
-                fontWeight: 600,
-                marginBottom: 6,
-              }}
-            >
-              HOTEL MANAGEMENT
-            </div>
-
-            <h3
-              className="mb-1"
-              style={{
-                fontWeight: 800,
-                color: "#0f172a",
-              }}
-            >
-              Khách sạn của tôi
-            </h3>
-
-            <p
-              className="mb-0"
-              style={{
-                color: "#64748b",
-              }}
-            >
-              Quản lý thông tin và danh sách
-              khách sạn của bạn.
-            </p>
+            <h1>Khách sạn của tôi</h1>
+            <p>Quản lý thông tin và danh sách khách sạn của bạn.</p>
           </div>
+          <div className="owner-date">
+            <FontAwesomeIcon icon={faCalendarDays} /> {today}
+            <Button variant="light" title="Làm mới" onClick={() => queryClient.invalidateQueries({ queryKey: ["KhachSanOwner"] })}>
+              <FontAwesomeIcon icon={faRotate} />
+            </Button>
+          </div>
+        </div>
 
-          <ActionButton
-            title="Thêm khách sạn"
-            onOk={handleOpen}
-          />
+        <div className="d-flex justify-content-end mb-4">
+          <ActionButton title="Thêm khách sạn" onOk={handleOpen} />
         </div>
 
         {/* ================================================= */}
