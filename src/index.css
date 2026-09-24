@@ -1,3 +1,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+	--stayro-orange: #e06b36;
+	--stayro-orange-dark: #c95726;
+	--stayro-light-gray: #eef1f3;
+}
+
+.btn-primary,
+.btn-dark,
+.btn-warning {
+	--bs-btn-bg: var(--stayro-orange);
+	--bs-btn-border-color: var(--stayro-orange);
+	--bs-btn-hover-bg: var(--stayro-orange-dark);
+	--bs-btn-hover-border-color: var(--stayro-orange-dark);
+	--bs-btn-active-bg: var(--stayro-orange-dark);
+	--bs-btn-active-border-color: var(--stayro-orange-dark);
+}
+
+.btn-outline-primary,
+.btn-outline-dark,
+.btn-outline-danger,
+.btn-outline-success,
+.btn-outline-secondary {
+	--bs-btn-color: var(--stayro-orange);
+	--bs-btn-border-color: var(--stayro-orange);
+	--bs-btn-hover-bg: var(--stayro-orange);
+	--bs-btn-hover-border-color: var(--stayro-orange);
+	--bs-btn-active-bg: var(--stayro-orange-dark);
+	--bs-btn-active-border-color: var(--stayro-orange-dark);
+}
+
+.btn-danger,
+.btn-success,
+.btn-info {
+	--bs-btn-bg: var(--stayro-orange);
+	--bs-btn-border-color: var(--stayro-orange);
+	--bs-btn-hover-bg: var(--stayro-orange-dark);
+	--bs-btn-hover-border-color: var(--stayro-orange-dark);
+}
+
+.btn-secondary,
+.btn-light,
+.btn-cancel {
+	--bs-btn-color: #5f6973;
+	--bs-btn-bg: var(--stayro-light-gray);
+	--bs-btn-border-color: #d9dfe3;
+	--bs-btn-hover-color: #3f4850;
+	--bs-btn-hover-bg: #dfe4e7;
+	--bs-btn-hover-border-color: #cbd3d8;
+}

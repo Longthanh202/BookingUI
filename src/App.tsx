@@ -1,13 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import AppRouters from "./routes/AppRoutes";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "react-datepicker/dist/react-datepicker.css";
+import Toast from "./components/common/Toast";
 
 const queryClient = new QueryClient();
 function App() {
@@ -15,6 +10,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <div className="App">
         <AppRouters />
+        <Toast />
       </div>
     </QueryClientProvider>
   );
