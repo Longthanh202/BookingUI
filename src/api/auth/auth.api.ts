@@ -23,7 +23,7 @@ export const registerCustomer = async(input: RegisterRequest) =>{
 
 export const refreshTokenApi = async () => (await api.post("/api/users/refresh-token")).data;
 
-export const setRolePermissions = async (payload: { roleId: string; permissions: unknown[] }) =>
+export const setRolePermissions = async (payload: { roleId: string; permissions: Record<string, unknown>[] }) =>
     (await api.post("/api/users/role-permissions", payload)).data;
 
 export const forgotPassword = async (username: string) =>

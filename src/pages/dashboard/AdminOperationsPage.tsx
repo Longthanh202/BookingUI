@@ -16,8 +16,11 @@ import { createAdminTag, disableAdminTag, getAdminTags, replaceAdminTagHotels, s
 import { setRolePermissions } from "../../api/auth/auth.api";
 
 type AdminRowData = Record<string, any>;
-type ConfirmAction = { title: string; description: string; operation?: () => Promise<any>; kind?: "withdrawal"; id?: string; status?: string };
+type ConfirmAction = { title: string; description: string; operation?: () => Promise<any>; kind?: "withdrawal" | "advertising-rejection"; id?: string; status?: string };
 type Notice = { kind: "success" | "danger"; text: string };
+
+const hotelStatuses = ["CHO_DUYET", "DA_DUYET", "TAM_NGUNG", "TU_CHOI", "DA_KHOA"];
+const paymentStatuses = ["CHO_THANH_TOAN", "DA_THANH_TOAN", "DA_HUY", "DA_HOAN_TIEN"];
 
 const titles: Record<string, string> = {
   bookings: "Đặt phòng toàn hệ thống", payments: "Thanh toán", commissions: "Hoa hồng chờ xử lý",
@@ -69,13 +72,13 @@ export default function AdminOperationsPage() {
     queryFn: () => {
       const page = Number(filters.page || 1);
       const pageSize = Number(filters.pageSize || 20);
-      if (section === "bookings") return searchBookingsAdmin({ hotelId: filters.hotelId || undefined, customerId: filters.customerId || undefined, trangThai: filters.trangThai || undefined, ngayTao: filters.ngayTao || undefined, page, pageSize });
+      if (section === "bookings") return searchBookingsAdmin({ hotelId: filters.hotelId || null, customerId: filters.customerId || null, trangThai: filters.trangThai || null, ngayTao: filters.ngayTao ? new Date(filters.ngayTao).toISOString() : null, page, pageSize });
       if (section === "payments") return getAdminPayments();
       if (section === "commissions") return getPendingCommissions();
       if (section === "withdrawals") return getPendingWithdrawals();
       if (section === "advertising") return getPendingAdvertising();
-      if (section === "banners") return getBanners({ keyword: filters.keyword || undefined, isActive: filters.isActive === "" || filters.isActive === undefined ? undefined : Number(filters.isActive), startRow: (page - 1) * pageSize, endRow: page * pageSize });
-      if (section === "hotels") return searchHotelsAdmin({ keyword: filters.keyword || undefined, thanhPho: filters.thanhPho || undefined, viDo: filters.viDo || undefined, kinhDo: filters.kinhDo || undefined, soSao: filters.soSao || undefined, trangThai: filters.trangThai || undefined, page, pageSize });
+      if (section === "banners") return getBanners({ keyword: filters.keyword || undefined, isActive: filters.isActive === "1" ? 1 : undefined, startRow: (page - 1) * pageSize, endRow: page * pageSize });
+      if (section === "hotels") return searchHotelsAdmin({ keyword: filters.keyword || undefined, thanhPho: filters.thanhPho || undefined, soSao: filters.soSao ? Number(filters.soSao) : undefined, trangThai: filters.trangThai || undefined, page, pageSize });
       if (section === "users") return searchAdminUsers({ keyword: filters.keyword || undefined, status: filters.status === "" || filters.status === undefined ? undefined : Number(filters.status), page, pageSize });
       if (section === "tags") return getAdminTags();
       return Promise.resolve([]);
@@ -84,10 +87,11 @@ export default function AdminOperationsPage() {
 
   const data = rows(query.data);
   const responseData = query.data?.data ?? query.data;
-  const total = Number(responseData?.totalCount ?? responseData?.totalItems ?? responseData?.total ?? responseData?.count ?? data.length);
+  const total = Number(query.data?.totalRow ?? query.data?.totalCount ?? query.data?.totalItems ?? query.data?.total ?? query.data?.count ?? responseData?.totalRow ?? responseData?.totalCount ?? responseData?.totalItems ?? responseData?.total ?? responseData?.count ?? data.length);
   const page = Number(filters.page || 1);
   const pageSize = Number(filters.pageSize || 20);
-  const hasNextPage = total > page * pageSize || data.length === pageSize;
+  const totalPage = Number(query.data?.totalPage ?? responseData?.totalPage ?? 0);
+  const hasNextPage = totalPage > 0 ? page < totalPage : total > page * pageSize || data.length === pageSize;
 
   const request = async (operation: () => Promise<any>): Promise<boolean> => {
     setSaving(true);
@@ -109,6 +113,10 @@ export default function AdminOperationsPage() {
 
   const submitFilters = (event: React.FormEvent) => {
     event.preventDefault();
+    if (section === "hotels" && filterDraft.soSao && (!Number.isInteger(Number(filterDraft.soSao)) || Number(filterDraft.soSao) < 1 || Number(filterDraft.soSao) > 5)) {
+      setNotice({ kind: "danger", text: "Số sao phải từ 1 đến 5; để trống nếu không lọc." });
+      return;
+    }
     setFilters((current) => ({ ...current, ...filterDraft, page: "1" }));
   };
 
@@ -120,9 +128,15 @@ export default function AdminOperationsPage() {
 
   const executeConfirmed = async () => {
     if (!confirmAction) return;
+    if (confirmAction.kind === "advertising-rejection" && !actionNote.trim()) {
+      setNotice({ kind: "danger", text: "Vui lòng nhập lý do từ chối chiến dịch." });
+      return;
+    }
     const operation = confirmAction.kind === "withdrawal"
-      ? () => updateWithdrawal(confirmAction.id as string, { trangThai: confirmAction.status as string, maGiaoDich: transactionRef.trim() || undefined, ghiChu: actionNote.trim() || undefined })
-      : confirmAction.operation;
+      ? () => updateWithdrawal(confirmAction.id as string, { trangThai: confirmAction.status as string, maGiaoDich: transactionRef.trim() || null, ghiChu: actionNote.trim() || null })
+      : confirmAction.kind === "advertising-rejection"
+        ? () => approveAdvertising(confirmAction.id as string, false, actionNote.trim())
+        : confirmAction.operation;
     if (!operation) return;
     const succeeded = await request(operation);
     if (succeeded) setConfirmAction(null);
@@ -170,8 +184,18 @@ export default function AdminOperationsPage() {
 
   const savePermissions = async (event: React.FormEvent) => {
     event.preventDefault();
-    const permissions = permissionsText.split(/[\n,]/).map((permission) => permission.trim()).filter(Boolean);
-    if (!roleId.trim() || !permissions.length) return;
+    let permissions: Record<string, unknown>[];
+    try {
+      const parsed: unknown = JSON.parse(permissionsText);
+      if (!Array.isArray(parsed) || parsed.length === 0 || !parsed.every((item) => item !== null && typeof item === "object" && !Array.isArray(item))) {
+        throw new Error("Permissions phải là một mảng DTO JSON không rỗng.");
+      }
+      permissions = parsed as Record<string, unknown>[];
+    } catch (error) {
+      setNotice({ kind: "danger", text: error instanceof Error ? error.message : "Permissions phải là JSON hợp lệ." });
+      return;
+    }
+    if (!roleId.trim()) return;
     await request(() => setRolePermissions({ roleId: roleId.trim(), permissions }));
   };
 
@@ -186,8 +210,8 @@ export default function AdminOperationsPage() {
 
     {section === "reviews" && <section className="admin-panel">
       <div className="admin-panel-heading"><div><h3>Xóa đánh giá vi phạm</h3><p>API hiện có hỗ trợ xóa theo ID; chưa có endpoint danh sách review dành cho Admin.</p></div></div>
-      <div className="admin-panel-body"><Form onSubmit={(event) => { event.preventDefault(); if (reviewId.trim()) askForConfirmation({ title: "Xóa đánh giá", description: `Đánh giá ${reviewId.trim()} sẽ bị xóa khỏi hệ thống. Thao tác này không thể hoàn tác.` , operation: () => deleteReview(reviewId.trim()) }); }} className="admin-inline-form">
-        <Form.Control aria-label="Review ID" placeholder="Nhập review ID" value={reviewId} onChange={(event) => setReviewId(event.target.value)} />
+      <div className="admin-panel-body"><Form onSubmit={(event) => { event.preventDefault(); if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(reviewId.trim())) { setNotice({ kind: "danger", text: "Review ID phải là UUID hợp lệ." }); return; } askForConfirmation({ title: "Xóa đánh giá", description: `Đánh giá ${reviewId.trim()} sẽ bị xóa khỏi hệ thống. Thao tác này không thể hoàn tác.` , operation: () => deleteReview(reviewId.trim()) }); }} className="admin-inline-form">
+        <Form.Control aria-label="Review ID" placeholder="Nhập review UUID" value={reviewId} onChange={(event) => setReviewId(event.target.value)} />
         <Button variant="danger" type="submit" disabled={!reviewId.trim()}><FontAwesomeIcon icon={faTrash} className="me-2" />Xóa đánh giá</Button>
       </Form></div>
     </section>}
@@ -196,7 +220,7 @@ export default function AdminOperationsPage() {
       <div className="admin-panel-heading"><div><h3>Gán permissions cho role</h3><p>Gửi roleId cùng danh sách permission lên API.</p></div></div>
       <div className="admin-panel-body"><Form onSubmit={savePermissions} className="admin-permission-form">
         <div><Form.Label>Role ID</Form.Label><Form.Control required value={roleId} onChange={(event) => setRoleId(event.target.value)} placeholder="Role ID" /></div>
-        <div><Form.Label>Danh sách permission</Form.Label><Form.Control required as="textarea" rows={5} value={permissionsText} onChange={(event) => setPermissionsText(event.target.value)} placeholder={"booking_read\npayment_update"} /><Form.Text>Mỗi dòng hoặc dấu phẩy là một permission.</Form.Text></div>
+        <div><Form.Label>RolePermissionDto[] (JSON)</Form.Label><Form.Control required as="textarea" rows={7} value={permissionsText} onChange={(event) => setPermissionsText(event.target.value)} placeholder={'[{"<dto-field>":"<value>"}]'} /><Form.Text>Nhập mảng JSON theo đúng các trường của RolePermissionDto backend.</Form.Text></div>
         <div><Button type="submit" disabled={saving || !roleId.trim() || !permissionsText.trim()}>Lưu phân quyền</Button></div>
       </Form></div>
     </section>}
@@ -246,8 +270,9 @@ export default function AdminOperationsPage() {
       <Modal.Body>
         <p className="mb-3">{confirmAction?.description}</p>
         {confirmAction?.kind === "withdrawal" && <div className="d-grid gap-3"><div><Form.Label>Mã giao dịch</Form.Label><Form.Control value={transactionRef} onChange={(event) => setTransactionRef(event.target.value)} /></div><div><Form.Label>Ghi chú xử lý</Form.Label><Form.Control as="textarea" rows={3} value={actionNote} onChange={(event) => setActionNote(event.target.value)} /></div></div>}
+        {confirmAction?.kind === "advertising-rejection" && <div><Form.Label>Lý do từ chối</Form.Label><Form.Control required as="textarea" rows={3} value={actionNote} onChange={(event) => setActionNote(event.target.value)} /></div>}
       </Modal.Body>
-      <Modal.Footer><Button variant="outline-secondary" onClick={() => setConfirmAction(null)}>Hủy</Button><Button variant={confirmAction?.status === "TU_CHOI" || confirmAction?.title?.includes("Xóa") ? "danger" : "primary"} onClick={() => void executeConfirmed()} disabled={saving}>{saving ? "Đang xử lý..." : "Xác nhận"}</Button></Modal.Footer>
+      <Modal.Footer><Button variant="outline-secondary" onClick={() => setConfirmAction(null)}>Hủy</Button><Button variant={confirmAction?.kind === "advertising-rejection" || confirmAction?.status === "DA_HUY" || confirmAction?.title?.includes("Xóa") ? "danger" : "primary"} onClick={() => void executeConfirmed()} disabled={saving}>{saving ? "Đang xử lý..." : "Xác nhận"}</Button></Modal.Footer>
     </Modal>
 
     <Modal show={Boolean(editingBanner)} onHide={() => setEditingBanner(null)} centered>
@@ -271,18 +296,16 @@ function FilterPanel({ section, draft, setDraft, onSubmit }: { section: string; 
       {section === "bookings" && <>
         <Input label="Hotel ID" value={draft.hotelId} onChange={(value) => change("hotelId", value)} />
         <Input label="Customer ID" value={draft.customerId} onChange={(value) => change("customerId", value)} />
-        <Input label="Trạng thái" value={draft.trangThai} onChange={(value) => change("trangThai", value)} />
+        <SelectInput label="Trạng thái booking" value={draft.trangThai} onChange={(value) => change("trangThai", value)} options={[["", "Tất cả"], ...["CHO_XAC_NHAN", "DA_XAC_NHAN", "DA_CHECK_IN", "DA_CHECK_OUT", "DA_HUY", "TU_CHOI", "KHONG_DEN"].map((status) => [status, status] as [string, string])]} />
         <Input label="Ngày tạo" type="datetime-local" value={draft.ngayTao} onChange={(value) => change("ngayTao", value)} />
       </>}
       {(section === "banners" || section === "hotels" || section === "users") && <Input label="Từ khóa" value={draft.keyword} onChange={(value) => change("keyword", value)} />}
-      {section === "banners" && <SelectInput label="Trạng thái" value={draft.isActive} onChange={(value) => change("isActive", value)} options={[["", "Tất cả"], ["1", "Đang bật"], ["0", "Đang tắt"]]} />}
+      {section === "banners" && <SelectInput label="Trạng thái" value={draft.isActive} onChange={(value) => change("isActive", value)} options={[["", "Tất cả"], ["1", "Chỉ banner đang bật"]]} />}
       {section === "users" && <SelectInput label="Tài khoản" value={draft.status} onChange={(value) => change("status", value)} options={[["", "Tất cả"], ["0", "Hoạt động"], ["1", "Bị khóa"]]} />}
       {section === "hotels" && <>
         <Input label="Thành phố" value={draft.thanhPho} onChange={(value) => change("thanhPho", value)} />
-        <Input label="Vĩ độ" value={draft.viDo} onChange={(value) => change("viDo", value)} />
-        <Input label="Kinh độ" value={draft.kinhDo} onChange={(value) => change("kinhDo", value)} />
-        <Input label="Số sao" type="number" value={draft.soSao} onChange={(value) => change("soSao", value)} />
-        <Input label="Trạng thái" value={draft.trangThai} onChange={(value) => change("trangThai", value)} />
+        <SelectInput label="Số sao" value={draft.soSao} onChange={(value) => change("soSao", value)} options={[["", "Tất cả"], ...[1, 2, 3, 4, 5].map((star) => [String(star), `${star} sao`] as [string, string])]} />
+        <SelectInput label="Trạng thái" value={draft.trangThai} onChange={(value) => change("trangThai", value)} options={[["", "Tất cả"], ...hotelStatuses.map((status) => [status, status] as [string, string])]} />
       </>}
       {(section === "users" || section === "hotels") && <SelectInput label="Số dòng" value={draft.pageSize || "20"} onChange={(value) => change("pageSize", value)} options={[["10", "10 / trang"], ["20", "20 / trang"], ["50", "50 / trang"]]} />}
       <div className="admin-filter-submit"><Button type="submit"><FontAwesomeIcon icon={faMagnifyingGlass} className="me-2" />Áp dụng</Button></div>
@@ -307,32 +330,37 @@ function DataTable({ section, data, loading, onAction, onEditBanner }: { section
 
 function AdminDataRow({ item, section, onAction, onEditBanner }: { item: AdminRowData; section: string; onAction: (action: ConfirmAction) => void; onEditBanner?: (item: AdminRowData) => void }) {
   const id = field(item, "id", "Id", "userId", "UserId", "tagId", "TagId");
+  const currentHotelStatus = String(field(item, "trangThai", "TrangThai") ?? "CHO_DUYET");
+  const currentPaymentStatus = String(field(item, "trangThai", "TrangThai") ?? "CHO_THANH_TOAN");
+  const [nextStatus, setNextStatus] = useState(section === "hotels" ? currentHotelStatus : currentPaymentStatus);
   const rawStatus = field(item, "trangThai", "TrangThai", "status", "Status", "isActive", "IsActive", "isDel", "IsDel");
   const status = section === "users" ? Number(field(item, "isDel", "IsDel", "status", "Status")) === 1 ? "Bị khóa" : "Hoạt động"
     : section === "banners" || section === "tags" ? Number(field(item, "isActive", "IsActive") ?? 0) === 1 || field(item, "isActive", "IsActive") === true ? "Đang bật" : "Đang tắt"
     : rawStatus ?? "Chưa xác định";
-  const name = field(item, "tenKhachSan", "khachSanTen", "hotelName", "HotelName", "title", "Title", "username", "userName", "UserName", "maGiaoDich", "email", "noiDung", "name", "Name", "slug", "Slug") ?? "Bản ghi";
-  const detail = field(item, "email", "Email", "createdAt", "ngayTao", "soSao", "SoSao", "slug", "Slug", "sortOrder", "SortOrder");
+  const name = field(item, "tenKhachSan", "khachSanTen", "hotelName", "HotelName", "title", "Title", "fullName", "FullName", "username", "userName", "UserName", "maGiaoDich", "email", "noiDung", "name", "Name", "slug", "Slug") ?? "Bản ghi";
+  const detail = field(item, "roleName", "RoleName", "phone", "Phone", "createAt", "CreateAt", "createdAt", "CreatedAt", "ngayTao", "soSao", "SoSao", "slug", "Slug", "sortOrder", "SortOrder");
   const amount = field(item, "soTien", "SoTien", "amount", "Amount");
   const isLocked = Number(field(item, "isDel", "IsDel", "status", "Status")) === 1;
   const isActive = Number(field(item, "isActive", "IsActive") ?? 0) === 1 || field(item, "isActive", "IsActive") === true;
   const actions: React.ReactNode[] = [];
 
-  if (section === "payments") actions.push(<Button key="paid" size="sm" onClick={() => onAction({ title: "Cập nhật thanh toán", description: `Xác nhận cập nhật trạng thái payment ${String(id)} thành đã thanh toán?`, operation: () => updatePaymentStatus(String(id), "DA_THANH_TOAN") })}><FontAwesomeIcon icon={faCheck} className="me-1" />Đã thanh toán</Button>);
+  if (section === "payments") actions.push(<><Form.Select key="payment-status" size="sm" aria-label="Trạng thái payment" value={nextStatus} onChange={(event) => setNextStatus(event.target.value)}>{paymentStatuses.map((status) => <option key={status} value={status}>{status}</option>)}</Form.Select><Button key="payment-update" size="sm" onClick={() => onAction({ title: "Cập nhật thanh toán", description: `Cập nhật payment ${String(id)} sang ${nextStatus}?`, operation: () => updatePaymentStatus(String(id), nextStatus) })}><FontAwesomeIcon icon={faCheck} className="me-1" />Lưu</Button></>);
   if (section === "withdrawals") {
+    actions.push(<Button key="processing" size="sm" variant="outline-secondary" onClick={() => onAction({ kind: "withdrawal", id: String(id), status: "DANG_XU_LY", title: "Đánh dấu đang xử lý", description: `Chuyển yêu cầu rút tiền ${String(id)} sang trạng thái DANG_XU_LY?` })}>Đang xử lý</Button>);
     actions.push(<Button key="pay" size="sm" onClick={() => onAction({ kind: "withdrawal", id: String(id), status: "DA_CHI_TRA", title: "Xác nhận chi trả", description: `Ghi nhận chi trả yêu cầu ${String(id)}?` })}>Chi trả</Button>);
-    actions.push(<Button key="reject" size="sm" variant="outline-danger" onClick={() => onAction({ kind: "withdrawal", id: String(id), status: "TU_CHOI", title: "Từ chối yêu cầu", description: `Từ chối yêu cầu rút tiền ${String(id)}?` })}><FontAwesomeIcon icon={faBan} className="me-1" />Từ chối</Button>);
+    actions.push(<Button key="failed" size="sm" variant="outline-danger" onClick={() => onAction({ kind: "withdrawal", id: String(id), status: "THAT_BAI", title: "Ghi nhận chi trả thất bại", description: `Chuyển yêu cầu rút tiền ${String(id)} sang trạng thái THAT_BAI?` })}>Thất bại</Button>);
+    actions.push(<Button key="reject" size="sm" variant="outline-danger" onClick={() => onAction({ kind: "withdrawal", id: String(id), status: "DA_HUY", title: "Hủy yêu cầu", description: `Chuyển yêu cầu rút tiền ${String(id)} sang trạng thái DA_HUY?` })}><FontAwesomeIcon icon={faBan} className="me-1" />Hủy yêu cầu</Button>);
   }
   if (section === "advertising") {
     actions.push(<Button key="approve" size="sm" onClick={() => onAction({ title: "Duyệt quảng cáo", description: `Duyệt chiến dịch ${String(id)}?`, operation: () => approveAdvertising(String(id), true) })}>Duyệt</Button>);
-    actions.push(<Button key="reject" size="sm" variant="outline-danger" onClick={() => onAction({ title: "Từ chối quảng cáo", description: `Từ chối chiến dịch ${String(id)}?`, operation: () => approveAdvertising(String(id), false, "Không đạt điều kiện") })}>Từ chối</Button>);
+    actions.push(<Button key="reject" size="sm" variant="outline-danger" onClick={() => onAction({ kind: "advertising-rejection", id: String(id), title: "Từ chối quảng cáo", description: `Nhập lý do từ chối chiến dịch ${String(id)}.` })}>Từ chối</Button>);
   }
   if (section === "banners") {
     actions.push(<Button key="edit" size="sm" variant="outline-secondary" onClick={() => onEditBanner?.(item)}><FontAwesomeIcon icon={faPen} className="me-1" />Sửa</Button>);
     actions.push(<Button key="toggle" size="sm" variant="outline-secondary" onClick={() => onAction({ title: isActive ? "Tắt banner" : "Bật banner", description: `Cập nhật trạng thái banner ${String(id)}?`, operation: () => updateBanner(String(id), { title: String(field(item, "title", "Title") ?? ""), subtitle: String(field(item, "subtitle", "Subtitle") ?? ""), url: String(field(item, "url", "Url") ?? ""), isActive: isActive ? 0 : 1 }) })}>{isActive ? "Tắt" : "Bật"}</Button>);
     actions.push(<Button key="delete" size="sm" variant="outline-danger" aria-label="Xóa banner" onClick={() => onAction({ title: "Xóa banner", description: `Xóa banner ${String(id)}? Thao tác này không thể hoàn tác.`, operation: () => deleteBanner(String(id)) })}><FontAwesomeIcon icon={faTrash} /></Button>);
   }
-  if (section === "hotels") actions.push(<Button key="approve" size="sm" onClick={() => onAction({ title: "Duyệt khách sạn", description: `Chuyển khách sạn ${String(name)} sang trạng thái đã duyệt?`, operation: () => updateHotelStatus(String(id), "DA_DUYET") })}>Duyệt</Button>);
+  if (section === "hotels") actions.push(<><Form.Select key="hotel-status" size="sm" aria-label="Trạng thái khách sạn" value={nextStatus} onChange={(event) => setNextStatus(event.target.value)}>{hotelStatuses.map((status) => <option key={status} value={status}>{status}</option>)}</Form.Select><Button key="hotel-update" size="sm" onClick={() => onAction({ title: "Cập nhật trạng thái khách sạn", description: `Chuyển khách sạn ${String(name)} sang ${nextStatus}?`, operation: () => updateHotelStatus(String(id), nextStatus) })}>Lưu</Button></>);
   if (section === "users") actions.push(<Button key="toggle" size="sm" variant={isLocked ? "outline-success" : "outline-danger"} onClick={() => onAction({ title: isLocked ? "Mở khóa tài khoản" : "Khóa tài khoản", description: `${isLocked ? "Mở khóa" : "Khóa"} tài khoản ${String(name)}?`, operation: () => updateAdminUserStatus(String(id), isLocked ? 0 : 1) })}><FontAwesomeIcon icon={isLocked ? faLockOpen : faLock} className="me-1" />{isLocked ? "Mở khóa" : "Khóa"}</Button>);
 
   return <tr>
