@@ -1,6 +1,6 @@
 import axios from "axios";
 import api from "../axiosInstance";
-import { HotelFilterParams, KhachSanListParams } from "../../types/khachsan/KhachSan.types";
+import { HotelFilterParams } from "../../types/khachsan/KhachSan.types";
 
 const mockApi = axios.create({
   baseURL: "http://localhost:4000",
@@ -21,7 +21,12 @@ export const getDestinations = async (tag?: string) => {
 };
 
 export const getTags = async () => {
-  const res = await mockApi.get("/tags");
+  const res = await api.get("/api/tags");
+  return res.data;
+};
+
+export const getHotelsByTag = async (slug: string, page = 1, pageSize = 10) => {
+  const res = await api.get(`/api/tags/${encodeURIComponent(slug)}/hotels`, { params: { page, pageSize } });
   return res.data;
 };
 

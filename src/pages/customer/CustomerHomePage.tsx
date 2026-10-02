@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { faHeart, faMagnifyingGlass, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FilterKhachSan } from "../../api/home/home.api";
+import { FilterKhachSan, getHotelsByTag, getTags } from "../../api/home/home.api";
 import { getUser } from "../../utils/auth/auth";
 import { HotelFilterParams } from "../../types/khachsan/KhachSan.types";
 import "./CustomerHomePage.css";
@@ -20,6 +20,8 @@ type HotelResult = {
   giaMoiDem?: number;
   price?: number;
 };
+
+type DiscoveryTag = { id?: string; name: string; slug: string; description?: string; sortOrder?: number; isActive?: boolean };
 
 const fallbackImages = [
   "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&h=620&fit=crop",
@@ -47,6 +49,7 @@ const CustomerHomePage = () => {
     NgayNhanPhong: null, NgayTraPhong: null, Page: 1,
   });
   const [destination, setDestination] = useState("");
+  const [selectedTag, setSelectedTag] = useState<DiscoveryTag | null>(null);
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState(2);
@@ -57,10 +60,29 @@ const CustomerHomePage = () => {
     queryFn: () => FilterKhachSan(filter) as Promise<HotelResult[]>,
     staleTime: 1000 * 60 * 5,
   });
-  const hotels = useMemo(() => (Array.isArray(hotelData) ? hotelData : []).slice(0, 6), [hotelData]);
+  const { data: tagData } = useQuery<DiscoveryTag[]>({ queryKey: ["stayro-public-tags"], queryFn: () => getTags(), staleTime: 1000 * 60 * 5 });
+  const tags = useMemo(() => {
+    const response = tagData as any;
+    const items = Array.isArray(response) ? response : response?.data ?? response?.items ?? [];
+    return items.filter((tag: DiscoveryTag) => tag?.slug && tag?.name);
+  }, [tagData]);
+  const { data: taggedHotelData, isLoading: isTagLoading, isError: isTagError } = useQuery({
+    queryKey: ["stayro-tag-hotels", selectedTag?.slug],
+    queryFn: () => getHotelsByTag(selectedTag?.slug || ""),
+    enabled: Boolean(selectedTag?.slug),
+  });
+  const taggedHotels = useMemo(() => {
+    const response = taggedHotelData as any;
+    const items = Array.isArray(response) ? response : response?.data ?? response?.items ?? response?.results ?? [];
+    return Array.isArray(items) ? items : [];
+  }, [taggedHotelData]);
+  const hotels = useMemo(() => (selectedTag ? taggedHotels : Array.isArray(hotelData) ? hotelData : []).slice(0, 6), [hotelData, selectedTag, taggedHotels]);
+  const listLoading = selectedTag ? isTagLoading : isLoading;
+  const listError = selectedTag ? isTagError : isError;
 
   const handleSearch = (event: FormEvent) => {
     event.preventDefault();
+    setSelectedTag(null);
     const nextFilter: HotelFilterParams = {
       Keyword: destination,
       SoKhach: guests,
@@ -98,9 +120,12 @@ const CustomerHomePage = () => {
 
         <section className="stayro-search-wrap stayro-container" id="search"><form className="stayro-search" onSubmit={handleSearch}><div className="stayro-tabs"><b>Khách sạn</b><span>Resort</span><span>Homestay</span><span>Villa</span></div><div className="stayro-fields"><label><small>📍 Điểm đến</small><input value={destination} onChange={(event) => setDestination(event.target.value)} placeholder="Bạn muốn đi đâu?" /></label><label><small>📅 Nhận phòng</small><input type="date" value={checkIn} onChange={(event) => setCheckIn(event.target.value)} /></label><label><small>📅 Trả phòng</small><input type="date" value={checkOut} onChange={(event) => setCheckOut(event.target.value)} /></label><label><small>🧑‍🤝‍🧑 Số khách</small><input type="number" min="1" max="10" value={guests} onChange={(event) => setGuests(Number(event.target.value) || 1)} /></label><button className="stayro-search-button" type="submit"><FontAwesomeIcon icon={faMagnifyingGlass} /> Tìm chỗ ở</button></div></form></section>
 
-        <section className="stayro-container stayro-destinations"><div className="stayro-chip-row">{destinations.map(([icon, name]) => <button key={name} onClick={() => { setDestination(name); setFilter((current) => ({ ...current, Keyword: name, Page: 1 })); }}><span>{icon}</span>{name}</button>)}</div></section>
+        <section className="stayro-container stayro-destinations"><div className="stayro-chip-row">{tags.length ? <>
+          <button className={!selectedTag ? "is-selected" : ""} onClick={() => { setSelectedTag(null); setDestination(""); }}>Tất cả</button>
+          {tags.map((tag: DiscoveryTag) => <button className={selectedTag?.slug === tag.slug ? "is-selected" : ""} key={tag.id || tag.slug} onClick={() => { setSelectedTag(tag); setDestination(tag.name); }} title={tag.description || tag.name}>{tag.name}</button>)}
+        </> : destinations.map(([icon, name]) => <button key={name} onClick={() => { setSelectedTag(null); setDestination(name); setFilter((current) => ({ ...current, Keyword: name, Page: 1 })); }}><span>{icon}</span>{name}</button>)}</div></section>
 
-        <section className="stayro-container stayro-stays" id="stays"><div className="stayro-section-head"><div><h2>Chỗ ở đang được săn đón</h2><p>Chọn lọc từ những chuyến đi thật, được host chăm chút và khách quay lại nhiều lần.</p></div><Link to="/search-results">Xem tất cả chỗ ở</Link></div>{isLoading ? <div className="stayro-state">Đang tìm những chỗ ở phù hợp...</div> : isError ? <div className="stayro-state">Không thể tải danh sách lúc này. Bạn thử lại sau nhé.</div> : <div className="stayro-hotel-grid">{hotels.map((hotel, index) => <article className="stayro-hotel-card" key={hotel.id} onClick={() => navigate(`/rooms/${hotel.id}`, { state: { filter } })}><div className="stayro-hotel-image" style={{ backgroundImage: `url(${hotel.url || hotel.urls?.[0] || fallbackImages[index % fallbackImages.length]})` }}><span className="stayro-tag">{index < 2 ? "Bán chạy" : index === 2 ? "Mới" : "Yêu thích"}</span><button aria-label="Lưu yêu thích" onClick={(event) => { event.stopPropagation(); toggleFavorite(hotel.id); }}><FontAwesomeIcon icon={faHeart} className={favorites.includes(hotel.id) ? "is-favorite" : ""} /></button><small>📍 {hotel.thanhPho || hotel.diaChi || "Việt Nam"}</small></div><div className="stayro-hotel-body"><div className="stayro-hotel-title"><h3>{hotel.tenKhachSan || "Chỗ ở Stayro"}</h3><span><FontAwesomeIcon icon={faStar} /> {hotel.soSao || 4}.0</span></div><p>{hotel.diaChi || hotel.thanhPho || "Việt Nam"}</p><strong>{formatPrice(hotel)} <small>/ đêm</small></strong></div></article>)}</div>}</section>
+        <section className="stayro-container stayro-stays" id="stays"><div className="stayro-section-head"><div><h2>{selectedTag ? selectedTag.name : "Chỗ ở đang được săn đón"}</h2><p>{selectedTag?.description || "Chọn lọc từ những chuyến đi thật, được host chăm chút và khách quay lại nhiều lần."}</p></div><Link to="/search-results">Xem tất cả chỗ ở</Link></div>{listLoading ? <div className="stayro-state">Đang tìm những chỗ ở phù hợp...</div> : listError ? <div className="stayro-state">Không thể tải danh sách lúc này. Bạn thử lại sau nhé.</div> : <div className="stayro-hotel-grid">{hotels.map((hotel, index) => <article className="stayro-hotel-card" key={hotel.id} onClick={() => navigate(`/rooms/${hotel.id}`, { state: { filter } })}><div className="stayro-hotel-image" style={{ backgroundImage: `url(${hotel.url || hotel.urls?.[0] || fallbackImages[index % fallbackImages.length]})` }}><span className="stayro-tag">{index < 2 ? "Bán chạy" : index === 2 ? "Mới" : "Yêu thích"}</span><button aria-label="Lưu yêu thích" onClick={(event) => { event.stopPropagation(); toggleFavorite(hotel.id); }}><FontAwesomeIcon icon={faHeart} className={favorites.includes(hotel.id) ? "is-favorite" : ""} /></button><small>📍 {hotel.thanhPho || hotel.diaChi || "Việt Nam"}</small></div><div className="stayro-hotel-body"><div className="stayro-hotel-title"><h3>{hotel.tenKhachSan || "Chỗ ở Stayro"}</h3><span><FontAwesomeIcon icon={faStar} /> {hotel.soSao || 4}.0</span></div><p>{hotel.diaChi || hotel.thanhPho || "Việt Nam"}</p><strong>{formatPrice(hotel)} <small>/ đêm</small></strong></div></article>)}</div>}</section>
 
         <section className="stayro-features" id="deals"><div className="stayro-container"><div className="stayro-section-head stayro-section-head--light"><div><h2>Vì sao khách quay lại đặt tiếp</h2><p>Ba điều Stayro giữ đúng lời hứa với mọi chuyến đi.</p></div></div><div className="stayro-feature-grid"><div><b>💸</b><h3>Giá hiển thị là giá cuối</h3><p>Không phụ phí ẩn khi thanh toán. Số bạn thấy lúc tìm kiếm là số bạn trả.</p></div><div><b>🔄</b><h3>Huỷ miễn phí trong 24 giờ</h3><p>Kế hoạch đổi phút chót cũng không sao, huỷ hoặc dời lịch không mất phí.</p></div><div><b>💬</b><h3>Có người trả lời lúc 2 giờ sáng</h3><p>Đội hỗ trợ trực chat 24/7, kể cả khi bạn nhận phòng trễ chuyến bay.</p></div></div></div></section>
 
