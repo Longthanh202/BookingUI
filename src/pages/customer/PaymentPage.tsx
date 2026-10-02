@@ -2,13 +2,44 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Badge from "react-bootstrap/Badge";
 import CustomerHeader from "../../components/customer/home/CustomerHeader/CustomerHeader";
 import { createBooking } from "../../api/booking/booking.api";
+import { BookingQrPayment, getBookingQr } from "../../api/payment/payment.api";
 import { showToast } from "../../components/common/Toast";
+
+const extractBookingId = (response: any): string => {
+  const candidates = [
+    response?.bookingId,
+    response?.id,
+    response?.datPhongId,
+    response?.idDatPhong,
+    response?.booking?.bookingId,
+    response?.booking?.id,
+    response?.datPhong?.bookingId,
+    response?.datPhong?.id,
+    response?.data?.bookingId,
+    response?.data?.id,
+    response?.data?.datPhongId,
+    response?.data?.idDatPhong,
+    response?.data?.booking?.bookingId,
+    response?.data?.booking?.id,
+    response?.data?.datPhong?.bookingId,
+    response?.data?.datPhong?.id,
+    response?.data?.data?.bookingId,
+    response?.data?.data?.id,
+    response?.result?.bookingId,
+    response?.result?.id,
+  ];
+
+  const bookingId = candidates.find(
+    (value) => value !== undefined && value !== null && String(value).trim()
+  );
+
+  return bookingId === undefined ? "" : String(bookingId).trim();
+};
 
 const PaymentPage = () => {
   const location = useLocation();
@@ -24,9 +55,11 @@ const PaymentPage = () => {
   console.log("PaymentPage location.state:", location.state);
 
   const [paymentMethod, setPaymentMethod] =
-    useState<"card" | "qr" | "pay_on_arrival">("card");
+    useState<"cash" | "qr">("cash");
 
   const [loading, setLoading] = useState(false);
+  const [qrPayment, setQrPayment] = useState<BookingQrPayment | null>(null);
+  const [qrBookingId, setQrBookingId] = useState<string | null>(null);
 
   // =========================
   // DATE
@@ -201,12 +234,7 @@ const PaymentPage = () => {
 
         ngayTraPhong: endDate.toISOString(),
 
-        phuongThucThanhToan:
-          paymentMethod === "card"
-            ? "CARD"
-            : paymentMethod === "qr"
-            ? "MOMO"
-            : "TIEN_MAT",
+        phuongThucThanhToan: paymentMethod === "qr" ? "MOMO" : "TIEN_MAT",
 
         danhSachPhong: rooms.map((room: any) => ({
           loaiPhongId: room.id,
@@ -218,6 +246,39 @@ const PaymentPage = () => {
         "Create booking payload:",
         payload
       );
+
+      if (paymentMethod === "qr") {
+        let bookingId = qrBookingId;
+
+        if (!bookingId) {
+          const bookingResponse = await createBooking(payload as any);
+          console.log("Booking response:", bookingResponse);
+          bookingId = extractBookingId(bookingResponse);
+          console.log("Extracted bookingId:", bookingId);
+
+          if (!bookingId) {
+            throw new Error("Đơn đã được tạo nhưng response không có mã đặt phòng.");
+          }
+
+          setQrBookingId(bookingId);
+        }
+
+        let qrResponse: BookingQrPayment;
+        try {
+          qrResponse = await getBookingQr(bookingId);
+        } catch (error) {
+          console.error(error);
+          showToast(
+            "Đặt phòng đã được tạo nhưng chưa lấy được mã QR. Vui lòng thử lại.",
+            "error"
+          );
+          return;
+        }
+
+        setQrPayment(qrResponse);
+        showToast("Đã tạo mã QR thanh toán.");
+        return;
+      }
 
       await createBooking(payload as any);
 
@@ -248,9 +309,8 @@ const PaymentPage = () => {
     description,
   }: {
     value:
-      | "card"
-      | "qr"
-      | "pay_on_arrival";
+      | "cash"
+      | "qr";
     icon: string;
     title: string;
     description: string;
@@ -260,9 +320,9 @@ const PaymentPage = () => {
 
     return (
       <div
-        onClick={() =>
-          setPaymentMethod(value)
-        }
+        onClick={() => {
+          if (!qrPayment) setPaymentMethod(value);
+        }}
         style={{
           border: selected
             ? "2px solid #4f46e5"
@@ -274,7 +334,7 @@ const PaymentPage = () => {
 
           borderRadius: 14,
           padding: "15px 16px",
-          cursor: "pointer",
+          cursor: qrPayment ? "default" : "pointer",
           transition: "all .2s ease",
           marginBottom: 12,
         }}
@@ -665,10 +725,10 @@ const PaymentPage = () => {
                   </p>
 
                   <PaymentMethodCard
-                    value="card"
-                    icon="💳"
-                    title="Thanh toán bằng thẻ"
-                    description="Visa, Mastercard hoặc thẻ ngân hàng"
+                    value="cash"
+                    icon="💵"
+                    title="Thanh toán tiền mặt tại quầy"
+                    description="Thanh toán trực tiếp tại khách sạn"
                   />
 
                   <PaymentMethodCard
@@ -677,114 +737,6 @@ const PaymentPage = () => {
                     title="Thanh toán bằng QR"
                     description="Quét mã QR để thanh toán nhanh"
                   />
-
-                  <PaymentMethodCard
-                    value="pay_on_arrival"
-                    icon="🏨"
-                    title="Thanh toán khi nhận phòng"
-                    description="Thanh toán trực tiếp tại khách sạn"
-                  />
-
-                  {/* =========================
-                      CARD FORM
-                  ========================= */}
-
-                  {paymentMethod ===
-                    "card" && (
-                    <div
-                      style={{
-                        marginTop: 24,
-                        padding: 20,
-                        background: "#f8fafc",
-                        borderRadius: 16,
-                      }}
-                    >
-                      <div className="d-flex justify-content-between align-items-center mb-3">
-                        <h6 className="fw-bold mb-0">
-                          Thông tin thẻ
-                        </h6>
-
-                        <span
-                          style={{
-                            fontSize: 12,
-                            color: "#64748b",
-                          }}
-                        >
-                          🔒 Bảo mật
-                        </span>
-                      </div>
-
-                      <Form>
-                        <Form.Group className="mb-3">
-                          <Form.Label>
-                            Tên chủ thẻ
-                          </Form.Label>
-
-                          <Form.Control
-                            type="text"
-                            placeholder="NGUYEN VAN A"
-                            style={{
-                              borderRadius: 10,
-                              padding: 11,
-                            }}
-                          />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                          <Form.Label>
-                            Số thẻ
-                          </Form.Label>
-
-                          <Form.Control
-                            type="text"
-                            placeholder="1234 5678 9012 3456"
-                            maxLength={19}
-                            style={{
-                              borderRadius: 10,
-                              padding: 11,
-                            }}
-                          />
-                        </Form.Group>
-
-                        <Row className="g-3">
-                          <Col xs={6}>
-                            <Form.Group>
-                              <Form.Label>
-                                Hạn sử dụng
-                              </Form.Label>
-
-                              <Form.Control
-                                type="text"
-                                placeholder="MM/YY"
-                                style={{
-                                  borderRadius: 10,
-                                  padding: 11,
-                                }}
-                              />
-                            </Form.Group>
-                          </Col>
-
-                          <Col xs={6}>
-                            <Form.Group>
-                              <Form.Label>
-                                CVV
-                              </Form.Label>
-
-                              <Form.Control
-                                type="password"
-                                placeholder="•••"
-                                maxLength={4}
-                                style={{
-                                  borderRadius: 10,
-                                  padding: 11,
-                                }}
-                              />
-                            </Form.Group>
-                          </Col>
-                        </Row>
-                      </Form>
-                    </div>
-                  )}
 
                   {/* =========================
                       QR
@@ -810,118 +762,62 @@ const PaymentPage = () => {
                         Quét mã QR để thanh toán
                       </div>
 
-                      <div
-                        style={{
-                          fontSize: 13,
-                          color: "#64748b",
-                          marginBottom: 20,
-                        }}
-                      >
-                        Số tiền cần thanh toán
-                      </div>
-
-                      <div
-                        style={{
-                          width: 210,
-                          height: 210,
-                          background: "#fff",
-                          borderRadius: 16,
-                          margin: "0 auto 18px",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent:
-                            "center",
-                          border:
-                            "1px solid #e2e8f0",
-                        }}
-                      >
-                        <div
-                          style={{
-                            textAlign: "center",
-                            color: "#64748b",
-                          }}
-                        >
-                          <div
-                            style={{
-                              fontSize: 50,
-                              marginBottom: 10,
-                            }}
-                          >
-                            ▦
-                          </div>
-
-                          <span
-                            style={{
-                              fontSize: 13,
-                            }}
-                          >
-                            Mã QR thanh toán
-                          </span>
-                        </div>
-                      </div>
-
-                      <div
-                        className="fw-bold text-danger"
-                        style={{
-                          fontSize: 20,
-                        }}
-                      >
-                        {total.toLocaleString(
-                          "vi-VN"
-                        )}{" "}
-                        VND
-                      </div>
-                    </div>
-                  )}
-
-                  {/* =========================
-                      PAY ON ARRIVAL
-                  ========================= */}
-
-                  {paymentMethod ===
-                    "pay_on_arrival" && (
-                    <div
-                      style={{
-                        marginTop: 24,
-                        padding: 20,
-                        background: "#fffbeb",
-                        border:
-                          "1px solid #fde68a",
-                        borderRadius: 16,
-                      }}
-                    >
-                      <div className="d-flex gap-3">
-                        <div
-                          style={{
-                            fontSize: 24,
-                          }}
-                        >
-                          🏨
-                        </div>
-
-                        <div>
-                          <h6 className="fw-bold">
-                            Thanh toán tại khách sạn
-                          </h6>
-
-                          <p
-                            className="mb-0"
-                            style={{
-                              fontSize: 13,
-                              color:
-                                "#92400e",
-                              lineHeight: 1.6,
-                            }}
-                          >
-                            Bạn sẽ thanh toán trực
-                            tiếp khi đến nhận phòng.
-                            Vui lòng đảm bảo thông
-                            tin đặt phòng chính xác.
+                      {qrPayment ? (
+                        <>
+                          <p className="text-secondary" style={{ fontSize: 13 }}>
+                            Quét mã bằng ứng dụng ngân hàng và giữ nguyên nội dung chuyển khoản.
                           </p>
-                        </div>
-                      </div>
+                          <img
+                            src={qrPayment.qrCodeUrl}
+                            alt={`Mã QR thanh toán ${qrPayment.amount.toLocaleString("vi-VN")} VND`}
+                            style={{
+                              width: 230,
+                              maxWidth: "100%",
+                              height: "auto",
+                              background: "#fff",
+                              borderRadius: 12,
+                              border: "1px solid #e2e8f0",
+                              margin: "4px auto 16px",
+                            }}
+                          />
+                          <div className="fw-bold text-danger mb-3" style={{ fontSize: 20 }}>
+                            {qrPayment.amount.toLocaleString("vi-VN")} VND
+                          </div>
+                          <div className="mx-auto text-start" style={{ maxWidth: 360, fontSize: 14 }}>
+                            <div className="d-flex justify-content-between gap-3 py-2 border-top">
+                              <span className="text-secondary">Ngân hàng</span>
+                              <strong>{qrPayment.bankCode}</strong>
+                            </div>
+                            <div className="d-flex justify-content-between gap-3 py-2 border-top">
+                              <span className="text-secondary">Số tài khoản</span>
+                              <strong>{qrPayment.accountNumber}</strong>
+                            </div>
+                            <div className="d-flex justify-content-between gap-3 py-2 border-top">
+                              <span className="text-secondary">Chủ tài khoản</span>
+                              <strong>{qrPayment.accountName}</strong>
+                            </div>
+                            <div className="d-flex justify-content-between gap-3 py-2 border-top">
+                              <span className="text-secondary">Nội dung</span>
+                              <strong>{qrPayment.paymentNote}</strong>
+                            </div>
+                          </div>
+                          <p className="text-secondary mt-3 mb-0" style={{ fontSize: 12 }}>
+                            Đặt phòng đã được tạo. Trạng thái thanh toán sẽ được cập nhật sau khi hệ thống xác nhận giao dịch.
+                          </p>
+                        </>
+                      ) : (
+                        <>
+                          <div className="text-secondary mb-3" style={{ fontSize: 13 }}>
+                            Mã QR và thông tin chuyển khoản sẽ hiển thị sau khi bạn tạo yêu cầu thanh toán.
+                          </div>
+                          <div className="fw-bold text-danger" style={{ fontSize: 20 }}>
+                            {total.toLocaleString("vi-VN")} VND
+                          </div>
+                        </>
+                      )}
                     </div>
                   )}
+
                 </Card.Body>
               </Card>
             </Col>
@@ -1050,7 +946,7 @@ const PaymentPage = () => {
                     <Button
                       variant="primary"
                       className="w-100 py-3"
-                      disabled={loading}
+                      disabled={loading || Boolean(qrPayment)}
                       onClick={handlePayment}
                       style={{
                         borderRadius: 12,
@@ -1060,13 +956,25 @@ const PaymentPage = () => {
                     >
                       {loading
                         ? "Đang xử lý..."
-                        : paymentMethod ===
-                          "pay_on_arrival"
-                        ? "Hoàn tất đặt phòng"
+                        : qrPayment
+                        ? "Đã tạo mã QR thanh toán"
+                        : paymentMethod === "cash"
+                        ? "Đặt phòng và thanh toán tại quầy"
                         : `Thanh toán ${total.toLocaleString(
                             "vi-VN"
                           )} VND`}
                     </Button>
+
+                    {qrPayment && (
+                      <Button
+                        variant="outline-primary"
+                        className="w-100 mt-2"
+                        onClick={() => navigate("/bookings")}
+                        style={{ borderRadius: 12, padding: 11 }}
+                      >
+                        Về lịch sử đặt phòng
+                      </Button>
+                    )}
 
                     <Button
                       variant="light"
