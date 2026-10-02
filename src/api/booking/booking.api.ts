@@ -43,6 +43,18 @@ export const confirmBooking = async (
   return response.data;
 };
 
+export const rejectOwnerBooking = async (id: string) =>
+  (await api.put(`/api/bookings/${id}/reject`)).data;
+
+export const cancelOwnerBooking = async (id: string) =>
+  (await api.put(`/api/bookings/${id}/owner-cancel`)).data;
+
+export const getOwnerBookingCustomers = async (hotelId: string) =>
+  (await api.get("/api/bookings/customer-options", { params: { hotelId } })).data;
+
+export const getBookingStatusOptions = async () =>
+  (await api.get("/api/bookings/status-options")).data;
+
 export const getOwnerAllBookings = (payload: { page?: number; pageSize?: number }) =>
   api.post("/api/bookings/owner/all", payload).then((res) => res.data);
 
