@@ -100,15 +100,19 @@ const AppRouters = () => {
                 <Route element={<AdminLayout />}>
                   <Route index element={<Dashboard />} />
 
-                  <Route path="hotels" element={<OwnerHotelListPage />} />
+                  <Route path="hotels" element={<AdminOperationsPage />} />
 
-                  <Route path="hotels/:id" element={<OwnerHotelDetailPage />} />
+                                    <Route path="hotels/:id" element={<Navigate to="/admin/hotels" replace />} />
                   <Route path="bookings" element={<AdminOperationsPage />} />
                   <Route path="payments" element={<AdminOperationsPage />} />
                   <Route path="commissions" element={<AdminOperationsPage />} />
                   <Route path="withdrawals" element={<AdminOperationsPage />} />
                   <Route path="advertising" element={<AdminOperationsPage />} />
                   <Route path="banners" element={<AdminOperationsPage />} />
+                  <Route path="users" element={<AdminOperationsPage />} />
+                  <Route path="reviews" element={<AdminOperationsPage />} />
+                  <Route path="tags" element={<AdminOperationsPage />} />
+                  <Route path="permissions" element={<AdminOperationsPage />} />
                 </Route>
             </Route>
 

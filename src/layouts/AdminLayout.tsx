@@ -1,51 +1,45 @@
-﻿import { useState } from "react";
-import { Outlet } from "react-router-dom";
+﻿import { Outlet, NavLink, useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProfileApi } from "../api/auth/auth.api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faStar, faHotel, faCreditCard, faPeopleRoof, faUser, faClipboardList, faWallet, faBullhorn, faImage } from "@fortawesome/free-solid-svg-icons";
-import Sidebar from "../components/common/navigation/Sidebar";
-import Button from "react-bootstrap/Button";
+import { faGaugeHigh, faHotel, faCreditCard, faUser, faClipboardList, faWallet, faBullhorn, faImage, faTags, faUserShield, faStar, faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import AccountMenu from "../components/common/AccountMenu";
+import "./AdminLayout.css";
 
 interface Profile {
   fullName: string;
-  permissions: string[];
 }
 
-const moduleConfig: Record<string, { label: string; path: string; icon: React.ReactNode }> = {
-  khachsan: { label: "Khách sạn", path: "/admin/hotels", icon: <FontAwesomeIcon icon={faHotel} /> },
-  phong: { label: "Phòng", path: "/admin/rooms", icon: <FontAwesomeIcon icon={faPeopleRoof} /> },
-  danhgia: { label: "Đánh giá", path: "/admin/reviews", icon: <FontAwesomeIcon icon={faStar} /> },
-  payment: { label: "Thanh toán", path: "/admin/payments", icon: <FontAwesomeIcon icon={faCreditCard} /> },
-  user: { label: "Người dùng", path: "/admin/users", icon: <FontAwesomeIcon icon={faUser} /> },
-  booking: { label: "Booking", path: "/admin/bookings", icon: <FontAwesomeIcon icon={faClipboardList} /> },
-  commission: { label: "Hoa hồng", path: "/admin/commissions", icon: <FontAwesomeIcon icon={faWallet} /> },
-  finance: { label: "Rút tiền", path: "/admin/withdrawals", icon: <FontAwesomeIcon icon={faWallet} /> },
-  advertising: { label: "Quảng cáo", path: "/admin/advertising", icon: <FontAwesomeIcon icon={faBullhorn} /> },
-  banner: { label: "Banner", path: "/admin/banners", icon: <FontAwesomeIcon icon={faImage} /> },
-};
+const sections = [
+  { title: "Tổng quan", links: [{ label: "Bàn điều hành", path: "/admin", icon: faGaugeHigh }] },
+  { title: "Vận hành", links: [
+    { label: "Đặt phòng", path: "/admin/bookings", icon: faClipboardList },
+    { label: "Khách sạn", path: "/admin/hotels", icon: faHotel },
+    { label: "Thanh toán", path: "/admin/payments", icon: faCreditCard },
+    { label: "Rút tiền", path: "/admin/withdrawals", icon: faWallet },
+    { label: "Hoa hồng", path: "/admin/commissions", icon: faWallet },
+    { label: "Quảng cáo", path: "/admin/advertising", icon: faBullhorn },
+  ] },
+  { title: "Nội dung", links: [
+    { label: "Banner", path: "/admin/banners", icon: faImage },
+    { label: "Tags khám phá", path: "/admin/tags", icon: faTags },
+    { label: "Đánh giá", path: "/admin/reviews", icon: faStar },
+  ] },
+  { title: "Truy cập", links: [
+    { label: "Người dùng", path: "/admin/users", icon: faUser },
+    { label: "Phân quyền", path: "/admin/permissions", icon: faUserShield },
+  ] },
+];
 
-const buildMenuFromPermissions = (permissions: string[]) => {
-  const allowed = new Set(["khachsan", "phong", "danhgia", "payment", "user", "booking", "commission", "finance", "advertising", "banner"]);
-  const moduleSet = new Set(
-    permissions
-      .map((p) => p.split("_")[0])
-      .filter((key) => allowed.has(key))
-  );
-  const order = ["khachsan", "booking", "payment", "commission", "finance", "advertising", "banner", "phong", "danhgia", "user"];
-  const orderedModules = order.filter((key) => moduleSet.has(key));
-
-  return orderedModules.map((module) => ({
-    key: module,
-    icon: moduleConfig[module]?.icon || null,
-    label: moduleConfig[module]?.label || module,
-    path: moduleConfig[module]?.path || "/",
-  }));
+const pageTitles: Record<string, string> = {
+  admin: "Bàn điều hành", bookings: "Đặt phòng", hotels: "Khách sạn", payments: "Thanh toán",
+  withdrawals: "Yêu cầu rút tiền", commissions: "Hoa hồng", advertising: "Quảng cáo",
+  banners: "Banner", tags: "Tags khám phá", reviews: "Đánh giá", users: "Người dùng", permissions: "Phân quyền",
 };
 
 const AdminLayout = () => {
-  const [collapsed, setCollapsed] = useState(true);
+  const location = useLocation();
+  const currentSection = location.pathname.split("/").filter(Boolean).at(-1) || "admin";
 
   const { data: profile } = useQuery<Profile>({
     queryKey: ["profile"],
@@ -55,28 +49,42 @@ const AdminLayout = () => {
     refetchOnWindowFocus: false,
   });
 
-  const menuItems = profile?.permissions ? buildMenuFromPermissions(profile.permissions) : [];
-
   return (
-    <div style={{ minHeight: "100vh", display: "flex" }}>
-      <Sidebar collapsed={collapsed} menuItems={menuItems} />
-      <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-        <header
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "0.75rem 1rem",
-            borderBottom: "1px solid #dee2e6",
-            backgroundColor: "#f8f9fa",
-          }}
-        >
-          <Button variant="link" onClick={() => setCollapsed(!collapsed)}>
-            <FontAwesomeIcon icon={faBars} />
-          </Button>
+    <div className="admin-shell">
+      <aside className="admin-sidebar">
+        <NavLink to="/admin" className="admin-brand" aria-label="Stayro Admin home">
+          <span className="admin-brand-mark">S</span>
+          <span className="admin-brand-copy"><strong>stayro</strong><small>ADMIN CONSOLE</small></span>
+        </NavLink>
+        <nav className="admin-navigation" aria-label="Điều hướng quản trị">
+          {sections.map((section) => <div className="admin-nav-section" key={section.title}>
+            <div className="admin-nav-heading">{section.title}</div>
+            {section.links.map((link) => <NavLink
+              key={link.path}
+              to={link.path}
+              end={link.path === "/admin"}
+              className={({ isActive }) => `admin-nav-link${isActive ? " is-active" : ""}`}
+            >
+              <FontAwesomeIcon icon={link.icon} fixedWidth />
+              <span>{link.label}</span>
+            </NavLink>)}
+          </div>)}
+        </nav>
+        <div className="admin-sidebar-foot">
+          <span className="admin-status-dot" />
+          <span>Hệ thống quản trị</span>
+          <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+        </div>
+      </aside>
+      <div className="admin-main">
+        <header className="admin-topbar">
+          <div className="admin-topbar-title">
+            <span className="admin-eyebrow">STAYRO / QUẢN TRỊ</span>
+            <h1>{pageTitles[currentSection] || "Quản trị"}</h1>
+          </div>
           <AccountMenu mode="admin" name={profile?.fullName} />
         </header>
-        <main style={{ padding: "1rem", backgroundColor: "#f3f5f7", minHeight: "100%" }}>
+        <main className="admin-content">
           <Outlet />
         </main>
       </div>
