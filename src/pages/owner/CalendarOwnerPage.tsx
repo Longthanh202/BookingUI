@@ -28,6 +28,9 @@ export default function CalendarOwnerPage() {
 	const [endAt, setEndAt] = useState("");
 	const [reason, setReason] = useState("");
 	const [error, setError] = useState("");
+	const earliestBlockDate = new Date();
+	earliestBlockDate.setDate(earliestBlockDate.getDate() + 1);
+	const earliestBlockDateText = earliestBlockDate.toLocaleDateString("en-CA");
 	const hotels = useQuery({ queryKey: ["owner-hotels"], queryFn: () => GetDanhSachKhachSanOwner({ Page: 1, PageSize: 100 }) });
 	const days = useMemo(() => Array.from({ length: 7 }, (_, index) => {
 		const day = new Date(week);
@@ -78,8 +81,8 @@ export default function CalendarOwnerPage() {
 		];
 	};
 	const submitBlock = () => {
-		if (!roomId || !startAt || !endAt || !reason.trim() || endAt <= startAt) {
-			setError("Chọn phòng, lý do và khoảng thời gian hợp lệ.");
+		if (!roomId || !startAt || !endAt || !reason.trim() || startAt < earliestBlockDateText || endAt <= startAt) {
+			setError("Chọn phòng, lý do và khoảng thời gian trong tương lai hợp lệ.");
 			return;
 		}
 		createBlock.mutate();
@@ -105,7 +108,7 @@ export default function CalendarOwnerPage() {
 			<Modal show={showBlockForm} onHide={() => setShowBlockForm(false)}>
 				<Modal.Header closeButton><Modal.Title>Chặn phòng</Modal.Title></Modal.Header>
 				<Modal.Body><Form.Group className="mb-3"><Form.Label>Phòng</Form.Label><Form.Select value={roomId} onChange={(event) => setRoomId(event.target.value)}><option value="">Chọn phòng</option>{rooms.map((room: any) => <option key={String(getValue(room, "id", "roomId", "phongId"))} value={String(getValue(room, "id", "roomId", "phongId"))}>{getValue(room, "name", "tenPhong", "maPhong") ?? "Phòng"}</option>)}</Form.Select></Form.Group>
-					<div className="row g-3"><Form.Group className="col-md-6"><Form.Label>Bắt đầu</Form.Label><Form.Control type="date" value={startAt} onChange={(event) => setStartAt(event.target.value)} min={new Date().toLocaleDateString("en-CA")} /></Form.Group><Form.Group className="col-md-6"><Form.Label>Kết thúc</Form.Label><Form.Control type="date" value={endAt} onChange={(event) => setEndAt(event.target.value)} min={startAt || new Date().toLocaleDateString("en-CA")} /></Form.Group></div>
+					<div className="row g-3"><Form.Group className="col-md-6"><Form.Label>Bắt đầu</Form.Label><Form.Control type="date" value={startAt} onChange={(event) => setStartAt(event.target.value)} min={earliestBlockDateText} /></Form.Group><Form.Group className="col-md-6"><Form.Label>Kết thúc</Form.Label><Form.Control type="date" value={endAt} onChange={(event) => setEndAt(event.target.value)} min={startAt || earliestBlockDateText} /></Form.Group></div>
 					<Form.Group className="mt-3"><Form.Label>Lý do</Form.Label><Form.Control value={reason} onChange={(event) => setReason(event.target.value)} maxLength={250} /></Form.Group>
 					{error && <Alert variant="danger" className="mt-3 mb-0">{error}</Alert>}
 				</Modal.Body><Modal.Footer><Button variant="outline-secondary" onClick={() => setShowBlockForm(false)}>Hủy</Button><Button disabled={createBlock.isPending} onClick={submitBlock}>{createBlock.isPending ? "Đang lưu..." : "Tạo khoảng chặn"}</Button></Modal.Footer>

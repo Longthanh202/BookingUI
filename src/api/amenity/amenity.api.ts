@@ -1,5 +1,5 @@
 import api from "../axiosInstance";
 
-export interface CreateAmenityRequest { TenTienIch?: string; Icon?: string; KhachSanId: string; }
+export interface CreateAmenityRequest { tenTienIch: string; icon?: string | null; khachSanId: string; }
 
-export const createAmenities = async (payload: CreateAmenityRequest[]) => (await api.post("/api/amenities", payload)).data;
+export const createAmenity = async (payload: CreateAmenityRequest) => (await api.post("/api/amenities", payload)).data;

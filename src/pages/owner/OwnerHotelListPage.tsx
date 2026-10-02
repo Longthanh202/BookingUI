@@ -5,8 +5,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   GetDanhSachKhachSanOwner,
   ThemKhachSan,
-  CapNhatKhachSan,
-  XoaKhachSan,
 } from "../../api/khachsan/khachsan.api";
 
 import { KhachSanListOwnerParams } from "../../types/khachsan/KhachSan.types";
@@ -36,40 +34,18 @@ const initialFormValues = {
   GioNhanPhong: "",
   GioTraPhong: "",
   MoTa: "",
+  ChinhSachHuy: "",
+  ViDo: "",
+  KinhDo: "",
 };
-
-interface HotelRoomType {
-  id?: string;
-  tenLoaiPhong: string;
-  soKhachToiDa: number;
-  kieuGiuong: string;
-  moTa: string;
-}
-
-interface HotelAmenity {
-  id?: string | number;
-  tenTienIch: string;
-}
 
 const OwnerHotelListPage = () => {
   const [page, setPage] = useState(1);
 
   const [open, setOpen] = useState(false);
 
-  const [editingHotel, setEditingHotel] =
-    useState<KhachSanType | null>(null);
-
   const [uploadedImages, setUploadedImages] =
     useState<File[]>([]);
-
-  const [roomTypes, setRoomTypes] =
-    useState<HotelRoomType[]>([]);
-
-  const [amenities, setAmenities] =
-    useState<HotelAmenity[]>([]);
-
-  const [newAmenity, setNewAmenity] =
-    useState("");
 
   const [formValues, setFormValues] =
     useState(initialFormValues);
@@ -105,6 +81,7 @@ const OwnerHotelListPage = () => {
       queryClient.invalidateQueries({
         queryKey: ["KhachSanOwner"],
       });
+      queryClient.invalidateQueries({ queryKey: ["owner-hotels"] });
 
       handleClose();
     },
@@ -114,77 +91,14 @@ const OwnerHotelListPage = () => {
     },
   });
 
-  // =====================================================
-  // UPDATE
-  // =====================================================
-
-  const updateMutation = useMutation<
-    any,
-    unknown,
-    FormData,
-    unknown
-  >({
-    mutationFn: CapNhatKhachSan,
-
-    onSuccess: () => {
-      showToast("Cập nhật khách sạn thành công");
-
-      queryClient.invalidateQueries({
-        queryKey: ["KhachSanOwner"],
-      });
-
-      handleClose();
-    },
-
-    onError: () => {
-      showToast("Cập nhật khách sạn thất bại");
-    },
-  });
-
-  // =====================================================
-  // DELETE
-  // =====================================================
-
-  const deleteMutation = useMutation<
-    any,
-    unknown,
-    string,
-    unknown
-  >({
-    mutationFn: XoaKhachSan,
-
-    onSuccess: () => {
-      showToast("Xóa khách sạn thành công");
-
-      queryClient.invalidateQueries({
-        queryKey: ["KhachSanOwner"],
-      });
-    },
-
-    onError: () => {
-      showToast("Xóa khách sạn thất bại");
-    },
-  });
-
-  const isProcessing =
-    createMutation.status === "pending" ||
-    updateMutation.status === "pending" ||
-    deleteMutation.status === "pending";
+  const isProcessing = createMutation.status === "pending";
 
   // =====================================================
   // OPEN MODAL
   // =====================================================
 
   const handleOpen = () => {
-    setEditingHotel(null);
-
     setFormValues(initialFormValues);
-
-    setRoomTypes([]);
-
-    setAmenities([]);
-
-    setNewAmenity("");
 
     setFormErrors({});
 
@@ -200,19 +114,12 @@ const OwnerHotelListPage = () => {
   const handleClose = () => {
     setOpen(false);
 
-    setEditingHotel(null);
-
     setFormValues(initialFormValues);
 
     setFormErrors({});
 
     setUploadedImages([]);
 
-    setRoomTypes([]);
-
-    setAmenities([]);
-
-    setNewAmenity("");
   };
 
   // =====================================================
@@ -227,17 +134,6 @@ const OwnerHotelListPage = () => {
     if (!files) return;
 
     const newFiles = Array.from(files);
-
-    const totalImages =
-      uploadedImages.length + newFiles.length;
-
-    if (totalImages > 4) {
-      showToast(
-        "Tối đa 4 ảnh cho một khách sạn"
-      );
-
-      return;
-    }
 
     setUploadedImages((current) => [
       ...current,
@@ -282,6 +178,12 @@ const OwnerHotelListPage = () => {
     if (!formValues.SoSao)
       errors.SoSao = "Chọn số sao";
 
+    if (!formValues.ViDo.trim() || !Number.isFinite(Number(formValues.ViDo)) || Number(formValues.ViDo) < -90 || Number(formValues.ViDo) > 90)
+      errors.ViDo = "Vĩ độ phải nằm trong khoảng -90 đến 90";
+
+    if (!formValues.KinhDo.trim() || !Number.isFinite(Number(formValues.KinhDo)) || Number(formValues.KinhDo) < -180 || Number(formValues.KinhDo) > 180)
+      errors.KinhDo = "Kinh độ phải nằm trong khoảng -180 đến 180";
+
     if (!formValues.GioNhanPhong)
       errors.GioNhanPhong =
         "Chọn giờ nhận phòng";
@@ -310,14 +212,6 @@ const OwnerHotelListPage = () => {
 
       return;
     }
-
-    const roomPayload = roomTypes.map((room) => ({
-      khachSanId: editingHotel?.id ?? "",
-      tenLoaiPhong: room.tenLoaiPhong ?? "",
-      soKhachToiDa: Number(room.soKhachToiDa ?? 1),
-      kieuGiuong: room.kieuGiuong ?? "",
-      moTa: room.moTa ?? "",
-    }));
 
     const formData = new FormData();
 
@@ -356,105 +250,20 @@ const OwnerHotelListPage = () => {
       formValues.MoTa
     );
 
-    formData.append("ViDo", "1");
-
-    formData.append("KinhDo", "1");
-
-    formData.append(
-      "TrangThai",
-      "cho_duyet"
-    );
-
-    formData.append(
-      "LoaiPhongs",
-      JSON.stringify(roomPayload)
-    );
-
-    formData.append(
-      "TienIchs",
-      JSON.stringify(amenities)
-    );
+    formData.append("ChinhSachHuy", formValues.ChinhSachHuy);
+    formData.append("ViDo", formValues.ViDo);
+    formData.append("KinhDo", formValues.KinhDo);
 
     uploadedImages.forEach((image) => {
       formData.append("Files", image);
     });
 
-    if (editingHotel) {
-      formData.append(
-        "id",
-        editingHotel.id
-      );
-
-      updateMutation.mutate(
-        formData as any
-      );
-    } else {
-      createMutation.mutate(
-        formData as any
-      );
-    }
+    createMutation.mutate(formData);
   };
 
   // =====================================================
   // EDIT
   // =====================================================
-
-  const handleEdit = (
-    data: KhachSanType
-  ) => {
-    setEditingHotel(data);
-
-    setFormValues({
-      TenKhachSan:
-        data.tenKhachSan ?? "",
-
-      DiaChi:
-        data.diaChi ?? "",
-
-      ThanhPho:
-        data.thanhPho ?? "",
-
-      SoSao:
-        String(data.soSao ?? ""),
-
-      GioNhanPhong:
-        data.gioNhanPhong ?? "",
-
-      GioTraPhong:
-        data.gioTraPhong ?? "",
-
-      MoTa:
-        data.moTa ?? "",
-    });
-
-    setRoomTypes([]);
-
-    setAmenities([]);
-
-    setNewAmenity("");
-
-    setFormErrors({});
-
-    setUploadedImages([]);
-
-    setOpen(true);
-  };
-
-  // =====================================================
-  // DELETE
-  // =====================================================
-
-  const handleDelete = (
-    item: KhachSanType
-  ) => {
-    const confirmed = window.confirm(
-      `Bạn có chắc chắn muốn xóa khách sạn "${item.tenKhachSan}"?`
-    );
-
-    if (confirmed) {
-      deleteMutation.mutate(item.id);
-    }
-  };
 
   // =====================================================
   // QUERY
@@ -1165,11 +974,7 @@ const OwnerHotelListPage = () => {
 
       <ConfirmationModal
         open={open}
-        title={
-          editingHotel
-            ? "Chỉnh sửa khách sạn"
-            : "Thêm khách sạn"
-        }
+        title="Thêm khách sạn"
         onOk={handleSubmit}
         onCancel={handleClose}
         confirmLoading={isProcessing}
@@ -1376,6 +1181,48 @@ const OwnerHotelListPage = () => {
               </Form.Group>
             </Col>
           </Row>
+
+          <Row className="g-3">
+            <Col md={6}>
+              <Form.Group className="mb-3" controlId="hotelLatitude">
+                <Form.Label>Vĩ độ</Form.Label>
+                <Form.Control
+                  type="number"
+                  step="any"
+                  value={formValues.ViDo}
+                  onChange={(e) => setFormValues({ ...formValues, ViDo: e.target.value })}
+                  isInvalid={Boolean(formErrors.ViDo)}
+                  disabled={isProcessing}
+                />
+                <Form.Control.Feedback type="invalid">{formErrors.ViDo}</Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group className="mb-3" controlId="hotelLongitude">
+                <Form.Label>Kinh độ</Form.Label>
+                <Form.Control
+                  type="number"
+                  step="any"
+                  value={formValues.KinhDo}
+                  onChange={(e) => setFormValues({ ...formValues, KinhDo: e.target.value })}
+                  isInvalid={Boolean(formErrors.KinhDo)}
+                  disabled={isProcessing}
+                />
+                <Form.Control.Feedback type="invalid">{formErrors.KinhDo}</Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Form.Group className="mb-3" controlId="hotelCancellationPolicy">
+            <Form.Label>Chính sách hủy</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={2}
+              value={formValues.ChinhSachHuy}
+              onChange={(e) => setFormValues({ ...formValues, ChinhSachHuy: e.target.value })}
+              disabled={isProcessing}
+            />
+          </Form.Group>
 
           <Row className="g-3">
             <Col md={6}>

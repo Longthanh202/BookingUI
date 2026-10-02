@@ -1,19 +1,21 @@
 import api from "../axiosInstance";
 import { HotelFilterParams, KhachSanListOwnerParams, KhachSanListParams } from "../../types/khachsan/KhachSan.types";
-import { KhachSan } from "../../types/khachsan/KhachSan";
+
+const toIsoDate = (value?: string | null) => {
+  if (!value) return value;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    return new Date(`${value}T00:00:00`).toISOString();
+  }
+  return value;
+};
 
 const toHotelSearchParams = (dto: HotelFilterParams | KhachSanListParams) => ({
   keyword: dto.Keyword,
-  thanhPho: dto.ThanhPho,
-  viDo: dto.ViDo,
-  kinhDo: dto.KinhDo,
-  soSao: dto.SoSao,
-  trangThai: dto.TrangThai,
   soKhach: "SoKhach" in dto ? dto.SoKhach : undefined,
-  ngayNhanPhong: "NgayNhanPhong" in dto ? dto.NgayNhanPhong : undefined,
-  ngayTraPhong: "NgayTraPhong" in dto ? dto.NgayTraPhong : undefined,
-  page: dto.Page,
-  pageSize: dto.PageSize,
+  ngayNhanPhong: "NgayNhanPhong" in dto ? toIsoDate(dto.NgayNhanPhong) : undefined,
+  ngayTraPhong: "NgayTraPhong" in dto ? toIsoDate(dto.NgayTraPhong) : undefined,
+  page: Math.max(1, Number(dto.Page) || 1),
+  pageSize: Math.min(100, Math.max(1, Number(dto.PageSize) || 10)),
 });
 
 export const GetDanhSachKhachSanOwner = async (dto: KhachSanListOwnerParams) => {
@@ -23,12 +25,24 @@ export const GetDanhSachKhachSanOwner = async (dto: KhachSanListOwnerParams) => 
   return res.data;
 };
 
-export const searchHotelsAdmin = async (dto: Record<string, unknown>) => {
+export const getOwnerHotelOptions = async (ownerId: string) =>
+  (await api.get("/api/hotels/options", { params: { ownerId } })).data;
+
+export interface AdminHotelSearchParams {
+  keyword?: string;
+  thanhPho?: string;
+  soSao?: number;
+  trangThai?: string;
+  page?: number;
+  pageSize?: number;
+}
+
+export const searchHotelsAdmin = async (dto: AdminHotelSearchParams) => {
   const res = await api.get("/api/hotels/admin/search", { params: dto });
   return res.data;
 };
 
-export const ThemKhachSan = async (dto: KhachSan | FormData) => {
+export const ThemKhachSan = async (dto: FormData) => {
   try {
     const res = await api.post("/api/hotels", dto, {
       headers: {
@@ -46,15 +60,34 @@ export const ThemKhachSan = async (dto: KhachSan | FormData) => {
   }
 };
 
-export const CapNhatKhachSan = async (dto: KhachSan | FormData) => {
-  const res = await api.put("/api/hotels", dto);
+export interface UpdateHotelRequest {
+  tenKhachSan: string;
+  moTa: string;
+  chinhSachHuy: string;
+  diaChi: string;
+  thanhPho: string;
+  viDo: number;
+  kinhDo: number;
+  soSao: number;
+  gioNhanPhong: string;
+  gioTraPhong: string;
+}
+
+export const CapNhatKhachSan = async (hotelId: string, dto: UpdateHotelRequest) => {
+  const res = await api.put(`/api/hotels/owner/${hotelId}`, dto);
   return res.data;
 };
 
-export const XoaKhachSan = async (id: string) => {
-  const res = await api.delete(`/api/hotels/${id}`);
-  return res.data;
+export const addHotelImages = async (hotelId: string, images: File[]) => {
+  const formData = new FormData();
+  images.forEach((image) => formData.append("images", image));
+  return (await api.post(`/api/hotels/owner/${hotelId}/images`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  })).data;
 };
+
+export const deleteHotelImage = async (hotelId: string, imageId: string | number) =>
+  (await api.delete(`/api/hotels/owner/${hotelId}/images/${imageId}`)).data;
 
 export const updateHotelStatus = async (id: string, trangThai: string) =>
   (await api.put(`/api/hotels/admin/${id}/status`, { trangThai })).data;

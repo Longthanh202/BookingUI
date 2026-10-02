@@ -10,6 +10,7 @@ export interface KhachSan{
     soSao: number;
     gioNhanPhong: string;
     gioTraPhong: string;
+    chinhSachHuy?: string | null;
     trangThai: string;
     ngayTao: Date;
     fullName: string;

@@ -1,11 +1,11 @@
 import api from "../axiosInstance";
 
-export interface CreateRoomRequest { LoaiPhongId: string; SoPhong?: string; Tang?: number; TrangThai?: string; }
+export interface CreateRoomRequest { loaiPhongId: string; soPhong: string; tang: number; trangThai: string; }
 
 export const createRoom = async (payload: CreateRoomRequest) => (await api.post("/api/rooms", payload)).data;
 
 export interface UpdateRoomRequest { soPhong: string; tang: number; trangThai: string; }
-export interface RoomPriceRequest { loaiPhongId: string; gia: number; ngayBatDau: string; ngayKetThuc: string; }
+export interface RoomPriceRequest { loaiPhongId: string; gia: number; ngayBatDau: string; ngayKetThuc: string | null; }
 
 export const getRoomsByRoomType = async (roomTypeId: string) =>
 	(await api.get(`/api/rooms/by-room-type/${roomTypeId}`)).data;

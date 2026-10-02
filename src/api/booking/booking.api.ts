@@ -9,7 +9,12 @@ export const getAllBookingsHistory = (
   pageIndex: number,
   pageSize: number
 ) => {
-  return api.get("/api/bookings/history", { params: { pageIndex, pageSize } })
+  return api.get("/api/bookings/history", {
+    params: {
+      pageIndex: Math.max(1, Math.trunc(pageIndex)),
+      pageSize: Math.max(1, Math.trunc(pageSize)),
+    },
+  })
     .then((res) => res.data);
 };
 
@@ -55,7 +60,16 @@ export const getOwnerBookingCustomers = async (hotelId: string) =>
 export const getBookingStatusOptions = async () =>
   (await api.get("/api/bookings/status-options")).data;
 
-export const getOwnerAllBookings = (payload: { page?: number; pageSize?: number }) =>
+export interface OwnerBookingSearchRequest {
+  hotelId?: string | null;
+  customerId?: string | null;
+  trangThai?: string | null;
+  ngayTao?: string | null;
+  page?: number;
+  pageSize?: number;
+}
+
+export const getOwnerAllBookings = (payload: OwnerBookingSearchRequest) =>
   api.post("/api/bookings/owner/all", payload).then((res) => res.data);
 
 export const getOwnerBookingStatistics = (payload: { hotelId: string; startDate: string; endDate: string; status?: string }) =>
@@ -67,10 +81,10 @@ export const cancelBooking = async (id: string) =>
   (await api.put(`/api/bookings/${id}/cancel`)).data;
 
 export interface AdminBookingSearchRequest {
-  hotelId?: string;
-  customerId?: string;
-  trangThai?: string;
-  ngayTao?: string;
+  hotelId?: string | null;
+  customerId?: string | null;
+  trangThai?: string | null;
+  ngayTao?: string | null;
   page?: number;
   pageSize?: number;
 }

@@ -21,7 +21,6 @@ import {
   faSave,
   faPlus,
   faTrash,
-  faImage,
   faHotel,
   faBed,
   faWifi,
@@ -41,6 +40,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   getHotelDetailById,
   CapNhatKhachSan,
+  addHotelImages,
+  deleteHotelImage,
+  UpdateHotelRequest,
 } from "../../api/khachsan/khachsan.api";
 
 import {
@@ -53,6 +55,7 @@ import {
   getOwnerRoomTypes,
   createRoomTypes,
 } from "../../api/loaiphong/loaiphong.api";
+import { createAmenity } from "../../api/amenity/amenity.api";
 
 import { RoomResponse } from "../../types/loaiphong/RoomResponse";
 import { showToast } from "../../components/common/Toast";
@@ -81,6 +84,9 @@ interface HotelDetailData {
   soSao: number;
   gioNhanPhong: string;
   gioTraPhong: string;
+  chinhSachHuy?: string | null;
+  viDo?: number | null;
+  kinhDo?: number | null;
   trangThai?: string | null;
   khachSanImages?: Array<{
     id: number | string;
@@ -516,15 +522,26 @@ const handleCheckOut = (bookingId: string) => {
   const updateMutation = useMutation<
     any,
     unknown,
-    FormData,
+    { payload: UpdateHotelRequest; images: File[]; removedImageIds: Array<number | string> },
     unknown
   >({
-    mutationFn: CapNhatKhachSan,
+    mutationFn: async ({ payload, images, removedImageIds }) => {
+      const result = await CapNhatKhachSan(id ?? "", payload);
+      if (images.length) {
+        await addHotelImages(id ?? "", images);
+      }
+      for (const imageId of removedImageIds) {
+        await deleteHotelImage(id ?? "", imageId);
+      }
+      return result;
+    },
 
     onSuccess: () => {
       showToast(
         "Cập nhật thông tin khách sạn thành công"
       );
+      setUploadedImages([]);
+      setRemovedImageIds([]);
 
       queryClient.invalidateQueries({
         queryKey: ["khachsans"],
@@ -539,10 +556,8 @@ const handleCheckOut = (bookingId: string) => {
       });
     },
 
-    onError: () => {
-      showToast(
-        "Cập nhật khách sạn thất bại"
-      );
+    onError: (error: any) => {
+      showToast(error?.response?.data?.message || "Cập nhật khách sạn thất bại");
     },
   });
 
@@ -647,14 +662,9 @@ const handleCheckOut = (bookingId: string) => {
 
     const newFiles = Array.from(files);
 
-    if (
-      newFiles.length +
-        existingImages.length +
-        uploadedImages.length >
-      8
-    ) {
+    if (newFiles.length + uploadedImages.length > 20) {
       showToast(
-        "Tối đa 8 ảnh cho khách sạn."
+        "Tối đa 20 ảnh trong một lần thêm."
       );
 
       return;
@@ -710,73 +720,19 @@ const handleCheckOut = (bookingId: string) => {
       return;
     }
 
-    const roomPayload = roomTypes.map((room) => ({
-      khachSanId: id ?? room.id ?? "",
-      tenLoaiPhong: room.tenLoaiPhong ?? "",
-      soKhachToiDa: Number(room.soKhachToiDa ?? 1),
-      kieuGiuong: room.kieuGiuong ?? "",
-      moTa: room.moTa ?? "",
-    }));
-
-    const formData = new FormData();
-
-    formData.append("id", id ?? "");
-
-    formData.append(
-      "TenKhachSan",
-      hotelForm.tenKhachSan
-    );
-
-    formData.append(
-      "DiaChi",
-      hotelForm.diaChi
-    );
-
-    formData.append(
-      "ThanhPho",
-      hotelForm.thanhPho
-    );
-
-    formData.append(
-      "SoSao",
-      hotelForm.soSao.toString()
-    );
-
-    formData.append(
-      "GioNhanPhong",
-      hotelForm.gioNhanPhong
-    );
-
-    formData.append(
-      "GioTraPhong",
-      hotelForm.gioTraPhong
-    );
-
-    formData.append(
-      "MoTa",
-      hotelForm.moTa
-    );
-
-    formData.append(
-      "LoaiPhongs",
-      JSON.stringify(roomPayload)
-    );
-
-    formData.append(
-      "TienIchs",
-      JSON.stringify(amenities)
-    );
-
-    formData.append(
-      "RemovedImageIds",
-      JSON.stringify(removedImageIds)
-    );
-
-    uploadedImages.forEach((file) => {
-      formData.append("Files", file);
-    });
-
-    updateMutation.mutate(formData);
+    const payload: UpdateHotelRequest = {
+      tenKhachSan: hotelForm.tenKhachSan,
+      moTa: hotelForm.moTa,
+      chinhSachHuy: hotel?.chinhSachHuy ?? "",
+      diaChi: hotelForm.diaChi,
+      thanhPho: hotelForm.thanhPho,
+      viDo: Number(hotel?.viDo ?? 0),
+      kinhDo: Number(hotel?.kinhDo ?? 0),
+      soSao: Number(hotelForm.soSao),
+      gioNhanPhong: hotelForm.gioNhanPhong,
+      gioTraPhong: hotelForm.gioTraPhong,
+    };
+    updateMutation.mutate({ payload, images: uploadedImages, removedImageIds });
   };
 
   /*
@@ -1134,8 +1090,8 @@ const handleCheckOut = (bookingId: string) => {
                           )
                         )}
 
-                        {imageList.length <
-                          8 && (
+                        {uploadedImages.length <
+                          20 && (
                           <div
                             onClick={() =>
                               fileInputRef.current?.click()
@@ -2587,20 +2543,18 @@ const handleCheckOut = (bookingId: string) => {
                 return;
               }
 
-              setAmenities((prev) => [
-                ...prev,
-                {
-                  tenTienIch:
-                    newAmenityLabel.trim(),
-                },
-              ]);
-
-              setNewAmenityLabel("");
-
-              setShowAddAmenityModal(
-                false
-              );
+              createAmenity({
+                tenTienIch: newAmenityLabel.trim(),
+                khachSanId: id ?? "",
+              }).then(() => {
+                setNewAmenityLabel("");
+                setShowAddAmenityModal(false);
+                queryClient.invalidateQueries({ queryKey: ["hotelDetailOwner", id] });
+              }).catch((error: any) => {
+                showToast(error?.response?.data?.message || "Thêm tiện ích thất bại");
+              });
             }}
+            disabled={!id || !newAmenityLabel.trim()}
           >
             <FontAwesomeIcon
               icon={faPlus}
