@@ -9,6 +9,7 @@ import CustomerHeader from "../../components/customer/home/CustomerHeader/Custom
 import { createBooking } from "../../api/booking/booking.api";
 import { BookingQrPayment, getBookingQr } from "../../api/payment/payment.api";
 import { showToast } from "../../components/common/Toast";
+import { BookingRequest } from "../../types/booking/BookingRequest";
 
 const extractBookingId = (response: any): string => {
   const candidates = [
@@ -50,9 +51,8 @@ const PaymentPage = () => {
     rooms = [],
     dates,
     guests,
+    maKhuyenMai,
   } = (location.state as any) || {};
-
-  console.log("PaymentPage location.state:", location.state);
 
   const [paymentMethod, setPaymentMethod] =
     useState<"cash" | "qr">("cash");
@@ -227,34 +227,24 @@ const PaymentPage = () => {
     setLoading(true);
 
     try {
-      const payload = {
+      const payload: BookingRequest = {
         khachSanId: hotelId,
-
         ngayNhanPhong: startDate.toISOString(),
-
         ngayTraPhong: endDate.toISOString(),
-
-        phuongThucThanhToan: paymentMethod === "qr" ? "MOMO" : "TIEN_MAT",
-
+        phuongThucThanhToan: paymentMethod,
+        maKhuyenMai: maKhuyenMai?.trim() || null,
         danhSachPhong: rooms.map((room: any) => ({
           loaiPhongId: room.id,
           soLuong: Number(room.quantity),
         })),
       };
 
-      console.log(
-        "Create booking payload:",
-        payload
-      );
-
       if (paymentMethod === "qr") {
         let bookingId = qrBookingId;
 
         if (!bookingId) {
-          const bookingResponse = await createBooking(payload as any);
-          console.log("Booking response:", bookingResponse);
+          const bookingResponse = await createBooking(payload);
           bookingId = extractBookingId(bookingResponse);
-          console.log("Extracted bookingId:", bookingId);
 
           if (!bookingId) {
             throw new Error("Đơn đã được tạo nhưng response không có mã đặt phòng.");
@@ -280,19 +270,15 @@ const PaymentPage = () => {
         return;
       }
 
-      await createBooking(payload as any);
+      await createBooking(payload);
 
       showToast(
         "Đặt phòng thành công!"
       );
 
       navigate("/bookings");
-    } catch (error) {
-      console.error(error);
-
-      showToast(
-        "Thanh toán thất bại. Vui lòng thử lại."
-      );
+    } catch (error: any) {
+      showToast(error?.response?.data?.message || error?.message || "Thanh toán thất bại. Vui lòng thử lại.", "error");
     } finally {
       setLoading(false);
     }

@@ -6,6 +6,14 @@ import { RoomSearchRequest } from "../types/loaiphong/RoomSearchRequest";
 export const useHotelRooms = (
   request: RoomSearchRequest
 ) => {
+  const validDates = Boolean(
+    request.hotelId &&
+    request.soKhach > 0 &&
+    request.ngayNhan &&
+    request.ngayTra &&
+    request.ngayTra > request.ngayNhan
+  );
+
   return useQuery({
     queryKey: [
       "hotel-room",
@@ -21,6 +29,7 @@ export const useHotelRooms = (
         request.ngayNhan,
         request.ngayTra
       ),
+    enabled: validDates,
     staleTime: 1000 * 60 * 5,
   });
 };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -8,6 +8,11 @@ import "./CustomerLoginPage.css";
 
 const CustomerLoginPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const returnTo = (location.state as any)?.redirectTo || "/";
+  const returnState = (location.state as any)?.bookingData
+    ? { state: (location.state as any).bookingData }
+    : undefined;
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -17,9 +22,9 @@ const CustomerLoginPage = () => {
     try {
       const response = await googleLoginApi(credential);
       localStorage.setItem("accessToken", response.token);
-      navigate("/");
-    } catch {
-      setError("Đăng nhập Google thất bại. Vui lòng thử lại.");
+      navigate(returnTo, returnState);
+    } catch (error: any) {
+      setError(error?.response?.data?.message || "Đăng nhập Google thất bại. Vui lòng thử lại.");
     }
   };
 
@@ -34,7 +39,7 @@ const CustomerLoginPage = () => {
     try {
       const response = await loginApi(username.trim(), password);
       localStorage.setItem("accessToken", response.token);
-      navigate("/");
+      navigate(returnTo, returnState);
     } catch (requestError: any) {
       setError(requestError?.response?.data?.message || "Tên đăng nhập hoặc mật khẩu chưa đúng.");
     } finally {

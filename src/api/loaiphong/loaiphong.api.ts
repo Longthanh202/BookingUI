@@ -12,8 +12,8 @@ export const getHotelRooms = async (
     {
       khachSanId,
       soKhach,
-      ngayNhan,
-      ngayTra,
+      ngayNhan: new Date(`${ngayNhan}T00:00:00`).toISOString(),
+      ngayTra: new Date(`${ngayTra}T00:00:00`).toISOString(),
     }
   );
 

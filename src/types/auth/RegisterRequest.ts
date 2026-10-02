@@ -5,5 +5,6 @@ export interface RegisterRequest
     fullName: string;
     email: string;
     phone: string;
-    address: string
+    address: string;
+    createBy: null;
 }

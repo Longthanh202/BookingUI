@@ -26,8 +26,21 @@ export const getTags = async () => {
 };
 
 export const getHotelsByTag = async (slug: string, page = 1, pageSize = 10) => {
-  const res = await api.get(`/api/tags/${encodeURIComponent(slug)}/hotels`, { params: { page, pageSize } });
+  const res = await api.get(`/api/tags/${encodeURIComponent(slug)}/hotels`, {
+    params: {
+      page: Math.max(1, Math.trunc(page)),
+      pageSize: Math.min(100, Math.max(1, Math.trunc(pageSize))),
+    },
+  });
   return res.data;
+};
+
+const toIsoDate = (value?: string | null) => {
+  if (!value) return value;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    return new Date(`${value}T00:00:00`).toISOString();
+  }
+  return value;
 };
 
 // export const getRooms = async () => {
@@ -39,19 +52,14 @@ export const FilterKhachSan = async (dto: HotelFilterParams) => {
   const res = await api.get("/api/hotels/search", {
     params: {
       keyword: dto.Keyword,
-      thanhPho: dto.ThanhPho,
-      viDo: dto.ViDo,
-      kinhDo: dto.KinhDo,
-      soSao: dto.SoSao,
-      trangThai: dto.TrangThai,
       soKhach: dto.SoKhach,
-      ngayNhanPhong: dto.NgayNhanPhong,
-      ngayTraPhong: dto.NgayTraPhong,
-      page: dto.Page,
-      pageSize: dto.PageSize,
+      ngayNhanPhong: toIsoDate(dto.NgayNhanPhong),
+      ngayTraPhong: toIsoDate(dto.NgayTraPhong),
+      page: Math.max(1, Number(dto.Page) || 1),
+      pageSize: Math.min(100, Math.max(1, Number(dto.PageSize) || 10)),
     },
   });
-  return res.data.data;
+  return res.data;
 };
 
 export const getRoomById = async (id: string | number) => {

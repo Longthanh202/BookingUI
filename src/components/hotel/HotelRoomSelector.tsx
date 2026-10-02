@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Button,
   Card,
@@ -17,20 +17,43 @@ interface Props {
   hotelName: string;
   hotelAddress: string;
   hotelImage?: string;
+  checkInTime?: string;
+  checkOutTime?: string;
+  initialCheckIn?: string | null;
+  initialCheckOut?: string | null;
+  initialGuests?: number;
 }
 
-export const HotelRoomSelector = ({ hotelId, hotelName, hotelAddress, hotelImage }: Props) => {
+export const HotelRoomSelector = ({
+  hotelId,
+  hotelName,
+  hotelAddress,
+  hotelImage,
+  checkInTime = "14:00",
+  checkOutTime = "12:00",
+  initialCheckIn,
+  initialCheckOut,
+  initialGuests = 1,
+}: Props) => {
   const navigate = useNavigate();
   const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const formatDate = (date: Date) => {
+    const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+    return localDate.toISOString().split("T")[0];
+  };
 
-    const tomorrow = new Date();
-    tomorrow.setDate(today.getDate() + 1);
+  const bookingDateTime = (date: string, time: string) => {
+    const normalizedTime = time.slice(0, 5) || "00:00";
+    return new Date(`${date}T${normalizedTime}:00`).toISOString();
+  };
 
-    const formatDate = (date: Date) => date.toISOString().split("T")[0];
-
-    const [ngayNhan, setNgayNhan] = useState(formatDate(today));
-    const [ngayTra, setNgayTra] = useState(formatDate(tomorrow));
-    const [soKhach, setSoKhach] = useState(1);
+    const dateInputValue = (value?: string | null) => value ? value.slice(0, 10) : "";
+    const [ngayNhan, setNgayNhan] = useState(dateInputValue(initialCheckIn) || formatDate(today));
+    const [ngayTra, setNgayTra] = useState(dateInputValue(initialCheckOut) || formatDate(tomorrow));
+    const [soKhach, setSoKhach] = useState(initialGuests);
     
     const request = useMemo(
     () => ({
@@ -47,16 +70,28 @@ export const HotelRoomSelector = ({ hotelId, hotelName, hotelAddress, hotelImage
     ]
   );
 
- const {
-    data: rooms = [],
-    isLoading,
-  } = useHotelRooms(request);
+  const { data, isLoading, isError, error } = useHotelRooms(request);
+  const rooms = useMemo(
+    () => Array.isArray(data) ? data : (data as any)?.data ?? (data as any)?.items ?? [],
+    [data]
+  );
 
 
   const [selectedRooms, setSelectedRooms] = useState<
     Record<string, number>
   >({});
 
+  useEffect(() => {
+    setSelectedRooms({});
+  }, [hotelId, ngayNhan, ngayTra, soKhach]);
+
+  useEffect(() => {
+    if (initialCheckIn) setNgayNhan(initialCheckIn.slice(0, 10));
+    if (initialCheckOut) setNgayTra(initialCheckOut.slice(0, 10));
+    if (initialGuests && initialGuests > 0) setSoKhach(initialGuests);
+  }, [initialCheckIn, initialCheckOut, initialGuests]);
+
+  const dateRangeValid = Boolean(ngayNhan && ngayTra && ngayTra > ngayNhan);
 
   const handleSelect = (roomId: string, quantity: number) => {
     setSelectedRooms((prev) => ({
@@ -66,7 +101,7 @@ export const HotelRoomSelector = ({ hotelId, hotelName, hotelAddress, hotelImage
   };
 
   const tongTien = useMemo(() => {
-    return rooms.reduce((sum, room) => {
+    return rooms.reduce((sum: number, room: RoomResponse) => {
       return (
         sum +
         room.tongTien *
@@ -76,13 +111,12 @@ export const HotelRoomSelector = ({ hotelId, hotelName, hotelAddress, hotelImage
   }, [rooms, selectedRooms]);
 
   const selectedRoomList = rooms.filter(
-    (room) => (selectedRooms[room.id] ?? 0) > 0
+    (room: RoomResponse) => (selectedRooms[room.id] ?? 0) > 0
   );
 
 const canBook = Boolean(
   selectedRoomList.length > 0 &&
-  ngayNhan &&
-  ngayTra &&
+  dateRangeValid &&
   soKhach > 0
 );
 
@@ -92,7 +126,7 @@ const canBook = Boolean(
     return;
   }
 
-  const bookRooms = selectedRoomList.map((room) => ({
+  const bookRooms = selectedRoomList.map((room: RoomResponse) => ({
     id: room.id,
     name: `${hotelName} - ${room.tenLoaiPhong}`,
     quantity: selectedRooms[room.id] ?? 0,
@@ -107,7 +141,7 @@ const canBook = Boolean(
     state: {
       hotelId,
       rooms: bookRooms,
-      dates: [ngayNhan, ngayTra],
+      dates: [bookingDateTime(ngayNhan, checkInTime), bookingDateTime(ngayTra, checkOutTime)],
       guests: soKhach,
     },
   });
@@ -169,6 +203,7 @@ const canBook = Boolean(
                 <Form.Control
                   type="date"
                   value={ngayNhan}
+                  min={formatDate(today)}
                   onChange={(e) =>
                     setNgayNhan(e.target.value)
                   }
@@ -187,6 +222,7 @@ const canBook = Boolean(
                 <Form.Control
                   type="date"
                   value={ngayTra}
+                  min={ngayNhan || formatDate(tomorrow)}
                   onChange={(e) =>
                     setNgayTra(e.target.value)
                   }
@@ -265,7 +301,7 @@ const canBook = Boolean(
               {selectedRoomList.length > 0 ? (
                 <div className="d-flex flex-column gap-2">
 
-                  {selectedRoomList.map((room) => (
+                  {selectedRoomList.map((room: RoomResponse) => (
                     <div
                       key={room.id}
                       className="d-flex justify-content-between align-items-center bg-white rounded-3 px-3 py-2"
@@ -283,6 +319,15 @@ const canBook = Boolean(
                   ))}
 
                 </div>
+              ) : isError ? (
+                <Card className="border-0 shadow-sm rounded-4">
+                  <Card.Body className="text-center py-5">
+                    <div className="fw-semibold">Không thể tìm phòng trong khoảng thời gian này</div>
+                    <div className="text-secondary small mt-1">
+                      {(error as any)?.response?.data?.message || "Hãy kiểm tra ngày lưu trú và thử lại."}
+                    </div>
+                  </Card.Body>
+                </Card>
               ) : (
                 <div className="text-secondary">
                   Vui lòng chọn ít nhất một phòng bên dưới.
@@ -354,6 +399,11 @@ const canBook = Boolean(
         </div>
       </div>
 
+      {!dateRangeValid && (
+        <div className="alert alert-warning" role="alert">
+          Ngày trả phòng phải sau ngày nhận phòng.
+        </div>
+      )}
 
       {/* Loading */}
       {isLoading ? (
@@ -445,7 +495,7 @@ const canBook = Boolean(
                     </div>
 
                     <div className="fw-semibold">
-                      Không tìm thấy phòng
+                      {dateRangeValid ? "Không tìm thấy phòng" : "Chọn ngày lưu trú hợp lệ"}
                     </div>
 
                     <div className="text-secondary small">

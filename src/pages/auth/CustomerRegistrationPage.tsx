@@ -37,7 +37,7 @@ const CustomerRegistrationPage = () => {
     try {
       const input: RegisterRequest = {
         username: form.username.trim(), password: form.password, fullName: form.fullName.trim(),
-        phone: form.phone.trim(), address: form.address.trim(), email: form.email.trim(),
+        phone: form.phone.trim(), address: form.address.trim(), email: form.email.trim(), createBy: null,
       };
       await registerCustomer(input);
       showToast("Đăng ký thành công", "success");

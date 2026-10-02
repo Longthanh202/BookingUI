@@ -79,13 +79,10 @@ const HotelDetailPage = () => {
   });
 
   const hotel = data;
-  const images = useMemo(
-    () =>
-      (data?.khachSanImages ?? [])
-        .map((item) => item.url)
-        .filter(Boolean) as string[],
-    [data?.khachSanImages],
-  );
+  const images = useMemo(() => {
+    const imageUrls = data?.khachSanImages?.map((item) => item.url) ?? data?.urls ?? [];
+    return imageUrls.filter(Boolean) as string[];
+  }, [data?.khachSanImages, data?.urls]);
   const imageCount = images.length;
   const imageToShow =
     images[activeImageIndex] ||
@@ -461,6 +458,11 @@ const HotelDetailPage = () => {
               hotelName={hotel.tenKhachSan}
               hotelAddress={hotel.diaChi}
               hotelImage={images[0]}
+              checkInTime={hotel.gioNhanPhong}
+              checkOutTime={hotel.gioTraPhong}
+              initialCheckIn={detailFilter.NgayNhanPhong}
+              initialCheckOut={detailFilter.NgayTraPhong}
+              initialGuests={detailFilter.SoKhach ?? 1}
             />
           )}
         </Container>

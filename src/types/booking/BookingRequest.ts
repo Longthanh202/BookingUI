@@ -7,6 +7,7 @@ export interface BookingRequest {
   khachSanId: string;
   ngayNhanPhong: string;
   ngayTraPhong: string;
-  phuongThucThanhToan: string;
+  phuongThucThanhToan: "cash" | "qr";
+  maKhuyenMai?: string | null;
   danhSachPhong: BookingRoomRequest[];
 }

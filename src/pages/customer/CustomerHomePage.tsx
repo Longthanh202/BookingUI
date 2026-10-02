@@ -3,7 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { faHeart, faMagnifyingGlass, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FilterKhachSan, getHotelsByTag, getTags } from "../../api/home/home.api";
+import { FilterKhachSan, getBanners, getHotelsByTag, getTags } from "../../api/home/home.api";
+import { getProvinces } from "../../api/province/province.api";
 import { getUser } from "../../utils/auth/auth";
 import { HotelFilterParams } from "../../types/khachsan/KhachSan.types";
 import "./CustomerHomePage.css";
@@ -61,6 +62,26 @@ const CustomerHomePage = () => {
     staleTime: 1000 * 60 * 5,
   });
   const { data: tagData } = useQuery<DiscoveryTag[]>({ queryKey: ["stayro-public-tags"], queryFn: () => getTags(), staleTime: 1000 * 60 * 5 });
+  const { data: bannerData, isError: isBannerError } = useQuery({
+    queryKey: ["stayro-active-banners"],
+    queryFn: getBanners,
+    staleTime: 1000 * 60 * 5,
+  });
+  const { data: provinceData, isError: isProvinceError } = useQuery({
+    queryKey: ["stayro-provinces"],
+    queryFn: getProvinces,
+    staleTime: 1000 * 60 * 60,
+  });
+  const banners = useMemo(() => {
+    const response = bannerData as any;
+    const items = Array.isArray(response) ? response : response?.data ?? response?.items ?? [];
+    return Array.isArray(items) ? items : [];
+  }, [bannerData]);
+  const provinces = useMemo(() => {
+    const response = provinceData as any;
+    const items = Array.isArray(response) ? response : response?.data ?? response?.items ?? [];
+    return Array.isArray(items) ? items : [];
+  }, [provinceData]);
   const tags = useMemo(() => {
     const response = tagData as any;
     const items = Array.isArray(response) ? response : response?.data ?? response?.items ?? [];
@@ -76,26 +97,34 @@ const CustomerHomePage = () => {
     const items = Array.isArray(response) ? response : response?.data ?? response?.items ?? response?.results ?? [];
     return Array.isArray(items) ? items : [];
   }, [taggedHotelData]);
-  const hotels = useMemo(() => (selectedTag ? taggedHotels : Array.isArray(hotelData) ? hotelData : []).slice(0, 6), [hotelData, selectedTag, taggedHotels]);
+  const searchHotels = useMemo(() => {
+    const response = hotelData as any;
+    const items = Array.isArray(response) ? response : response?.data ?? response?.items ?? response?.results ?? [];
+    return Array.isArray(items) ? items : [];
+  }, [hotelData]);
+  const hotels = useMemo(() => (selectedTag ? taggedHotels : searchHotels).slice(0, 6), [searchHotels, selectedTag, taggedHotels]);
   const listLoading = selectedTag ? isTagLoading : isLoading;
   const listError = selectedTag ? isTagError : isError;
 
   const handleSearch = (event: FormEvent) => {
     event.preventDefault();
+    if ((checkIn && !checkOut) || (!checkIn && checkOut) || (checkIn && checkOut && checkOut <= checkIn)) {
+      return;
+    }
     setSelectedTag(null);
     const nextFilter: HotelFilterParams = {
       Keyword: destination,
       SoKhach: guests,
-      NgayNhanPhong: checkIn || null,
-      NgayTraPhong: checkOut || null,
+      NgayNhanPhong: checkIn ? new Date(`${checkIn}T00:00:00`).toISOString() : null,
+      NgayTraPhong: checkOut ? new Date(`${checkOut}T00:00:00`).toISOString() : null,
       Page: 1,
     };
     setFilter(nextFilter);
     const params = new URLSearchParams({
       Keyword: destination,
       SoKhach: String(guests),
-      NgayNhanPhong: checkIn,
-      NgayTraPhong: checkOut,
+      NgayNhanPhong: nextFilter.NgayNhanPhong || "",
+      NgayTraPhong: nextFilter.NgayTraPhong || "",
     });
     navigate(`/search-results?${params.toString()}`);
   };
@@ -118,7 +147,15 @@ const CustomerHomePage = () => {
           <div className="stayro-collage" aria-label="Các điểm đến nổi bật"><div className="stayro-photo stayro-photo--one" /><div className="stayro-photo stayro-photo--two" /><div className="stayro-photo stayro-photo--three" /><strong>★ 4.9 · được yêu thích</strong></div>
         </div></section>
 
-        <section className="stayro-search-wrap stayro-container" id="search"><form className="stayro-search" onSubmit={handleSearch}><div className="stayro-tabs"><b>Khách sạn</b><span>Resort</span><span>Homestay</span><span>Villa</span></div><div className="stayro-fields"><label><small>📍 Điểm đến</small><input value={destination} onChange={(event) => setDestination(event.target.value)} placeholder="Bạn muốn đi đâu?" /></label><label><small>📅 Nhận phòng</small><input type="date" value={checkIn} onChange={(event) => setCheckIn(event.target.value)} /></label><label><small>📅 Trả phòng</small><input type="date" value={checkOut} onChange={(event) => setCheckOut(event.target.value)} /></label><label><small>🧑‍🤝‍🧑 Số khách</small><input type="number" min="1" max="10" value={guests} onChange={(event) => setGuests(Number(event.target.value) || 1)} /></label><button className="stayro-search-button" type="submit"><FontAwesomeIcon icon={faMagnifyingGlass} /> Tìm chỗ ở</button></div></form></section>
+        <section className="stayro-search-wrap stayro-container" id="search"><form className="stayro-search" onSubmit={handleSearch}><div className="stayro-tabs"><b>Khách sạn</b><span>Resort</span><span>Homestay</span><span>Villa</span></div><div className="stayro-fields"><label><small>📍 Điểm đến</small><input list="stayro-provinces" value={destination} onChange={(event) => setDestination(event.target.value)} placeholder="Bạn muốn đi đâu?" /><datalist id="stayro-provinces">{provinces.map((province: any, index: number) => <option key={province.code || index} value={province.full_name || province.name || province.name_en} />)}</datalist></label><label><small>📅 Nhận phòng</small><input type="date" value={checkIn} onChange={(event) => setCheckIn(event.target.value)} /></label><label><small>📅 Trả phòng</small><input type="date" value={checkOut} min={checkIn || undefined} onChange={(event) => setCheckOut(event.target.value)} /></label><label><small>🧑‍🤝‍🧑 Số khách</small><input type="number" min="1" max="10" value={guests} onChange={(event) => setGuests(Number(event.target.value) || 1)} /></label><button className="stayro-search-button" type="submit"><FontAwesomeIcon icon={faMagnifyingGlass} /> Tìm chỗ ở</button></div></form>{isProvinceError && <p role="status" className="text-muted mt-2 mb-0">Không thể tải danh sách tỉnh/thành; bạn vẫn có thể nhập điểm đến.</p>}</section>
+
+        {banners.length > 0 && <section className="stayro-container stayro-active-banners" aria-label="Ưu đãi nổi bật">{banners.map((banner: any, index: number) => {
+          const title = banner.title || banner.name || banner.Title || "Ưu đãi Stayro";
+          const subtitle = banner.subtitle || banner.description || banner.Subtitle;
+          const image = banner.url || banner.imageUrl || banner.image || banner.Url;
+          return <article className="stayro-active-banner" key={banner.id || index} style={image ? { backgroundImage: `linear-gradient(90deg, rgba(18, 35, 48, .8), rgba(18, 35, 48, .08)), url("${image}")` } : undefined}><div><h2>{title}</h2>{subtitle && <p>{subtitle}</p>}</div></article>;
+        })}</section>}
+        {isBannerError && <p role="status" className="stayro-container text-muted">Không thể tải ưu đãi nổi bật.</p>}
 
         <section className="stayro-container stayro-destinations"><div className="stayro-chip-row">{tags.length ? <>
           <button className={!selectedTag ? "is-selected" : ""} onClick={() => { setSelectedTag(null); setDestination(""); }}>Tất cả</button>

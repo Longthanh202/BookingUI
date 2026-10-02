@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import Card from "react-bootstrap/Card";
@@ -10,7 +10,7 @@ import Modal from "react-bootstrap/Modal";
 
 import CustomerHeader from "../../components/customer/home/CustomerHeader/CustomerHeader";
 
-import { cancelBooking, getAllBookingsHistory } from "../../api/booking/booking.api";
+import { cancelBooking, getAllBookingsHistory, getBooking } from "../../api/booking/booking.api";
 
 import {
   Booking,
@@ -23,6 +23,17 @@ const BookingHistoryPage = () => {
 
   const [selectedBooking, setSelectedBooking] =
     useState<Booking | null>(null);
+  const bookingDetail = useQuery({
+    queryKey: ["booking-detail", selectedBooking?.id],
+    queryFn: () => getBooking(selectedBooking!.id),
+    enabled: Boolean(selectedBooking?.id),
+  });
+  useEffect(() => {
+    if (!bookingDetail.data) return;
+    const response: any = bookingDetail.data;
+    const detail = response?.booking ?? response?.data?.booking ?? response?.data ?? response;
+    if (detail?.id) setSelectedBooking(detail);
+  }, [bookingDetail.data]);
   const queryClient = useQueryClient();
   const cancelMutation = useMutation({
     mutationFn: cancelBooking,
@@ -32,7 +43,7 @@ const BookingHistoryPage = () => {
     },
   });
 
-  const { data, isLoading } =
+  const { data, isLoading, isError } =
     useQuery<BookingHistoryResponse, Error>({
       queryKey: [
         "bookings-history",
@@ -456,6 +467,10 @@ const BookingHistoryPage = () => {
                   Đang tải lịch sử đặt phòng...
                 </div>
               </div>
+            ) : isError ? (
+              <div className="text-center text-danger py-5">
+                Không thể tải lịch sử booking. Vui lòng thử lại.
+              </div>
             ) : (
               <>
                 <div className="table-responsive">
@@ -779,6 +794,18 @@ const BookingHistoryPage = () => {
       >
         {selectedBooking && (
           <>
+            {bookingDetail.isLoading && (
+              <Modal.Body className="text-center">
+                <Spinner animation="border" /> Đang tải chi tiết booking...
+              </Modal.Body>
+            )}
+            {bookingDetail.isError && (
+              <Modal.Body>
+                <div className="alert alert-warning mb-0">
+                  Không thể tải chi tiết đầy đủ. Đang hiển thị dữ liệu lịch sử booking.
+                </div>
+              </Modal.Body>
+            )}
             {/* MODAL HEADER */}
 
             <Modal.Header

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -11,6 +11,7 @@ import { getUser } from "../../utils/auth/auth";
 const BookingSummaryPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [promoCode, setPromoCode] = useState("");
 
   const {
     hotelId,
@@ -45,7 +46,10 @@ const BookingSummaryPage = () => {
     !rooms ||
     rooms.length === 0 ||
     !startDate ||
-    !endDate
+    !endDate ||
+    Number.isNaN(startDate.getTime()) ||
+    Number.isNaN(endDate.getTime()) ||
+    endDate <= startDate
   ) {
     return (
       <div>
@@ -172,6 +176,7 @@ const BookingSummaryPage = () => {
       rooms,
       dates,
       guests,
+      maKhuyenMai: promoCode.trim() || null,
     };
 
     if (user) {
@@ -705,6 +710,17 @@ const BookingSummaryPage = () => {
                         )}{" "}
                         VND
                       </strong>
+                    </div>
+
+                    <div className="mb-3">
+                      <label className="form-label" htmlFor="booking-promo-code">Mã khuyến mãi (không bắt buộc)</label>
+                      <input
+                        id="booking-promo-code"
+                        className="form-control"
+                        value={promoCode}
+                        onChange={(event) => setPromoCode(event.target.value)}
+                        maxLength={64}
+                      />
                     </div>
 
                     <div

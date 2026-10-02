@@ -9,11 +9,14 @@ import Spinner from "react-bootstrap/Spinner";
 import "./HotelList.css";
 
 const HotelList = (input: HotelFilterParams) => {
-  const { data: rooms = [], isLoading } = useQuery<any[]>({
+  const { data, isLoading, isError } = useQuery<any>({
     queryKey: ["homeRooms", input],
     queryFn: () => FilterKhachSan(input),
     staleTime: 1000 * 60 * 5,
   });
+  const rooms: any[] = Array.isArray(data)
+    ? data
+    : data?.data ?? data?.items ?? data?.results ?? [];
 
   return (
     <div className="hotel-list">
@@ -23,6 +26,8 @@ const HotelList = (input: HotelFilterParams) => {
         <div className="text-center py-4">
           <Spinner animation="border" />
         </div>
+      ) : isError ? (
+        <p className="text-danger">Không thể tải danh sách khách sạn.</p>
       ) : (
         <Row className="row-cols-1 row-cols-md-3 row-cols-xl-4 g-4">
           {rooms.slice(0, 10).map((room) => (
