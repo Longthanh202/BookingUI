@@ -12,8 +12,8 @@ export const getHotelRooms = async (
     {
       khachSanId,
       soKhach,
-      ngayNhan: new Date(`${ngayNhan}T00:00:00`).toISOString(),
-      ngayTra: new Date(`${ngayTra}T00:00:00`).toISOString(),
+      ngayNhan: new Date(`${ngayNhan}T00:00:00.000Z`).toISOString(),
+      ngayTra: new Date(`${ngayTra}T00:00:00.000Z`).toISOString(),
     }
   );
 
@@ -21,10 +21,16 @@ export const getHotelRooms = async (
 };
 
 export const getOwnerRoomTypes = async (khachSanId: string): Promise<RoomResponse[]> => {
-  const response = await api.get<RoomResponse[]>("/api/room-types/owner", {
+  const response = await api.get<RoomResponse[] | { data?: RoomResponse[] }>("/api/room-types/owner", {
     params: { khachSanId },
   });
-  return response.data;
+  const roomTypes = Array.isArray(response.data)
+    ? response.data
+    : response.data.data;
+  if (!Array.isArray(roomTypes)) {
+    throw new Error("Danh sách loại phòng trả về không hợp lệ.");
+  }
+  return roomTypes;
 };
 
 export const createRoomTypes = async (

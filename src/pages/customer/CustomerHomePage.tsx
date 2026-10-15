@@ -115,8 +115,8 @@ const CustomerHomePage = () => {
     const nextFilter: HotelFilterParams = {
       Keyword: destination,
       SoKhach: guests,
-      NgayNhanPhong: checkIn ? new Date(`${checkIn}T00:00:00`).toISOString() : null,
-      NgayTraPhong: checkOut ? new Date(`${checkOut}T00:00:00`).toISOString() : null,
+      NgayNhanPhong: checkIn || null,
+      NgayTraPhong: checkOut || null,
       Page: 1,
     };
     setFilter(nextFilter);
