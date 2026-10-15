@@ -7,7 +7,7 @@ import { FilterKhachSan, getBanners, getHotelsByTag, getTags } from "../../api/h
 import { getProvinces } from "../../api/province/province.api";
 import { getUser } from "../../utils/auth/auth";
 import { HotelFilterParams } from "../../types/khachsan/KhachSan.types";
-import "./CustomerHomePage.css";
+import "../../styles/customer/CustomerHomePage.css";
 
 type HotelResult = {
   id: string;

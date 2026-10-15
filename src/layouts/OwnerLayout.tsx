@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faBell, faCalendarDays, faChartLine, faClipboardList, faBed, faHotel, faMoneyBillTransfer, faPeopleGroup, faPercent, faStar, faUsers, faWallet, faBullhorn } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../components/common/navigation/Sidebar";
 import Button from "react-bootstrap/Button";
-import "./OwnerLayout.css";
+import "../styles/layouts/OwnerLayout.css";
 import AccountMenu from "../components/common/AccountMenu";
 
 interface Profile {

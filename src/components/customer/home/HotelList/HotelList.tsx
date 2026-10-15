@@ -6,7 +6,7 @@ import { HotelFilterParams } from "../../../../types/khachsan/KhachSan.types";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Spinner from "react-bootstrap/Spinner";
-import "./HotelList.css";
+import "../../../../styles/components/customer/home/HotelList.css";
 
 const HotelList = (input: HotelFilterParams) => {
   const { data, isLoading, isError } = useQuery<any>({

@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
-import "./PopularDestinationList.css";
+import "../../../../styles/components/customer/home/PopularDestinationList.css";
 
 const PopularDestinationList = () => {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);

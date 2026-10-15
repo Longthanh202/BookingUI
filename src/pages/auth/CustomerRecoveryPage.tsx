@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight, faCheck, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { forgotPassword, resetPassword } from "../../api/auth/auth.api";
-import "./CustomerLoginPage.css";
+import "../../styles/auth/CustomerLoginPage.css";
 
 const CustomerRecoveryPage = () => {
   const [params] = useSearchParams();

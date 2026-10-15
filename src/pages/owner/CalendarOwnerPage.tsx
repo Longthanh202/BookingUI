@@ -8,6 +8,7 @@ import { createAvailabilityBlock, deleteAvailabilityBlock, getOwnerCalendar } fr
 import OwnerPageShell from "../../components/owner/OwnerPageShell";
 import { field, rows } from "../../components/owner/OwnerDataTable";
 import { HotelSelector } from "../../components/owner/OwnerSelectors";
+import "../../styles/owner/CalendarOwnerPage.css";
 
 const getValue = (item: any, ...keys: string[]) => keys.map((key) => item?.[key] ?? item?.[key.charAt(0).toUpperCase() + key.slice(1)]).find((value) => value !== undefined && value !== null);
 const dateOnly = (value: unknown) => value ? new Date(String(value)).toLocaleDateString("en-CA") : "";

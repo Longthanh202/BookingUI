@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./CustomerHeader.css";
+import "../../../../styles/components/customer/home/CustomerHeader.css";
 import { getUser } from "../../../../utils/auth/auth";
 import AccountMenu from "../../../common/AccountMenu";
 

@@ -4,7 +4,7 @@ import { getProfileApi } from "../api/auth/auth.api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGaugeHigh, faHotel, faCreditCard, faUser, faClipboardList, faWallet, faBullhorn, faImage, faTags, faUserShield, faStar, faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import AccountMenu from "../components/common/AccountMenu";
-import "./AdminLayout.css";
+import "../styles/layouts/AdminLayout.css";
 
 interface Profile {
   fullName: string;

@@ -15,7 +15,7 @@ import CustomerHeader from "../../components/customer/home/CustomerHeader/Custom
 import { showToast } from "../../components/common/Toast";
 import { HotelFilterParams } from "../../types/khachsan/KhachSan.types";
 import { HotelRoomSelector } from "../../components/hotel/HotelRoomSelector";
-import "./HotelDetailPage.css";
+import "../../styles/customer/HotelDetailPage.css";
 
 interface HotelAmenity {
   id?: string | number;

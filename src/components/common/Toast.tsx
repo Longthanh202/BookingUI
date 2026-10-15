@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCircleExclamation, faInfo, faXmark } from "@fortawesome/free-solid-svg-icons";
-import "./Toast.css";
+import "../../styles/components/common/Toast.css";
 
 export type ToastTone = "success" | "error" | "info";
 export type ToastMessage = { message: string; tone: ToastTone };

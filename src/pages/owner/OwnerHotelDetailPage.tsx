@@ -59,7 +59,7 @@ import { createAmenity } from "../../api/amenity/amenity.api";
 
 import { RoomResponse } from "../../types/loaiphong/RoomResponse";
 import { showToast } from "../../components/common/Toast";
-import "./OwnerWorkspacePage.css";
+import "../../styles/owner/OwnerWorkspacePage.css";
 
 interface HotelRoomType {
   id?: string;

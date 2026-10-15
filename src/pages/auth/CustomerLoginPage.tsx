@@ -4,7 +4,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { googleLoginApi, loginApi } from "../../api/auth/auth.api";
-import "./CustomerLoginPage.css";
+import "../../styles/auth/CustomerLoginPage.css";
 
 const CustomerLoginPage = () => {
   const navigate = useNavigate();

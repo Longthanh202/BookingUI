@@ -1,0 +1,331 @@
+.owner-booking-calendar {
+  padding-top: 8px;
+}
+
+.owner-booking-calendar .fc {
+  --fc-border-color: #e8ebef;
+  --fc-button-bg-color: #e06b36;
+  --fc-button-border-color: #e06b36;
+  --fc-button-hover-bg-color: #c95a2b;
+  --fc-button-hover-border-color: #c95a2b;
+  --fc-button-active-bg-color: #b94d24;
+  --fc-button-active-border-color: #b94d24;
+  --fc-today-bg-color: #fff8f3;
+  color: #344150;
+  font-size: 13px;
+}
+
+.owner-booking-calendar .fc .fc-toolbar-title {
+  color: #202c38;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.owner-booking-calendar .fc .fc-button {
+  border-radius: 7px;
+  box-shadow: none;
+  font-size: 12px;
+  font-weight: 650;
+  text-transform: capitalize;
+}
+
+.owner-booking-calendar .fc .fc-event {
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 2px 4px;
+}
+
+.owner-booking-calendar .fc .fc-event:focus {
+  outline: 2px solid #202c38;
+  outline-offset: 1px;
+}
+
+.owner-booking-calendar .fc .fc-daygrid-day-number,
+.owner-booking-calendar .fc .fc-col-header-cell-cushion {
+  color: #475463;
+  text-decoration: none;
+}
+
+.owner-calendar-modal .modal-dialog {
+  max-width: 760px;
+}
+
+.owner-calendar-modal .modal-content {
+  overflow: hidden;
+  border: 0;
+  border-radius: 20px;
+  box-shadow: 0 24px 80px rgba(25, 37, 49, 0.24);
+}
+
+.owner-calendar-modal .modal-header {
+  align-items: flex-start;
+  border: 0;
+  padding: 25px 30px 22px;
+}
+
+.owner-calendar-modal .owner-calendar-modal-header {
+  color: #fff;
+  background:
+    radial-gradient(circle at 90% 0, rgba(255, 255, 255, 0.2), transparent 34%),
+    linear-gradient(125deg, #b94d24, #e06b36 62%, #f09859);
+}
+
+.owner-calendar-modal .owner-calendar-modal-header .btn-close {
+  filter: brightness(0) invert(1);
+  opacity: 0.82;
+}
+
+.owner-calendar-modal .modal-title {
+  font-size: 22px;
+  font-weight: 750;
+  letter-spacing: -0.35px;
+}
+
+.owner-calendar-modal-eyebrow {
+  margin-bottom: 6px;
+  color: #a66a4f;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.owner-calendar-modal-header .owner-calendar-modal-eyebrow,
+.owner-calendar-modal-header .owner-calendar-modal-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.owner-calendar-modal-subtitle {
+  margin-top: 5px;
+  color: #768394;
+  font-size: 13px;
+}
+
+.owner-calendar-modal .modal-body {
+  padding: 26px 30px 30px;
+}
+
+.owner-calendar-booking-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding: 13px 16px;
+  border: 1px solid #f2e5dc;
+  border-radius: 12px;
+  background: #fff9f5;
+}
+
+.owner-calendar-booking-code span,
+.owner-calendar-info-card span,
+.owner-calendar-price-strip span {
+  display: block;
+  margin-bottom: 5px;
+  color: #82909d;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.55px;
+  text-transform: uppercase;
+}
+
+.owner-calendar-booking-code strong {
+  color: #293744;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.owner-calendar-status {
+  flex: none;
+  padding: 7px 11px;
+  border-radius: 20px;
+  background: #fff0de;
+  color: #a75b27;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.owner-calendar-status-da_xac_nhan,
+.owner-calendar-status-hoan_tat {
+  background: #e8f7ee;
+  color: #27804d;
+}
+
+.owner-calendar-status-da_huy {
+  background: #fff0ef;
+  color: #bd5047;
+}
+
+.owner-calendar-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+
+.owner-calendar-info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid #e9edf1;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.owner-calendar-info-card > svg {
+  flex: none;
+  width: 16px;
+  margin-top: 2px;
+  color: #df7040;
+}
+
+.owner-calendar-info-card > div {
+  min-width: 0;
+}
+
+.owner-calendar-info-card strong,
+.owner-calendar-info-card small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.owner-calendar-info-card strong {
+  color: #293744;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.owner-calendar-info-card small {
+  margin-top: 4px;
+  color: #84909b;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.owner-calendar-price-strip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 18px;
+  margin-top: 12px;
+  padding: 17px;
+  border-radius: 12px;
+  background: #f7f9fb;
+}
+
+.owner-calendar-price-strip > div:last-child {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid #e7ebef;
+  color: #667382;
+  font-size: 12px;
+}
+
+.owner-calendar-price-strip > div:last-child svg {
+  color: #df7040;
+}
+
+.owner-calendar-price-strip > div:last-child span {
+  display: inline;
+  margin: 0;
+}
+
+.owner-calendar-price-strip > div:last-child strong {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.owner-calendar-price-strip strong {
+  color: #293744;
+  font-size: 14px;
+}
+
+.owner-calendar-room-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 23px 0 10px;
+}
+
+.owner-calendar-room-heading h6 {
+  margin: 0;
+  color: #293744;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.owner-calendar-room-heading span {
+  color: #84909b;
+  font-size: 11px;
+}
+
+.owner-calendar-room-table {
+  border: 1px solid #e9edf1;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.owner-calendar-room-table thead th {
+  border-bottom: 1px solid #e9edf1;
+  background: #f7f9fb;
+  color: #778391;
+  font-size: 10px;
+  letter-spacing: 0.45px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.owner-calendar-room-table tbody td {
+  color: #42505e;
+  font-size: 12px;
+}
+
+.owner-calendar-modal .modal-footer {
+  padding: 15px 30px;
+  border-top: 1px solid #edf0f2;
+  background: #fafbfc;
+}
+
+@media (max-width: 768px) {
+  .owner-booking-calendar .fc .fc-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .owner-booking-calendar .fc .fc-toolbar-title {
+    font-size: 16px;
+  }
+
+  .owner-calendar-modal .modal-header,
+  .owner-calendar-modal .modal-body {
+    padding-right: 19px;
+    padding-left: 19px;
+  }
+
+  .owner-calendar-info-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .owner-calendar-modal .modal-title {
+    font-size: 19px;
+  }
+
+  .owner-calendar-booking-summary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .owner-calendar-price-strip {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .owner-calendar-price-strip > div:last-child {
+    grid-column: auto;
+  }
+}

@@ -3,7 +3,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Alert, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays, faRotate } from "@fortawesome/free-solid-svg-icons";
-import "../../pages/owner/OwnerWorkspacePage.css";
+import "../../styles/owner/OwnerWorkspacePage.css";
+import "../../styles/owner/OwnerPageShell.css";
 
 type OwnerPageShellProps = {
   title: string;

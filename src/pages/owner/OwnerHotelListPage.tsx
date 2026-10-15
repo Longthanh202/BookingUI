@@ -24,7 +24,7 @@ import { faCalendarDays, faRotate } from "@fortawesome/free-solid-svg-icons";
 import ConfirmationModal from "../../components/common/ConfirmationModal";
 import ActionButton from "../../components/common/ActionButton";
 import { showToast } from "../../components/common/Toast";
-import "./OwnerWorkspacePage.css";
+import "../../styles/owner/OwnerWorkspacePage.css";
 
 const initialFormValues = {
   TenKhachSan: "",

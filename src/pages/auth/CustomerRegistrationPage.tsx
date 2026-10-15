@@ -5,7 +5,7 @@ import { faArrowLeft, faArrowRight, faCheck, faEnvelope, faLocationDot, faLock, 
 import { registerCustomer } from "../../api/auth/auth.api";
 import { showToast } from "../../components/common/Toast";
 import { RegisterRequest } from "../../types/auth/RegisterRequest";
-import "./CustomerRegistrationPage.css";
+import "../../styles/auth/CustomerRegistrationPage.css";
 
 const CustomerRegistrationPage = () => {
   const navigate = useNavigate();

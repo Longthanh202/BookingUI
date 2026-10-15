@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 
 import { HotelFilterParams } from "../../../../types/khachsan/KhachSan.types";
-import "./HotelCard.css";
+import "../../../../styles/components/customer/home/HotelCard.css";
 
 interface HotelCardProps {
   room: {

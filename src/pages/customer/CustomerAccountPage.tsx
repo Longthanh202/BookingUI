@@ -11,7 +11,7 @@ import { getAllBookingsHistory } from "../../api/booking/booking.api";
 import { getMyReviews } from "../../api/review/review.api";
 import { getPayment } from "../../api/payment/payment.api";
 import { getUser } from "../../utils/auth/auth";
-import "./CustomerAccountPage.css";
+import "../../styles/customer/CustomerAccountPage.css";
 
 type AccountSection = "profile" | "notifications" | "payments" | "reviews";
 type CustomerNotification = { id: number; title: string; message: string; receivedAt: string };

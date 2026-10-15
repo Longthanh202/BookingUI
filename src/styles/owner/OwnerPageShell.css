@@ -1,0 +1,29 @@
+.owner-page-heading-centered {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+
+.owner-page-heading-centered > div:first-child {
+  grid-column: 2;
+  text-align: center;
+}
+
+.owner-page-heading-centered .owner-date {
+  grid-column: 3;
+  justify-self: end;
+}
+
+@media (max-width: 768px) {
+  .owner-page-heading-centered {
+    display: block;
+  }
+
+  .owner-page-heading-centered > div:first-child {
+    text-align: center;
+  }
+
+  .owner-page-heading-centered .owner-date {
+    justify-content: center;
+    margin-top: 16px;
+  }
+}
