@@ -11,15 +11,16 @@ type OwnerPageShellProps = {
   description: string;
   notice?: string;
   onDismissNotice?: () => void;
+  centerTitle?: boolean;
   children: JSX.Element;
 };
 
-export default function OwnerPageShell({ title, description, notice, onDismissNotice, children }: OwnerPageShellProps) {
+export default function OwnerPageShell({ title, description, notice, onDismissNotice, centerTitle = false, children }: OwnerPageShellProps) {
   const client = useQueryClient();
   const today = useMemo(() => new Intl.DateTimeFormat("vi-VN", { weekday: "long", day: "numeric", month: "long" }).format(new Date()), []);
 
   return <div className="owner-workspace owner-operations">
-    <div className="owner-page-heading">
+    <div className={`owner-page-heading${centerTitle ? " owner-page-heading-centered" : ""}`}>
       <div><h1>{title}</h1><p>{description}</p></div>
       <div className="owner-date"><FontAwesomeIcon icon={faCalendarDays} /> {today}<Button variant="light" title="Làm mới" onClick={() => client.invalidateQueries()}><FontAwesomeIcon icon={faRotate} /></Button></div>
     </div>
