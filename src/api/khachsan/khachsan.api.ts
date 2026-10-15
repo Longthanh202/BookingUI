@@ -71,6 +71,7 @@ export interface UpdateHotelRequest {
   soSao: number;
   gioNhanPhong: string;
   gioTraPhong: string;
+  tagIds: string[];
 }
 
 export const CapNhatKhachSan = async (hotelId: string, dto: UpdateHotelRequest) => {

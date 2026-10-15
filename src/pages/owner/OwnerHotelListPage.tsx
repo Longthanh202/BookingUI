@@ -6,6 +6,7 @@ import {
   GetDanhSachKhachSanOwner,
   ThemKhachSan,
 } from "../../api/khachsan/khachsan.api";
+import { getTags } from "../../api/home/home.api";
 
 import { KhachSanListOwnerParams } from "../../types/khachsan/KhachSan.types";
 import { KhachSan as KhachSanType } from "../../types/khachsan/KhachSan";
@@ -39,6 +40,37 @@ const initialFormValues = {
   KinhDo: "",
 };
 
+interface OwnerTagOption {
+  id: string;
+  name: string;
+}
+
+const normalizeTags = (value: unknown): OwnerTagOption[] => {
+  if (value === undefined || value === null) return [];
+
+  const source = Array.isArray(value)
+    ? value
+    : value && typeof value === "object" && "data" in value && Array.isArray(value.data)
+      ? value.data
+      : value && typeof value === "object" && "items" in value && Array.isArray(value.items)
+        ? value.items
+        : null;
+
+  if (!source) {
+    throw new Error("Danh sách tag trả về không hợp lệ.");
+  }
+
+  return source.flatMap((item): OwnerTagOption[] => {
+    if (!item || typeof item !== "object") return [];
+    const tag = item as Record<string, unknown>;
+    const id = tag.id ?? tag.Id ?? tag.tagId ?? tag.TagId;
+    const name = tag.name ?? tag.Name ?? tag.tagName ?? tag.TagName;
+    return typeof id === "string" && typeof name === "string"
+      ? [{ id, name }]
+      : [];
+  });
+};
+
 const OwnerHotelListPage = () => {
   const [page, setPage] = useState(1);
 
@@ -46,6 +78,8 @@ const OwnerHotelListPage = () => {
 
   const [uploadedImages, setUploadedImages] =
     useState<File[]>([]);
+
+  const [selectedTagIds, setSelectedTagIds] = useState<string[]>([]);
 
   const [formValues, setFormValues] =
     useState(initialFormValues);
@@ -58,6 +92,11 @@ const OwnerHotelListPage = () => {
 
   const queryClient = useQueryClient();
   const today = useMemo(() => new Intl.DateTimeFormat("vi-VN", { weekday: "long", day: "numeric", month: "long" }).format(new Date()), []);
+  const { data: tags = [], isLoading: isTagsLoading, isError: isTagsError } = useQuery<OwnerTagOption[]>({
+    queryKey: ["hotel-tags"],
+    queryFn: async () => normalizeTags(await getTags()),
+    staleTime: 5 * 60 * 1000,
+  });
 
   const dto: KhachSanListOwnerParams = {
     Page: page,
@@ -104,6 +143,8 @@ const OwnerHotelListPage = () => {
 
     setUploadedImages([]);
 
+    setSelectedTagIds([]);
+
     setOpen(true);
   };
 
@@ -119,6 +160,8 @@ const OwnerHotelListPage = () => {
     setFormErrors({});
 
     setUploadedImages([]);
+
+    setSelectedTagIds([]);
 
   };
 
@@ -253,6 +296,8 @@ const OwnerHotelListPage = () => {
     formData.append("ChinhSachHuy", formValues.ChinhSachHuy);
     formData.append("ViDo", formValues.ViDo);
     formData.append("KinhDo", formValues.KinhDo);
+
+    selectedTagIds.forEach((tagId) => formData.append("TagIds", tagId));
 
     uploadedImages.forEach((image) => {
       formData.append("Files", image);
@@ -1181,6 +1226,34 @@ const OwnerHotelListPage = () => {
               </Form.Group>
             </Col>
           </Row>
+
+          <Form.Group className="mb-3" controlId="hotelTags">
+            <Form.Label>Thẻ khám phá</Form.Label>
+            <Form.Select
+              multiple
+              value={selectedTagIds}
+              onChange={(event) =>
+                setSelectedTagIds(
+                  Array.from(event.target.selectedOptions, (option) => option.value)
+                )
+              }
+              disabled={isProcessing || isTagsLoading || isTagsError}
+              aria-describedby="hotelTagsHelp"
+            >
+              {tags.map((tag) => (
+                <option key={tag.id} value={tag.id}>
+                  {tag.name}
+                </option>
+              ))}
+            </Form.Select>
+            <Form.Text id="hotelTagsHelp" muted>
+              {isTagsLoading
+                ? "Đang tải danh sách tag..."
+                : isTagsError
+                  ? "Không tải được danh sách tag. Vui lòng tải lại trang để thử lại."
+                  : "Có thể chọn nhiều tag; giữ Ctrl (Windows) hoặc Command (Mac) khi chọn."}
+            </Form.Text>
+          </Form.Group>
 
           <Row className="g-3">
             <Col md={6}>

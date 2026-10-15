@@ -56,6 +56,7 @@ import {
   createRoomTypes,
 } from "../../api/loaiphong/loaiphong.api";
 import { createAmenity } from "../../api/amenity/amenity.api";
+import { getTags } from "../../api/home/home.api";
 
 import { RoomResponse } from "../../types/loaiphong/RoomResponse";
 import { showToast } from "../../components/common/Toast";
@@ -75,6 +76,11 @@ interface HotelAmenity {
   tenTienIch?: string;
 }
 
+interface OwnerTagOption {
+  id: string;
+  name: string;
+}
+
 interface HotelDetailData {
   id: string;
   tenKhachSan: string;
@@ -87,6 +93,13 @@ interface HotelDetailData {
   chinhSachHuy?: string | null;
   viDo?: number | null;
   kinhDo?: number | null;
+  tagIds?: string[];
+  tags?: Array<{
+    id?: string;
+    tagId?: string;
+    name?: string;
+    tagName?: string;
+  }>;
   trangThai?: string | null;
   khachSanImages?: Array<{
     id: number | string;
@@ -104,6 +117,8 @@ interface HotelDetailResponse {
   }>;
   tienIchs?: HotelAmenity[];
   loaiPhongs?: HotelRoomType[];
+  tagIds?: string[];
+  tags?: HotelDetailData["tags"];
 }
 
 type HotelDetailApiResponse =
@@ -118,6 +133,28 @@ const isHotelDetailResponse = (
       typeof value === "object" &&
       "khachSan" in value
   );
+};
+
+const normalizeTags = (value: unknown): OwnerTagOption[] => {
+  if (value === undefined || value === null) return [];
+  const source = Array.isArray(value)
+    ? value
+    : value && typeof value === "object" && "data" in value && Array.isArray(value.data)
+      ? value.data
+      : value && typeof value === "object" && "items" in value && Array.isArray(value.items)
+        ? value.items
+        : null;
+  if (!source) throw new Error("Danh sách tag trả về không hợp lệ.");
+
+  return source.flatMap((item): OwnerTagOption[] => {
+    if (!item || typeof item !== "object") return [];
+    const tag = item as Record<string, unknown>;
+    const id = tag.id ?? tag.Id ?? tag.tagId ?? tag.TagId;
+    const name = tag.name ?? tag.Name ?? tag.tagName ?? tag.TagName;
+    return typeof id === "string" && typeof name === "string"
+      ? [{ id, name }]
+      : [];
+  });
 };
 
 const OwnerHotelDetailPage = () => {
@@ -140,6 +177,12 @@ const OwnerHotelDetailPage = () => {
 
   const [roomTypes, setRoomTypes] = useState<HotelRoomType[]>([]);
   const [amenities, setAmenities] = useState<HotelAmenity[]>([]);
+  const [selectedTagIds, setSelectedTagIds] = useState<string[]>([]);
+  const { data: tags = [], isLoading: isTagsLoading, isError: isTagsError } = useQuery<OwnerTagOption[]>({
+    queryKey: ["hotel-tags"],
+    queryFn: async () => normalizeTags(await getTags()),
+    staleTime: 5 * 60 * 1000,
+  });
 
   const [showAddRoomModal, setShowAddRoomModal] =
     useState(false);
@@ -318,7 +361,12 @@ const handleCheckOut = (bookingId: string) => {
   |--------------------------------------------------------------------------
   */
 
-  const { data: ownerRoomTypes } = useQuery<
+  const {
+    data: ownerRoomTypes,
+    isLoading: isRoomTypesLoading,
+    isError: isRoomTypesError,
+    refetch: refetchRoomTypes,
+  } = useQuery<
     RoomResponse[],
     Error
   >({
@@ -355,11 +403,12 @@ const handleCheckOut = (bookingId: string) => {
       moTa: hotelRoot.moTa ?? "",
     });
 
-    setRoomTypes(
-      isHotelDetailResponse(data)
-        ? data.loaiPhongs || []
-        : data.loaiPhongs || []
-    );
+    const rawTagIds = hotelRoot.tagIds ??
+      hotelRoot.tags?.map((tag) => tag.id ?? tag.tagId).filter((tagId): tagId is string => Boolean(tagId)) ??
+      (isHotelDetailResponse(data)
+        ? data.tagIds ?? data.tags?.map((tag) => tag.id ?? tag.tagId).filter((tagId): tagId is string => Boolean(tagId)) ?? []
+        : []);
+    setSelectedTagIds(rawTagIds);
 
     setAmenities(
       isHotelDetailResponse(data)
@@ -375,10 +424,8 @@ const handleCheckOut = (bookingId: string) => {
   }, [data]);
 
   useEffect(() => {
-    if (ownerRoomTypes?.length) {
-      setRoomTypes(ownerRoomTypes);
-    }
-  }, [ownerRoomTypes]);
+    setRoomTypes(ownerRoomTypes ?? []);
+  }, [id, ownerRoomTypes]);
 
   /*
   |--------------------------------------------------------------------------
@@ -731,6 +778,7 @@ const handleCheckOut = (bookingId: string) => {
       soSao: Number(hotelForm.soSao),
       gioNhanPhong: hotelForm.gioNhanPhong,
       gioTraPhong: hotelForm.gioTraPhong,
+      tagIds: selectedTagIds,
     };
     updateMutation.mutate({ payload, images: uploadedImages, removedImageIds });
   };
@@ -1342,6 +1390,45 @@ const handleCheckOut = (bookingId: string) => {
                             </Col>
                           </Row>
 
+                          <Form.Group className="mt-3">
+                            <Form.Label className="fw-semibold">
+                              Thẻ khám phá
+                            </Form.Label>
+                            <div className="d-flex flex-wrap gap-2 mb-2">
+                              {selectedTagIds.length ? selectedTagIds.map((tagId) => {
+                                const tag = tags.find((item) => item.id === tagId);
+                                return (
+                                  <Badge bg="info" text="dark" key={tagId}>
+                                    {tag?.name ?? tagId}
+                                  </Badge>
+                                );
+                              }) : <span className="text-secondary small">Chưa gán tag</span>}
+                            </div>
+                            <Form.Select
+                              multiple
+                              value={selectedTagIds}
+                              onChange={(event) =>
+                                setSelectedTagIds(
+                                  Array.from(event.target.selectedOptions, (option) => option.value)
+                                )
+                              }
+                              disabled={isSaving || isTagsLoading || isTagsError}
+                            >
+                              {tags.map((tag) => (
+                                <option key={tag.id} value={tag.id}>
+                                  {tag.name}
+                                </option>
+                              ))}
+                            </Form.Select>
+                            <Form.Text muted>
+                              {isTagsLoading
+                                ? "Đang tải danh sách tag..."
+                                : isTagsError
+                                  ? "Không tải được danh sách tag. Vui lòng thử tải lại trang."
+                                  : "Có thể chọn nhiều tag; giữ Ctrl (Windows) hoặc Command (Mac) khi chọn."}
+                            </Form.Text>
+                          </Form.Group>
+
                           <Row className="g-3 mt-1">
                             <Col md={6}>
                               <Form.Group>
@@ -1532,8 +1619,19 @@ const handleCheckOut = (bookingId: string) => {
                     </div>
                   </div>
 
-                  {roomTypes.length ===
-                  0 ? (
+                  {isRoomTypesLoading && roomTypes.length === 0 ? (
+                    <div className="py-5 text-center text-secondary">
+                      <Spinner animation="border" size="sm" className="me-2" />
+                      Đang tải danh sách loại phòng...
+                    </div>
+                  ) : isRoomTypesError && roomTypes.length === 0 ? (
+                    <div className="py-5 text-center">
+                      <p className="text-danger mb-3">Không tải được danh sách loại phòng.</p>
+                      <Button variant="outline-primary" onClick={() => refetchRoomTypes()}>
+                        Thử tải lại
+                      </Button>
+                    </div>
+                  ) : roomTypes.length === 0 ? (
                     <EmptyState
                       icon={faBed}
                       title="Chưa có loại phòng"
@@ -2083,9 +2181,9 @@ const handleCheckOut = (bookingId: string) => {
                           }}
                         >
                           <tr>
-                              <th className="px-4 py-3">
-                                Mã đặt phòng
-                              </th>
+                            <th className="px-4 py-3">
+                              Mã đặt phòng
+                            </th>
                             <th className="px-4 py-3">
                               Trạng thái
                             </th>
