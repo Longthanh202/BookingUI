@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Alert, Button, Form, Modal, Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faRotate, faPen, faTrash, faCheck, faBan, faLockOpen, faLock } from "@fortawesome/free-solid-svg-icons";
-import { searchBookingsAdmin } from "../../api/booking/booking.api";
+import { getBookingStatusOptions, searchBookingsAdmin } from "../../api/booking/booking.api";
 import { getAdminPayments, updatePaymentStatus } from "../../api/payment/payment.api";
 import { getPendingCommissions } from "../../api/hoahong/hoahong.api";
 import { getPendingWithdrawals, updateWithdrawal } from "../../api/finance/finance.api";
@@ -66,13 +66,18 @@ export default function AdminOperationsPage() {
   const [bannerEditDraft, setBannerEditDraft] = useState({ title: "", subtitle: "", url: "", isActive: "1" });
   const [selectedTagId, setSelectedTagId] = useState("");
   const [tagDraft, setTagDraft] = useState({ name: "", slug: "", description: "", sortOrder: "0", isActive: true, hotelIds: "" });
+  const bookingStatuses = useQuery({
+    queryKey: ["booking-status-options"],
+    queryFn: getBookingStatusOptions,
+    enabled: section === "bookings",
+  });
 
   const query = useQuery({
     queryKey: ["admin", section, filters],
     queryFn: () => {
       const page = Number(filters.page || 1);
       const pageSize = Number(filters.pageSize || 20);
-      if (section === "bookings") return searchBookingsAdmin({ hotelId: filters.hotelId || null, customerId: filters.customerId || null, trangThai: filters.trangThai || null, ngayTao: filters.ngayTao ? new Date(filters.ngayTao).toISOString() : null, page, pageSize });
+      if (section === "bookings") return searchBookingsAdmin({ hotelId: filters.hotelId || null, customerId: filters.customerId || null, trangThai: filters.trangThai || null, ngayTao: filters.ngayTao ? new Date(filters.ngayTao).toISOString() : null, maDatPhong: filters.maDatPhong?.trim() || null, page, pageSize });
       if (section === "payments") return getAdminPayments();
       if (section === "commissions") return getPendingCommissions();
       if (section === "withdrawals") return getPendingWithdrawals();
@@ -207,6 +212,7 @@ export default function AdminOperationsPage() {
 
     {notice && <Alert className="admin-alert" variant={notice.kind} dismissible onClose={() => setNotice(null)}>{notice.text}</Alert>}
     {query.isError && <Alert className="admin-alert" variant="danger">Không tải được dữ liệu. Hãy kiểm tra kết nối API và quyền Admin.</Alert>}
+    {section === "bookings" && bookingStatuses.isError && <Alert className="admin-alert" variant="danger">Không thể tải lựa chọn trạng thái booking từ API.</Alert>}
 
     {section === "reviews" && <section className="admin-panel">
       <div className="admin-panel-heading"><div><h3>Xóa đánh giá vi phạm</h3><p>API hiện có hỗ trợ xóa theo ID; chưa có endpoint danh sách review dành cho Admin.</p></div></div>
@@ -260,7 +266,7 @@ export default function AdminOperationsPage() {
     </section>}
 
     {section !== "reviews" && section !== "permissions" && section !== "tags" && <>
-      {section !== "payments" && section !== "commissions" && section !== "withdrawals" && section !== "advertising" && <FilterPanel section={section} draft={filterDraft} setDraft={setFilterDraft} onSubmit={submitFilters} />}
+      {section !== "payments" && section !== "commissions" && section !== "withdrawals" && section !== "advertising" && <FilterPanel section={section} draft={filterDraft} setDraft={setFilterDraft} onSubmit={submitFilters} bookingStatuses={rows(bookingStatuses.data)} />}
       <DataTable section={section} data={data} loading={query.isLoading} onAction={askForConfirmation} onEditBanner={openBannerEditor} />
       {(section === "users" || section === "hotels" || section === "bookings" || section === "banners") && <div className="admin-pagination"><span>{total ? `Trang ${page} · ${total} kết quả` : `Trang ${page} · ${data.length} kết quả`}</span><div className="d-flex gap-2"><Button size="sm" variant="outline-secondary" disabled={page <= 1 || query.isFetching} onClick={() => setFilters((current) => ({ ...current, page: String(Math.max(1, page - 1)) }))}>Trước</Button><Button size="sm" variant="outline-secondary" disabled={!hasNextPage || query.isFetching} onClick={() => setFilters((current) => ({ ...current, page: String(page + 1) }))}>Tiếp</Button></div></div>}
     </>}
@@ -288,15 +294,16 @@ export default function AdminOperationsPage() {
   </div>;
 }
 
-function FilterPanel({ section, draft, setDraft, onSubmit }: { section: string; draft: Record<string, string>; setDraft: (update: (current: Record<string, string>) => Record<string, string>) => void; onSubmit: (event: React.FormEvent) => void }) {
+function FilterPanel({ section, draft, setDraft, onSubmit, bookingStatuses = [] }: { section: string; draft: Record<string, string>; setDraft: (update: (current: Record<string, string>) => Record<string, string>) => void; onSubmit: (event: React.FormEvent) => void; bookingStatuses?: AdminRowData[] }) {
   const change = (key: string, value: string) => setDraft((current) => ({ ...current, [key]: value }));
   return <section className="admin-panel admin-filter-panel">
     <div className="admin-panel-heading"><div><h3>Bộ lọc</h3><p>Thiết lập điều kiện rồi áp dụng để tải dữ liệu.</p></div></div>
     <div className="admin-panel-body"><Form onSubmit={onSubmit} className="admin-filter-grid">
       {section === "bookings" && <>
+        <Input label="Mã đặt phòng" value={draft.maDatPhong} onChange={(value) => change("maDatPhong", value)} />
         <Input label="Hotel ID" value={draft.hotelId} onChange={(value) => change("hotelId", value)} />
         <Input label="Customer ID" value={draft.customerId} onChange={(value) => change("customerId", value)} />
-        <SelectInput label="Trạng thái booking" value={draft.trangThai} onChange={(value) => change("trangThai", value)} options={[["", "Tất cả"], ...["CHO_XAC_NHAN", "DA_XAC_NHAN", "DA_CHECK_IN", "DA_CHECK_OUT", "DA_HUY", "TU_CHOI", "KHONG_DEN"].map((status) => [status, status] as [string, string])]} />
+        <SelectInput label="Trạng thái booking" value={draft.trangThai} onChange={(value) => change("trangThai", value)} options={[["", "Tất cả"], ...bookingStatuses.map((status) => [String(field(status, "id", "Id")), String(field(status, "name", "Name"))] as [string, string])]} />
         <Input label="Ngày tạo" type="datetime-local" value={draft.ngayTao} onChange={(value) => change("ngayTao", value)} />
       </>}
       {(section === "banners" || section === "hotels" || section === "users") && <Input label="Từ khóa" value={draft.keyword} onChange={(value) => change("keyword", value)} />}
@@ -330,6 +337,7 @@ function DataTable({ section, data, loading, onAction, onEditBanner }: { section
 
 function AdminDataRow({ item, section, onAction, onEditBanner }: { item: AdminRowData; section: string; onAction: (action: ConfirmAction) => void; onEditBanner?: (item: AdminRowData) => void }) {
   const id = field(item, "id", "Id", "userId", "UserId", "tagId", "TagId");
+  const displayId = section === "bookings" ? field(item, "maDatPhong", "MaDatPhong") ?? id : id;
   const currentHotelStatus = String(field(item, "trangThai", "TrangThai") ?? "CHO_DUYET");
   const currentPaymentStatus = String(field(item, "trangThai", "TrangThai") ?? "CHO_THANH_TOAN");
   const [nextStatus, setNextStatus] = useState(section === "hotels" ? currentHotelStatus : currentPaymentStatus);
@@ -363,9 +371,12 @@ function AdminDataRow({ item, section, onAction, onEditBanner }: { item: AdminRo
   if (section === "hotels") actions.push(<><Form.Select key="hotel-status" size="sm" aria-label="Trạng thái khách sạn" value={nextStatus} onChange={(event) => setNextStatus(event.target.value)}>{hotelStatuses.map((status) => <option key={status} value={status}>{status}</option>)}</Form.Select><Button key="hotel-update" size="sm" onClick={() => onAction({ title: "Cập nhật trạng thái khách sạn", description: `Chuyển khách sạn ${String(name)} sang ${nextStatus}?`, operation: () => updateHotelStatus(String(id), nextStatus) })}>Lưu</Button></>);
   if (section === "users") actions.push(<Button key="toggle" size="sm" variant={isLocked ? "outline-success" : "outline-danger"} onClick={() => onAction({ title: isLocked ? "Mở khóa tài khoản" : "Khóa tài khoản", description: `${isLocked ? "Mở khóa" : "Khóa"} tài khoản ${String(name)}?`, operation: () => updateAdminUserStatus(String(id), isLocked ? 0 : 1) })}><FontAwesomeIcon icon={isLocked ? faLockOpen : faLock} className="me-1" />{isLocked ? "Mở khóa" : "Khóa"}</Button>);
 
+  const secondary = section === "bookings"
+    ? [field(item, "tenKhachHang", "customerName", "hoTen"), field(item, "tenKhachSan", "hotelName")].filter(Boolean).join(" · ")
+    : field(item, "email", "Email", "tenKhachSan", "khachSanTen", "hotelName", "HotelName") ?? "";
   return <tr>
-    <td><span className="admin-id">{String(id ?? "—")}</span></td>
-    <td><span className="admin-primary-cell">{String(name)}</span><span className="admin-secondary-cell">{String(field(item, "email", "Email", "tenKhachSan", "khachSanTen", "hotelName", "HotelName") ?? "")}</span></td>
+    <td><span className="admin-id">{String(displayId ?? "—")}</span></td>
+    <td><span className="admin-primary-cell">{String(name)}</span><span className="admin-secondary-cell">{String(secondary)}</span></td>
     <td>{amount !== undefined ? `${Number(amount).toLocaleString("vi-VN")} ₫` : detail === undefined ? "—" : String(detail)}</td>
     <td><span className={`admin-status-badge ${statusClass(status)}`}>{String(typeof status === "boolean" ? status ? "Đang bật" : "Đang tắt" : status)}</span></td>
     <td><div className="admin-action-group justify-content-end">{actions.length ? actions : <span className="text-muted">—</span>}</div></td>

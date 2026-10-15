@@ -7,18 +7,20 @@ export const createBooking = async (payload: BookingRequest) => {
 
 export const getAllBookingsHistory = (
   pageIndex: number,
-  pageSize: number
+  pageSize: number,
+  maDatPhong?: string
 ) => {
   return api.get("/api/bookings/history", {
     params: {
       pageIndex: Math.max(1, Math.trunc(pageIndex)),
       pageSize: Math.max(1, Math.trunc(pageSize)),
+      ...(maDatPhong?.trim() ? { maDatPhong: maDatPhong.trim() } : {}),
     },
   })
     .then((res) => res.data);
 };
 
-export const getOwnerBookings = (payload: { khachSanId: string; page: number; pageSize: number }) => {
+export const getOwnerBookings = (payload: { khachSanId: string; maDatPhong?: string | null; page: number; pageSize: number }) => {
   return api.post("/api/bookings/owner", payload).then((res) => res.data);
 };
 
@@ -65,6 +67,7 @@ export interface OwnerBookingSearchRequest {
   customerId?: string | null;
   trangThai?: string | null;
   ngayTao?: string | null;
+  maDatPhong?: string | null;
   page?: number;
   pageSize?: number;
 }
@@ -85,6 +88,7 @@ export interface AdminBookingSearchRequest {
   customerId?: string | null;
   trangThai?: string | null;
   ngayTao?: string | null;
+  maDatPhong?: string | null;
   page?: number;
   pageSize?: number;
 }

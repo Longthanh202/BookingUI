@@ -2083,6 +2083,9 @@ const handleCheckOut = (bookingId: string) => {
                           }}
                         >
                           <tr>
+                              <th className="px-4 py-3">
+                                Mã đặt phòng
+                              </th>
                             <th className="px-4 py-3">
                               Trạng thái
                             </th>
@@ -2173,6 +2176,9 @@ const handleCheckOut = (bookingId: string) => {
                                     b.id
                                   }
                                 >
+                                  <td className="px-4 fw-semibold">
+                                    {b.maDatPhong || b.id || "-"}
+                                  </td>
                                   <td className="px-4">
                                     <Badge
                                       bg={

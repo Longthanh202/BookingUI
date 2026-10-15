@@ -14,10 +14,15 @@ export interface BookingDetail {
 
 export interface Booking {
   id: string;
+  maDatPhong?: string;
   trangThai: string;
   thanhToan: string;
   khachSanId: string;
   tenKhachSan: string;
+  soTienGiam?: number;
+  ngayTao?: string;
+  ngayNhan?: string;
+  ngayTra?: string;
   chiTietDatPhongs: BookingDetail[];
 }
 

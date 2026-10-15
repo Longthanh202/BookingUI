@@ -39,12 +39,13 @@ export default function BookingOwnerPage() {
   });
   const statuses = useQuery({ queryKey: ["booking-status-options"], queryFn: getBookingStatusOptions });
   const bookingQuery = useQuery({
-    queryKey: ["owner-all-bookings", hotelId, customerId, status, createdDate],
+    queryKey: ["owner-all-bookings", hotelId, customerId, status, createdDate, search],
     queryFn: () => getOwnerAllBookings({
       hotelId: hotelId || null,
       customerId: customerId || null,
       trangThai: status || null,
       ngayTao: createdDate ? new Date(createdDate).toISOString() : null,
+      maDatPhong: search.trim() || null,
       page: 1,
       pageSize: 200,
     }),
@@ -128,6 +129,7 @@ export default function BookingOwnerPage() {
               <tbody>
                 {filtered.map((row, index) => {
                   const id = String(valueOf(row, "id", "bookingId", "maBooking"));
+                  const bookingCode = valueOf(row, "maDatPhong");
                   const statusValue = String(valueOf(row, "trangThai", "status"));
                   const actions = pendingStatuses.includes(statusValue)
                     ? <>{action(id, "confirm", "Xác nhận")}{action(id, "reject", "Từ chối", "outline-danger")}</>
@@ -136,7 +138,7 @@ export default function BookingOwnerPage() {
                       : checkedInStatuses.includes(statusValue) ? action(id, "check-out", "Checkout") : null;
                   return (
                     <tr key={id === "-" ? index : id}>
-                      <td><strong>{id}</strong></td>
+                      <td><strong>{bookingCode === "-" ? id : bookingCode}</strong></td>
                       <td>{valueOf(row, "tenKhachHang", "guest", "hoTen")}</td>
                       <td>{valueOf(row, "tenLoaiPhong", "room")}</td>
                       <td>{valueOf(row, "ngayNhanPhong", "checkIn")} - {valueOf(row, "ngayTraPhong", "checkOut")}</td>

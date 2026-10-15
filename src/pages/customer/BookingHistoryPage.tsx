@@ -7,6 +7,7 @@ import Spinner from "react-bootstrap/Spinner";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
 
 import CustomerHeader from "../../components/customer/home/CustomerHeader/CustomerHeader";
 
@@ -19,6 +20,8 @@ import {
 
 const BookingHistoryPage = () => {
   const [pageIndex, setPageIndex] = useState(1);
+  const [bookingCodeDraft, setBookingCodeDraft] = useState("");
+  const [bookingCode, setBookingCode] = useState("");
   const pageSize = 10;
 
   const [selectedBooking, setSelectedBooking] =
@@ -32,7 +35,13 @@ const BookingHistoryPage = () => {
     if (!bookingDetail.data) return;
     const response: any = bookingDetail.data;
     const detail = response?.booking ?? response?.data?.booking ?? response?.data ?? response;
-    if (detail?.id) setSelectedBooking(detail);
+    if (detail?.id) {
+      setSelectedBooking((current) =>
+        current
+          ? { ...current, ...detail, maDatPhong: detail.maDatPhong ?? current.maDatPhong }
+          : detail
+      );
+    }
   }, [bookingDetail.data]);
   const queryClient = useQueryClient();
   const cancelMutation = useMutation({
@@ -49,11 +58,13 @@ const BookingHistoryPage = () => {
         "bookings-history",
         pageIndex,
         pageSize,
+        bookingCode,
       ],
       queryFn: () =>
         getAllBookingsHistory(
           pageIndex,
-          pageSize
+          pageSize,
+          bookingCode
         ),
     });
 
@@ -261,6 +272,36 @@ const BookingHistoryPage = () => {
             </div>
           </div>
         </div>
+
+        <Form
+          className="d-flex gap-2 mb-4"
+          onSubmit={(event) => {
+            event.preventDefault();
+            setPageIndex(1);
+            setBookingCode(bookingCodeDraft.trim());
+          }}
+        >
+          <Form.Control
+            aria-label="Mã đặt phòng"
+            placeholder="Tìm theo mã đặt phòng"
+            value={bookingCodeDraft}
+            onChange={(event) => setBookingCodeDraft(event.target.value)}
+          />
+          <Button type="submit" variant="primary">Tìm</Button>
+          {bookingCode && (
+            <Button
+              type="button"
+              variant="outline-secondary"
+              onClick={() => {
+                setBookingCodeDraft("");
+                setBookingCode("");
+                setPageIndex(1);
+              }}
+            >
+              Xóa lọc
+            </Button>
+          )}
+        </Form>
 
         {/* ========================= */}
         {/* STATISTICS */}
@@ -604,16 +645,8 @@ const BookingHistoryPage = () => {
                                         }
                                       </div>
 
-                                      <div
-                                        className="text-secondary"
-                                        style={{
-                                          fontSize: 12,
-                                        }}
-                                      >
-                                        #{booking.id.slice(
-                                          0,
-                                          8
-                                        )}
+                                      <div className="text-secondary" style={{ fontSize: 12 }}>
+                                        Mã: {booking.maDatPhong || booking.id}
                                       </div>
                                     </div>
                                   </div>
@@ -889,7 +922,7 @@ const BookingHistoryPage = () => {
                       </div>
 
                       <div className="fw-semibold">
-                        #{selectedBooking.id}
+                        {selectedBooking.maDatPhong || selectedBooking.id}
                       </div>
                     </div>
                   </div>
