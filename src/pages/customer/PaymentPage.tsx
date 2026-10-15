@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -10,6 +10,7 @@ import { createBooking } from "../../api/booking/booking.api";
 import { BookingQrPayment, getBookingQr } from "../../api/payment/payment.api";
 import { showToast } from "../../components/common/Toast";
 import { BookingRequest } from "../../types/booking/BookingRequest";
+import { getUser } from "../../utils/auth/auth";
 
 const extractBookingId = (response: any): string => {
   const candidates = [
@@ -60,6 +61,7 @@ const PaymentPage = () => {
   const [loading, setLoading] = useState(false);
   const [qrPayment, setQrPayment] = useState<BookingQrPayment | null>(null);
   const [qrBookingId, setQrBookingId] = useState<string | null>(null);
+  const paymentInProgress = useRef(false);
 
   // =========================
   // DATE
@@ -213,7 +215,29 @@ const PaymentPage = () => {
   // PAYMENT
   // =========================
 
-  const handlePayment = async () => {
+  const handlePayment = async (
+    method: "cash" | "qr" = paymentMethod
+  ) => {
+    if (paymentInProgress.current || qrPayment) return;
+
+    const user = getUser();
+    if (user?.Role !== "CUSTOMER") {
+      navigate("/customer-login", {
+        state: {
+          redirectTo: "/booking/payment",
+          bookingData: {
+            hotelId,
+            rooms,
+            dates,
+            guests,
+            maKhuyenMai: maKhuyenMai?.trim() || null,
+          },
+        },
+      });
+      showToast("Để đặt phòng, vui lòng đăng nhập bằng tài khoản khách hàng.", "error");
+      return;
+    }
+
     if (!hotelId) {
       showToast("Không xác định được khách sạn.", "error");
       return;
@@ -224,6 +248,7 @@ const PaymentPage = () => {
       return;
     }
 
+    paymentInProgress.current = true;
     setLoading(true);
 
     try {
@@ -231,7 +256,7 @@ const PaymentPage = () => {
         khachSanId: hotelId,
         ngayNhanPhong: startDate.toISOString(),
         ngayTraPhong: endDate.toISOString(),
-        phuongThucThanhToan: paymentMethod,
+        phuongThucThanhToan: method,
         maKhuyenMai: maKhuyenMai?.trim() || null,
         danhSachPhong: rooms.map((room: any) => ({
           loaiPhongId: room.id,
@@ -239,7 +264,7 @@ const PaymentPage = () => {
         })),
       };
 
-      if (paymentMethod === "qr") {
+      if (method === "qr") {
         let bookingId = qrBookingId;
 
         if (!bookingId) {
@@ -278,8 +303,14 @@ const PaymentPage = () => {
 
       navigate("/bookings");
     } catch (error: any) {
-      showToast(error?.response?.data?.message || error?.message || "Thanh toán thất bại. Vui lòng thử lại.", "error");
+      showToast(
+        error?.response?.status === 403
+          ? "API đặt phòng chỉ cho phép tài khoản khách hàng. Vui lòng đăng nhập lại bằng tài khoản Customer."
+          : error?.response?.data?.message || error?.message || "Thanh toán thất bại. Vui lòng thử lại.",
+        "error"
+      );
     } finally {
+      paymentInProgress.current = false;
       setLoading(false);
     }
   };
@@ -287,6 +318,13 @@ const PaymentPage = () => {
   // =========================
   // PAYMENT METHOD
   // =========================
+
+  const handleSelectPaymentMethod = (value: "cash" | "qr") => {
+    if (paymentInProgress.current || qrPayment) return;
+    if (qrBookingId && value !== "qr") return;
+
+    setPaymentMethod(value);
+  };
 
   const PaymentMethodCard = ({
     value,
@@ -306,9 +344,7 @@ const PaymentPage = () => {
 
     return (
       <div
-        onClick={() => {
-          if (!qrPayment) setPaymentMethod(value);
-        }}
+        onClick={() => handleSelectPaymentMethod(value)}
         style={{
           border: selected
             ? "2px solid #4f46e5"
@@ -320,7 +356,7 @@ const PaymentPage = () => {
 
           borderRadius: 14,
           padding: "15px 16px",
-          cursor: qrPayment ? "default" : "pointer",
+          cursor: loading || qrPayment || (qrBookingId && value !== "qr") ? "default" : "pointer",
           transition: "all .2s ease",
           marginBottom: 12,
         }}
@@ -713,7 +749,7 @@ const PaymentPage = () => {
                   <PaymentMethodCard
                     value="cash"
                     icon="💵"
-                    title="Thanh toán tiền mặt tại quầy"
+                    title="Thanh toán tại khách sạn"
                     description="Thanh toán trực tiếp tại khách sạn"
                   />
 
@@ -794,7 +830,9 @@ const PaymentPage = () => {
                       ) : (
                         <>
                           <div className="text-secondary mb-3" style={{ fontSize: 13 }}>
-                            Mã QR và thông tin chuyển khoản sẽ hiển thị sau khi bạn tạo yêu cầu thanh toán.
+                            {loading
+                              ? "Đang tạo đặt phòng và mã QR thanh toán..."
+                              : "Nhấn nút tạo mã QR để tiếp tục thanh toán."}
                           </div>
                           <div className="fw-bold text-danger" style={{ fontSize: 20 }}>
                             {total.toLocaleString("vi-VN")} VND
@@ -933,7 +971,7 @@ const PaymentPage = () => {
                       variant="primary"
                       className="w-100 py-3"
                       disabled={loading || Boolean(qrPayment)}
-                      onClick={handlePayment}
+                      onClick={() => void handlePayment(paymentMethod)}
                       style={{
                         borderRadius: 12,
                         fontSize: 16,
@@ -943,12 +981,10 @@ const PaymentPage = () => {
                       {loading
                         ? "Đang xử lý..."
                         : qrPayment
-                        ? "Đã tạo mã QR thanh toán"
+                        ? "Chờ xác nhận thanh toán qua QR"
                         : paymentMethod === "cash"
-                        ? "Đặt phòng và thanh toán tại quầy"
-                        : `Thanh toán ${total.toLocaleString(
-                            "vi-VN"
-                          )} VND`}
+                        ? "Đặt phòng và thanh toán tại khách sạn"
+                        : "Tạo mã QR thanh toán"}
                     </Button>
 
                     {qrPayment && (
