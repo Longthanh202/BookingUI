@@ -1,29 +1,53 @@
 import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Alert, Button, Card, Form, Modal } from "react-bootstrap";
+import { Alert, Button, Card, Form, Modal, Table } from "react-bootstrap";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import viLocale from "@fullcalendar/core/locales/vi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faChevronRight, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDays, faCreditCard, faHotel, faMoneyBillWave, faPlus, faUser, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { getBooking } from "../../api/booking/booking.api";
 import { GetDanhSachKhachSanOwner } from "../../api/khachsan/khachsan.api";
 import { createAvailabilityBlock, deleteAvailabilityBlock, getOwnerCalendar } from "../../api/owner.api";
 import OwnerPageShell from "../../components/owner/OwnerPageShell";
-import { field, rows } from "../../components/owner/OwnerDataTable";
-import { HotelSelector } from "../../components/owner/OwnerSelectors";
+import { rows } from "../../components/owner/OwnerDataTable";
 import "../../styles/owner/CalendarOwnerPage.css";
 
 const getValue = (item: any, ...keys: string[]) => keys.map((key) => item?.[key] ?? item?.[key.charAt(0).toUpperCase() + key.slice(1)]).find((value) => value !== undefined && value !== null);
-const dateOnly = (value: unknown) => value ? new Date(String(value)).toLocaleDateString("en-CA") : "";
-const startOfWeek = (date: Date) => {
-	const start = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-	start.setDate(start.getDate() - ((start.getDay() + 6) % 7));
-	return start;
+const dateOnly = (value: unknown) => {
+	if (typeof value !== "string" || !value) return "";
+	const dateMatch = value.match(/^\d{4}-\d{2}-\d{2}/);
+	return dateMatch ? dateMatch[0] : "";
 };
-const localIso = (date: Date) => new Date(date.getFullYear(), date.getMonth(), date.getDate()).toISOString();
+const formatDate = (value: unknown) => {
+	const date = dateOnly(value);
+	return date ? new Date(`${date}T00:00:00`).toLocaleDateString("vi-VN") : "-";
+};
+const formatMoney = (value: unknown) => `${(Number(value) || 0).toLocaleString("vi-VN")} đ`;
+const statusLabels: Record<string, string> = {
+	CHO_XAC_NHAN: "Chờ xác nhận",
+	DA_XAC_NHAN: "Đã xác nhận",
+	DA_CHECK_IN: "Đã nhận phòng",
+	DA_CHECK_OUT: "Đã trả phòng",
+	HOAN_TAT: "Hoàn tất",
+	DA_HUY: "Đã hủy",
+};
+const localIso = (date: Date) => new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())).toISOString();
+const initialCalendarRange = () => {
+	const start = new Date();
+	start.setHours(0, 0, 0, 0);
+	start.setDate(start.getDate() - ((start.getDay() + 6) % 7));
+	const end = new Date(start);
+	end.setDate(end.getDate() + 7);
+	return { from: localIso(start), to: localIso(end) };
+};
 
 export default function CalendarOwnerPage() {
 	const client = useQueryClient();
-	const [hotelId, setHotelId] = useState("");
-	const [week, setWeek] = useState(() => startOfWeek(new Date()));
+	const [calendarRange, setCalendarRange] = useState(initialCalendarRange);
 	const [showBlockForm, setShowBlockForm] = useState(false);
+	const [selectedEvent, setSelectedEvent] = useState<{ type: "booking" | "block"; id: string; item: any } | null>(null);
 	const [roomId, setRoomId] = useState("");
 	const [startAt, setStartAt] = useState("");
 	const [endAt, setEndAt] = useState("");
@@ -32,55 +56,126 @@ export default function CalendarOwnerPage() {
 	const earliestBlockDate = new Date();
 	earliestBlockDate.setDate(earliestBlockDate.getDate() + 1);
 	const earliestBlockDateText = earliestBlockDate.toLocaleDateString("en-CA");
-	const hotels = useQuery({ queryKey: ["owner-hotels"], queryFn: () => GetDanhSachKhachSanOwner({ Page: 1, PageSize: 100 }) });
-	const days = useMemo(() => Array.from({ length: 7 }, (_, index) => {
-		const day = new Date(week);
-		day.setDate(day.getDate() + index);
-		return day;
-	}), [week]);
-	const from = localIso(days[0]);
-	const toDate = new Date(days[6]);
-	toDate.setDate(toDate.getDate() + 1);
-	const to = localIso(toDate);
-	const calendar = useQuery({
-		queryKey: ["owner-calendar", hotelId, from, to],
-		queryFn: () => getOwnerCalendar(hotelId, from, to),
-		enabled: !!hotelId,
+	const hotels = useQuery({
+		queryKey: ["owner-hotels"],
+		queryFn: async () => {
+			const pageSize = 100;
+			const firstPage = await GetDanhSachKhachSanOwner({ Page: 1, PageSize: pageSize });
+			const totalPages = Number(firstPage?.totalPage ?? firstPage?.data?.totalPage ?? 1);
+			if (totalPages <= 1) return firstPage;
+			const remainingPages = await Promise.all(
+				Array.from({ length: totalPages - 1 }, (_, index) =>
+					GetDanhSachKhachSanOwner({ Page: index + 2, PageSize: pageSize })
+				)
+			);
+			const allHotels = [firstPage, ...remainingPages].flatMap(rows);
+			if (Array.isArray(firstPage)) return allHotels;
+			if (Array.isArray(firstPage?.data)) {
+				return { ...firstPage, data: allHotels, totalRow: firstPage.totalRow ?? allHotels.length };
+			}
+			return firstPage;
+		},
 	});
-	const payload = calendar.data?.data ?? calendar.data ?? {};
-	const rooms = rows(getValue(payload, "rooms", "phongs", "roomList"));
-	const bookings = rows(getValue(payload, "bookings", "datPhongs", "reservations"));
-	const blocks = rows(getValue(payload, "blocks", "availabilityBlocks", "blockedPeriods", "khoangChan"));
+	const ownerHotels = rows(hotels.data);
+	const ownerHotelIds = ownerHotels
+		.map((hotel: any) => String(getValue(hotel, "id", "khachSanId") ?? ""))
+		.filter(Boolean);
+	const calendar = useQuery({
+		queryKey: ["owner-calendar", ownerHotelIds.join(","), calendarRange.from, calendarRange.to],
+		queryFn: async () => {
+			const calendars = await Promise.all(ownerHotels.map(async (hotel: any) => {
+				const id = String(getValue(hotel, "id", "khachSanId"));
+				const data = await getOwnerCalendar(id, calendarRange.from, calendarRange.to);
+				const payload = data?.data ?? data ?? {};
+				const hotelName = getValue(hotel, "tenKhachSan", "name") ?? "Khách sạn";
+				return {
+					rooms: rows(getValue(payload, "rooms", "phongs", "roomList")).map((room: any) => ({ ...room, _hotelId: id, _hotelName: hotelName })),
+					bookings: rows(getValue(payload, "bookings", "datPhongs", "reservations")).map((booking: any) => ({ ...booking, _hotelId: id, _hotelName: hotelName })),
+					blocks: rows(getValue(payload, "blocks", "availabilityBlocks", "blockedPeriods", "khoangChan")).map((block: any) => ({ ...block, _hotelId: id, _hotelName: hotelName })),
+				};
+			}));
+			return {
+				rooms: calendars.flatMap((item) => item.rooms),
+				bookings: calendars.flatMap((item) => item.bookings),
+				blocks: calendars.flatMap((item) => item.blocks),
+			};
+		},
+		enabled: !hotels.isLoading && !hotels.isError && ownerHotelIds.length > 0,
+	});
+	const rooms = rows(calendar.data?.rooms);
+	const bookings = rows(calendar.data?.bookings);
+	const blocks = rows(calendar.data?.blocks);
+	const bookingDetailsQuery = useQuery({
+		queryKey: ["owner-calendar-booking-details", selectedEvent?.id],
+		queryFn: () => getBooking(selectedEvent!.id),
+		enabled: selectedEvent?.type === "booking",
+	});
+	const bookingDetails = bookingDetailsQuery.data?.data ?? bookingDetailsQuery.data ?? selectedEvent?.item;
 	const createBlock = useMutation({
 		mutationFn: () => createAvailabilityBlock(roomId, { startAt: new Date(`${startAt}T00:00:00`).toISOString(), endAt: new Date(`${endAt}T00:00:00`).toISOString(), reason }),
 		onSuccess: () => {
 			setShowBlockForm(false);
 			setRoomId(""); setStartAt(""); setEndAt(""); setReason(""); setError("");
-			client.invalidateQueries({ queryKey: ["owner-calendar", hotelId] });
+			client.invalidateQueries({ queryKey: ["owner-calendar"] });
 		},
 		onError: (failure: any) => setError(failure?.response?.data?.message || "Không thể chặn phòng trong khoảng thời gian này."),
 	});
 	const removeBlock = useMutation({
 		mutationFn: deleteAvailabilityBlock,
-		onSuccess: () => client.invalidateQueries({ queryKey: ["owner-calendar", hotelId] }),
+		onSuccess: () => {
+			setSelectedEvent(null);
+			client.invalidateQueries({ queryKey: ["owner-calendar"] });
+		},
 		onError: (failure: any) => setError(failure?.response?.data?.message || "Không thể gỡ khoảng chặn."),
 	});
-	const property = rows(hotels.data).find((hotel: any) => String(field(hotel, "id", "khachSanId")) === hotelId);
-	const weekLabel = `${days[0].toLocaleDateString("vi-VN", { day: "numeric", month: "short" })} - ${days[6].toLocaleDateString("vi-VN", { day: "numeric", month: "short", year: "numeric" })}`;
-	const itemsForDay = (room: any, day: Date) => {
-		const roomKey = String(getValue(room, "id", "roomId", "phongId"));
-		const selectedDate = dateOnly(day);
-		const roomMatches = (item: any) => String(getValue(item, "roomId", "phongId") ?? getValue(getValue(item, "room", "phong"), "id", "roomId", "phongId")) === roomKey;
-		const coversDate = (item: any) => {
-			const start = dateOnly(getValue(item, "startAt", "checkIn", "ngayNhanPhong", "ngayBatDau"));
-			const end = dateOnly(getValue(item, "endAt", "checkOut", "ngayTraPhong", "ngayKetThuc"));
-			return start && end && selectedDate >= start && selectedDate < end;
-		};
-		return [
-			...bookings.filter((item) => roomMatches(item) && coversDate(item)).map((item) => ({ item, type: "booking" })),
-			...blocks.filter((item) => roomMatches(item) && coversDate(item)).map((item) => ({ item, type: "block" })),
-		];
-	};
+	const events = useMemo(() => {
+		const bookingEvents = bookings.flatMap((item: any, index: number) => {
+			const start = dateOnly(getValue(item, "startAt", "checkIn", "ngayNhan", "ngayNhanPhong", "ngayBatDau"));
+			const checkOut = dateOnly(getValue(item, "endAt", "checkOut", "ngayTra", "ngayTraPhong", "ngayKetThuc"));
+			if (!start || !checkOut) return [];
+			const endDate = new Date(`${checkOut}T00:00:00`);
+			endDate.setDate(endDate.getDate() + 1);
+			const end = dateOnly(localIso(endDate));
+			const id = String(getValue(item, "id", "bookingId", "datPhongId") ?? index);
+			const details = rows(getValue(item, "chiTietDatPhongs", "bookingDetails"));
+			const roomLabels = details.map((detail: any) => {
+				const numbers = rows(getValue(detail, "phongs", "rooms"))
+					.map((room: any) => getValue(room, "soPhong", "name", "maPhong"))
+					.filter(Boolean);
+				return numbers.length ? numbers.join(", ") : getValue(detail, "tenLoaiPhong", "roomName");
+			}).filter(Boolean);
+			const guest = getValue(item, "tenKhachHang", "guestName", "hoTen") ?? "Booking";
+			const bookingCode = getValue(item, "maDatPhong") ?? "";
+			const title = [bookingCode, guest, item._hotelName, roomLabels.join(", ")].filter(Boolean).join(" · ");
+			return [{
+				id: `booking-${item._hotelId}-${id}-${index}`,
+				title,
+				start,
+				end,
+				allDay: true,
+				backgroundColor: "#e06b36",
+				borderColor: "#e06b36",
+				extendedProps: { type: "booking", id, item },
+			}];
+		});
+		const blockEvents = blocks.flatMap((item: any, index: number) => {
+			const start = dateOnly(getValue(item, "startAt", "ngayBatDau", "checkIn"));
+			const end = dateOnly(getValue(item, "endAt", "ngayKetThuc", "checkOut"));
+			if (!start || !end) return [];
+			const id = String(getValue(item, "id", "blockId") ?? index);
+			return [{
+				id: `block-${id}-${index}`,
+				title: `Đã chặn · ${getValue(item, "reason") ?? "Bảo trì"}`,
+				start,
+				end,
+				allDay: true,
+				backgroundColor: "#75808a",
+				borderColor: "#75808a",
+				extendedProps: { type: "block", id, item },
+			}];
+		});
+		return [...bookingEvents, ...blockEvents];
+	}, [bookings, blocks]);
 	const submitBlock = () => {
 		if (!roomId || !startAt || !endAt || !reason.trim() || startAt < earliestBlockDateText || endAt <= startAt) {
 			setError("Chọn phòng, lý do và khoảng thời gian trong tương lai hợp lệ.");
@@ -88,25 +183,94 @@ export default function CalendarOwnerPage() {
 		}
 		createBlock.mutate();
 	};
+	const selectedBooking = selectedEvent?.type === "booking" ? bookingDetails : null;
+	const bookingRooms = rows(getValue(selectedBooking, "chiTietDatPhongs", "bookingDetails"));
+	const bookingAmount = bookingRooms.reduce((total: number, detail: any) => total + (Number(getValue(detail, "gia", "price")) || 0), 0);
+	const bookingCustomer = getValue(selectedBooking, "khachHang", "customer");
+	const bookingStatus = getValue(selectedBooking, "trangThai", "status");
+	const bookingStatusLabel = statusLabels[bookingStatus] ?? bookingStatus ?? "-";
+	const selectedHotelName = getValue(selectedBooking, "tenKhachSan", "hotelName")
+		?? selectedEvent?.item?._hotelName
+		?? "-";
 
-	return <OwnerPageShell title="Lịch phòng" description="Theo dõi booking và khoảng thời gian bị chặn theo từng property.">
+	return <OwnerPageShell title="Lịch phòng" description="Theo dõi booking và khoảng thời gian bị chặn tại tất cả khách sạn của bạn.">
 		<>
-			<div className="mb-3" style={{ maxWidth: 420 }}><HotelSelector data={hotels.data} value={hotelId} onChange={setHotelId} /></div>
 			<Card className="owner-panel"><Card.Body>
-				<div className="owner-toolbar px-0 pt-0"><div><h5>{property ? field(property, "tenKhachSan", "name") : "Lịch availability"}</h5><span>{weekLabel}</span></div><div className="d-flex gap-2"><Button variant="outline-dark" onClick={() => setWeek(startOfWeek(new Date()))}>Hôm nay</Button><Button variant="outline-dark" title="Tuần trước" aria-label="Tuần trước" onClick={() => setWeek((current) => new Date(current.getFullYear(), current.getMonth(), current.getDate() - 7))}><FontAwesomeIcon icon={faChevronLeft} /></Button><Button variant="outline-dark" title="Tuần sau" aria-label="Tuần sau" onClick={() => setWeek((current) => new Date(current.getFullYear(), current.getMonth(), current.getDate() + 7))}><FontAwesomeIcon icon={faChevronRight} /></Button><Button variant="dark" disabled={!hotelId} onClick={() => { setError(""); setShowBlockForm(true); }}><FontAwesomeIcon icon={faPlus} /> Chặn ngày</Button></div></div>
+				<div className="owner-toolbar px-0 pt-0">
+					<div><h5>Lịch tất cả khách sạn</h5><span>Nhấp vào booking trên lịch để xem chi tiết</span></div>
+					<Button variant="dark" disabled={!rooms.length} onClick={() => { setError(""); setShowBlockForm(true); }}><FontAwesomeIcon icon={faPlus} /> Chặn ngày</Button>
+				</div>
 				{error && <Alert variant="danger" dismissible onClose={() => setError("")}>{error}</Alert>}
-				{!hotelId ? <p className="text-muted mb-0">Chọn property để xem lịch.</p> : calendar.isLoading ? <p className="text-muted mb-0">Đang tải lịch...</p> : calendar.isError ? <Alert variant="danger">Không thể tải lịch property.</Alert> : <div className="calendar-grid">
-					<div className="calendar-header"><span>Phòng</span>{days.map((day) => <strong key={day.toISOString()}>{day.toLocaleDateString("vi-VN", { weekday: "short", day: "numeric" })}</strong>)}</div>
-					{rooms.map((room: any) => <div className="calendar-row" key={String(getValue(room, "id", "roomId", "phongId"))}><span>{getValue(room, "name", "tenPhong", "maPhong") ?? "Phòng"}</span>{days.map((day) => {
-						const dayItems = itemsForDay(room, day);
-						return <div key={day.toISOString()} className={`calendar-cell ${dayItems.length ? (dayItems[0].type === "block" ? "blocked" : "booked") : "available"}`} title={dayItems.map(({ item }) => getValue(item, "reason", "tenKhachHang", "guestName", "status") ?? "").join(", ")}>
-							{dayItems.map(({ item, type }) => <span className="d-block" key={String(getValue(item, "id", "bookingId", "blockId"))}>{type === "block" ? getValue(item, "reason") ?? "Đã chặn" : getValue(item, "tenKhachHang", "guestName", "status") ?? "Đã đặt"}{type === "block" && <Button variant="link" size="sm" title="Gỡ chặn" aria-label="Gỡ chặn" onClick={() => removeBlock.mutate(String(getValue(item, "id", "blockId")))}><FontAwesomeIcon icon={faTrash} /></Button>}</span>)}
-						</div>;
-					})}</div>)}
-					{!rooms.length && <p className="text-muted mt-3 mb-0">Property chưa có phòng để hiển thị.</p>}
+				{hotels.isLoading || calendar.isLoading ? <p className="text-muted mb-0">Đang tải lịch các khách sạn...</p> : hotels.isError ? <Alert variant="danger">Không thể tải danh sách khách sạn.</Alert> : calendar.isError ? <Alert variant="danger">Không thể tải lịch một hoặc nhiều khách sạn.</Alert> : !ownerHotelIds.length ? <p className="text-muted mb-0">Tài khoản Owner chưa có khách sạn để hiển thị.</p> : <div className="owner-booking-calendar">
+					<FullCalendar
+						plugins={[dayGridPlugin, interactionPlugin]}
+						initialView="dayGridMonth"
+						locale={viLocale}
+						headerToolbar={{ left: "prev,next today", center: "title", right: "dayGridMonth,dayGridWeek" }}
+						buttonText={{ today: "Hôm nay", month: "Tháng", week: "Tuần" }}
+						events={events}
+						datesSet={(dateInfo) => {
+							const nextRange = { from: localIso(dateInfo.start), to: localIso(dateInfo.end) };
+							setCalendarRange((current) => current.from === nextRange.from && current.to === nextRange.to ? current : nextRange);
+						}}
+						eventClick={(info) => {
+							const { type, id, item } = info.event.extendedProps;
+							if (type === "booking" || type === "block") setSelectedEvent({ type, id, item });
+						}}
+						height="auto"
+						dayMaxEvents
+						eventDisplay="block"
+					/>
+					{!events.length && <p className="text-muted mt-3 mb-0">Chưa có booking hoặc khoảng chặn trong lịch.</p>}
 				</div>}
+				{rooms.length > 0 && <div className="small text-muted mt-3">Đang hiển thị {rooms.length} phòng thuộc {ownerHotelIds.length} khách sạn.</div>}
 			</Card.Body></Card>
-			<Modal show={showBlockForm} onHide={() => setShowBlockForm(false)}>
+			<Modal show={Boolean(selectedEvent)} onHide={() => setSelectedEvent(null)} centered size={selectedEvent?.type === "booking" ? "lg" : undefined} className="owner-calendar-modal">
+				<Modal.Header closeButton className={selectedEvent?.type === "booking" ? "owner-calendar-modal-header" : ""}>
+					<div>
+						<div className="owner-calendar-modal-eyebrow">{selectedEvent?.type === "booking" ? "THÔNG TIN ĐẶT PHÒNG" : "LỊCH KHẢ DỤNG"}</div>
+						<Modal.Title>{selectedEvent?.type === "booking" ? "Chi tiết booking" : "Chi tiết khoảng chặn"}</Modal.Title>
+						{selectedEvent?.type === "booking" && <div className="owner-calendar-modal-subtitle">{selectedHotelName}</div>}
+					</div>
+				</Modal.Header>
+				<Modal.Body>
+					{selectedEvent?.type === "booking" && bookingDetailsQuery.isLoading ? <p className="mb-0">Đang tải chi tiết booking...</p> : selectedEvent?.type === "booking" && bookingDetailsQuery.isError ? <Alert variant="warning">Không thể tải đầy đủ booking từ máy chủ. Một số thông tin lịch vẫn được hiển thị.</Alert> : null}
+					{selectedEvent?.type === "booking" && selectedBooking && <>
+						<div className="owner-calendar-booking-summary">
+							<div className="owner-calendar-booking-code"><span>Mã đặt phòng</span><strong>{getValue(selectedBooking, "maDatPhong") ?? getValue(selectedEvent.item, "maDatPhong") ?? getValue(selectedBooking, "id", "bookingId") ?? selectedEvent.id}</strong></div>
+							<span className={`owner-calendar-status owner-calendar-status-${String(bookingStatus ?? "").toLowerCase()}`}>{bookingStatusLabel}</span>
+						</div>
+						<div className="owner-calendar-info-grid">
+							<div className="owner-calendar-info-card"><FontAwesomeIcon icon={faUser} /><div><span>Khách hàng</span><strong>{getValue(selectedBooking, "tenKhachHang", "hoTen") ?? getValue(bookingCustomer, "tenKhachHang", "hoTen", "fullName", "name") ?? "Chưa có thông tin"}</strong><small>{[getValue(selectedBooking, "email") ?? getValue(bookingCustomer, "email"), getValue(selectedBooking, "soDienThoai", "phone") ?? getValue(bookingCustomer, "soDienThoai", "phone")].filter(Boolean).join(" · ") || "Không có thông tin liên hệ"}</small></div></div>
+							<div className="owner-calendar-info-card"><FontAwesomeIcon icon={faHotel} /><div><span>Khách sạn</span><strong>{selectedHotelName}</strong></div></div>
+							<div className="owner-calendar-info-card"><FontAwesomeIcon icon={faCalendarDays} /><div><span>Ngày lưu trú</span><strong>{formatDate(getValue(selectedBooking, "ngayNhan", "ngayNhanPhong", "checkIn"))} – {formatDate(getValue(selectedBooking, "ngayTra", "ngayTraPhong", "checkOut"))}</strong><small>Ngày trả phòng cũng được đánh dấu trên lịch</small></div></div>
+							<div className="owner-calendar-info-card"><FontAwesomeIcon icon={faCreditCard} /><div><span>Thanh toán</span><strong>{getValue(selectedBooking, "thanhToan", "paymentMethod") ?? "-"}</strong><small>Ngày tạo: {formatDate(getValue(selectedBooking, "ngayTao", "createdAt"))}</small></div></div>
+						</div>
+						<div className="owner-calendar-price-strip">
+							<div><span>Tiền phòng</span><strong>{formatMoney(getValue(selectedBooking, "tongTien", "totalAmount") ?? bookingAmount)}</strong></div>
+							<div><span>Tiền giảm</span><strong>{formatMoney(getValue(selectedBooking, "soTienGiam", "discountAmount"))}</strong></div>
+							<div><FontAwesomeIcon icon={faMoneyBillWave} /><span>Ghi chú:</span><strong>{getValue(selectedBooking, "ghiChu", "note") ?? "-"}</strong></div>
+						</div>
+						<div className="owner-calendar-room-heading"><h6>Phòng trong booking</h6><span>{bookingRooms.length} loại phòng</span></div>
+						{bookingRooms.length ? <Table responsive className="owner-calendar-room-table align-middle mb-0">
+							<thead><tr><th>Loại phòng</th><th>Giá</th><th>Phòng</th><th>Trạng thái phòng</th></tr></thead>
+							<tbody>{bookingRooms.map((detail: any, index: number) => <tr key={String(getValue(detail, "id") ?? index)}>
+								<td>{getValue(detail, "tenLoaiPhong", "roomName") ?? "-"}</td>
+								<td>{formatMoney(getValue(detail, "gia", "price"))}</td>
+								<td>{rows(getValue(detail, "phongs", "rooms")).map((room: any) => getValue(room, "soPhong", "name")).filter(Boolean).join(", ") || "-"}</td>
+								<td>{rows(getValue(detail, "phongs", "rooms")).map((room: any) => getValue(room, "trangThai", "status")).filter(Boolean).join(", ") || "-"}</td>
+							</tr>)}</tbody>
+						</Table> : <p className="text-muted mb-0">Booking chưa có chi tiết phòng trong dữ liệu trả về.</p>}
+					</>}
+					{selectedEvent?.type === "block" && <div><p><strong>Lý do:</strong> {getValue(selectedEvent.item, "reason") ?? "Đã chặn"}</p><p className="mb-0"><strong>Thời gian:</strong> {formatDate(getValue(selectedEvent.item, "startAt", "ngayBatDau"))} - {formatDate(getValue(selectedEvent.item, "endAt", "ngayKetThuc"))}</p></div>}
+				</Modal.Body>
+				{selectedEvent?.type === "booking" && <Modal.Footer><Button variant="outline-secondary" onClick={() => setSelectedEvent(null)}>Đóng</Button></Modal.Footer>}
+				{selectedEvent?.type === "block" && <Modal.Footer>
+					<Button variant="outline-secondary" onClick={() => setSelectedEvent(null)}>Đóng</Button>
+					<Button variant="outline-danger" disabled={removeBlock.isPending} onClick={() => removeBlock.mutate(selectedEvent.id)}><FontAwesomeIcon icon={faTrash} className="me-2" />Gỡ chặn</Button>
+				</Modal.Footer>}
+			</Modal>
+			<Modal show={showBlockForm} onHide={() => setShowBlockForm(false)} className="owner-calendar-modal">
 				<Modal.Header closeButton><Modal.Title>Chặn phòng</Modal.Title></Modal.Header>
 				<Modal.Body><Form.Group className="mb-3"><Form.Label>Phòng</Form.Label><Form.Select value={roomId} onChange={(event) => setRoomId(event.target.value)}><option value="">Chọn phòng</option>{rooms.map((room: any) => <option key={String(getValue(room, "id", "roomId", "phongId"))} value={String(getValue(room, "id", "roomId", "phongId"))}>{getValue(room, "name", "tenPhong", "maPhong") ?? "Phòng"}</option>)}</Form.Select></Form.Group>
 					<div className="row g-3"><Form.Group className="col-md-6"><Form.Label>Bắt đầu</Form.Label><Form.Control type="date" value={startAt} onChange={(event) => setStartAt(event.target.value)} min={earliestBlockDateText} /></Form.Group><Form.Group className="col-md-6"><Form.Label>Kết thúc</Form.Label><Form.Control type="date" value={endAt} onChange={(event) => setEndAt(event.target.value)} min={startAt || earliestBlockDateText} /></Form.Group></div>
