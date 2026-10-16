@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Alert, Button, Form, Modal, Table } from "react-bootstrap";
+import { Alert, Button, Form, Table } from "react-bootstrap";
+import Modal from "../../components/common/SystemModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faRotate, faPen, faTrash, faCheck, faBan, faLockOpen, faLock } from "@fortawesome/free-solid-svg-icons";
 import { getBookingStatusOptions, searchBookingsAdmin } from "../../api/booking/booking.api";
@@ -14,6 +15,7 @@ import { searchHotelsAdmin, updateHotelStatus } from "../../api/khachsan/khachsa
 import { deleteReview } from "../../api/review/review.api";
 import { createAdminTag, disableAdminTag, getAdminTags, replaceAdminTagHotels, searchAdminUsers, updateAdminTag, updateAdminUserStatus } from "../../api/admin/admin.api";
 import { setRolePermissions } from "../../api/auth/auth.api";
+import NumberedPagination from "../../components/common/NumberedPagination";
 
 type AdminRowData = Record<string, any>;
 type ConfirmAction = { title: string; description: string; operation?: () => Promise<any>; kind?: "withdrawal" | "advertising-rejection"; id?: string; status?: string };
@@ -21,6 +23,7 @@ type Notice = { kind: "success" | "danger"; text: string };
 
 const hotelStatuses = ["CHO_DUYET", "DA_DUYET", "TAM_NGUNG", "TU_CHOI", "DA_KHOA"];
 const paymentStatuses = ["CHO_THANH_TOAN", "DA_THANH_TOAN", "DA_HUY", "DA_HOAN_TIEN"];
+const serverPagedSections = new Set(["bookings", "banners", "hotels", "users"]);
 
 const titles: Record<string, string> = {
   bookings: "Đặt phòng toàn hệ thống", payments: "Thanh toán", commissions: "Hoa hồng chờ xử lý",
@@ -66,6 +69,9 @@ export default function AdminOperationsPage() {
   const [bannerEditDraft, setBannerEditDraft] = useState({ title: "", subtitle: "", url: "", isActive: "1" });
   const [selectedTagId, setSelectedTagId] = useState("");
   const [tagDraft, setTagDraft] = useState({ name: "", slug: "", description: "", sortOrder: "0", isActive: true, hotelIds: "" });
+  useEffect(() => {
+    setFilters((current) => ({ ...current, page: "1" }));
+  }, [section]);
   const bookingStatuses = useQuery({
     queryKey: ["booking-status-options"],
     queryFn: getBookingStatusOptions,
@@ -92,11 +98,17 @@ export default function AdminOperationsPage() {
 
   const data = rows(query.data);
   const responseData = query.data?.data ?? query.data;
-  const total = Number(query.data?.totalRow ?? query.data?.totalCount ?? query.data?.totalItems ?? query.data?.total ?? query.data?.count ?? responseData?.totalRow ?? responseData?.totalCount ?? responseData?.totalItems ?? responseData?.total ?? responseData?.count ?? data.length);
+  const reportedTotal = Number(query.data?.totalRow ?? query.data?.totalCount ?? query.data?.totalItems ?? query.data?.total ?? query.data?.count ?? responseData?.totalRow ?? responseData?.totalCount ?? responseData?.totalItems ?? responseData?.total ?? responseData?.count ?? 0);
+  const total = reportedTotal || data.length;
   const page = Number(filters.page || 1);
   const pageSize = Number(filters.pageSize || 20);
-  const totalPage = Number(query.data?.totalPage ?? responseData?.totalPage ?? 0);
-  const hasNextPage = totalPage > 0 ? page < totalPage : total > page * pageSize || data.length === pageSize;
+  const reportedTotalPage = Number(query.data?.totalPage ?? responseData?.totalPage ?? 0);
+  const totalPage = reportedTotalPage || (serverPagedSections.has(section)
+    ? reportedTotal > 0 ? Math.ceil(reportedTotal / pageSize) : page + (data.length === pageSize ? 1 : 0)
+    : Math.max(1, Math.ceil(total / pageSize)));
+  const visibleData = serverPagedSections.has(section)
+    ? data
+    : data.slice((page - 1) * pageSize, page * pageSize);
 
   const request = async (operation: () => Promise<any>): Promise<boolean> => {
     setSaving(true);
@@ -251,7 +263,8 @@ export default function AdminOperationsPage() {
           <Button variant="outline-primary" disabled={!selectedTagId || saving} onClick={() => { const hotelIds = tagDraft.hotelIds.split(/[\n,]/).map((id) => id.trim()).filter(Boolean); askForConfirmation({ title: "Thay danh sách khách sạn", description: `Danh sách mới gồm ${hotelIds.length} khách sạn sẽ thay thế toàn bộ liên kết hiện tại.`, operation: () => replaceAdminTagHotels(selectedTagId, hotelIds) }); }}>Thay danh sách khách sạn</Button>
         </div></div>
       </section>
-      <DataTable section={section} data={data} loading={query.isLoading} onAction={askForConfirmation} />
+      <DataTable section={section} data={visibleData} loading={query.isLoading} onAction={askForConfirmation} />
+      <NumberedPagination page={page} totalPages={totalPage} disabled={query.isFetching} className="admin-pagination" onPageChange={(nextPage) => setFilters((current) => ({ ...current, page: String(nextPage) }))} />
     </>}
 
     {section === "banners" && <section className="admin-panel">
@@ -267,8 +280,8 @@ export default function AdminOperationsPage() {
 
     {section !== "reviews" && section !== "permissions" && section !== "tags" && <>
       {section !== "payments" && section !== "commissions" && section !== "withdrawals" && section !== "advertising" && <FilterPanel section={section} draft={filterDraft} setDraft={setFilterDraft} onSubmit={submitFilters} bookingStatuses={rows(bookingStatuses.data)} />}
-      <DataTable section={section} data={data} loading={query.isLoading} onAction={askForConfirmation} onEditBanner={openBannerEditor} />
-      {(section === "users" || section === "hotels" || section === "bookings" || section === "banners") && <div className="admin-pagination"><span>{total ? `Trang ${page} · ${total} kết quả` : `Trang ${page} · ${data.length} kết quả`}</span><div className="d-flex gap-2"><Button size="sm" variant="outline-secondary" disabled={page <= 1 || query.isFetching} onClick={() => setFilters((current) => ({ ...current, page: String(Math.max(1, page - 1)) }))}>Trước</Button><Button size="sm" variant="outline-secondary" disabled={!hasNextPage || query.isFetching} onClick={() => setFilters((current) => ({ ...current, page: String(page + 1) }))}>Tiếp</Button></div></div>}
+      <DataTable section={section} data={visibleData} loading={query.isLoading} onAction={askForConfirmation} onEditBanner={openBannerEditor} />
+      <NumberedPagination page={page} totalPages={totalPage} disabled={query.isFetching} className="admin-pagination" onPageChange={(nextPage) => setFilters((current) => ({ ...current, page: String(nextPage) }))} />
     </>}
 
     <Modal show={Boolean(confirmAction)} onHide={() => setConfirmAction(null)} centered>
@@ -324,7 +337,7 @@ function DataTable({ section, data, loading, onAction, onEditBanner }: { section
   if (["reviews", "permissions"].includes(section)) return null;
   return <section className="admin-panel admin-results-panel">
     <div className="admin-panel-heading"><div><h3>Kết quả</h3><p>{loading ? "Đang tải dữ liệu..." : `${data.length} bản ghi trên trang này`}</p></div></div>
-    <div className="admin-table-wrap"><Table className="admin-table" hover responsive>
+    <div className="admin-table-wrap"><Table className="admin-table" hover>
       <thead><tr><th>Mã</th><th>Nội dung</th><th>Chi tiết</th><th>Trạng thái</th><th className="text-end">Thao tác</th></tr></thead>
       <tbody>
         {data.map((item, index) => <AdminDataRow key={String(field(item, "id", "Id", "userId", "UserId", "tagId", "TagId") ?? index)} item={item} section={section} onAction={onAction} onEditBanner={onEditBanner} />)}

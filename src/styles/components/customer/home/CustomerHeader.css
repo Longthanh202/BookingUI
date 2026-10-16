@@ -46,6 +46,12 @@
 .home-header__nav { display: flex; gap: 34px; font-size: 15px; font-weight: 600; }
 .home-header__nav a, .home-header__login { color: #14162b; text-decoration: none; }
 .home-header__nav a:hover, .home-header__login:hover { color: #ff5a3c; }
+.home-header__login {
+  font-family: Arial, "Helvetica Neue", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+}
 
 .home-header__actions {
   display: flex;
@@ -101,7 +107,6 @@
 @media (max-width: 760px) {
   .home-header__inner { padding: 16px 20px; }
   .home-header__nav, .home-header__outline { display: none; }
-  .home-header__login { font-size: 13px; }
   .home-header__primary { padding: 10px 12px; font-size: 12px; }
 }
 

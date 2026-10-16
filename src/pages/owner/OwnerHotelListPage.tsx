@@ -20,11 +20,13 @@ import Col from "react-bootstrap/Col";
 import Badge from "react-bootstrap/Badge";
 import Spinner from "react-bootstrap/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarDays, faRotate } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 
 import ConfirmationModal from "../../components/common/ConfirmationModal";
 import ActionButton from "../../components/common/ActionButton";
 import { showToast } from "../../components/common/Toast";
+import OwnerRefreshButton from "../../components/owner/OwnerRefreshButton";
+import NumberedPagination from "../../components/common/NumberedPagination";
 import "../../styles/owner/OwnerWorkspacePage.css";
 
 const initialFormValues = {
@@ -100,6 +102,7 @@ const OwnerHotelListPage = () => {
 
   const dto: KhachSanListOwnerParams = {
     Page: page,
+    PageSize: 10,
   };
 
   // =====================================================
@@ -329,6 +332,9 @@ const OwnerHotelListPage = () => {
 
   const hotels =
     data?.data || [];
+  const totalPages = Math.max(1, Number(data?.totalPage ?? data?.data?.totalPage ?? (data?.totalRow || data?.totalCount
+    ? Math.ceil(Number(data.totalRow ?? data.totalCount) / 10)
+    : hotels.length >= 10 ? page + 1 : page)));
 
   // =====================================================
   // RENDER
@@ -359,9 +365,7 @@ const OwnerHotelListPage = () => {
           </div>
           <div className="owner-date">
             <FontAwesomeIcon icon={faCalendarDays} /> {today}
-            <Button variant="light" title="Làm mới" onClick={() => queryClient.invalidateQueries({ queryKey: ["KhachSanOwner"] })}>
-              <FontAwesomeIcon icon={faRotate} />
-            </Button>
+            <OwnerRefreshButton />
           </div>
         </div>
 
@@ -946,67 +950,7 @@ const OwnerHotelListPage = () => {
 
                 {/* PAGINATION */}
 
-                <div
-                  className="d-flex justify-content-between align-items-center"
-                  style={{
-                    padding:
-                      "16px 24px",
-                    borderTop:
-                      "1px solid #e5e7eb",
-                  }}
-                >
-                  <span
-                    style={{
-                      color:
-                        "#64748b",
-                      fontSize: 14,
-                    }}
-                  >
-                    Trang {page}
-                  </span>
-
-                  <div className="d-flex gap-2">
-                    <Button
-                      variant="light"
-                      size="sm"
-                      disabled={page <= 1}
-                      onClick={() =>
-                        setPage(
-                          (prev) =>
-                            Math.max(
-                              prev - 1,
-                              1
-                            )
-                        )
-                      }
-                      style={{
-                        border:
-                          "1px solid #e2e8f0",
-                        borderRadius: 9,
-                      }}
-                    >
-                      ← Trang trước
-                    </Button>
-
-                    <Button
-                      variant="light"
-                      size="sm"
-                      onClick={() =>
-                        setPage(
-                          (prev) =>
-                            prev + 1
-                        )
-                      }
-                      style={{
-                        border:
-                          "1px solid #e2e8f0",
-                        borderRadius: 9,
-                      }}
-                    >
-                      Trang sau →
-                    </Button>
-                  </div>
-                </div>
+                <NumberedPagination page={page} totalPages={totalPages} disabled={isLoading} onPageChange={setPage} />
               </>
             )}
           </Card.Body>
@@ -1023,9 +967,10 @@ const OwnerHotelListPage = () => {
         onOk={handleSubmit}
         onCancel={handleClose}
         confirmLoading={isProcessing}
-        width={960}
+        width={1200}
+        className="owner-layout-modal owner-create-hotel-modal"
       >
-        <Form>
+        <Form className="owner-create-hotel-form">
           {/* ================================================= */}
           {/* BASIC INFORMATION */}
           {/* ================================================= */}

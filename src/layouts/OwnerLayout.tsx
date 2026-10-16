@@ -7,6 +7,7 @@ import { faBars, faBell, faCalendarDays, faChartLine, faClipboardList, faBed, fa
 import Sidebar from "../components/common/navigation/Sidebar";
 import Button from "react-bootstrap/Button";
 import "../styles/layouts/OwnerLayout.css";
+import "../styles/layouts/OwnerFormControls.css";
 import AccountMenu from "../components/common/AccountMenu";
 
 interface Profile {
@@ -48,7 +49,7 @@ const OwnerLayout = () => {
   });
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex" }}>
+    <div className="owner-layout" style={{ minHeight: "100vh", display: "flex" }}>
       <Sidebar collapsed={collapsed} menuItems={menuItems} />
       <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
         <header

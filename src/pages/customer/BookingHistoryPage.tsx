@@ -6,8 +6,9 @@ import Table from "react-bootstrap/Table";
 import Spinner from "react-bootstrap/Spinner";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+import Modal from "../../components/common/SystemModal";
 import Form from "react-bootstrap/Form";
+import NumberedPagination from "../../components/common/NumberedPagination";
 
 import CustomerHeader from "../../components/customer/home/CustomerHeader/CustomerHeader";
 
@@ -744,69 +745,14 @@ const BookingHistoryPage = () => {
                 {/* PAGINATION */}
                 {/* ========================= */}
 
-                {data &&
-                  data.totalPage > 1 && (
-                    <div
-                      className="d-flex justify-content-between align-items-center flex-wrap gap-3"
-                      style={{
-                        padding:
-                          "18px 24px",
-                        borderTop:
-                          "1px solid #eef0f4",
-                      }}
-                    >
-                      <div
-                        className="text-secondary"
-                        style={{
-                          fontSize: 14,
-                        }}
-                      >
-                        Trang{" "}
-                        <strong>
-                          {pageIndex}
-                        </strong>{" "}
-                        /{" "}
-                        <strong>
-                          {data.totalPage}
-                        </strong>
-                      </div>
-
-                      <div className="d-flex gap-2">
-                        <Button
-                          variant="outline-primary"
-                          className="rounded-pill px-4"
-                          disabled={
-                            pageIndex <= 1
-                          }
-                          onClick={() =>
-                            setPageIndex(
-                              (prev) =>
-                                prev - 1
-                            )
-                          }
-                        >
-                          ← Trước
-                        </Button>
-
-                        <Button
-                          variant="primary"
-                          className="rounded-pill px-4"
-                          disabled={
-                            pageIndex >=
-                            data.totalPage
-                          }
-                          onClick={() =>
-                            setPageIndex(
-                              (prev) =>
-                                prev + 1
-                            )
-                          }
-                        >
-                          Sau →
-                        </Button>
-                      </div>
-                    </div>
-                  )}
+                {data && (
+                  <NumberedPagination
+                    page={pageIndex}
+                    totalPages={data.totalPage}
+                    disabled={isLoading}
+                    onPageChange={setPageIndex}
+                  />
+                )}
               </>
             )}
           </Card.Body>

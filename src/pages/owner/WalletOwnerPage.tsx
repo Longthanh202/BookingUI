@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Button, Card, Form, Modal, Tab, Tabs } from "react-bootstrap";
+import { Button, Card, Form, Tab, Tabs } from "react-bootstrap";
+import Modal from "../../components/common/SystemModal";
 import {
   createBankAccount,
   createWithdrawal,
@@ -115,7 +116,7 @@ export default function WalletOwnerPage() {
           <DataTable data={statements.data} columns={["loaiGiaoDich", "soTien", "createdAt"]} money={["soTien"]} />
         </Card.Body></Card>
 
-        <Modal show={showWithdrawal} onHide={() => setShowWithdrawal(false)} centered className="owner-withdrawal-modal">
+        <Modal show={showWithdrawal} onHide={() => setShowWithdrawal(false)} centered className="owner-withdrawal-modal owner-layout-modal">
           <Modal.Header closeButton><Modal.Title>Gửi yêu cầu rút tiền</Modal.Title></Modal.Header>
           <Modal.Body>
             <p>Tài khoản ngân hàng đã đăng ký sẽ được sử dụng.</p>
@@ -131,7 +132,7 @@ export default function WalletOwnerPage() {
           </Modal.Footer>
         </Modal>
 
-        <Modal show={showAccount} onHide={() => setShowAccount(false)} centered>
+        <Modal show={showAccount} onHide={() => setShowAccount(false)} centered className="owner-layout-modal">
           <Modal.Header closeButton><Modal.Title>Thêm tài khoản ngân hàng</Modal.Title></Modal.Header>
           <Modal.Body>
             <Form.Group className="mb-3"><Form.Label>Tên ngân hàng</Form.Label><Form.Control value={accountForm.tenNganHang || ""} onChange={(event) => updateAccount("tenNganHang", event.target.value)} /></Form.Group>

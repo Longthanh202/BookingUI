@@ -1,0 +1,119 @@
+.owner-layout {
+  color: #344150;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.owner-layout .form-control,
+.owner-layout .form-select,
+.owner-layout input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+.owner-layout select,
+.owner-layout textarea,
+.owner-layout-modal .form-control,
+.owner-layout-modal .form-select,
+.owner-layout-modal input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+.owner-layout-modal select,
+.owner-layout-modal textarea {
+  min-height: 42px;
+  padding: 9px 12px;
+  border: 1px solid #d9e1e8;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #263442;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.4;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.owner-layout .form-select,
+.owner-layout select,
+.owner-layout-modal .form-select,
+.owner-layout-modal select {
+  padding-right: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%236b7785' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 5 5 5-5'/%3E%3C/svg%3E");
+  background-position: right 13px center;
+  background-size: 16px;
+}
+
+.owner-layout textarea,
+.owner-layout-modal textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.owner-layout .form-control:focus,
+.owner-layout .form-select:focus,
+.owner-layout input:focus,
+.owner-layout select:focus,
+.owner-layout textarea:focus,
+.owner-layout-modal .form-control:focus,
+.owner-layout-modal .form-select:focus,
+.owner-layout-modal input:focus,
+.owner-layout-modal select:focus,
+.owner-layout-modal textarea:focus {
+  border-color: #e06b36;
+  outline: 0;
+  box-shadow: 0 0 0 4px rgba(224, 107, 54, 0.14);
+}
+
+.owner-layout .form-control::placeholder,
+.owner-layout input::placeholder,
+.owner-layout textarea::placeholder,
+.owner-layout-modal .form-control::placeholder,
+.owner-layout-modal input::placeholder,
+.owner-layout-modal textarea::placeholder {
+  color: #9aa5b1;
+  opacity: 1;
+}
+
+.owner-layout .form-control:disabled,
+.owner-layout .form-select:disabled,
+.owner-layout input:disabled,
+.owner-layout select:disabled,
+.owner-layout textarea:disabled,
+.owner-layout-modal .form-control:disabled,
+.owner-layout-modal .form-select:disabled,
+.owner-layout-modal input:disabled,
+.owner-layout-modal select:disabled,
+.owner-layout-modal textarea:disabled {
+  background-color: #f3f5f7;
+  color: #7c8793;
+  cursor: not-allowed;
+}
+
+.owner-layout input[type="checkbox"],
+.owner-layout input[type="radio"],
+.owner-layout-modal input[type="checkbox"],
+.owner-layout-modal input[type="radio"] {
+  accent-color: #e06b36;
+}
+
+.owner-layout .form-control[type="file"],
+.owner-layout-modal .form-control[type="file"] {
+  min-height: 42px;
+  padding: 5px;
+  border: 1px solid #d9e1e8;
+  border-radius: 10px;
+  color: #657180;
+  font: inherit;
+  font-size: 13px;
+}
+
+.owner-layout .form-control[type="file"]::file-selector-button,
+.owner-layout-modal .form-control[type="file"]::file-selector-button {
+  margin: 0 10px 0 0;
+  padding: 7px 12px;
+  border: 0;
+  border-radius: 7px;
+  background: #fff0e8;
+  color: #c95726;
+  font: inherit;
+  font-weight: 650;
+}
+
+.owner-layout .form-label,
+.owner-layout-modal .form-label {
+  color: #5f6c7a;
+  font-size: 13px;
+  font-weight: 650;
+}

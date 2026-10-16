@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+import Modal from "./SystemModal";
 
 type ModalProps = {
   open: boolean;
@@ -9,6 +9,7 @@ type ModalProps = {
   onCancel: () => void;
   confirmLoading?: boolean;
   width?: number;
+  className?: string;
   children: React.ReactNode;
 };
 
@@ -19,9 +20,10 @@ const ConfirmationModal = ({
   onCancel,
   confirmLoading = false,
   width = 900,
+  className = "",
   children,
 }: ModalProps) => {
-  const size = width >= 1000 ? "xl" : "lg";
+  const size = width >= 960 ? "xl" : "lg";
 
   return (
     <Modal
@@ -30,6 +32,7 @@ const ConfirmationModal = ({
       centered
       size={size}
       dialogClassName="base-modal-dialog modal-xl"
+      className={className}
       scrollable
     >
       <Modal.Header closeButton>

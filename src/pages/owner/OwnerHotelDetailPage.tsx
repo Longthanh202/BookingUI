@@ -10,7 +10,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Badge from "react-bootstrap/Badge";
-import Modal from "react-bootstrap/Modal";
+import Modal from "../../components/common/SystemModal";
 import Spinner from "react-bootstrap/Spinner";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
@@ -26,7 +26,6 @@ import {
   faWifi,
   faCalendarCheck,
   faClock,
-  faRotate,
   faLocationDot,
   faStar,
   faUsers,
@@ -60,7 +59,10 @@ import { getTags } from "../../api/home/home.api";
 
 import { RoomResponse } from "../../types/loaiphong/RoomResponse";
 import { showToast } from "../../components/common/Toast";
+import OwnerRefreshButton from "../../components/owner/OwnerRefreshButton";
+import NumberedPagination from "../../components/common/NumberedPagination";
 import "../../styles/owner/OwnerWorkspacePage.css";
+import "../../styles/owner/OwnerHotelDetailPage.css";
 
 interface HotelRoomType {
   id?: string;
@@ -161,6 +163,8 @@ const OwnerHotelDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const [bookingPage, setBookingPage] = useState(1);
+  const bookingPageSize = 10;
   const today = useMemo(() => new Intl.DateTimeFormat("vi-VN", { weekday: "long", day: "numeric", month: "long" }).format(new Date()), []);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -488,6 +492,11 @@ const handleCheckOut = (bookingId: string) => {
   const hotelBookings = useMemo(() => {
     return ownerBookingsResp?.data ?? [];
   }, [ownerBookingsResp]);
+  const bookingTotalPages = Math.max(1, Math.ceil(hotelBookings.length / bookingPageSize));
+  const visibleHotelBookings = hotelBookings.slice((bookingPage - 1) * bookingPageSize, bookingPage * bookingPageSize);
+  useEffect(() => {
+    setBookingPage((current) => Math.min(current, bookingTotalPages));
+  }, [bookingTotalPages]);
 
   /*
   |--------------------------------------------------------------------------
@@ -853,31 +862,16 @@ const handleCheckOut = (bookingId: string) => {
     >
       {/* HEADER */}
 
-      <div
-        style={{
-          background: "#fff",
-          borderBottom:
-            "1px solid #e9ecef",
-          position: "sticky",
-          top: 0,
-          zIndex: 100,
-        }}
-      >
-        <Container fluid>
+      <div className="owner-hotel-detail-topbar">
+        <Container fluid className="owner-hotel-detail-topbar-container">
           <div
-            className="owner-page-heading mb-0"
-            style={{
-              minHeight: 82,
-            }}
+            className="owner-page-heading owner-hotel-detail-header mb-0"
           >
-            <div className="d-flex align-items-center gap-3">
+            <div className="owner-hotel-detail-title">
               <Button
                 variant="light"
                 className="rounded-circle"
-                style={{
-                  width: 42,
-                  height: 42,
-                }}
+                aria-label="Quay lại"
                 onClick={() => navigate(-1)}
               >
                 <FontAwesomeIcon
@@ -885,24 +879,14 @@ const handleCheckOut = (bookingId: string) => {
                 />
               </Button>
 
-              <div>
-                <div
-                  className="fw-bold"
-                  style={{
-                    fontSize: 22,
-                    lineHeight: 1.3,
-                  }}
-                >
-                  {hotel.tenKhachSan}
-                </div>
-              </div>
+              <div className="owner-hotel-detail-name">{hotel.tenKhachSan}</div>
             </div>
 
-            <div className="owner-date">
-              <FontAwesomeIcon icon={faCalendarCheck} /> {today}
-              <Button variant="light" title="Làm mới" onClick={() => queryClient.invalidateQueries({ queryKey: ["hotelDetailOwner", id] })}>
-                <FontAwesomeIcon icon={faRotate} />
-              </Button>
+            <div className="owner-hotel-detail-actions">
+              <span className="owner-hotel-detail-date">
+                <FontAwesomeIcon icon={faCalendarCheck} /> {today}
+              </span>
+              <OwnerRefreshButton />
               <Badge
                 bg={
                   hotel.trangThai ===
@@ -2217,7 +2201,7 @@ const handleCheckOut = (bookingId: string) => {
                         </thead>
 
                         <tbody>
-                          {hotelBookings.map(
+                          {visibleHotelBookings.map(
                             (b: any) => {
                               const types =
                                 Array.isArray(
@@ -2417,6 +2401,9 @@ const handleCheckOut = (bookingId: string) => {
                       </Table>
                     </Card>
                   )}
+                  {hotelBookings.length > 0 && (
+                    <NumberedPagination page={bookingPage} totalPages={bookingTotalPages} onPageChange={setBookingPage} />
+                  )}
                 </div>
               </Tab>
             </Tabs>
@@ -2434,6 +2421,7 @@ const handleCheckOut = (bookingId: string) => {
           setShowAddRoomModal(false)
         }
         centered
+        className="owner-layout-modal"
       >
         <Modal.Header closeButton>
           <Modal.Title>
@@ -2600,6 +2588,7 @@ const handleCheckOut = (bookingId: string) => {
           setShowAddAmenityModal(false)
         }
         centered
+        className="owner-layout-modal"
       >
         <Modal.Header closeButton>
           <Modal.Title>

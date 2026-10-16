@@ -1,0 +1,262 @@
+.stayro-modal-backdrop {
+  position: fixed;
+  z-index: 2000;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 20px;
+  background: rgba(22, 32, 43, 0.58);
+  backdrop-filter: blur(3px);
+}
+
+.stayro-modal-dialog.modal-dialog {
+  width: min(100%, 720px);
+  max-width: 720px;
+  margin: auto;
+  outline: none;
+}
+
+.stayro-modal-dialog--sm.modal-dialog {
+  max-width: 440px;
+}
+
+.stayro-modal-dialog--lg.modal-dialog {
+  max-width: 960px;
+}
+
+.stayro-modal-dialog--xl.modal-dialog {
+  max-width: 1200px;
+}
+
+.stayro-modal-backdrop.owner-calendar-modal .stayro-modal-dialog {
+  max-width: 960px;
+}
+
+.stayro-modal-backdrop.owner-withdrawal-modal .stayro-modal-dialog {
+  max-width: 520px;
+}
+
+.owner-calendar-modal-header .stayro-modal-title {
+  color: #fff !important;
+}
+
+.owner-calendar-modal-header .stayro-modal-close {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+.owner-calendar-modal-header .stayro-modal-close:hover {
+  background: rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+
+.stayro-modal-content.modal-content {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 40px);
+  max-height: calc(100dvh - 40px);
+  overflow: hidden;
+  border: 1px solid rgba(226, 231, 236, 0.9);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgba(15, 27, 39, 0.24);
+  font-family: inherit;
+}
+
+.stayro-modal-header.modal-header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 26px;
+  border-bottom: 1px solid #edf0f3;
+}
+
+.stayro-modal-heading {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.stayro-modal-title.modal-title {
+  margin: 0;
+  color: #202c38;
+  font-size: 20px;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.stayro-modal-close {
+  display: inline-grid;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  place-items: center;
+  margin: -5px -7px 0 0;
+  border: 0;
+  border-radius: 50%;
+  background: #f2f4f6;
+  color: #5e6a76;
+  cursor: pointer;
+  font: inherit;
+  font-size: 25px;
+  line-height: 1;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.stayro-modal-close:hover {
+  background: #e7ebef;
+  color: #263442;
+}
+
+.stayro-modal-body.modal-body {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow: auto;
+  padding: 24px 26px;
+  overscroll-behavior: contain;
+}
+
+.stayro-modal-footer.modal-footer {
+  flex: 0 0 auto;
+  gap: 10px;
+  padding: 16px 26px;
+  border-top: 1px solid #edf0f3;
+  background: #fbfcfd;
+}
+
+.stayro-modal-content .btn {
+  min-height: 38px;
+  padding: 8px 17px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-weight: 650;
+  line-height: 1.2;
+  box-shadow: none;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease;
+}
+
+.stayro-modal-content .btn:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+.stayro-modal-content .btn-primary,
+.stayro-modal-content .btn-dark {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #e06b36;
+  --bs-btn-border-color: #e06b36;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #c95726;
+  --bs-btn-hover-border-color: #c95726;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #b94c20;
+  --bs-btn-active-border-color: #b94c20;
+}
+
+.stayro-modal-content .btn-secondary,
+.stayro-modal-content .btn-light,
+.stayro-modal-content .btn-outline-secondary {
+  --bs-btn-color: #536170;
+  --bs-btn-bg: #eef1f3;
+  --bs-btn-border-color: #d9dfe3;
+  --bs-btn-hover-color: #344150;
+  --bs-btn-hover-bg: #e1e6e9;
+  --bs-btn-hover-border-color: #cbd3d8;
+  --bs-btn-active-color: #344150;
+  --bs-btn-active-bg: #d8dfe3;
+  --bs-btn-active-border-color: #cbd3d8;
+}
+
+.stayro-modal-content .btn-outline-primary {
+  --bs-btn-color: #d65e2b;
+  --bs-btn-border-color: #e06b36;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #e06b36;
+  --bs-btn-hover-border-color: #e06b36;
+  --bs-btn-active-bg: #c95726;
+  --bs-btn-active-border-color: #c95726;
+}
+
+.stayro-modal-content .btn-danger,
+.stayro-modal-content .btn-outline-danger {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #d94b4b;
+  --bs-btn-border-color: #d94b4b;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #bd3737;
+  --bs-btn-hover-border-color: #bd3737;
+  --bs-btn-active-bg: #a92d2d;
+  --bs-btn-active-border-color: #a92d2d;
+}
+
+.stayro-modal-content .btn-outline-danger {
+  --bs-btn-color: #c63e3e;
+  --bs-btn-bg: transparent;
+}
+
+.stayro-modal-content .btn-success,
+.stayro-modal-content .btn-outline-success {
+  --bs-btn-color: #16835d;
+  --bs-btn-bg: #e8f6ef;
+  --bs-btn-border-color: #bde7d1;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #16835d;
+  --bs-btn-hover-border-color: #16835d;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #116b4b;
+  --bs-btn-active-border-color: #116b4b;
+}
+
+.stayro-modal-content .btn-outline-success {
+  --bs-btn-bg: transparent;
+}
+
+.stayro-modal-content .btn-warning,
+.stayro-modal-content .btn-outline-warning {
+  --bs-btn-color: #80530a;
+  --bs-btn-bg: #fff4d8;
+  --bs-btn-border-color: #f0d38e;
+  --bs-btn-hover-color: #684306;
+  --bs-btn-hover-bg: #f6e6bd;
+  --bs-btn-hover-border-color: #e7c66e;
+}
+
+.stayro-modal-content .btn-outline-warning {
+  --bs-btn-bg: transparent;
+}
+
+@media (max-width: 575px) {
+  .stayro-modal-backdrop {
+    align-items: flex-end;
+    padding: 10px;
+  }
+
+  .stayro-modal-dialog.modal-dialog,
+  .stayro-modal-dialog--sm.modal-dialog,
+  .stayro-modal-dialog--lg.modal-dialog,
+  .stayro-modal-dialog--xl.modal-dialog {
+    width: 100%;
+    max-width: none;
+  }
+
+  .stayro-modal-content.modal-content {
+    max-height: calc(100vh - 20px);
+    max-height: calc(100dvh - 20px);
+    border-radius: 16px;
+  }
+
+  .stayro-modal-header.modal-header {
+    padding: 18px 18px;
+  }
+
+  .stayro-modal-body.modal-body {
+    padding: 20px 18px;
+  }
+
+  .stayro-modal-footer.modal-footer {
+    padding: 14px 18px;
+  }
+}

@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Alert, Button, Card, Form, Modal, Table } from "react-bootstrap";
+import { Alert, Button, Card, Form, Table } from "react-bootstrap";
+import Modal from "../../components/common/SystemModal";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -225,7 +226,7 @@ export default function CalendarOwnerPage() {
 				</div>}
 				{rooms.length > 0 && <div className="small text-muted mt-3">Đang hiển thị {rooms.length} phòng thuộc {ownerHotelIds.length} khách sạn.</div>}
 			</Card.Body></Card>
-			<Modal show={Boolean(selectedEvent)} onHide={() => setSelectedEvent(null)} centered size={selectedEvent?.type === "booking" ? "lg" : undefined} className="owner-calendar-modal">
+			<Modal show={Boolean(selectedEvent)} onHide={() => setSelectedEvent(null)} centered size={selectedEvent?.type === "booking" ? "lg" : undefined} className="owner-calendar-modal owner-layout-modal">
 				<Modal.Header closeButton className={selectedEvent?.type === "booking" ? "owner-calendar-modal-header" : ""}>
 					<div>
 						<div className="owner-calendar-modal-eyebrow">{selectedEvent?.type === "booking" ? "THÔNG TIN ĐẶT PHÒNG" : "LỊCH KHẢ DỤNG"}</div>
@@ -270,7 +271,7 @@ export default function CalendarOwnerPage() {
 					<Button variant="outline-danger" disabled={removeBlock.isPending} onClick={() => removeBlock.mutate(selectedEvent.id)}><FontAwesomeIcon icon={faTrash} className="me-2" />Gỡ chặn</Button>
 				</Modal.Footer>}
 			</Modal>
-			<Modal show={showBlockForm} onHide={() => setShowBlockForm(false)} className="owner-calendar-modal">
+			<Modal show={showBlockForm} onHide={() => setShowBlockForm(false)} className="owner-calendar-modal owner-layout-modal">
 				<Modal.Header closeButton><Modal.Title>Chặn phòng</Modal.Title></Modal.Header>
 				<Modal.Body><Form.Group className="mb-3"><Form.Label>Phòng</Form.Label><Form.Select value={roomId} onChange={(event) => setRoomId(event.target.value)}><option value="">Chọn phòng</option>{rooms.map((room: any) => <option key={String(getValue(room, "id", "roomId", "phongId"))} value={String(getValue(room, "id", "roomId", "phongId"))}>{getValue(room, "name", "tenPhong", "maPhong") ?? "Phòng"}</option>)}</Form.Select></Form.Group>
 					<div className="row g-3"><Form.Group className="col-md-6"><Form.Label>Bắt đầu</Form.Label><Form.Control type="date" value={startAt} onChange={(event) => setStartAt(event.target.value)} min={earliestBlockDateText} /></Form.Group><Form.Group className="col-md-6"><Form.Label>Kết thúc</Form.Label><Form.Control type="date" value={endAt} onChange={(event) => setEndAt(event.target.value)} min={startAt || earliestBlockDateText} /></Form.Group></div>
