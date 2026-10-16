@@ -1,0 +1,141 @@
+.not-found-page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 32px 20px;
+  background:
+    radial-gradient(circle at 15% 12%, rgba(224, 107, 54, 0.09), transparent 28%),
+    linear-gradient(145deg, #f8fafc, #fff 58%, #fff8f3);
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.not-found-card {
+  width: min(100%, 560px);
+  padding: 42px 36px;
+  border: 1px solid #e9edf1;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 20px 60px rgba(36, 49, 62, 0.1);
+  text-align: center;
+}
+
+.not-found-illustration {
+  position: relative;
+  display: inline-grid;
+  width: 196px;
+  height: 142px;
+  place-items: center;
+  margin-bottom: 18px;
+  border-radius: 44% 56% 58% 42% / 46% 43% 57% 54%;
+  background: #fff1e8;
+  color: #e06b36;
+}
+
+.not-found-number {
+  font-size: 64px;
+  font-weight: 850;
+  letter-spacing: -5px;
+  line-height: 1;
+}
+
+.not-found-search {
+  position: absolute;
+  right: 24px;
+  bottom: 22px;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  padding: 10px;
+  border-radius: 50%;
+  background: #e06b36;
+  color: #fff;
+  transform: rotate(-12deg);
+}
+
+.not-found-eyebrow {
+  margin: 0 0 8px;
+  color: #d65e2b;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+}
+
+.not-found-card h1 {
+  margin: 0;
+  color: #202c38;
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: 780;
+  letter-spacing: -0.6px;
+}
+
+.not-found-description {
+  max-width: 430px;
+  margin: 12px auto 26px;
+  color: #718090;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.not-found-button {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 10px 17px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease;
+}
+
+.not-found-button:hover {
+  transform: translateY(-1px);
+}
+
+.not-found-button--primary {
+  background: #e06b36;
+  color: #fff;
+}
+
+.not-found-button--primary:hover {
+  background: #c95726;
+  color: #fff;
+}
+
+.not-found-button--secondary {
+  border-color: #dfe5ea;
+  background: #fff;
+  color: #536170;
+  cursor: pointer;
+}
+
+.not-found-button--secondary:hover {
+  border-color: #cbd3d8;
+  background: #f5f7f8;
+  color: #344150;
+}
+
+@media (max-width: 480px) {
+  .not-found-card {
+    padding: 32px 20px;
+  }
+
+  .not-found-actions {
+    flex-direction: column-reverse;
+  }
+
+  .not-found-button {
+    width: 100%;
+  }
+}

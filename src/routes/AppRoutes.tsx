@@ -23,7 +23,6 @@ import BookingOwnerPage from "../pages/owner/BookingOwnerPage";
 import CalendarOwnerPage from "../pages/owner/CalendarOwnerPage";
 import CustomerOwnerPage from "../pages/owner/CustomerOwnerPage";
 import ReportOwnerPage from "../pages/owner/ReportOwnerRevenuePage";
-import StaffOwnerPage from "../pages/owner/StaffOwnerPage";
 import NotificationOwnerPage from "../pages/owner/NotificationOwnerPage";
 import CustomerAccountPage from "../pages/customer/CustomerAccountPage";
 import CustomerRecoveryPage from "../pages/auth/CustomerRecoveryPage";
@@ -33,13 +32,14 @@ import ReviewOwnerPage from "../pages/owner/ReviewOwnerPage";
 import WalletOwnerPage from "../pages/owner/WalletOwnerPage";
 import AdvertisingOwnerPage from "../pages/owner/AdvertisingOwnerPage";
 import AdminOperationsPage from "../pages/dashboard/AdminOperationsPage";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const AppRouters = () => {
     return (
         <Routes>
 
             {/* ================= PUBLIC ================= */}
-          
+
 
                 <Route index element={<CustomerHomePage />} />
 
@@ -86,7 +86,7 @@ const AppRouters = () => {
                                     <Route path="customers" element={<CustomerOwnerPage />} />
                                     <Route path="reports" element={<ReportOwnerPage />} />
                                     <Route path="reviews" element={<ReviewOwnerPage />} />
-                                    <Route path="staff" element={<StaffOwnerPage />} />
+                                    <Route path="staff" element={<NotFoundPage />} />
                                     <Route path="notifications" element={<NotificationOwnerPage />} />
                                     <Route path="wallet" element={<WalletOwnerPage />} />
                                     <Route path="advertising" element={<AdvertisingOwnerPage />} />
@@ -102,7 +102,7 @@ const AppRouters = () => {
 
                   <Route path="hotels" element={<AdminOperationsPage />} />
 
-                                    <Route path="hotels/:id" element={<Navigate to="/admin/hotels" replace />} />
+                                    <Route path="hotels/:id" element={<NotFoundPage />} />
                   <Route path="bookings" element={<AdminOperationsPage />} />
                   <Route path="payments" element={<AdminOperationsPage />} />
                   <Route path="commissions" element={<AdminOperationsPage />} />
@@ -118,7 +118,7 @@ const AppRouters = () => {
 
             <Route
                 path="*"
-                element={<Navigate to="/" replace />}
+                element={<NotFoundPage />}
             />
 
         </Routes>
