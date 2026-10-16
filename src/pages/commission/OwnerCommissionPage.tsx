@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
@@ -9,8 +9,12 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { GetHoaHongOwner } from "../../api/hoahong/hoahong.api";
 import { HoaHong } from "../../types/HoaHongs/HoaHong";
+import OwnerRefreshButton from "../../components/owner/OwnerRefreshButton";
+import NumberedPagination from "../../components/common/NumberedPagination";
 
 const OwnerCommissionPage: React.FC = () => {
+  const [page, setPage] = useState(1);
+  const pageSize = 10;
   /**
    * Lấy ownerId
    *
@@ -61,6 +65,8 @@ const OwnerCommissionPage: React.FC = () => {
         0
       );
   }, [hoaHongs]);
+  const totalPages = Math.max(1, Math.ceil(hoaHongs.length / pageSize));
+  const visibleCommissions = hoaHongs.slice((page - 1) * pageSize, page * pageSize);
 
   /**
    * Format tiền
@@ -140,13 +146,7 @@ const OwnerCommissionPage: React.FC = () => {
           </div>
         </div>
 
-        <Button
-          variant="outline-primary"
-          onClick={() => refetch()}
-          disabled={isLoading}
-        >
-          {isLoading ? "Đang tải..." : "↻ Làm mới"}
-        </Button>
+        <OwnerRefreshButton />
       </div>
 
       {/* Statistics */}
@@ -271,7 +271,6 @@ const OwnerCommissionPage: React.FC = () => {
             <div className="table-responsive">
               <Table
                 hover
-                responsive
                 className="mb-0 align-middle"
               >
                 <thead
@@ -315,7 +314,7 @@ const OwnerCommissionPage: React.FC = () => {
                 </thead>
 
                 <tbody>
-                  {hoaHongs.map((item) => (
+                  {visibleCommissions.map((item) => (
                     <tr key={item.maHoaHong}>
                       <td className="px-4">
                         <span className="fw-semibold">
@@ -378,6 +377,9 @@ const OwnerCommissionPage: React.FC = () => {
                 </tbody>
               </Table>
             </div>
+          )}
+          {!isLoading && !isError && hoaHongs.length > 0 && (
+            <NumberedPagination page={page} totalPages={totalPages} onPageChange={setPage} />
           )}
         </Card.Body>
       </Card>

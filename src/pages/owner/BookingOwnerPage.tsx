@@ -13,6 +13,7 @@ import {
 } from "../../api/booking/booking.api";
 import { GetDanhSachKhachSanOwner } from "../../api/khachsan/khachsan.api";
 import OwnerPageShell from "../../components/owner/OwnerPageShell";
+import NumberedPagination from "../../components/common/NumberedPagination";
 import { responseRows, valueOf } from "../../components/owner/OwnerWorkspaceData";
 import { HotelSelector } from "../../components/owner/OwnerSelectors";
 
@@ -147,7 +148,7 @@ export default function BookingOwnerPage() {
   );
 
   return (
-    <OwnerPageShell title="Quản lý booking" description="Lọc, xác nhận, từ chối, check-in, checkout hoặc hủy booking thuộc Owner." notice={notice} onDismissNotice={() => setNotice("")} centerTitle>
+    <OwnerPageShell title="Quản lý booking" description="Lọc, xác nhận, từ chối, check-in, checkout hoặc hủy booking thuộc Owner." notice={notice} onDismissNotice={() => setNotice("")}>
       <Card className="owner-panel">
         <Card.Body className="p-0">
           <div className="p-3 border-bottom">
@@ -244,14 +245,13 @@ export default function BookingOwnerPage() {
               </tbody>
             </Table>
           )}
-          {!bookingQuery.isLoading && !bookingQuery.isError && totalPages > 1 && (
-            <div className="d-flex justify-content-between align-items-center p-3 border-top">
-              <span className="text-muted">Trang {page}/{totalPages}</span>
-              <div className="d-flex gap-2">
-                <Button size="sm" variant="outline-secondary" disabled={page <= 1} onClick={() => setPage((current) => current - 1)}>Trước</Button>
-                <Button size="sm" variant="outline-secondary" disabled={page >= totalPages} onClick={() => setPage((current) => current + 1)}>Sau</Button>
-              </div>
-            </div>
+          {!bookingQuery.isLoading && !bookingQuery.isError && (
+            <NumberedPagination
+              page={page}
+              totalPages={totalPages}
+              disabled={bookingQuery.isFetching}
+              onPageChange={setPage}
+            />
           )}
         </Card.Body>
       </Card>

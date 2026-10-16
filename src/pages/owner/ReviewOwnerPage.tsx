@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button, Card, Form, Table } from "react-bootstrap";
 import { GetDanhSachKhachSanOwner } from "../../api/khachsan/khachsan.api";
 import { getOwnerHotelReviews, reportOwnerReview, respondToOwnerReview } from "../../api/review/review.api";
 import OwnerPageShell from "../../components/owner/OwnerPageShell";
+import NumberedPagination from "../../components/common/NumberedPagination";
 import { field, rows } from "../../components/owner/OwnerDataTable";
 import { HotelSelector } from "../../components/owner/OwnerSelectors";
 
@@ -12,6 +13,8 @@ export default function ReviewOwnerPage() {
   const [responses, setResponses] = useState<Record<string, string>>({});
   const [reports, setReports] = useState<Record<string, string>>({});
   const [notice, setNotice] = useState("");
+  const [page, setPage] = useState(1);
+  const pageSize = 10;
   const client = useQueryClient();
   const hotels = useQuery({
     queryKey: ["owner-hotels"],
@@ -22,6 +25,11 @@ export default function ReviewOwnerPage() {
     queryFn: () => getOwnerHotelReviews(hotelId),
     enabled: Boolean(hotelId),
   });
+  const reviewRows = rows(reviews.data);
+  const totalPages = Math.max(1, Math.ceil(reviewRows.length / pageSize));
+  useEffect(() => {
+    setPage((current) => Math.min(current, totalPages));
+  }, [totalPages]);
   const run = async (request: Promise<unknown>) => {
     try {
       await request;
@@ -36,7 +44,7 @@ export default function ReviewOwnerPage() {
     <OwnerPageShell title="Đánh giá của khách" description="Phản hồi đánh giá và báo cáo nội dung vi phạm." notice={notice} onDismissNotice={() => setNotice("")}>
       <>
         <div className="mb-3">
-          <HotelSelector data={hotels.data} value={hotelId} onChange={setHotelId} />
+          <HotelSelector data={hotels.data} value={hotelId} onChange={(value) => { setHotelId(value); setPage(1); }} />
         </div>
         <Card>
           <Card.Body>
@@ -50,7 +58,7 @@ export default function ReviewOwnerPage() {
             <Table responsive className="owner-table align-middle">
               <thead><tr><th>Đánh giá</th><th>Phản hồi Owner</th><th>Báo cáo</th></tr></thead>
               <tbody>
-                {rows(reviews.data).map((review: any, index) => {
+                {reviewRows.slice((page - 1) * pageSize, page * pageSize).map((review: any, index) => {
                   const id = String(field(review, "id", "reviewId"));
                   return (
                     <tr key={id || index}>
@@ -94,6 +102,9 @@ export default function ReviewOwnerPage() {
                 })}
               </tbody>
             </Table>
+          )}
+          {hotelId && !reviews.isLoading && !reviews.isError && (
+            <NumberedPagination page={page} totalPages={totalPages} onPageChange={setPage} />
           )}
           </Card.Body>
         </Card>

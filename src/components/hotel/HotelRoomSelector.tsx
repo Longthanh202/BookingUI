@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useHotelRooms } from "../../hooks/useHotelRooms";
 import { RoomResponse } from "../../types/loaiphong/RoomResponse";
 import { showToast } from "../common/Toast";
+import NumberedPagination from "../common/NumberedPagination";
 
 interface Props {
   hotelId: string;
@@ -91,9 +92,13 @@ export const HotelRoomSelector = ({
   const [selectedRooms, setSelectedRooms] = useState<
     Record<string, number>
   >({});
+  const [roomPage, setRoomPage] = useState(1);
+  const roomPageSize = 10;
+  const roomTotalPages = Math.max(1, Math.ceil(rooms.length / roomPageSize));
 
   useEffect(() => {
     setSelectedRooms({});
+    setRoomPage(1);
   }, [hotelId, ngayNhan, ngayTra, soKhach]);
 
   useEffect(() => {
@@ -518,7 +523,7 @@ const canBook = Boolean(
 
               ) : (
 
-                rooms.map((room: RoomResponse) => {
+                rooms.slice((roomPage - 1) * roomPageSize, roomPage * roomPageSize).map((room: RoomResponse) => {
 
                   const selected =
                     (selectedRooms[room.id] ?? 0) > 0;
@@ -675,6 +680,9 @@ const canBook = Boolean(
 
         </div>
 
+      )}
+      {!isLoading && !isError && rooms.length > 0 && (
+        <NumberedPagination page={roomPage} totalPages={roomTotalPages} onPageChange={setRoomPage} />
       )}
 
     </Card.Body>

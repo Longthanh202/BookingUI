@@ -1,9 +1,10 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Alert, Card, Form, Spinner, Table } from "react-bootstrap";
 import { getOwnerRevenueReport } from "../../api/owner.api";
 import { GetDanhSachKhachSanOwner } from "../../api/khachsan/khachsan.api";
 import OwnerPageShell from "../../components/owner/OwnerPageShell";
+import NumberedPagination from "../../components/common/NumberedPagination";
 import { HotelSelector } from "../../components/owner/OwnerSelectors";
 import { rows } from "../../components/owner/OwnerDataTable";
 
@@ -16,10 +17,19 @@ export default function ReportOwnerRevenuePage() {
 	const [to, setTo] = useState(new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1).toLocaleDateString("en-CA"));
 	const [groupBy, setGroupBy] = useState<"day" | "month" | "year">("day");
 	const [hotelId, setHotelId] = useState("");
+	const [page, setPage] = useState(1);
+	const pageSize = 10;
 	const hotels = useQuery({ queryKey: ["owner-hotels"], queryFn: () => GetDanhSachKhachSanOwner({ Page: 1, PageSize: 100 }) });
 	const params = useMemo(() => ({ from: isoStart(from), to: isoStart(to), groupBy, hotelId: hotelId || undefined }), [from, to, groupBy, hotelId]);
 	const report = useQuery({ queryKey: ["owner-revenue-report", params], queryFn: () => getOwnerRevenueReport(params), enabled: !!from && !!to && from < to });
 	const entries = rows(report.data?.data ?? report.data);
+	const totalPages = Math.max(1, Math.ceil(entries.length / pageSize));
+	useEffect(() => {
+		setPage(1);
+	}, [params]);
+	useEffect(() => {
+		setPage((current) => Math.min(current, totalPages));
+	}, [totalPages]);
 	return <OwnerPageShell title="Doanh thu & báo cáo" description="Doanh thu tính từ booking đã checkout; ngày kết thúc không thuộc khoảng báo cáo.">
 		<Card className="owner-panel"><Card.Body>
 			<div className="row g-3 align-items-end mb-3">
@@ -31,12 +41,13 @@ export default function ReportOwnerRevenuePage() {
 			{from >= to && <Alert variant="warning">Ngày kết thúc phải sau ngày bắt đầu.</Alert>}
 			{report.isLoading ? <div className="py-4 text-center"><Spinner animation="border" role="status" /><span className="visually-hidden">Đang tải...</span></div> : report.isError ? <Alert variant="danger">Không thể tải báo cáo doanh thu.</Alert> : <Table responsive hover>
 				<thead><tr><th>Kỳ</th><th>Doanh thu</th><th>Booking</th><th>Tỷ lệ hủy</th></tr></thead>
-				<tbody>{entries.map((entry: any, index: number) => {
+				<tbody>{entries.slice((page - 1) * pageSize, page * pageSize).map((entry: any, index: number) => {
 					const period = read(entry, "period", "date", "month", "year", "ky");
 					const cancellationRate = read(entry, "cancellationRate", "cancelRate", "tyLeHuy");
 					return <tr key={String(period ?? index)}><td>{period ?? "—"}</td><td>{Number(read(entry, "revenue", "doanhThu", "totalRevenue") ?? 0).toLocaleString("vi-VN")} đ</td><td>{read(entry, "bookingCount", "bookings", "soBooking", "totalBookings") ?? "—"}</td><td>{cancellationRate === undefined ? "—" : `${cancellationRate} %`}</td></tr>;
 				})}</tbody>
 			</Table>}
+			{!report.isLoading && !report.isError && <NumberedPagination page={page} totalPages={totalPages} onPageChange={setPage} />}
 			{!report.isLoading && !report.isError && !entries.length && <p className="text-muted mb-0">Không có dữ liệu trong khoảng thời gian này.</p>}
 		</Card.Body></Card>
 	</OwnerPageShell>;

@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, Form, Table } from "react-bootstrap";
 import { getOwnerBookingCustomers } from "../../api/booking/booking.api";
 import { GetDanhSachKhachSanOwner } from "../../api/khachsan/khachsan.api";
 import OwnerPageShell from "../../components/owner/OwnerPageShell";
+import NumberedPagination from "../../components/common/NumberedPagination";
 import { responseRows, valueOf } from "../../components/owner/OwnerWorkspaceData";
 import { HotelSelector } from "../../components/owner/OwnerSelectors";
 
 export default function CustomerOwnerPage() {
   const [hotelId, setHotelId] = useState("");
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const pageSize = 10;
   const hotels = useQuery({
     queryKey: ["owner-hotels"],
     queryFn: () => GetDanhSachKhachSanOwner({ Page: 1, PageSize: 100 }),
@@ -22,6 +25,11 @@ export default function CustomerOwnerPage() {
   const customers = responseRows(data).filter((row) =>
     JSON.stringify(row).toLowerCase().includes(search.toLowerCase())
   );
+  const totalPages = Math.max(1, Math.ceil(customers.length / pageSize));
+
+  useEffect(() => {
+    setPage((current) => Math.min(current, totalPages));
+  }, [totalPages]);
 
   return (
     <OwnerPageShell title="Khách hàng" description="Xem khách đã đặt khách sạn thuộc tài khoản Owner.">
@@ -30,14 +38,14 @@ export default function CustomerOwnerPage() {
           <div className="row g-3 align-items-end mb-3">
             <div className="col-md-5">
               <Form.Label>Khách sạn</Form.Label>
-              <HotelSelector data={hotels.data} value={hotelId} onChange={setHotelId} />
+              <HotelSelector data={hotels.data} value={hotelId} onChange={(value) => { setHotelId(value); setPage(1); }} />
             </div>
             <div className="col-md-7">
               <Form.Label>Tìm khách hàng</Form.Label>
               <Form.Control
                 placeholder="Tìm tên, email hoặc số điện thoại"
                 value={search}
-                onChange={(event) => setSearch(event.target.value)}
+                onChange={(event) => { setSearch(event.target.value); setPage(1); }}
                 disabled={!hotelId}
               />
             </div>
@@ -54,7 +62,7 @@ export default function CustomerOwnerPage() {
                 <tr><th>Khách hàng</th><th>Email</th><th>Số điện thoại</th></tr>
               </thead>
               <tbody>
-                {customers.map((row, index) => (
+                {customers.slice((page - 1) * pageSize, page * pageSize).map((row, index) => (
                   <tr key={String(valueOf(row, "id", "customerId", "khachHangId") || index)}>
                     <td>{valueOf(row, "tenKhachHang", "hoTen", "name", "fullName")}</td>
                     <td>{valueOf(row, "email")}</td>
@@ -63,6 +71,9 @@ export default function CustomerOwnerPage() {
                 ))}
               </tbody>
             </Table>
+          )}
+          {hotelId && !isLoading && !isError && (
+            <NumberedPagination page={page} totalPages={totalPages} onPageChange={setPage} />
           )}
         </Card.Body>
       </Card>

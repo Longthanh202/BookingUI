@@ -11,6 +11,7 @@ import { getAllBookingsHistory } from "../../api/booking/booking.api";
 import { getMyReviews } from "../../api/review/review.api";
 import { getPayment } from "../../api/payment/payment.api";
 import { getUser } from "../../utils/auth/auth";
+import NumberedPagination from "../../components/common/NumberedPagination";
 import "../../styles/customer/CustomerAccountPage.css";
 
 type AccountSection = "profile" | "notifications" | "payments" | "reviews";
@@ -33,6 +34,11 @@ const CustomerAccountPage = () => {
   const [notifications, setNotifications] = useState<CustomerNotification[]>([]);
   const [connectionError, setConnectionError] = useState("");
   const [connectionStatus, setConnectionStatus] = useState("Chưa kết nối");
+  const [paymentPage, setPaymentPage] = useState(1);
+  const [notificationPage, setNotificationPage] = useState(1);
+  const [reviewPage, setReviewPage] = useState(1);
+  const paymentPageSize = 10;
+  const listPageSize = 10;
   const profile = useQuery({
     queryKey: ["customer-profile"],
     queryFn: getProfileApi,
@@ -107,6 +113,14 @@ const CustomerAccountPage = () => {
   const paymentRows = bookingRows
     .map((booking: any) => ({ booking, paymentId: valueOf(booking, "paymentId", "thanhToanId") }))
     .filter(({ paymentId }) => paymentId !== "-");
+  const paymentTotalPages = Math.max(1, Math.ceil(paymentRows.length / paymentPageSize));
+  const notificationTotalPages = Math.max(1, Math.ceil(notifications.length / listPageSize));
+  const reviewTotalPages = Math.max(1, Math.ceil(reviewRows.length / listPageSize));
+  const visiblePaymentRows = paymentRows.slice((paymentPage - 1) * paymentPageSize, paymentPage * paymentPageSize);
+  useEffect(() => {
+    setNotificationPage((current) => Math.min(current, notificationTotalPages));
+    setReviewPage((current) => Math.min(current, reviewTotalPages));
+  }, [notificationTotalPages, reviewTotalPages]);
   const paymentDetails = useQueries({
     queries: paymentRows.map(({ paymentId }) => ({
       queryKey: ["customer-payment", paymentId],
@@ -162,20 +176,27 @@ const CustomerAccountPage = () => {
             {section === "notifications" && <Card className="account-panel"><Card.Body>
               <div className="account-panel-title"><div><h3>Thông báo booking</h3><p>Sự kiện realtime từ bookingHub trong phiên này.</p></div><Badge bg={connectionStatus === "Đã kết nối" ? "success" : "secondary"}>{connectionStatus}</Badge></div>
               {connectionError && <Alert variant="warning">Không thể kết nối bookingHub: {connectionError}</Alert>}
-              {!notifications.length ? <p className="text-muted mb-0">Chưa nhận được thông báo realtime trong phiên này.</p> : notifications.map((notice) => <div className="notice-item" key={notice.id}><span className="notice-icon orange"><FontAwesomeIcon icon={faBell} /></span><div><strong>{notice.title}</strong><p>{notice.message}</p><small>{notice.receivedAt}</small></div></div>)}
+              {!notifications.length ? <p className="text-muted mb-0">Chưa nhận được thông báo realtime trong phiên này.</p> : <>
+                {notifications.slice((notificationPage - 1) * listPageSize, notificationPage * listPageSize).map((notice) => <div className="notice-item" key={notice.id}><span className="notice-icon orange"><FontAwesomeIcon icon={faBell} /></span><div><strong>{notice.title}</strong><p>{notice.message}</p><small>{notice.receivedAt}</small></div></div>)}
+                <NumberedPagination page={notificationPage} totalPages={notificationTotalPages} onPageChange={setNotificationPage} />
+              </>}
             </Card.Body></Card>}
             {section === "payments" && <Card className="account-panel"><Card.Body>
               <div className="account-panel-title"><div><h3>Thanh toán</h3><p>Chi tiết thanh toán lấy từ API payment của booking thuộc tài khoản.</p></div></div>
-              {bookings.isLoading ? <Spinner animation="border" /> : bookings.isError ? <Alert variant="danger">Không thể tải lịch sử booking.</Alert> : paymentRows.length ? <Table responsive className="align-middle"><thead><tr><th>Booking</th><th>Payment</th><th>Số tiền</th><th>Trạng thái</th></tr></thead><tbody>
-                {paymentRows.map(({ booking, paymentId }, index) => {
-                  const payment = (paymentDetails[index]?.data as any)?.data ?? paymentDetails[index]?.data;
-                  return <tr key={String(valueOf(booking, "id") || index)}><td>{valueOf(booking, "id")}</td><td>{paymentId}</td><td>{payment ? valueOf(payment, "amount", "soTien") : paymentDetails[index]?.isLoading ? "Đang tải..." : "-"}</td><td>{payment ? valueOf(payment, "status", "trangThai") : paymentDetails[index]?.isError ? "Không thể tải" : "-"}</td></tr>;
+              {bookings.isLoading ? <Spinner animation="border" /> : bookings.isError ? <Alert variant="danger">Không thể tải lịch sử booking.</Alert> : paymentRows.length ? <div className="table-responsive"><Table className="align-middle mb-0"><thead><tr><th>Booking</th><th>Payment</th><th>Số tiền</th><th>Trạng thái</th></tr></thead><tbody>
+                {visiblePaymentRows.map(({ booking, paymentId }, index) => {
+                  const paymentDetail = paymentDetails[(paymentPage - 1) * paymentPageSize + index];
+                  const payment = (paymentDetail?.data as any)?.data ?? paymentDetail?.data;
+                  return <tr key={String(valueOf(booking, "id") || index)}><td>{valueOf(booking, "id")}</td><td>{paymentId}</td><td>{payment ? valueOf(payment, "amount", "soTien") : paymentDetail?.isLoading ? "Đang tải..." : "-"}</td><td>{payment ? valueOf(payment, "status", "trangThai") : paymentDetail?.isError ? "Không thể tải" : "-"}</td></tr>;
                 })}
-              </tbody></Table> : <p className="text-muted mb-0">Lịch sử booking chưa cung cấp paymentId để tra cứu chi tiết thanh toán.</p>}
+              </tbody></Table><NumberedPagination page={paymentPage} totalPages={paymentTotalPages} onPageChange={setPaymentPage} /></div> : <p className="text-muted mb-0">Lịch sử booking chưa cung cấp paymentId để tra cứu chi tiết thanh toán.</p>}
             </Card.Body></Card>}
             {section === "reviews" && <Card className="account-panel"><Card.Body>
               <div className="account-panel-title"><div><h3>Đánh giá của tôi</h3><p>Review đã gửi bằng tài khoản hiện tại.</p></div></div>
-              {reviews.isLoading ? <Spinner animation="border" /> : reviews.isError ? <Alert variant="danger">Không thể tải đánh giá.</Alert> : reviewRows.length ? reviewRows.map((review: any, index: number) => <div className="review-item" key={String(valueOf(review, "id", "reviewId") || index)}><div className="review-property"><div><strong>{valueOf(review, "tenKhachSan", "hotelName")}</strong><small>{valueOf(review, "createdAt")}</small></div><Badge bg="warning" text="dark">{valueOf(review, "soSao", "rating")} ★</Badge></div><p>{valueOf(review, "noiDung", "content")}</p></div>) : <p className="text-muted mb-0">Bạn chưa có đánh giá nào.</p>}
+              {reviews.isLoading ? <Spinner animation="border" /> : reviews.isError ? <Alert variant="danger">Không thể tải đánh giá.</Alert> : reviewRows.length ? <>
+                {reviewRows.slice((reviewPage - 1) * listPageSize, reviewPage * listPageSize).map((review: any, index: number) => <div className="review-item" key={String(valueOf(review, "id", "reviewId") || index)}><div className="review-property"><div><strong>{valueOf(review, "tenKhachSan", "hotelName")}</strong><small>{valueOf(review, "createdAt")}</small></div><Badge bg="warning" text="dark">{valueOf(review, "soSao", "rating")} ★</Badge></div><p>{valueOf(review, "noiDung", "content")}</p></div>)}
+                <NumberedPagination page={reviewPage} totalPages={reviewTotalPages} onPageChange={setReviewPage} />
+              </> : <p className="text-muted mb-0">Bạn chưa có đánh giá nào.</p>}
             </Card.Body></Card>}
           </Col>
         </Row>
