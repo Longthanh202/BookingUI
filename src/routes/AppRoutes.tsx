@@ -31,7 +31,16 @@ import PricingOwnerPage from "../pages/owner/PricingOwnerPage";
 import ReviewOwnerPage from "../pages/owner/ReviewOwnerPage";
 import WalletOwnerPage from "../pages/owner/WalletOwnerPage";
 import AdvertisingOwnerPage from "../pages/owner/AdvertisingOwnerPage";
-import AdminOperationsPage from "../pages/dashboard/AdminOperationsPage";
+import AdminBookingsPage from "../pages/admin/AdminBookingsPage";
+import AdminHotelsPage from "../pages/admin/AdminHotelsPage";
+import AdminPaymentsPage from "../pages/admin/AdminPaymentsPage";
+import AdminCommissionsPage from "../pages/admin/AdminCommissionsPage";
+import AdminWithdrawalsPage from "../pages/admin/AdminWithdrawalsPage";
+import AdminAdvertisingPage from "../pages/admin/AdminAdvertisingPage";
+import AdminBannersPage from "../pages/admin/AdminBannersPage";
+import AdminUsersPage from "../pages/admin/AdminUsersPage";
+import AdminReviewsPage from "../pages/admin/AdminReviewsPage";
+import AdminTagsPage from "../pages/admin/AdminTagsPage";
 import OwnerRegistrationsPage from "../pages/dashboard/OwnerRegistrationsPage";
 import NotFoundPage from "../pages/NotFoundPage";
 
@@ -102,19 +111,19 @@ const AppRouters = () => {
                 <Route element={<AdminLayout />}>
                   <Route index element={<Dashboard />} />
 
-                  <Route path="hotels" element={<AdminOperationsPage />} />
+                  <Route path="hotels" element={<AdminHotelsPage />} />
 
                                     <Route path="hotels/:id" element={<NotFoundPage />} />
-                  <Route path="bookings" element={<AdminOperationsPage />} />
-                  <Route path="payments" element={<AdminOperationsPage />} />
-                  <Route path="commissions" element={<AdminOperationsPage />} />
-                  <Route path="withdrawals" element={<AdminOperationsPage />} />
-                  <Route path="advertising" element={<AdminOperationsPage />} />
-                  <Route path="banners" element={<AdminOperationsPage />} />
-                  <Route path="users" element={<AdminOperationsPage />} />
+                  <Route path="bookings" element={<AdminBookingsPage />} />
+                  <Route path="payments" element={<AdminPaymentsPage />} />
+                  <Route path="commissions" element={<AdminCommissionsPage />} />
+                  <Route path="withdrawals" element={<AdminWithdrawalsPage />} />
+                  <Route path="advertising" element={<AdminAdvertisingPage />} />
+                  <Route path="banners" element={<AdminBannersPage />} />
+                  <Route path="users" element={<AdminUsersPage />} />
                   <Route path="owner-registrations" element={<OwnerRegistrationsPage />} />
-                  <Route path="reviews" element={<AdminOperationsPage />} />
-                  <Route path="tags" element={<AdminOperationsPage />} />
+                  <Route path="reviews" element={<AdminReviewsPage />} />
+                  <Route path="tags" element={<AdminTagsPage />} />
                 </Route>
             </Route>
 

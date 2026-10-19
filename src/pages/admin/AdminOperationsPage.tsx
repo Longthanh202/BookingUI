@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Alert, Button, Form, Table } from "react-bootstrap";
 import Modal from "../../components/common/SystemModal";
@@ -17,13 +16,13 @@ import { createAdminTag, disableAdminTag, getAdminTags, replaceAdminTagHotels, s
 import NumberedPagination from "../../components/common/NumberedPagination";
 
 type AdminRowData = Record<string, any>;
+type AdminSection = "bookings" | "payments" | "commissions" | "withdrawals" | "advertising" | "banners" | "hotels" | "users" | "reviews" | "tags";
 type ConfirmAction = { title: string; description: string; operation?: () => Promise<any>; kind?: "withdrawal" | "advertising-rejection"; id?: string; status?: string };
 type Notice = { kind: "success" | "danger"; text: string };
 
 const hotelStatuses = ["CHO_DUYET", "DA_DUYET", "TAM_NGUNG", "TU_CHOI", "DA_KHOA"];
 const paymentStatuses = ["CHO_THANH_TOAN", "DA_THANH_TOAN", "DA_HUY", "DA_HOAN_TIEN"];
 const serverPagedSections = new Set(["bookings", "banners", "hotels", "users"]);
-
 const titles: Record<string, string> = {
   bookings: "Đặt phòng toàn hệ thống", payments: "Thanh toán", commissions: "Hoa hồng chờ xử lý",
   withdrawals: "Yêu cầu rút tiền", advertising: "Duyệt quảng cáo", banners: "Quản lý banner",
@@ -50,8 +49,7 @@ const statusClass = (value: unknown) => {
   return "";
 };
 
-export default function AdminOperationsPage() {
-  const section = useLocation().pathname.split("/").filter(Boolean).pop() || "bookings";
+export default function AdminOperationsPage({ section }: { section: AdminSection }) {
   const queryClient = useQueryClient();
   const [filters, setFilters] = useState<Record<string, string>>({ page: "1", pageSize: "20" });
   const [filterDraft, setFilterDraft] = useState<Record<string, string>>({});
@@ -74,7 +72,6 @@ export default function AdminOperationsPage() {
     queryFn: getBookingStatusOptions,
     enabled: section === "bookings",
   });
-
   const query = useQuery({
     queryKey: ["admin", section, filters],
     queryFn: () => {
