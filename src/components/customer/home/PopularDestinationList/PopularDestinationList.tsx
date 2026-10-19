@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getDestinations, getTags } from "../../../../api/home/home.api";
+import { usePopularDestinations, usePopularTags } from "../../../../hooks/useCustomerQueries";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -12,17 +11,8 @@ import "../../../../styles/components/customer/home/PopularDestinationList.css";
 const PopularDestinationList = () => {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
-  const { data: tags = [], isLoading: tagsLoading } = useQuery<any[]>({
-    queryKey: ["homeTags"],
-    queryFn: getTags,
-  });
-
-  const { data: destinations = [], isFetching } = useQuery<any[]>({
-    queryKey: ["homeDestinations", selectedTag || "all"],
-    queryFn: () => getDestinations(selectedTag ?? undefined),
-    placeholderData: (previousData) => previousData,
-    staleTime: 1000 * 60 * 5,
-  });
+  const { data: tags = [], isLoading: tagsLoading } = usePopularTags();
+  const { data: destinations = [], isFetching } = usePopularDestinations(selectedTag);
 
   const isLoading = tagsLoading;
 

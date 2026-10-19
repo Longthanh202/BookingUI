@@ -1,17 +1,19 @@
 import { useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useAppMutation, useAppQueryClient } from "../../hooks/useAppReactQuery";
+import {
+  useOwnerBookingStatuses,
+  useOwnerBookings,
+  useOwnerCustomersForHotels,
+  useOwnerHotels,
+} from "../../hooks/useOwnerQueries";
 import { Badge, Button, Card, Form, Table } from "react-bootstrap";
 import {
   cancelOwnerBooking,
   checkInBooking,
   checkOutBooking,
   confirmBooking,
-  getBookingStatusOptions,
-  getOwnerAllBookings,
-  getOwnerBookingCustomers,
   rejectOwnerBooking,
 } from "../../api/booking/booking.api";
-import { GetDanhSachKhachSanOwner } from "../../api/khachsan/khachsan.api";
 import OwnerPageShell from "../../components/owner/OwnerPageShell";
 import NumberedPagination from "../../components/common/NumberedPagination";
 import { responseRows, valueOf } from "../../components/owner/OwnerWorkspaceData";
@@ -80,48 +82,18 @@ export default function BookingOwnerPage() {
   const [createdDate, setCreatedDate] = useState("");
   const [page, setPage] = useState(1);
   const [notice, setNotice] = useState("");
-  const client = useQueryClient();
-  const hotels = useQuery({
-    queryKey: ["owner-hotels"],
-    queryFn: () => GetDanhSachKhachSanOwner({ Page: 1, PageSize: 100 }),
-  });
+  const client = useAppQueryClient();
+  const hotels = useOwnerHotels();
   const ownerHotelIds = responseRows(hotels.data)
     .map((hotel) => String(valueOf(hotel, "id", "khachSanId")))
     .filter((id) => id !== "-");
-  const customers = useQuery({
-    queryKey: ["owner-booking-customers", ownerHotelIds.join(",")],
-    queryFn: async () => {
-      const customerLists = await Promise.all(
-        ownerHotelIds.map((id) => getOwnerBookingCustomers(id))
-      );
-      const uniqueCustomers = new Map<string, any>();
-      customerLists.flatMap(responseRows).forEach((customer) => {
-        const id = String(valueOf(customer, "id", "customerId", "khachHangId"));
-        if (id !== "-") uniqueCustomers.set(id, customer);
-      });
-      return Array.from(uniqueCustomers.values());
-    },
-    enabled: !hotels.isLoading && !hotels.isError,
-  });
-  const statuses = useQuery({ queryKey: ["booking-status-options"], queryFn: getBookingStatusOptions });
-  const bookingQuery = useQuery({
-    queryKey: ["owner-all-bookings", hotelId, customerId, status, createdDate, search, page],
-    queryFn: () => getOwnerAllBookings({
-      hotelId: hotelId || null,
-      customerId: customerId || null,
-      trangThai: status,
-      ngayTao: createdDate ? new Date(`${createdDate}T00:00:00.000Z`).toISOString() : null,
-      maDatPhong: search.trim() || null,
-      page,
-      pageSize: 10,
-    }),
-    enabled: true,
-    refetchOnMount: "always",
-  });
+  const customers = useOwnerCustomersForHotels(ownerHotelIds, !hotels.isLoading && !hotels.isError);
+  const statuses = useOwnerBookingStatuses();
+  const bookingQuery = useOwnerBookings(hotelId, customerId, status, createdDate, search, page);
   const bookings = responseRows(bookingQuery.data);
   const totalRows = Number(bookingQuery.data?.totalRow ?? bookings.length);
   const totalPages = Number(bookingQuery.data?.totalPage ?? 1);
-  const transition = useMutation({
+  const transition = useAppMutation({
     mutationFn: ({ id, action }: { id: string; action: string }) => {
       if (action === "confirm") return confirmBooking(id);
       if (action === "reject") return rejectOwnerBooking(id);

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import {
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+  useAppMutation,
+  useAppQueryClient,
+} from "../../hooks/useAppReactQuery";
 import {
   useNavigate,
   Link,
@@ -29,7 +29,7 @@ interface LoginCredentials {
 }
 
 const AdminLoginPage = () => {
-  const queryClient = useQueryClient();
+  const queryClient = useAppQueryClient();
   const navigate = useNavigate();
 
   // ============================
@@ -56,7 +56,7 @@ const AdminLoginPage = () => {
   // LOGIN MUTATION
   // ============================
 
-  const loginMutation = useMutation<
+  const loginMutation = useAppMutation<
     LoginResponse,
     unknown,
     LoginCredentials

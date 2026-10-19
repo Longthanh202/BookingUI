@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useHotelList } from "../../../../hooks/useCustomerQueries";
 import HotelCard from "../HotelCard/HotelCard";
-import { FilterKhachSan } from "../../../../api/home/home.api";
 import { HotelFilterParams } from "../../../../types/khachsan/KhachSan.types";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -13,11 +12,7 @@ const HotelList = (input: HotelFilterParams) => {
   const [page, setPage] = useState(input.Page || 1);
   const pageSize = input.PageSize || 10;
   const queryFilter = { ...input, Page: page, PageSize: pageSize };
-  const { data, isLoading, isError } = useQuery<any>({
-    queryKey: ["homeRooms", queryFilter],
-    queryFn: () => FilterKhachSan(queryFilter),
-    staleTime: 1000 * 60 * 5,
-  });
+  const { data, isLoading, isError } = useHotelList(queryFilter);
   const rooms: any[] = Array.isArray(data)
     ? data
     : data?.data ?? data?.items ?? data?.results ?? [];

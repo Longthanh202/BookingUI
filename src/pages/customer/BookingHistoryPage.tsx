@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useAppMutation,
+  useAppQueryClient,
+} from "../../hooks/useAppReactQuery";
+import { useCustomerBookingDetail, useCustomerBookings } from "../../hooks/useCustomerQueries";
 
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
@@ -12,11 +16,10 @@ import NumberedPagination from "../../components/common/NumberedPagination";
 
 import CustomerHeader from "../../components/customer/home/CustomerHeader/CustomerHeader";
 
-import { cancelBooking, getAllBookingsHistory, getBooking } from "../../api/booking/booking.api";
+import { cancelBooking } from "../../api/booking/booking.api";
 
 import {
   Booking,
-  BookingHistoryResponse,
 } from "../../types/booking/BookingHistory";
 
 const BookingHistoryPage = () => {
@@ -27,11 +30,7 @@ const BookingHistoryPage = () => {
 
   const [selectedBooking, setSelectedBooking] =
     useState<Booking | null>(null);
-  const bookingDetail = useQuery({
-    queryKey: ["booking-detail", selectedBooking?.id],
-    queryFn: () => getBooking(selectedBooking!.id),
-    enabled: Boolean(selectedBooking?.id),
-  });
+  const bookingDetail = useCustomerBookingDetail(selectedBooking?.id);
   useEffect(() => {
     if (!bookingDetail.data) return;
     const response: any = bookingDetail.data;
@@ -44,8 +43,8 @@ const BookingHistoryPage = () => {
       );
     }
   }, [bookingDetail.data]);
-  const queryClient = useQueryClient();
-  const cancelMutation = useMutation({
+  const queryClient = useAppQueryClient();
+  const cancelMutation = useAppMutation({
     mutationFn: cancelBooking,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["bookings-history"] });
@@ -53,21 +52,7 @@ const BookingHistoryPage = () => {
     },
   });
 
-  const { data, isLoading, isError } =
-    useQuery<BookingHistoryResponse, Error>({
-      queryKey: [
-        "bookings-history",
-        pageIndex,
-        pageSize,
-        bookingCode,
-      ],
-      queryFn: () =>
-        getAllBookingsHistory(
-          pageIndex,
-          pageSize,
-          bookingCode
-        ),
-    });
+  const { data, isLoading, isError } = useCustomerBookings(pageIndex, pageSize, bookingCode);
 
   const bookingsList: Booking[] = data?.data ?? [];
 

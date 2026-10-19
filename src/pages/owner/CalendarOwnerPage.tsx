@@ -1,5 +1,8 @@
 import { useMemo, useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useAppMutation,
+  useAppQueryClient,
+} from "../../hooks/useAppReactQuery";
 import { Alert, Button, Card, Form, Table } from "react-bootstrap";
 import Modal from "../../components/common/SystemModal";
 import FullCalendar from "@fullcalendar/react";
@@ -8,9 +11,12 @@ import interactionPlugin from "@fullcalendar/interaction";
 import viLocale from "@fullcalendar/core/locales/vi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays, faCreditCard, faHotel, faMoneyBillWave, faPlus, faUser, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { getBooking } from "../../api/booking/booking.api";
-import { GetDanhSachKhachSanOwner } from "../../api/khachsan/khachsan.api";
-import { createAvailabilityBlock, deleteAvailabilityBlock, getOwnerCalendar } from "../../api/owner.api";
+import {
+  useOwnerBookingDetails,
+  useOwnerCalendar,
+  useOwnerCalendarHotels,
+} from "../../hooks/useOwnerQueries";
+import { createAvailabilityBlock, deleteAvailabilityBlock } from "../../api/owner.api";
 import OwnerPageShell from "../../components/owner/OwnerPageShell";
 import { rows } from "../../components/owner/OwnerDataTable";
 import "../../styles/owner/CalendarOwnerPage.css";
@@ -45,7 +51,7 @@ const initialCalendarRange = () => {
 };
 
 export default function CalendarOwnerPage() {
-	const client = useQueryClient();
+	const client = useAppQueryClient();
 	const [calendarRange, setCalendarRange] = useState(initialCalendarRange);
 	const [showBlockForm, setShowBlockForm] = useState(false);
 	const [selectedEvent, setSelectedEvent] = useState<{ type: "booking" | "block"; id: string; item: any } | null>(null);
@@ -57,62 +63,24 @@ export default function CalendarOwnerPage() {
 	const earliestBlockDate = new Date();
 	earliestBlockDate.setDate(earliestBlockDate.getDate() + 1);
 	const earliestBlockDateText = earliestBlockDate.toLocaleDateString("en-CA");
-	const hotels = useQuery({
-		queryKey: ["owner-hotels"],
-		queryFn: async () => {
-			const pageSize = 100;
-			const firstPage = await GetDanhSachKhachSanOwner({ Page: 1, PageSize: pageSize });
-			const totalPages = Number(firstPage?.totalPage ?? firstPage?.data?.totalPage ?? 1);
-			if (totalPages <= 1) return firstPage;
-			const remainingPages = await Promise.all(
-				Array.from({ length: totalPages - 1 }, (_, index) =>
-					GetDanhSachKhachSanOwner({ Page: index + 2, PageSize: pageSize })
-				)
-			);
-			const allHotels = [firstPage, ...remainingPages].flatMap(rows);
-			if (Array.isArray(firstPage)) return allHotels;
-			if (Array.isArray(firstPage?.data)) {
-				return { ...firstPage, data: allHotels, totalRow: firstPage.totalRow ?? allHotels.length };
-			}
-			return firstPage;
-		},
-	});
+	const hotels = useOwnerCalendarHotels();
 	const ownerHotels = rows(hotels.data);
 	const ownerHotelIds = ownerHotels
 		.map((hotel: any) => String(getValue(hotel, "id", "khachSanId") ?? ""))
 		.filter(Boolean);
-	const calendar = useQuery({
-		queryKey: ["owner-calendar", ownerHotelIds.join(","), calendarRange.from, calendarRange.to],
-		queryFn: async () => {
-			const calendars = await Promise.all(ownerHotels.map(async (hotel: any) => {
-				const id = String(getValue(hotel, "id", "khachSanId"));
-				const data = await getOwnerCalendar(id, calendarRange.from, calendarRange.to);
-				const payload = data?.data ?? data ?? {};
-				const hotelName = getValue(hotel, "tenKhachSan", "name") ?? "Khách sạn";
-				return {
-					rooms: rows(getValue(payload, "rooms", "phongs", "roomList")).map((room: any) => ({ ...room, _hotelId: id, _hotelName: hotelName })),
-					bookings: rows(getValue(payload, "bookings", "datPhongs", "reservations")).map((booking: any) => ({ ...booking, _hotelId: id, _hotelName: hotelName })),
-					blocks: rows(getValue(payload, "blocks", "availabilityBlocks", "blockedPeriods", "khoangChan")).map((block: any) => ({ ...block, _hotelId: id, _hotelName: hotelName })),
-				};
-			}));
-			return {
-				rooms: calendars.flatMap((item) => item.rooms),
-				bookings: calendars.flatMap((item) => item.bookings),
-				blocks: calendars.flatMap((item) => item.blocks),
-			};
-		},
-		enabled: !hotels.isLoading && !hotels.isError && ownerHotelIds.length > 0,
-	});
+	const calendar = useOwnerCalendar(
+		ownerHotels,
+		ownerHotelIds,
+		calendarRange.from,
+		calendarRange.to,
+		!hotels.isLoading && !hotels.isError && ownerHotelIds.length > 0
+	);
 	const rooms = rows(calendar.data?.rooms);
 	const bookings = rows(calendar.data?.bookings);
 	const blocks = rows(calendar.data?.blocks);
-	const bookingDetailsQuery = useQuery({
-		queryKey: ["owner-calendar-booking-details", selectedEvent?.id],
-		queryFn: () => getBooking(selectedEvent!.id),
-		enabled: selectedEvent?.type === "booking",
-	});
+	const bookingDetailsQuery = useOwnerBookingDetails(selectedEvent?.id, selectedEvent?.type === "booking");
 	const bookingDetails = bookingDetailsQuery.data?.data ?? bookingDetailsQuery.data ?? selectedEvent?.item;
-	const createBlock = useMutation({
+	const createBlock = useAppMutation({
 		mutationFn: () => createAvailabilityBlock(roomId, { startAt: new Date(`${startAt}T00:00:00`).toISOString(), endAt: new Date(`${endAt}T00:00:00`).toISOString(), reason }),
 		onSuccess: () => {
 			setShowBlockForm(false);
@@ -121,7 +89,7 @@ export default function CalendarOwnerPage() {
 		},
 		onError: (failure: any) => setError(failure?.response?.data?.message || "Không thể chặn phòng trong khoảng thời gian này."),
 	});
-	const removeBlock = useMutation({
+	const removeBlock = useAppMutation({
 		mutationFn: deleteAvailabilityBlock,
 		onSuccess: () => {
 			setSelectedEvent(null);

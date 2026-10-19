@@ -1,6 +1,15 @@
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useAppMutation,
+  useAppQueryClient,
+} from "../../hooks/useAppReactQuery";
+import {
+  useOwnerHotelBookings,
+  useOwnerHotelDetail,
+  useOwnerHotelRoomTypes,
+  useOwnerHotelTags,
+} from "../../hooks/useOwnerQueries";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -37,7 +46,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
-  getHotelDetailById,
   CapNhatKhachSan,
   addHotelImages,
   deleteHotelImage,
@@ -45,19 +53,13 @@ import {
 } from "../../api/khachsan/khachsan.api";
 
 import {
-  getOwnerBookings,
   checkInBooking,
   checkOutBooking,
   confirmBooking
 } from "../../api/booking/booking.api";
-import {
-  getOwnerRoomTypes,
-  createRoomTypes,
-} from "../../api/loaiphong/loaiphong.api";
+import { createRoomTypes } from "../../api/loaiphong/loaiphong.api";
 import { createAmenity } from "../../api/amenity/amenity.api";
-import { getTags } from "../../api/home/home.api";
 
-import { RoomResponse } from "../../types/loaiphong/RoomResponse";
 import { showToast } from "../../components/common/Toast";
 import OwnerRefreshButton from "../../components/owner/OwnerRefreshButton";
 import NumberedPagination from "../../components/common/NumberedPagination";
@@ -76,11 +78,6 @@ interface HotelRoomType {
 interface HotelAmenity {
   id?: string | number;
   tenTienIch?: string;
-}
-
-interface OwnerTagOption {
-  id: string;
-  name: string;
 }
 
 interface HotelDetailData {
@@ -137,32 +134,10 @@ const isHotelDetailResponse = (
   );
 };
 
-const normalizeTags = (value: unknown): OwnerTagOption[] => {
-  if (value === undefined || value === null) return [];
-  const source = Array.isArray(value)
-    ? value
-    : value && typeof value === "object" && "data" in value && Array.isArray(value.data)
-      ? value.data
-      : value && typeof value === "object" && "items" in value && Array.isArray(value.items)
-        ? value.items
-        : null;
-  if (!source) throw new Error("Danh sách tag trả về không hợp lệ.");
-
-  return source.flatMap((item): OwnerTagOption[] => {
-    if (!item || typeof item !== "object") return [];
-    const tag = item as Record<string, unknown>;
-    const id = tag.id ?? tag.Id ?? tag.tagId ?? tag.TagId;
-    const name = tag.name ?? tag.Name ?? tag.tagName ?? tag.TagName;
-    return typeof id === "string" && typeof name === "string"
-      ? [{ id, name }]
-      : [];
-  });
-};
-
 const OwnerHotelDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
+  const queryClient = useAppQueryClient();
   const [bookingPage, setBookingPage] = useState(1);
   const bookingPageSize = 10;
   const today = useMemo(() => new Intl.DateTimeFormat("vi-VN", { weekday: "long", day: "numeric", month: "long" }).format(new Date()), []);
@@ -182,11 +157,7 @@ const OwnerHotelDetailPage = () => {
   const [roomTypes, setRoomTypes] = useState<HotelRoomType[]>([]);
   const [amenities, setAmenities] = useState<HotelAmenity[]>([]);
   const [selectedTagIds, setSelectedTagIds] = useState<string[]>([]);
-  const { data: tags = [], isLoading: isTagsLoading, isError: isTagsError } = useQuery<OwnerTagOption[]>({
-    queryKey: ["hotel-tags"],
-    queryFn: async () => normalizeTags(await getTags()),
-    staleTime: 5 * 60 * 1000,
-  });
+  const { data: tags = [], isLoading: isTagsLoading, isError: isTagsError } = useOwnerHotelTags();
 
   const [showAddRoomModal, setShowAddRoomModal] =
     useState(false);
@@ -238,14 +209,9 @@ const OwnerHotelDetailPage = () => {
     data,
     isLoading,
     isError,
-  } = useQuery<HotelDetailApiResponse>({
-    queryKey: ["hotelDetailOwner", id],
-    queryFn: () => getHotelDetailById(id ?? ""),
-    enabled: Boolean(id),
-    retry: false,
-  });
+  } = useOwnerHotelDetail<HotelDetailApiResponse>(id);
 
-  const checkInMutation = useMutation({
+  const checkInMutation = useAppMutation({
   mutationFn: (bookingId: string) =>
     checkInBooking(bookingId),
 
@@ -267,7 +233,7 @@ const OwnerHotelDetailPage = () => {
   },
 });
 
-const checkOutMutation = useMutation({
+const checkOutMutation = useAppMutation({
   mutationFn: (bookingId: string) =>
     checkOutBooking(bookingId),
 
@@ -289,7 +255,7 @@ const checkOutMutation = useMutation({
   },
 });
 
-const confirmMutation = useMutation({
+const confirmMutation = useAppMutation({
   mutationFn: confirmBooking,
   onSuccess: () => {
     queryClient.invalidateQueries({
@@ -339,25 +305,7 @@ const handleCheckOut = (bookingId: string) => {
   const {
     data: ownerBookingsResp,
     isLoading: isBookingsLoading,
-  } = useQuery<
-    {
-      data: any[];
-      totalRow?: number;
-      totalPage?: number;
-    },
-    Error
-  >({
-    queryKey: ["hotelBookings", id],
-    queryFn: () =>
-      getOwnerBookings({
-        khachSanId: id ?? "",
-        page: 1,
-        pageSize: 10,
-      }),
-    enabled: Boolean(id),
-    staleTime: 5 * 60 * 1000,
-    refetchOnWindowFocus: false,
-  });
+  } = useOwnerHotelBookings(id);
 
   /*
   |--------------------------------------------------------------------------
@@ -370,17 +318,7 @@ const handleCheckOut = (bookingId: string) => {
     isLoading: isRoomTypesLoading,
     isError: isRoomTypesError,
     refetch: refetchRoomTypes,
-  } = useQuery<
-    RoomResponse[],
-    Error
-  >({
-    queryKey: ["ownerRoomTypes", id],
-    queryFn: () =>
-      getOwnerRoomTypes(id ?? ""),
-    enabled: Boolean(id),
-    staleTime: 5 * 60 * 1000,
-    refetchOnWindowFocus: false,
-  });
+  } = useOwnerHotelRoomTypes(id);
 
   /*
   |--------------------------------------------------------------------------
@@ -575,7 +513,7 @@ const handleCheckOut = (bookingId: string) => {
   |--------------------------------------------------------------------------
   */
 
-  const updateMutation = useMutation<
+  const updateMutation = useAppMutation<
     any,
     unknown,
     { payload: UpdateHotelRequest; images: File[]; removedImageIds: Array<number | string> },
@@ -620,7 +558,7 @@ const handleCheckOut = (bookingId: string) => {
   const isSaving =
     updateMutation.status === "pending";
 
-  const createRoomTypeMutation = useMutation({
+  const createRoomTypeMutation = useAppMutation({
     mutationFn: (payload: Array<{
       khachSanId: string;
       tenLoaiPhong: string;

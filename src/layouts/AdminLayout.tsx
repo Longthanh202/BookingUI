@@ -1,6 +1,5 @@
 ﻿import { Outlet, NavLink, useLocation } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getProfileApi, UserProfile } from "../api/auth/auth.api";
+import { useCurrentProfile } from "../hooks/useAdminQueries";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGaugeHigh, faHotel, faCreditCard, faUser, faClipboardList, faWallet, faBullhorn, faImage, faTags, faStar, faArrowUpRightFromSquare, faUserCheck } from "@fortawesome/free-solid-svg-icons";
 import AccountMenu from "../components/common/AccountMenu";
@@ -37,13 +36,7 @@ const AdminLayout = () => {
   const location = useLocation();
   const currentSection = location.pathname.split("/").filter(Boolean).at(-1) || "admin";
 
-  const { data: profile } = useQuery<UserProfile>({
-    queryKey: ["profile"],
-    queryFn: getProfileApi,
-    enabled: !!localStorage.getItem("accessToken"),
-    staleTime: 5 * 60 * 1000,
-    refetchOnWindowFocus: false,
-  });
+  const { data: profile } = useCurrentProfile(!!localStorage.getItem("accessToken"));
 
   return (
     <div className="admin-shell">

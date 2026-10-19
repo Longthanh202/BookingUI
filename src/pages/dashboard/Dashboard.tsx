@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWallet, faBullhorn, faHotel, faClipboardList, faCreditCard, faUser, faImage, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { getPendingWithdrawals } from "../../api/finance/finance.api";
-import { getPendingAdvertising } from "../../api/advertising/advertising.api";
-import { getPendingCommissions } from "../../api/hoahong/hoahong.api";
+import {
+    useAdminPendingAdvertising,
+    useAdminPendingCommissions,
+    useAdminPendingWithdrawals,
+} from "../../hooks/useAdminQueries";
 
 const getRows = (value: any): any[] => {
     const data = value?.data ?? value;
@@ -13,9 +14,9 @@ const getRows = (value: any): any[] => {
 };
 
 const Dashboard = () => {
-    const withdrawals = useQuery({ queryKey: ["admin", "withdrawals"], queryFn: getPendingWithdrawals });
-    const advertising = useQuery({ queryKey: ["admin", "advertising"], queryFn: getPendingAdvertising });
-    const commissions = useQuery({ queryKey: ["admin", "commissions"], queryFn: getPendingCommissions });
+    const withdrawals = useAdminPendingWithdrawals();
+    const advertising = useAdminPendingAdvertising();
+    const commissions = useAdminPendingCommissions();
     const queues = [
         { title: "Yêu cầu rút tiền", note: "Kiểm tra trước khi xác nhận chi trả", path: "/admin/withdrawals", icon: faWallet, query: withdrawals },
         { title: "Chiến dịch quảng cáo", note: "Đơn đang đợi phê duyệt", path: "/admin/advertising", icon: faBullhorn, query: advertising },

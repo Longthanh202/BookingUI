@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { Alert, Button, Form, Table } from "react-bootstrap";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useAppQueryClient } from "../../hooks/useAppReactQuery";
+import { useAdminOwnerRegistrations } from "../../hooks/useAdminQueries";
 import Modal from "../../components/common/SystemModal";
 import NumberedPagination from "../../components/common/NumberedPagination";
 import {
   approveOwnerRegistration,
   OwnerRegistration,
   rejectOwnerRegistration,
-  searchOwnerRegistrations,
 } from "../../api/admin/admin.api";
 import "../../styles/layouts/AdminLayout.css";
 
 const statusLabels = ["Chờ duyệt", "Đã duyệt", "Đã từ chối"];
 
 const OwnerRegistrationsPage = () => {
-  const queryClient = useQueryClient();
+  const queryClient = useAppQueryClient();
   const [status, setStatus] = useState("");
   const [keywordDraft, setKeywordDraft] = useState("");
   const [keyword, setKeyword] = useState("");
@@ -24,15 +24,7 @@ const OwnerRegistrationsPage = () => {
   const [reason, setReason] = useState("");
   const [notice, setNotice] = useState<{ variant: "success" | "danger"; text: string } | null>(null);
   const [saving, setSaving] = useState(false);
-  const registrations = useQuery({
-    queryKey: ["admin", "owner-registrations", { status, keyword, page, pageSize }],
-    queryFn: () => searchOwnerRegistrations({
-      status: status === "" ? undefined : Number(status) as 0 | 1 | 2,
-      keyword: keyword || undefined,
-      page,
-      pageSize,
-    }),
-  });
+  const registrations = useAdminOwnerRegistrations(status, keyword, page, pageSize);
 
   const handleAction = async (operation: () => Promise<unknown>, successText: string) => {
     setSaving(true);

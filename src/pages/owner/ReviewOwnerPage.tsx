@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useAppQueryClient } from "../../hooks/useAppReactQuery";
 import { Button, Card, Form, Table } from "react-bootstrap";
-import { GetDanhSachKhachSanOwner } from "../../api/khachsan/khachsan.api";
-import { getOwnerHotelReviews, reportOwnerReview, respondToOwnerReview } from "../../api/review/review.api";
+import { reportOwnerReview, respondToOwnerReview } from "../../api/review/review.api";
+import { useOwnerHotels, useOwnerReviews } from "../../hooks/useOwnerQueries";
 import OwnerPageShell from "../../components/owner/OwnerPageShell";
 import NumberedPagination from "../../components/common/NumberedPagination";
 import { field, rows } from "../../components/owner/OwnerDataTable";
@@ -15,16 +15,9 @@ export default function ReviewOwnerPage() {
   const [notice, setNotice] = useState("");
   const [page, setPage] = useState(1);
   const pageSize = 10;
-  const client = useQueryClient();
-  const hotels = useQuery({
-    queryKey: ["owner-hotels"],
-    queryFn: () => GetDanhSachKhachSanOwner({ Page: 1, PageSize: 100 }),
-  });
-  const reviews = useQuery({
-    queryKey: ["owner-reviews", hotelId],
-    queryFn: () => getOwnerHotelReviews(hotelId),
-    enabled: Boolean(hotelId),
-  });
+  const client = useAppQueryClient();
+  const hotels = useOwnerHotels();
+  const reviews = useOwnerReviews(hotelId);
   const reviewRows = rows(reviews.data);
   const totalPages = Math.max(1, Math.ceil(reviewRows.length / pageSize));
   useEffect(() => {

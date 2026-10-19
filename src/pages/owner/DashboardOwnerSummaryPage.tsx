@@ -1,8 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
+import { useOwnerDashboard } from "../../hooks/useOwnerQueries";
 import { Alert, Card, Col, Row, Spinner } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBed, faCalendarDays, faChartLine, faCircleCheck, faClock, faUsers } from "@fortawesome/free-solid-svg-icons";
-import { getOwnerDashboard } from "../../api/owner.api";
 import OwnerPageShell from "../../components/owner/OwnerPageShell";
 
 const read = (source: any, ...keys: string[]) => keys.map((key) => source?.[key] ?? source?.[key.charAt(0).toUpperCase() + key.slice(1)]).find((value) => value !== undefined && value !== null);
@@ -24,7 +23,7 @@ function Metric({ label, value, icon, tone }: { label: string; value: string; ic
 }
 
 export default function DashboardOwnerSummaryPage() {
-	const dashboard = useQuery({ queryKey: ["owner-dashboard"], queryFn: () => getOwnerDashboard() });
+	const dashboard = useOwnerDashboard();
 	const data = dashboard.data?.data ?? dashboard.data ?? {};
 	return <OwnerPageShell title="Tổng quan vận hành" description="Số liệu tổng hợp từ các property thuộc tài khoản của bạn.">
 		{dashboard.isLoading ? <div className="py-5 text-center"><Spinner animation="border" role="status" /><span className="visually-hidden">Đang tải...</span></div> : dashboard.isError ? <Alert variant="danger">Không thể tải dữ liệu tổng quan.</Alert> : <>

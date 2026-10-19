@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useAppQueryClient as useQueryClient } from "../../hooks/useAppReactQuery";
+import { AdminSection, useAdminBookingStatuses, useAdminOperations } from "../../hooks/useAdminQueries";
 import { Alert, Button, Form, Table } from "react-bootstrap";
 import Modal from "../../components/common/SystemModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faRotate, faPen, faTrash, faCheck, faBan, faLockOpen, faLock } from "@fortawesome/free-solid-svg-icons";
-import { getBookingStatusOptions, searchBookingsAdmin } from "../../api/booking/booking.api";
-import { getAdminPayments, updatePaymentStatus } from "../../api/payment/payment.api";
-import { getPendingCommissions } from "../../api/hoahong/hoahong.api";
-import { getPendingWithdrawals, updateWithdrawal } from "../../api/finance/finance.api";
-import { getPendingAdvertising, approveAdvertising } from "../../api/advertising/advertising.api";
-import { createBanner, getBanners, updateBanner, deleteBanner } from "../../api/banner/banner.api";
-import { searchHotelsAdmin, updateHotelStatus } from "../../api/khachsan/khachsan.api";
+import { updatePaymentStatus } from "../../api/payment/payment.api";
+import { updateWithdrawal } from "../../api/finance/finance.api";
+import { approveAdvertising } from "../../api/advertising/advertising.api";
+import { createBanner, updateBanner, deleteBanner } from "../../api/banner/banner.api";
+import { updateHotelStatus } from "../../api/khachsan/khachsan.api";
 import { deleteReview } from "../../api/review/review.api";
-import { createAdminTag, disableAdminTag, getAdminTags, replaceAdminTagHotels, searchAdminUsers, updateAdminTag, updateAdminUserStatus } from "../../api/admin/admin.api";
+import { createAdminTag, disableAdminTag, replaceAdminTagHotels, updateAdminTag, updateAdminUserStatus } from "../../api/admin/admin.api";
 import NumberedPagination from "../../components/common/NumberedPagination";
 
 type AdminRowData = Record<string, any>;
-type AdminSection = "bookings" | "payments" | "commissions" | "withdrawals" | "advertising" | "banners" | "hotels" | "users" | "reviews" | "tags";
 type ConfirmAction = { title: string; description: string; operation?: () => Promise<any>; kind?: "withdrawal" | "advertising-rejection"; id?: string; status?: string };
 type Notice = { kind: "success" | "danger"; text: string };
 
@@ -67,28 +65,8 @@ export default function AdminOperationsPage({ section }: { section: AdminSection
   useEffect(() => {
     setFilters((current) => ({ ...current, page: "1" }));
   }, [section]);
-  const bookingStatuses = useQuery({
-    queryKey: ["booking-status-options"],
-    queryFn: getBookingStatusOptions,
-    enabled: section === "bookings",
-  });
-  const query = useQuery({
-    queryKey: ["admin", section, filters],
-    queryFn: () => {
-      const page = Number(filters.page || 1);
-      const pageSize = Number(filters.pageSize || 20);
-      if (section === "bookings") return searchBookingsAdmin({ hotelId: filters.hotelId || null, customerId: filters.customerId || null, trangThai: filters.trangThai || null, ngayTao: filters.ngayTao ? new Date(filters.ngayTao).toISOString() : null, maDatPhong: filters.maDatPhong?.trim() || null, page, pageSize });
-      if (section === "payments") return getAdminPayments();
-      if (section === "commissions") return getPendingCommissions();
-      if (section === "withdrawals") return getPendingWithdrawals();
-      if (section === "advertising") return getPendingAdvertising();
-      if (section === "banners") return getBanners({ keyword: filters.keyword || undefined, isActive: filters.isActive === "1" ? 1 : undefined, startRow: (page - 1) * pageSize, endRow: page * pageSize });
-      if (section === "hotels") return searchHotelsAdmin({ keyword: filters.keyword || undefined, thanhPho: filters.thanhPho || undefined, soSao: filters.soSao ? Number(filters.soSao) : undefined, trangThai: filters.trangThai || undefined, page, pageSize });
-      if (section === "users") return searchAdminUsers({ keyword: filters.keyword || undefined, status: filters.status === "" || filters.status === undefined ? undefined : Number(filters.status), page, pageSize });
-      if (section === "tags") return getAdminTags();
-      return Promise.resolve([]);
-    },
-  });
+  const bookingStatuses = useAdminBookingStatuses(section === "bookings");
+  const query = useAdminOperations(section, filters);
 
   const data = rows(query.data);
   const responseData = query.data?.data ?? query.data;

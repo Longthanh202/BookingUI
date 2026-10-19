@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useCustomerHotelDetail } from "../../hooks/useCustomerQueries";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -10,7 +10,6 @@ import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Badge from "react-bootstrap/Badge";
 import Spinner from "react-bootstrap/Spinner";
-import { getHotelDetailById } from "../../api/khachsan/khachsan.api";
 import CustomerHeader from "../../components/customer/home/CustomerHeader/CustomerHeader";
 import { showToast } from "../../components/common/Toast";
 import { HotelFilterParams } from "../../types/khachsan/KhachSan.types";
@@ -71,12 +70,11 @@ const HotelDetailPage = () => {
     Page: 1,
   });
 
-  const { data, isLoading, isError } = useQuery<HotelDetailResponse>({
-    queryKey: ["hotelDetail", id],
-    queryFn: () => getHotelDetailById(id ?? ""),
-    enabled: Boolean(id),
-    retry: false,
-  });
+  const { data, isLoading, isError } = useCustomerHotelDetail(id) as {
+    data: HotelDetailResponse | undefined;
+    isLoading: boolean;
+    isError: boolean;
+  };
 
   const hotel = data;
   const images = useMemo(() => {

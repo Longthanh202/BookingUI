@@ -1,8 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { Alert, Card, Form, Spinner, Table } from "react-bootstrap";
-import { getOwnerRevenueReport } from "../../api/owner.api";
-import { GetDanhSachKhachSanOwner } from "../../api/khachsan/khachsan.api";
+import { useOwnerHotels, useOwnerRevenueReport } from "../../hooks/useOwnerQueries";
 import OwnerPageShell from "../../components/owner/OwnerPageShell";
 import NumberedPagination from "../../components/common/NumberedPagination";
 import { HotelSelector } from "../../components/owner/OwnerSelectors";
@@ -19,9 +17,9 @@ export default function ReportOwnerRevenuePage() {
 	const [hotelId, setHotelId] = useState("");
 	const [page, setPage] = useState(1);
 	const pageSize = 10;
-	const hotels = useQuery({ queryKey: ["owner-hotels"], queryFn: () => GetDanhSachKhachSanOwner({ Page: 1, PageSize: 100 }) });
+	const hotels = useOwnerHotels();
 	const params = useMemo(() => ({ from: isoStart(from), to: isoStart(to), groupBy, hotelId: hotelId || undefined }), [from, to, groupBy, hotelId]);
-	const report = useQuery({ queryKey: ["owner-revenue-report", params], queryFn: () => getOwnerRevenueReport(params), enabled: !!from && !!to && from < to });
+	const report = useOwnerRevenueReport(params, !!from && !!to && from < to);
 	const entries = rows(report.data?.data ?? report.data);
 	const totalPages = Math.max(1, Math.ceil(entries.length / pageSize));
 	useEffect(() => {

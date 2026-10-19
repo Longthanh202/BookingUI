@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { QueryKey, useQueryClient } from "@tanstack/react-query";
+import type { QueryKey } from "@tanstack/react-query";
+import { useAppQueryClient } from "../../hooks/useAppReactQuery";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotate } from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
@@ -11,7 +12,7 @@ type OwnerRefreshButtonProps = {
 };
 
 export default function OwnerRefreshButton({ queryKey }: OwnerRefreshButtonProps) {
-  const queryClient = useQueryClient();
+  const queryClient = useAppQueryClient();
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const refresh = async () => {

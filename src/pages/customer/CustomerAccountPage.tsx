@@ -4,12 +4,13 @@ import { HubConnectionBuilder } from "@microsoft/signalr";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faCalendarCheck, faChevronRight, faCreditCard, faShieldHalved, faStar, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Alert, Badge, Card, Col, Row, Spinner, Table } from "react-bootstrap";
-import { useQueries, useQuery } from "@tanstack/react-query";
+import {
+  useCustomerAccountBookings,
+  useCustomerPaymentDetails,
+  useCustomerProfile,
+  useCustomerReviews,
+} from "../../hooks/useCustomerQueries";
 import CustomerHeader from "../../components/customer/home/CustomerHeader/CustomerHeader";
-import { getProfileApi } from "../../api/auth/auth.api";
-import { getAllBookingsHistory } from "../../api/booking/booking.api";
-import { getMyReviews } from "../../api/review/review.api";
-import { getPayment } from "../../api/payment/payment.api";
 import { getUser } from "../../utils/auth/auth";
 import NumberedPagination from "../../components/common/NumberedPagination";
 import "../../styles/customer/CustomerAccountPage.css";
@@ -39,21 +40,9 @@ const CustomerAccountPage = () => {
   const [reviewPage, setReviewPage] = useState(1);
   const paymentPageSize = 10;
   const listPageSize = 10;
-  const profile = useQuery({
-    queryKey: ["customer-profile"],
-    queryFn: getProfileApi,
-    enabled: Boolean(user),
-  });
-  const bookings = useQuery({
-    queryKey: ["bookings-history", 1, 50],
-    queryFn: () => getAllBookingsHistory(1, 50),
-    enabled: Boolean(user),
-  });
-  const reviews = useQuery({
-    queryKey: ["customer-reviews"],
-    queryFn: getMyReviews,
-    enabled: Boolean(user),
-  });
+  const profile = useCustomerProfile(Boolean(user));
+  const bookings = useCustomerAccountBookings(Boolean(user));
+  const reviews = useCustomerReviews(Boolean(user));
 
   useEffect(() => {
     if (section !== "notifications" || !accessToken) return;
@@ -121,13 +110,8 @@ const CustomerAccountPage = () => {
     setNotificationPage((current) => Math.min(current, notificationTotalPages));
     setReviewPage((current) => Math.min(current, reviewTotalPages));
   }, [notificationTotalPages, reviewTotalPages]);
-  const paymentDetails = useQueries({
-    queries: paymentRows.map(({ paymentId }) => ({
-      queryKey: ["customer-payment", paymentId],
-      queryFn: () => getPayment(paymentId),
-      enabled: Boolean(user),
-    })),
-  });
+  const paymentIds = paymentRows.map(({ paymentId }) => paymentId);
+  const paymentDetails = useCustomerPaymentDetails(paymentIds, Boolean(user));
   const displayName = valueOf(profileData, "fullName", "hoTen", "username");
   const email = valueOf(profileData, "email");
 

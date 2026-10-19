@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useOwnerCommissions } from "../../hooks/useOwnerQueries";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import Badge from "react-bootstrap/Badge";
@@ -7,8 +7,6 @@ import Spinner from "react-bootstrap/Spinner";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { GetHoaHongOwner } from "../../api/hoahong/hoahong.api";
-import { HoaHong } from "../../types/HoaHongs/HoaHong";
 import OwnerRefreshButton from "../../components/owner/OwnerRefreshButton";
 import NumberedPagination from "../../components/common/NumberedPagination";
 
@@ -27,10 +25,7 @@ const OwnerCommissionPage: React.FC = () => {
     isLoading,
     isError,
     refetch,
-  } = useQuery<HoaHong[]>({
-    queryKey: ["hoaHongOwner"],
-    queryFn: () => GetHoaHongOwner()
-  });
+  } = useOwnerCommissions();
 
   /**
    * Tổng hoa hồng

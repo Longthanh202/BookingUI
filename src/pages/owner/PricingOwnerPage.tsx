@@ -1,13 +1,10 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { Button, Card, Form } from "react-bootstrap";
-import { createRoomPrice, getRoomPrices } from "../../api/room/room.api";
-import { getOwnerRoomTypes } from "../../api/loaiphong/loaiphong.api";
-import { GetDanhSachKhachSanOwner } from "../../api/khachsan/khachsan.api";
+import { createRoomPrice } from "../../api/room/room.api";
+import { useOwnerHotels, useOwnerPromotions, useOwnerRoomPrices, useOwnerRoomTypes } from "../../hooks/useOwnerQueries";
 import {
   createOwnerPromotion,
   deleteOwnerPromotion,
-  getOwnerPromotions,
   PromotionRequest,
   updateOwnerPromotion,
 } from "../../api/promotion/promotion.api";
@@ -35,25 +32,10 @@ export default function PricingOwnerPage() {
     .then(() => setNotice("Đã cập nhật thành công."))
     .catch((error) => setNotice(error?.response?.data?.message || "Không thể hoàn tất thao tác."));
 
-  const hotels = useQuery({
-    queryKey: ["owner-hotels"],
-    queryFn: () => GetDanhSachKhachSanOwner({ Page: 1, PageSize: 100 }),
-  });
-  const roomTypes = useQuery({
-    queryKey: ["owner-room-types", hotelId],
-    queryFn: () => getOwnerRoomTypes(hotelId),
-    enabled: Boolean(hotelId),
-  });
-  const prices = useQuery({
-    queryKey: ["room-prices", roomTypeId],
-    queryFn: () => getRoomPrices(roomTypeId),
-    enabled: Boolean(roomTypeId),
-  });
-  const promotions = useQuery({
-    queryKey: ["owner-promotions", hotelId],
-    queryFn: () => getOwnerPromotions(hotelId),
-    enabled: Boolean(hotelId),
-  });
+  const hotels = useOwnerHotels();
+  const roomTypes = useOwnerRoomTypes(hotelId);
+  const prices = useOwnerRoomPrices(roomTypeId);
+  const promotions = useOwnerPromotions(hotelId);
 
   const promotionPayload: PromotionRequest = {
     code: promotion.code || "",

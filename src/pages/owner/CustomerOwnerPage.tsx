@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { Card, Form, Table } from "react-bootstrap";
-import { getOwnerBookingCustomers } from "../../api/booking/booking.api";
-import { GetDanhSachKhachSanOwner } from "../../api/khachsan/khachsan.api";
+import { useOwnerCustomers, useOwnerHotels } from "../../hooks/useOwnerQueries";
 import OwnerPageShell from "../../components/owner/OwnerPageShell";
 import NumberedPagination from "../../components/common/NumberedPagination";
 import { responseRows, valueOf } from "../../components/owner/OwnerWorkspaceData";
@@ -13,15 +11,8 @@ export default function CustomerOwnerPage() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const pageSize = 10;
-  const hotels = useQuery({
-    queryKey: ["owner-hotels"],
-    queryFn: () => GetDanhSachKhachSanOwner({ Page: 1, PageSize: 100 }),
-  });
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["owner-booking-customers", hotelId],
-    queryFn: () => getOwnerBookingCustomers(hotelId),
-    enabled: Boolean(hotelId),
-  });
+  const hotels = useOwnerHotels();
+  const { data, isLoading, isError } = useOwnerCustomers(hotelId);
   const customers = responseRows(data).filter((row) =>
     JSON.stringify(row).toLowerCase().includes(search.toLowerCase())
   );

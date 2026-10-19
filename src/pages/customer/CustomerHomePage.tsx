@@ -1,10 +1,14 @@
 import React, { FormEvent, useMemo, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import {
+  useCustomerBanners,
+  useCustomerHomeHotels,
+  useCustomerHomeTags,
+  useCustomerProvinces,
+  useCustomerTaggedHotels,
+} from "../../hooks/useCustomerQueries";
 import { Link, useNavigate } from "react-router-dom";
 import { faHeart, faMagnifyingGlass, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FilterKhachSan, getBanners, getHotelsByTag, getTags } from "../../api/home/home.api";
-import { getProvinces } from "../../api/province/province.api";
 import { getUser } from "../../utils/auth/auth";
 import { HotelFilterParams } from "../../types/khachsan/KhachSan.types";
 import "../../styles/customer/CustomerHomePage.css";
@@ -56,22 +60,10 @@ const CustomerHomePage = () => {
   const [guests, setGuests] = useState(2);
   const [favorites, setFavorites] = useState<string[]>([]);
 
-  const { data: hotelData, isLoading, isError } = useQuery<HotelResult[]>({
-    queryKey: ["stayro-home-hotels", filter],
-    queryFn: () => FilterKhachSan(filter) as Promise<HotelResult[]>,
-    staleTime: 1000 * 60 * 5,
-  });
-  const { data: tagData } = useQuery<DiscoveryTag[]>({ queryKey: ["stayro-public-tags"], queryFn: () => getTags(), staleTime: 1000 * 60 * 5 });
-  const { data: bannerData, isError: isBannerError } = useQuery({
-    queryKey: ["stayro-active-banners"],
-    queryFn: getBanners,
-    staleTime: 1000 * 60 * 5,
-  });
-  const { data: provinceData, isError: isProvinceError } = useQuery({
-    queryKey: ["stayro-provinces"],
-    queryFn: getProvinces,
-    staleTime: 1000 * 60 * 60,
-  });
+  const { data: hotelData, isLoading, isError } = useCustomerHomeHotels(filter);
+  const { data: tagData } = useCustomerHomeTags();
+  const { data: bannerData, isError: isBannerError } = useCustomerBanners();
+  const { data: provinceData, isError: isProvinceError } = useCustomerProvinces();
   const banners = useMemo(() => {
     const response = bannerData as any;
     const items = Array.isArray(response) ? response : response?.data ?? response?.items ?? [];
@@ -87,11 +79,7 @@ const CustomerHomePage = () => {
     const items = Array.isArray(response) ? response : response?.data ?? response?.items ?? [];
     return items.filter((tag: DiscoveryTag) => tag?.slug && tag?.name);
   }, [tagData]);
-  const { data: taggedHotelData, isLoading: isTagLoading, isError: isTagError } = useQuery({
-    queryKey: ["stayro-tag-hotels", selectedTag?.slug],
-    queryFn: () => getHotelsByTag(selectedTag?.slug || ""),
-    enabled: Boolean(selectedTag?.slug),
-  });
+  const { data: taggedHotelData, isLoading: isTagLoading, isError: isTagError } = useCustomerTaggedHotels(selectedTag?.slug);
   const taggedHotels = useMemo(() => {
     const response = taggedHotelData as any;
     const items = Array.isArray(response) ? response : response?.data ?? response?.items ?? response?.results ?? [];

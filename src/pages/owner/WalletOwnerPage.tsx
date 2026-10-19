@@ -1,16 +1,17 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { Button, Card, Form, Tab, Tabs } from "react-bootstrap";
 import Modal from "../../components/common/SystemModal";
 import {
   createBankAccount,
   createWithdrawal,
-  getBankAccounts,
-  getFinanceStatement,
-  getOwnerWallets,
-  getWithdrawals,
 } from "../../api/finance/finance.api";
-import { GetDanhSachKhachSanOwner } from "../../api/khachsan/khachsan.api";
+import {
+  useOwnerBankAccounts,
+  useOwnerFinanceStatement,
+  useOwnerHotels,
+  useOwnerWallets,
+  useOwnerWithdrawals,
+} from "../../hooks/useOwnerQueries";
 import OwnerPageShell from "../../components/owner/OwnerPageShell";
 import { DataTable, Field, field, rows } from "../../components/owner/OwnerDataTable";
 import { HotelSelector } from "../../components/owner/OwnerSelectors";
@@ -24,14 +25,11 @@ export default function WalletOwnerPage() {
   const [showAccount, setShowAccount] = useState(false);
   const update = (key: string, value: string) => setForm((current) => ({ ...current, [key]: value }));
   const updateAccount = (key: string, value: string) => setAccountForm((current) => ({ ...current, [key]: value }));
-  const hotels = useQuery({ queryKey: ["owner-hotels"], queryFn: () => GetDanhSachKhachSanOwner({ Page: 1, PageSize: 100 }) });
-  const wallets = useQuery({ queryKey: ["owner-wallets"], queryFn: getOwnerWallets });
-  const accounts = useQuery({ queryKey: ["bank-accounts"], queryFn: getBankAccounts });
-  const withdrawals = useQuery({ queryKey: ["withdrawals"], queryFn: getWithdrawals });
-  const statements = useQuery({
-    queryKey: ["owner-statement", form.from, form.to, hotelId],
-    queryFn: () => getFinanceStatement({ khachSanId: hotelId || undefined, from: form.from, to: form.to }),
-  });
+  const hotels = useOwnerHotels();
+  const wallets = useOwnerWallets();
+  const accounts = useOwnerBankAccounts();
+  const withdrawals = useOwnerWithdrawals();
+  const statements = useOwnerFinanceStatement(form.from, form.to, hotelId);
   const bankAccounts = rows(accounts.data);
   const defaultBankAccount = bankAccounts.find((account) => {
     const isDefault = field(account, "isDefault");

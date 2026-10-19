@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getProfileApi, UserProfile } from "../api/auth/auth.api";
+import { useCurrentProfile } from "../hooks/useAdminQueries";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faBell, faCalendarDays, faChartLine, faClipboardList, faBed, faHotel, faMoneyBillTransfer, faPeopleGroup, faPercent, faStar, faUsers, faWallet, faBullhorn } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../components/common/navigation/Sidebar";
@@ -34,13 +33,7 @@ const menuItems = [
 
 const OwnerLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const { data: profile } = useQuery<UserProfile>({
-    queryKey: ["profile"],
-    queryFn: getProfileApi,
-    enabled: !!localStorage.getItem("accessToken"),
-    staleTime: 5 * 60 * 1000,
-    refetchOnWindowFocus: false,
-  });
+  const { data: profile } = useCurrentProfile(!!localStorage.getItem("accessToken"));
 
   return (
     <div className="owner-layout" style={{ minHeight: "100vh", display: "flex" }}>

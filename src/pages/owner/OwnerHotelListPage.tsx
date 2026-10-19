@@ -1,12 +1,12 @@
 import React, { useMemo, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-
 import {
-  GetDanhSachKhachSanOwner,
-  ThemKhachSan,
-} from "../../api/khachsan/khachsan.api";
-import { getTags } from "../../api/home/home.api";
+  useAppMutation,
+  useAppQueryClient,
+} from "../../hooks/useAppReactQuery";
+
+import { ThemKhachSan } from "../../api/khachsan/khachsan.api";
+import { useOwnerHotelPage, useOwnerHotelTags } from "../../hooks/useOwnerQueries";
 
 import { KhachSanListOwnerParams } from "../../types/khachsan/KhachSan.types";
 import { KhachSan as KhachSanType } from "../../types/khachsan/KhachSan";
@@ -42,37 +42,6 @@ const initialFormValues = {
   KinhDo: "",
 };
 
-interface OwnerTagOption {
-  id: string;
-  name: string;
-}
-
-const normalizeTags = (value: unknown): OwnerTagOption[] => {
-  if (value === undefined || value === null) return [];
-
-  const source = Array.isArray(value)
-    ? value
-    : value && typeof value === "object" && "data" in value && Array.isArray(value.data)
-      ? value.data
-      : value && typeof value === "object" && "items" in value && Array.isArray(value.items)
-        ? value.items
-        : null;
-
-  if (!source) {
-    throw new Error("Danh sách tag trả về không hợp lệ.");
-  }
-
-  return source.flatMap((item): OwnerTagOption[] => {
-    if (!item || typeof item !== "object") return [];
-    const tag = item as Record<string, unknown>;
-    const id = tag.id ?? tag.Id ?? tag.tagId ?? tag.TagId;
-    const name = tag.name ?? tag.Name ?? tag.tagName ?? tag.TagName;
-    return typeof id === "string" && typeof name === "string"
-      ? [{ id, name }]
-      : [];
-  });
-};
-
 const OwnerHotelListPage = () => {
   const [page, setPage] = useState(1);
 
@@ -92,13 +61,9 @@ const OwnerHotelListPage = () => {
   const fileInputRef =
     useRef<HTMLInputElement>(null);
 
-  const queryClient = useQueryClient();
+  const queryClient = useAppQueryClient();
   const today = useMemo(() => new Intl.DateTimeFormat("vi-VN", { weekday: "long", day: "numeric", month: "long" }).format(new Date()), []);
-  const { data: tags = [], isLoading: isTagsLoading, isError: isTagsError } = useQuery<OwnerTagOption[]>({
-    queryKey: ["hotel-tags"],
-    queryFn: async () => normalizeTags(await getTags()),
-    staleTime: 5 * 60 * 1000,
-  });
+  const { data: tags = [], isLoading: isTagsLoading, isError: isTagsError } = useOwnerHotelTags();
 
   const dto: KhachSanListOwnerParams = {
     Page: page,
@@ -109,7 +74,7 @@ const OwnerHotelListPage = () => {
   // CREATE
   // =====================================================
 
-  const createMutation = useMutation<
+  const createMutation = useAppMutation<
     any,
     unknown,
     FormData,
@@ -320,15 +285,7 @@ const OwnerHotelListPage = () => {
   const {
     isLoading,
     data,
-  } = useQuery({
-    queryKey: [
-      "KhachSanOwner",
-      page,
-    ],
-
-    queryFn: () =>
-      GetDanhSachKhachSanOwner(dto),
-  });
+  } = useOwnerHotelPage(dto);
 
   const hotels =
     data?.data || [];
