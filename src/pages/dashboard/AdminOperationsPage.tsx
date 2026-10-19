@@ -14,7 +14,6 @@ import { createBanner, getBanners, updateBanner, deleteBanner } from "../../api/
 import { searchHotelsAdmin, updateHotelStatus } from "../../api/khachsan/khachsan.api";
 import { deleteReview } from "../../api/review/review.api";
 import { createAdminTag, disableAdminTag, getAdminTags, replaceAdminTagHotels, searchAdminUsers, updateAdminTag, updateAdminUserStatus } from "../../api/admin/admin.api";
-import { setRolePermissions } from "../../api/auth/auth.api";
 import NumberedPagination from "../../components/common/NumberedPagination";
 
 type AdminRowData = Record<string, any>;
@@ -29,7 +28,7 @@ const titles: Record<string, string> = {
   bookings: "Đặt phòng toàn hệ thống", payments: "Thanh toán", commissions: "Hoa hồng chờ xử lý",
   withdrawals: "Yêu cầu rút tiền", advertising: "Duyệt quảng cáo", banners: "Quản lý banner",
   hotels: "Quản lý khách sạn", users: "Tài khoản người dùng", reviews: "Xử lý đánh giá vi phạm",
-  tags: "Tags và tab khám phá", permissions: "Phân quyền theo role",
+  tags: "Tags và tab khám phá",
 };
 
 const rows = (value: any): AdminRowData[] => {
@@ -62,8 +61,6 @@ export default function AdminOperationsPage() {
   const [actionNote, setActionNote] = useState("");
   const [transactionRef, setTransactionRef] = useState("");
   const [reviewId, setReviewId] = useState("");
-  const [roleId, setRoleId] = useState("");
-  const [permissionsText, setPermissionsText] = useState("");
   const [bannerDraft, setBannerDraft] = useState({ title: "", subtitle: "", isActive: "1", file: null as File | null });
   const [editingBanner, setEditingBanner] = useState<AdminRowData | null>(null);
   const [bannerEditDraft, setBannerEditDraft] = useState({ title: "", subtitle: "", url: "", isActive: "1" });
@@ -121,7 +118,7 @@ export default function AdminOperationsPage() {
       await queryClient.invalidateQueries({ queryKey: ["admin", "commissions"] });
       return true;
     } catch (error: any) {
-      setNotice({ kind: "danger", text: error?.response?.data?.message || error?.message || "Không thể hoàn tất thao tác." });
+      setNotice({ kind: "danger", text: error?.response?.data?.message || error?.response?.data?.Message || error?.message || "Không thể hoàn tất thao tác." });
       return false;
     } finally {
       setSaving(false);
@@ -199,27 +196,10 @@ export default function AdminOperationsPage() {
     if (succeeded) setBannerDraft({ title: "", subtitle: "", isActive: "1", file: null });
   };
 
-  const savePermissions = async (event: React.FormEvent) => {
-    event.preventDefault();
-    let permissions: Record<string, unknown>[];
-    try {
-      const parsed: unknown = JSON.parse(permissionsText);
-      if (!Array.isArray(parsed) || parsed.length === 0 || !parsed.every((item) => item !== null && typeof item === "object" && !Array.isArray(item))) {
-        throw new Error("Permissions phải là một mảng DTO JSON không rỗng.");
-      }
-      permissions = parsed as Record<string, unknown>[];
-    } catch (error) {
-      setNotice({ kind: "danger", text: error instanceof Error ? error.message : "Permissions phải là JSON hợp lệ." });
-      return;
-    }
-    if (!roleId.trim()) return;
-    await request(() => setRolePermissions({ roleId: roleId.trim(), permissions }));
-  };
-
   return <div>
     <div className="admin-page-intro">
       <div><span className="admin-kicker">Quản trị Stayro</span><h2>{titles[section] || "Quản trị dữ liệu"}</h2><p>Tra cứu và xử lý dữ liệu theo quyền quản trị toàn hệ thống.</p></div>
-      {section !== "reviews" && section !== "permissions" && <Button variant="outline-secondary" size="sm" onClick={() => void query.refetch()} disabled={query.isFetching}><FontAwesomeIcon icon={faRotate} className="me-2" />Làm mới</Button>}
+      {section !== "reviews" && <Button variant="outline-secondary" size="sm" onClick={() => void query.refetch()} disabled={query.isFetching}><FontAwesomeIcon icon={faRotate} className="me-2" />Làm mới</Button>}
     </div>
 
     {notice && <Alert className="admin-alert" variant={notice.kind} dismissible onClose={() => setNotice(null)}>{notice.text}</Alert>}
@@ -231,15 +211,6 @@ export default function AdminOperationsPage() {
       <div className="admin-panel-body"><Form onSubmit={(event) => { event.preventDefault(); if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(reviewId.trim())) { setNotice({ kind: "danger", text: "Review ID phải là UUID hợp lệ." }); return; } askForConfirmation({ title: "Xóa đánh giá", description: `Đánh giá ${reviewId.trim()} sẽ bị xóa khỏi hệ thống. Thao tác này không thể hoàn tác.` , operation: () => deleteReview(reviewId.trim()) }); }} className="admin-inline-form">
         <Form.Control aria-label="Review ID" placeholder="Nhập review UUID" value={reviewId} onChange={(event) => setReviewId(event.target.value)} />
         <Button variant="danger" type="submit" disabled={!reviewId.trim()}><FontAwesomeIcon icon={faTrash} className="me-2" />Xóa đánh giá</Button>
-      </Form></div>
-    </section>}
-
-    {section === "permissions" && <section className="admin-panel">
-      <div className="admin-panel-heading"><div><h3>Gán permissions cho role</h3><p>Gửi roleId cùng danh sách permission lên API.</p></div></div>
-      <div className="admin-panel-body"><Form onSubmit={savePermissions} className="admin-permission-form">
-        <div><Form.Label>Role ID</Form.Label><Form.Control required value={roleId} onChange={(event) => setRoleId(event.target.value)} placeholder="Role ID" /></div>
-        <div><Form.Label>RolePermissionDto[] (JSON)</Form.Label><Form.Control required as="textarea" rows={7} value={permissionsText} onChange={(event) => setPermissionsText(event.target.value)} placeholder={'[{"<dto-field>":"<value>"}]'} /><Form.Text>Nhập mảng JSON theo đúng các trường của RolePermissionDto backend.</Form.Text></div>
-        <div><Button type="submit" disabled={saving || !roleId.trim() || !permissionsText.trim()}>Lưu phân quyền</Button></div>
       </Form></div>
     </section>}
 
@@ -278,7 +249,7 @@ export default function AdminOperationsPage() {
       </Form></div>
     </section>}
 
-    {section !== "reviews" && section !== "permissions" && section !== "tags" && <>
+    {section !== "reviews" && section !== "tags" && <>
       {section !== "payments" && section !== "commissions" && section !== "withdrawals" && section !== "advertising" && <FilterPanel section={section} draft={filterDraft} setDraft={setFilterDraft} onSubmit={submitFilters} bookingStatuses={rows(bookingStatuses.data)} />}
       <DataTable section={section} data={visibleData} loading={query.isLoading} onAction={askForConfirmation} onEditBanner={openBannerEditor} />
       <NumberedPagination page={page} totalPages={totalPage} disabled={query.isFetching} className="admin-pagination" onPageChange={(nextPage) => setFilters((current) => ({ ...current, page: String(nextPage) }))} />
@@ -334,7 +305,7 @@ function FilterPanel({ section, draft, setDraft, onSubmit, bookingStatuses = [] 
 }
 
 function DataTable({ section, data, loading, onAction, onEditBanner }: { section: string; data: AdminRowData[]; loading: boolean; onAction: (action: ConfirmAction) => void; onEditBanner?: (item: AdminRowData) => void }) {
-  if (["reviews", "permissions"].includes(section)) return null;
+  if (section === "reviews") return null;
   return <section className="admin-panel admin-results-panel">
     <div className="admin-panel-heading"><div><h3>Kết quả</h3><p>{loading ? "Đang tải dữ liệu..." : `${data.length} bản ghi trên trang này`}</p></div></div>
     <div className="admin-table-wrap"><Table className="admin-table" hover>

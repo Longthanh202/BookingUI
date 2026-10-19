@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getProfileApi } from "../api/auth/auth.api";
+import { getProfileApi, UserProfile } from "../api/auth/auth.api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faBell, faCalendarDays, faChartLine, faClipboardList, faBed, faHotel, faMoneyBillTransfer, faPeopleGroup, faPercent, faStar, faUsers, faWallet, faBullhorn } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../components/common/navigation/Sidebar";
@@ -9,12 +9,6 @@ import Button from "react-bootstrap/Button";
 import "../styles/layouts/OwnerLayout.css";
 import "../styles/layouts/OwnerFormControls.css";
 import AccountMenu from "../components/common/AccountMenu";
-
-interface Profile {
-  fullName: string;
-  permissions: string[];
-  avatar: string;
-}
 
 const menuItems = [
   { key: "dashboard", label: "Tổng quan", path: "/owner/dashboard", icon: <FontAwesomeIcon icon={faChartLine} /> },
@@ -40,7 +34,7 @@ const menuItems = [
 
 const OwnerLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const { data: profile } = useQuery<Profile>({
+  const { data: profile } = useQuery<UserProfile>({
     queryKey: ["profile"],
     queryFn: getProfileApi,
     enabled: !!localStorage.getItem("accessToken"),
@@ -67,7 +61,7 @@ const OwnerLayout = () => {
           </Button>
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
             <div style={{ fontWeight: 700, fontSize: 18 }}>Trung tâm vận hành</div>
-            <AccountMenu mode="owner" name={profile?.fullName} avatar={profile?.avatar} />
+            <AccountMenu mode="owner" name={profile?.fullName} />
           </div>
         </header>
         <main style={{ padding: "1rem", backgroundColor: "#f3f5f7", minHeight: "100%" }}>

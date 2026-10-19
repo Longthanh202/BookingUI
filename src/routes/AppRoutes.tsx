@@ -8,12 +8,12 @@ import PaymentPage from "../pages/customer/PaymentPage";
 import AdminLoginPage from "../pages/auth/AdminLoginPage";
 import CustomerLoginPage from "../pages/auth/CustomerLoginPage";
 import CustomerRegistrationPage from "../pages/auth/CustomerRegistrationPage";
+import OwnerRegistrationPage from "../pages/auth/OwnerRegistrationPage";
 import Dashboard from "../pages/dashboard/Dashboard";
 import AdminLayout from "../layouts/AdminLayout";
 import OwnerLayout from "../layouts/OwnerLayout";
 import OwnerHotelListPage from "../pages/owner/OwnerHotelListPage";
 import OwnerHotelDetailPage from "../pages/owner/OwnerHotelDetailPage";
-import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./AdminRoute";
 import HotelRoute from "./HotelRoute";
 import CustomerRoute from "./CustomerRoute";
@@ -32,6 +32,7 @@ import ReviewOwnerPage from "../pages/owner/ReviewOwnerPage";
 import WalletOwnerPage from "../pages/owner/WalletOwnerPage";
 import AdvertisingOwnerPage from "../pages/owner/AdvertisingOwnerPage";
 import AdminOperationsPage from "../pages/dashboard/AdminOperationsPage";
+import OwnerRegistrationsPage from "../pages/dashboard/OwnerRegistrationsPage";
 import NotFoundPage from "../pages/NotFoundPage";
 
 const AppRouters = () => {
@@ -52,6 +53,7 @@ const AppRouters = () => {
                 <Route path="customer-login" element={<CustomerLoginPage />} />
 
                 <Route path="register" element={<CustomerRegistrationPage />} />
+                <Route path="owner/register" element={<OwnerRegistrationPage />} />
 
                 <Route path="rooms/:id" element={<HotelDetailPage />} />
 
@@ -110,9 +112,9 @@ const AppRouters = () => {
                   <Route path="advertising" element={<AdminOperationsPage />} />
                   <Route path="banners" element={<AdminOperationsPage />} />
                   <Route path="users" element={<AdminOperationsPage />} />
+                  <Route path="owner-registrations" element={<OwnerRegistrationsPage />} />
                   <Route path="reviews" element={<AdminOperationsPage />} />
                   <Route path="tags" element={<AdminOperationsPage />} />
-                  <Route path="permissions" element={<AdminOperationsPage />} />
                 </Route>
             </Route>
 

@@ -20,7 +20,6 @@ interface LoginResponse {
   status: boolean;
   token: string;
   fullName: string;
-  permissions: [];
   message: string;
 }
 

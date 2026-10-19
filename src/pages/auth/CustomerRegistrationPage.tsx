@@ -39,8 +39,8 @@ const CustomerRegistrationPage = () => {
         username: form.username.trim(), password: form.password, fullName: form.fullName.trim(),
         phone: form.phone.trim(), address: form.address.trim(), email: form.email.trim(), createBy: null,
       };
-      await registerCustomer(input);
-      showToast("Đăng ký thành công", "success");
+      const response = await registerCustomer(input);
+      showToast(response.message || "Đăng ký thành công", "success");
       navigate("/customer-login");
     } catch (error: any) {
       const message = error?.response?.data?.message || error?.response?.data?.Message || "Đăng ký thất bại";
@@ -81,6 +81,7 @@ const CustomerRegistrationPage = () => {
             <button type="submit" className="customer-register-submit" disabled={submitting}>{submitting ? "Đang tạo tài khoản..." : <>Tạo tài khoản <FontAwesomeIcon icon={faArrowRight} /></>}</button>
           </form>
           <p className="customer-register-login">Đã có tài khoản? <Link to="/customer-login">Đăng nhập</Link></p>
+          <p className="customer-register-login">Bạn là chủ khách sạn? <Link to="/owner/register">Đăng ký Owner</Link></p>
         </div>
       </section>
     </main>

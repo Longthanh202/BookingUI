@@ -1,14 +1,10 @@
 ﻿import { Outlet, NavLink, useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getProfileApi } from "../api/auth/auth.api";
+import { getProfileApi, UserProfile } from "../api/auth/auth.api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGaugeHigh, faHotel, faCreditCard, faUser, faClipboardList, faWallet, faBullhorn, faImage, faTags, faUserShield, faStar, faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { faGaugeHigh, faHotel, faCreditCard, faUser, faClipboardList, faWallet, faBullhorn, faImage, faTags, faStar, faArrowUpRightFromSquare, faUserCheck } from "@fortawesome/free-solid-svg-icons";
 import AccountMenu from "../components/common/AccountMenu";
 import "../styles/layouts/AdminLayout.css";
-
-interface Profile {
-  fullName: string;
-}
 
 const sections = [
   { title: "Tổng quan", links: [{ label: "Bàn điều hành", path: "/admin", icon: faGaugeHigh }] },
@@ -27,21 +23,21 @@ const sections = [
   ] },
   { title: "Truy cập", links: [
     { label: "Người dùng", path: "/admin/users", icon: faUser },
-    { label: "Phân quyền", path: "/admin/permissions", icon: faUserShield },
+    { label: "Duyệt Owner", path: "/admin/owner-registrations", icon: faUserCheck },
   ] },
 ];
 
 const pageTitles: Record<string, string> = {
   admin: "Bàn điều hành", bookings: "Đặt phòng", hotels: "Khách sạn", payments: "Thanh toán",
   withdrawals: "Yêu cầu rút tiền", commissions: "Hoa hồng", advertising: "Quảng cáo",
-  banners: "Banner", tags: "Tags khám phá", reviews: "Đánh giá", users: "Người dùng", permissions: "Phân quyền",
+  banners: "Banner", tags: "Tags khám phá", reviews: "Đánh giá", users: "Người dùng", "owner-registrations": "Hồ sơ Owner",
 };
 
 const AdminLayout = () => {
   const location = useLocation();
   const currentSection = location.pathname.split("/").filter(Boolean).at(-1) || "admin";
 
-  const { data: profile } = useQuery<Profile>({
+  const { data: profile } = useQuery<UserProfile>({
     queryKey: ["profile"],
     queryFn: getProfileApi,
     enabled: !!localStorage.getItem("accessToken"),
